@@ -1,2 +1,2 @@
-src/dist/**
-src/node_modules/**
+api/src/dist/**
+api/src/node_modules/**
