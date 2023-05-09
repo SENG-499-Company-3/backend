@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  mongo_db:
+    build: ./mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      net-10.9.0.0:
+        ipv4_address: 10.9.0.3
+
+networks:
+  net-10.9.0.0:
+    name: net-10.9.0.0
+    ipam:
+      config:
+        - subnet: 10.9.0.0/24
