@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "The backend portion of the schedualing application for SENG-499 Company 3",
   "scripts": {
-    "lint": "eslint .",
+    "lint": "npx eslint .",
     "format": "npx prettier --write .",
+    "format:check": "npx prettier --check .",
     "clean": "rimraf ./build",
     "build": "npm run lint && npm run format && npm run clean && tsc",
     "start": "node dist/index.js",
