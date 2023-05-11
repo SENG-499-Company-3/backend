@@ -11,7 +11,7 @@ services:
   api:
     build: ./api
     ports:
-      - "3000:3000"
+      - "3001:3001"
     environment:
       - MONGO_HOST=10.9.0.3
     networks:
