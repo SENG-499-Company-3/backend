@@ -3,13 +3,26 @@
   "version": "1.0.0",
   "description": "The backend portion of the schedualing application for SENG-499 Company 3",
   "scripts": {
-      "test": "test",
-      "build": "tsc",
-      "start": "node dist/index.js"
+    "lint": "npx eslint .",
+    "format": "npx prettier --write .",
+    "format:check": "npx prettier --check .",
+    "clean": "rimraf ./build",
+    "build": "npm run lint && npm run format && npm run clean && tsc",
+    "start": "node dist/index.js",
+    "local": "npx ts-node ."
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.59.5",
+    "@typescript-eslint/parser": "^5.59.5",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "nodemon": "^2.0.22",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.8",
+    "rimraf": "^5.0.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   }
 }
