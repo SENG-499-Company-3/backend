@@ -1,0 +1,14 @@
+name: Lint
+
+on: [push]
+
+jobs:
+  test: 
+    name: Check source code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install packages
+        run: npm ci
+      -name: Lint
+        run: npm run lint
