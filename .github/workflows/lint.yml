@@ -9,6 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install packages
+        working-directory: ./api/src
         run: npm ci
       - name: Lint
+        working-directory: ./api/src
         run: npm run lint
