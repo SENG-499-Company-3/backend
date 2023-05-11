@@ -1,7 +1,11 @@
 name: Prettier
 
-on: [push]
-
+on: 
+  push:
+    branches-ignore: [dev, prod]
+  pull_request:
+    branches: [dev, prod]
+    
 jobs:
   build: 
     name: Check source code
