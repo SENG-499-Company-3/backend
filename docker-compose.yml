@@ -10,8 +10,8 @@ services:
 
   api:
     build: ./api
-    # ports:
-    #   - "27017:27017"
+    ports:
+      - "3001:3001"
     networks:
       net-10.9.0.0:
         ipv4_address: 10.9.0.4
