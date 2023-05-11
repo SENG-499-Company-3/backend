@@ -57,33 +57,6 @@ interface Course extends Document {
 	weeksOffered: TODO;
 }
 
-/*
-  Basic structure for any request that requires inserting a type into the database based on the request
- */
-async function parseAndStore<T extends Document>(body: T, collection: string): Promise<string> {
-	try {
-		console.log(body);
-		const course: T = body;
-
-		// Connect the client to the server (optional starting in v4.7)
-		await mongoClient.connect();
-		// Send a ping to confirm a successful connection
-		await mongoClient.db('admin').command({ ping: 1 });
-		console.log('Pinged your deployment. You successfully connected to MongoDB!');
-		const classes = mongoClient.db('schedule_backend').collection<T>(collection);
-
-		const result = await classes.insertOne(
-			// TODO casting to any since I couldn't figure out how to satisfy this
-			<any>course
-		);
-		await mongoClient.close();
-		return `Inserted ${course} with id ${result.insertedId}`;
-	} catch (e) {
-		await mongoClient.close();
-		return `Failed ${e}`;
-	}
-}
-
 const mongoHost: string = process.env.MONGO_HOST ? process.env.MONGO_HOST : 'localhost';
 
 const mongoUri = 'mongodb://admin:admin@' + mongoHost + ':27017';
@@ -112,6 +85,33 @@ app.use(cors());
 app.use(morgan('combined'));
 
 const port = 3001;
+
+/*
+  Basic structure for any request that requires inserting a type into the database based on the request
+ */
+async function parseAndStore<T extends Document>(body: T, collection: string): Promise<string> {
+	try {
+		console.log(body);
+		const course: T = body;
+
+		// Connect the client to the server (optional starting in v4.7)
+		await mongoClient.connect();
+		// Send a ping to confirm a successful connection
+		await mongoClient.db('admin').command({ ping: 1 });
+		console.log('Pinged your deployment. You successfully connected to MongoDB!');
+		const classes = mongoClient.db('schedule_backend').collection<T>(collection);
+
+		const result = await classes.insertOne(
+			// TODO casting to any since I couldn't figure out how to satisfy this
+			<any>course
+		);
+		await mongoClient.close();
+		return `Inserted ${course} with id ${result.insertedId}`;
+	} catch (e) {
+		await mongoClient.close();
+		return `Failed ${e}`;
+	}
+}
 
 // TODO GET SCHEDULE
 // Gets the most recently generated schedule
