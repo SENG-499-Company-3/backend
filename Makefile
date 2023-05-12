@@ -32,13 +32,13 @@ log-api: ## Runs `docker logs <container> -f` for the api container
 	@echo "==============================================="
 	@echo "Running docker logs for the api container"
 	@echo "==============================================="
-	@docker logs api -f
+	@docker logs backend_api -f
 
 log-db: ## Runs `docker logs <container> -f` for the db container
 	@echo "==============================================="
 	@echo "Running docker logs for the db container"
 	@echo "==============================================="
-	@docker logs mongo_db -f
+	@docker logs backend_db -f
 
 ##Close and clean
 close: ## Closes all project containers
