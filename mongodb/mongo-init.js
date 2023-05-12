@@ -13,4 +13,6 @@ db.createUser({
     ]
 });
 
-db.createCollection("classes")
+db.createCollection("courses")
+db.createCollection("professors")
+db.createCollection("rooms")
