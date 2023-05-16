@@ -1,19 +1,18 @@
 FROM node:lts
 
-WORKDIR /api
+WORKDIR /api/dev
 
 # A wildcard is used to ensure copying both package.json AND package-lock.json (when available).
 # Copying this first prevents re-running npm install on every code change.
 COPY package*.json ./
 
 RUN npm install && npm cache clean --force
+ENV PATH=/api/node_modules/.bin:$PATH
 
 COPY tsconfig.json ./
 
 COPY src ./src
-COPY .env ./
 
 EXPOSE ${PORT}
 
-RUN npm run build
-CMD ["npm","run","start:dev"]
+CMD ["npm","run","start:watch"]

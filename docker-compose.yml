@@ -1,22 +1,34 @@
 version: "3.7"
 services:
   mongo_db:
+    container_name: backend_db
     build: ./mongodb
     ports:
-      - "27017:27017"
+      - "27017:${MONGO_PORT}"
     networks:
       net-10.9.0.0:
-        ipv4_address: 10.9.0.3
+        ipv4_address: ${MONGO_HOST}
 
   api:
-    build: ./api
+    container_name: backend_api
+    restart: always
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
     ports:
-      - "3001:3001"
+      - "3001:${PORT}"
     environment:
-      - MONGO_HOST=10.9.0.3
+      - MONGO_HOST=${MONGO_HOST}
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
     networks:
       net-10.9.0.0:
         ipv4_address: 10.9.0.4
+
+    volumes:
+      - ./api/:/api/dev
+      - /api/dev/node_modules/
 
 networks:
   net-10.9.0.0:
