@@ -30,6 +30,22 @@ services:
       - ./api/:/api/dev
       - /api/dev/node_modules/
 
+  sonarqube:
+    container_name: backend_sonarqube
+    build: ./sonarqube
+    ports:
+      - "9000:${SONARQUBE_PORT}"
+    environment:
+      - SONAR_JDBC_USERNAME=${SONARQUBE_USERNAME}
+      - SONAR_JDBC_PASSWORD=${SONARQUBE_PASSWORD}
+      - SONAR_EMBEDDEDDATABASE_PORT=${SONAR_EMBEDDEDDATABASE_PORT}
+
+    volumes:
+      - /opt/sonarqube/data
+      - /opt/sonarqube/logs
+      - /opt/sonarqube/extensions
+
+
 networks:
   net-10.9.0.0:
     name: net-10.9.0.0

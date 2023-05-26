@@ -5,7 +5,7 @@
 # ------------------------------------------------------------------------------
 
 
-api: | close build-api build-db run-api
+api: | close build-api build-db build-sonarqube run-api
 
 ##Build
 build-api: ## Builds all backend+api containers
@@ -20,12 +20,18 @@ build-db: ## Builds all db containers
 	@echo "==============================================="
 	@docker-compose -f docker-compose.yml build mongo_db
 
+build-sonarqube: ##Builds sonarqube container
+	@echo "==============================================="
+	@echo "Make: build-db - building sonarqube image"
+	@echo "==============================================="
+	@docker-compose -f docker-compose.yml build sonarqube
+
 #Run
 run-api: ## Runs all backend+api containers
 	@echo "==============================================="
 	@echo "Make: run-api - running api images"
 	@echo "==============================================="
-	@docker-compose -f docker-compose.yml up -d mongo_db api
+	@docker-compose -f docker-compose.yml up -d mongo_db sonarqube api 
 
 ##Logs
 log-api: ## Runs `docker logs <container> -f` for the api container
