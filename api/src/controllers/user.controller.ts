@@ -1,4 +1,5 @@
 const db = require('../models');
+const bcrypt = require("bcrypt");
 const User = db.users;
 
 // Create and Save a new User
@@ -16,16 +17,27 @@ export class UserController {
       password: req.body.password
     });
 
-    // Save User in the database
-    user.save(user)
-      .then((data) => {
-        res.send(data);
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message: err.message || 'Some error occurred while creating the User.'
+    // Encrypt the user's password
+    const saltRounds = 10;
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+      bcrypt.hash(user.password, salt, function(err, hash) {
+        
+        //Set the user's password to the new hashed version
+        user.password = hash;
+
+        // Save User in the database
+        user.save(user)
+        .then((data) => {
+          res.send(data);
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message: err.message || 'Some error occurred while creating the User.'
+          });
         });
-      });
+
+      })
+    })
   };
 
   // Retrieve all Users from the database.
