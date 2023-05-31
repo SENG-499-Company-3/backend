@@ -10,4 +10,7 @@ router.post('/create', userController.create);
 // Retrieve all Tutorials
 router.get('/list', userController.list);
 
+// Self authentication
+router.post('/self', userController.self);
+
 module.exports = router;
