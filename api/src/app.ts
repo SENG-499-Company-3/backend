@@ -3,6 +3,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 import express from 'express';
 const user = require('./routes/user.routes');
+const auth = require('./routes/auth.routes');
+
 
 const app = express();
 
@@ -41,6 +43,7 @@ db.mongoose
   });
 
 app.use('/user', user);
+app.use('/auth', auth)
 
 // Global error handling
 // eslint-disable-next-line no-unused-vars
