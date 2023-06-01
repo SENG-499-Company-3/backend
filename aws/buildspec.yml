@@ -1,1 +1,29 @@
 
+version: 0.2
+
+phases: 
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "📦 installing packages..."
+      - echo "✅ Packages installed successfully."
+  pre_build:
+    commands: 
+      - echo "⚙️ Testing..."
+      - echo "✅ Tests passed successfully."
+  build:
+    commands:
+      - echo "🚧 Starting compiling packages..."
+      - echo "✅ Build passed successfully."
+  post_build:
+    commands:
+      - echo "🚚 Performing post-build packing and operations..."
+      - aws deploy push --application-name deploy-nodejs-codeDeploy --s3-location s3://deploy-nodejs-deployment-revisions/development/source.zip --ignore-hidden-files --profile personal-mumbai
+      - aws deploy create-deployment --application-name deploy-nodejs-codeDeploy --s3-location bucket=deploy-nodejs-deployment-revisions,key=development/source.zip,bundleType=zip,eTag=80e501480a8545019660e87ca42a6f00,version=67ZE9Q8CZeo9XszaZ4F.eKmrlW7mnDrm --deployment-group-name development --deployment-config-name CodeDeployDefault.AllAtOnce --description "This deployment aims to deploy our code to the eligible EC2 instance(s)."      
+      - echo "✅ Post build successful"
+
+artifacts:
+  files:
+    - '**/*'
+  name: deploy-nodejs-build-artifacts

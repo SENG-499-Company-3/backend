@@ -33,6 +33,7 @@ export class AuthController{
         //if user and password found, generate jwt token and return it
         //var jwtToken = 
         User.findOne({ username: `${req.body.username}`, password: `${req.body.password}` })
+            // eslint-disable-next-line no-unused-vars
             .then((data) => {
                 res.send({"Authorization": this.makeJWT(req.body.username)});
             })
