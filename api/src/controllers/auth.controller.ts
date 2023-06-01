@@ -6,15 +6,17 @@ const jwt = require('jsonwebtoken');
 //login user
 export class AuthController{
 
+    #JWT_SECRET: string = "sadlfkjsfk"
+
     public makeJWT = (user) => {
-        var jwtToken = jwt.sign(user, process.env.JWT_SECRET || "sadlfkjsfk"); //TODO can't access JWT_SECRET
+        var jwtToken = jwt.sign(user, process.env.JWT_SECRET || this.#JWT_SECRET); //TODO can't access JWT_SECRET
         return jwtToken;
     };
 
     //returns the username if jwt token is invalid, else returns empty string.
     public verifyJWT = (jwtToken) => {
         try{
-            const user = jwt.verify(jwtToken, process.env.JWT_SECRET || "sadlfkjsfk", { expiresIn: 60*60*4 });
+            const user = jwt.verify(jwtToken, process.env.JWT_SECRET || this.#JWT_SECRET, { expiresIn: 60*60*4 });
             return user;
         }catch(err){
             return '';
