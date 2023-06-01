@@ -179,3 +179,9 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`listening on ${port}`);
 });
+
+app.post('/login', express.json(), (req, res) => {
+  console.log(req.body.username);
+
+  res.send(req.body);
+});
