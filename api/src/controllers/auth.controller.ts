@@ -14,7 +14,7 @@ export class AuthController{
     //returns the username if jwt token is invalid, else returns empty string.
     public verifyJWT = (jwtToken) => {
         try{
-            const user = jwt.verify(jwtToken, process.env.JWT_SECRET || "sadlfkjsfk");
+            const user = jwt.verify(jwtToken, process.env.JWT_SECRET || "sadlfkjsfk", { expiresIn: 60*60*4 });
             return user;
         }catch(err){
             return '';
