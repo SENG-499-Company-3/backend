@@ -9,9 +9,7 @@ jobs:
       - image: cimg/python:3.10.2
     steps:
       - checkout
-      - run:
-          name: Install requirements
-          command: pip install -r api/requirements.txt
+
       - run:
           name: Run tests and collect coverage
           command: pytest --cov api/
