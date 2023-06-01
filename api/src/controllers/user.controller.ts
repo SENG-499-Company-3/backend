@@ -1,4 +1,5 @@
 const db = require('../models');
+const jwt_decode = require("jwt-decode");
 const User = db.users;
 
 // Create and Save a new User
@@ -42,12 +43,20 @@ export class UserController {
   };
 
   public self = (req, res) => {
+    
+    if(!req.headers.authorization) {
+      res.status(400).send({message: 'Self endpoint requires authorization header.'});
+    }
+    
+    const authToken = req.headers.authorization.split(' ')[1];
 
-    if(!req.body.username || !req.body.authToken) {
-      res.status(400).send({message: 'Self endpoint requires a username and token!'});
+    if(jwt_decode(authToken).username === undefined) {
+      res.status(400).send({message: 'Self endpoint requires a username'});
     }
 
-    User.findOne({ username: req.body.username})
+    const decoded_username = jwt_decode(authToken).username;
+
+    User.findOne({ username: decoded_username})
       .then((data) => {
         if(!data) {
           res.send({message: "There was no user with that username."})
@@ -57,10 +66,9 @@ export class UserController {
         // Will be replaced by a real token found in database
         const tempToken = "tempToken";
 
-        if(req.body.authToken != tempToken) {
+        if(authToken != tempToken) {
           res.status(401).send({message: "Tokens do not match!"});
         }
-
         res.send(data);
       })
       .catch((err) => {
