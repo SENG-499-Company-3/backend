@@ -32,7 +32,7 @@ export class AuthController{
         //var jwtToken = 
         User.findOne({ username: `${req.body.username}`, password: `${req.body.password}` })
             .then((data) => {
-                res.send(this.makeJWT(req.body.username));
+                res.send({"Authorization": this.makeJWT(req.body.username)});
             })
             .catch((err) => {
                 res.status(401).send({
