@@ -1,11 +1,24 @@
 const db = require('../models');
 const User = db.users;
+const jwt = require('jsonwebtoken');
+
 
 //login user
 export class AuthController{
 
-    private makeJWT = (user) => {
-        return "safdsf"; //TODO
+    public makeJWT = (user) => {
+        var jwtToken = jwt.sign(user, process.env.JWT_SECRET || "sadlfkjsfk"); //TODO can't access JWT_SECRET
+        return jwtToken;
+    };
+
+    //returns the username if jwt token is invalid, else returns empty string.
+    public verifyJWT = (jwtToken) => {
+        try{
+            const user = jwt.verify(jwtToken, process.env.JWT_SECRET || "sadlfkjsfk");
+            return user;
+        }catch(err){
+            return '';
+        }
     };
 
     public login = (req, res) => {
