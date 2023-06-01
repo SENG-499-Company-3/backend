@@ -1,4 +1,5 @@
 const db = require('../models');
+const jwt_decode = require("jwt-decode");
 const User = db.users;
 
 // Create and Save a new User
@@ -40,4 +41,40 @@ export class UserController {
         });
       });
   };
+
+  public self = (req, res) => {
+    
+    if(!req.headers.authorization) {
+      res.status(400).send({message: 'Self endpoint requires authorization header.'});
+    }
+    
+    const authToken = req.headers.authorization.split(' ')[1];
+
+    if(jwt_decode(authToken).username === undefined) {
+      res.status(400).send({message: 'Self endpoint requires a username'});
+    }
+
+    const decoded_username = jwt_decode(authToken).username;
+
+    User.findOne({ username: decoded_username})
+      .then((data) => {
+        if(!data) {
+          res.send({message: "There was no user with that username."})
+        }
+
+        // TODO
+        // Will be replaced by a real token found in database
+        const tempToken = "tempToken";
+
+        if(authToken != tempToken) {
+          res.status(401).send({message: "Tokens do not match!"});
+        }
+        res.send(data);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: err.message || 'Some error occured while trying to retrieve a user.'
+        });
+      });
+  }
 }
