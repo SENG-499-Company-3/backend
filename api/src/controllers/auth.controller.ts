@@ -11,11 +11,6 @@ export class AuthController{
     #saltRounds: number = 10;
 
 
-    public hashPassword = (pass) => {
-        bcrypt.hash(pass, this.#saltRounds, function(err, hash) {
-            return hash;
-        })
-    };
 
 
     public makeJWT = (user) => {
