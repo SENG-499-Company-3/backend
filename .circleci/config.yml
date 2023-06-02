@@ -1,22 +1,22 @@
 version: 2.1
 
 orbs:
-  codecov: codecov/codecov@3.2.2
-
+  codecov: codecov/codecov@3
 jobs:
-  test-api:
-    docker:
-      - image: cimg/python:3.10.2
+  build:
+    docker: 
+      - image: 
     steps:
       - checkout
-
       - run:
-          name: Run tests and collect coverage
-          command: pytest --cov api/
+        name: Install packages
+        command: npm install
+      - run:
+        name: Run tests
+        command: npm run test 
       - codecov/upload
-
-workflows:
+workflow:
   version: 2.1
-  build-test:
+  build-test: 
     jobs:
-      - test-api
+      - build
