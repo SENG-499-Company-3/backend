@@ -1,5 +1,8 @@
+import { beforeEach, describe, it } from "mocha";
+import { UserController } from "./user.controller";
+
 const { expect } = require('chai');
-const { UserController } = require('./user.controller');
+
 
 describe('UserController', () => {
   let userController;
@@ -18,8 +21,8 @@ describe('UserController', () => {
         }
       };
       let res  = {
-        send: (data) => {},
-        status: (statusCode) => res,
+        send: () => {},
+        status: () => res,
         statusCode: 0
       };
 
@@ -40,8 +43,8 @@ describe('UserController', () => {
         }
       };
       let res = {
-        send: (data) => {},
-        status: (statusCode) => res,
+        send: () => {},
+        status: () => res,
         statusCode: 0
       };
 
@@ -59,8 +62,8 @@ describe('UserController', () => {
     it('should retrieve all users from the database', () => {
       // Arrange
       let res = {
-        send: (data) => {},
-        status: (statusCode) => res,
+        send: () => {},
+        status: () => res,
         statusCode: 0
       };
 
