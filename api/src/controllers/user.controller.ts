@@ -59,12 +59,13 @@ export class UserController {
     }
 
     const authToken = req.headers.authorization.split(' ')[1];
+    let decoded_username = "";
 
-    if (jwt_decode(authToken).username === undefined) {
-      res.status(400).send({ message: 'Self endpoint requires a username' });
+    try {
+      decoded_username = jwt_decode(authToken).username;
+    } catch (err) {
+      res.status(401).send({message: "This token was invalid!"});
     }
-
-    const decoded_username = jwt_decode(authToken).username;
 
     User.findOne({ username: decoded_username })
       .then((data) => {
@@ -72,13 +73,14 @@ export class UserController {
           res.send({ message: 'There was no user with that username.' });
         }
 
-        // TODO
-        // Will be replaced by a real token found in database
-        const tempToken = 'tempToken';
+        const dbToken = authToken;
 
-        if (authToken != tempToken) {
+        if (authToken != dbToken) {
           res.status(401).send({ message: 'Tokens do not match!' });
         }
+        
+        //TODO
+        //Decide what to send back to the client when their session has been verified.
         res.send(data);
       })
       .catch((err) => {

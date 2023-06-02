@@ -43,7 +43,7 @@ export class AuthController{
             //and return it
             User.findOne({ username: `${req.body.username}`, password: hash })
                 .then((data) => {
-                    var jwtToken = this.makeJWT(req.body.username);
+                    var jwtToken = this.makeJWT({username: req.body.username});
                     User.findOneAndUpdate({username: `${req.body.username}`}, 
                         {$set: {token: jwtToken}}).then(
                             res.send({"Authorization": jwtToken}));
