@@ -1,25 +1,76 @@
-// generic test function to verify whether mocha and chai is set up properly.
+const { expect } = require('chai');
+const { UserController } = require('./user.controller');
 
-var assert = require('chai').assert;
+describe('UserController', () => {
+  let userController;
 
-describe('MathUtils', () => {
-  describe('add', () => {
-    it('should add two numbers correctly', () => {
+  beforeEach(() => {
+    userController = new UserController();
+  });
+
+  describe('create', () => {
+    it('should create and save a new user', () => {
       // Arrange
-      const num1 = 5;
-      const num2 = 10;
+      let req = {
+        body: {
+          username: 'john_doe',
+          password: 'password123'
+        }
+      };
+      let res  = {
+        send: (data) => {},
+        status: (statusCode) => res,
+        statusCode: 0
+      };
 
       // Act
-      const result = MathUtils.add(num1, num2);
+      userController.create(req, res);
 
       // Assert
-      assert.equal(result, 15);
+      // Check if the response is sent successfully
+      expect(res.statusCode).to.equal(200);
+      // Add additional assertions as needed
+    });
+
+    it('should return an error when request body is missing username', () => {
+      // Arrange
+      let req = {
+        body: {
+          password: 'password123'
+        }
+      };
+      let res = {
+        send: (data) => {},
+        status: (statusCode) => res,
+        statusCode: 0
+      };
+
+      // Act
+      userController.create(req, res);
+
+      // Assert
+      // Check if the response has an error status code
+      expect(res.statusCode).to.equal(400);
+      // Add additional assertions as needed
+    });
+  });
+
+  describe('list', () => {
+    it('should retrieve all users from the database', () => {
+      // Arrange
+      let res = {
+        send: (data) => {},
+        status: (statusCode) => res,
+        statusCode: 0
+      };
+
+      // Act
+      userController.list({}, res);
+
+      // Assert
+      // Check if the response is sent successfully
+      expect(res.statusCode).to.equal(200);
+      // Add additional assertions as needed
     });
   });
 });
-
-class MathUtils {
-  static add(a: number, b: number): number {
-    return a + b;
-  }
-}
