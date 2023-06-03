@@ -10,7 +10,8 @@
     "build": "npm run lint && npm run format && npm run clean && tsc",
     "start:dev": "node dist/app.js",
     "start:watch": "nodemon src/app.ts",
-    "local": "npx ts-node ."
+    "local": "npx ts-node .",
+    "test": "node tmp_test/tmp_test.ts"
   },
   "author": "",
   "license": "ISC",
