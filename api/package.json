@@ -11,7 +11,7 @@
     "start:dev": "node dist/app.js",
     "start:watch": "nodemon src/app.ts",
     "local": "npx ts-node .",
-    "test": "node tmp_test/tmp_test.ts"
+    "test": "node ./node_modules/.bin/istanbul cover tmp_test/tmp_test.js"
   },
   "author": "",
   "license": "ISC",
