@@ -5,7 +5,7 @@ orbs:
 jobs:
   build:
     docker: 
-      - image: 
+      - image: cimg/node:current
     steps:
       - checkout
       - run:
@@ -13,7 +13,7 @@ jobs:
         command: npm install
       - run:
         name: Run tests
-        command: npm run test 
+        command: npm --version #TODO replace with test script once added. Ex: npm test 
       - codecov/upload
 workflow:
   version: 2.1

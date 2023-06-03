@@ -17,6 +17,8 @@ jobs:
           node-version: 12
       - name: Install packages
         run: npm install
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
     
  
       
