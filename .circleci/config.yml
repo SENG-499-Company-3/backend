@@ -13,7 +13,7 @@ jobs:
         command: npm install
       - run:
         name: Run tests
-        command: npm test #TODO replace with test script once added. Ex: npm test 
+        command: npm test 
       - codecov/upload
 workflow:
   version: 2.1
