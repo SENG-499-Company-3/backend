@@ -18,6 +18,9 @@ jobs:
       - name: Install packages
         working-directory: ./api
         run: npm install
+      - name: Run test
+        working-directory: ./api
+        run: npm test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
