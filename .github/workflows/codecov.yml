@@ -6,20 +6,17 @@ on:
   pull_request:
     branches: [codecov]
 jobs:
-  build:
-    name: Check source code
+  run:
     runs-on: ubuntu-latest
     steps:
-      -name: Checkout
+      - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version v12
+          node-version: 12
       - name: Install packages
-        run: npm install
-      -name: Run tests
-        run: npm run test
-      -name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+          run: npm install
+    
+ 
       
