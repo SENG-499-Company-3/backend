@@ -11,7 +11,7 @@
     "start:dev": "node dist/app.js",
     "start:watch": "nodemon src/app.ts",
     "local": "npx ts-node .",
-    "test": "npx nyc node_modules/.bin/mocha './src/**/*.test.ts'"
+    "test": "npx nyc node_modules/.bin/mocha"
   },
   "author": "",
   "license": "ISC",
