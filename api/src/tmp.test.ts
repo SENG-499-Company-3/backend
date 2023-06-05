@@ -1,4 +1,3 @@
-function a()
-{
+function someTest(): number {
     return 1;
 }
