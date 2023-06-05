@@ -4,6 +4,9 @@ import { UserController } from "./user.controller";
 const { expect } = require('chai');
 
 
+// basic user controller test, tests are failing right now 
+// but better testability will be added in the following sprint.
+
 describe('UserController', () => {
   let userController;
 
