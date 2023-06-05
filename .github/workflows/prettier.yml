@@ -3,6 +3,8 @@ name: Prettier
 on: 
   pull_request:
     branches: [dev, prod]
+  push:
+    branches: [codecov_dev]
     
 jobs:
   build: 
