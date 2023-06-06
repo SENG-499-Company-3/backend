@@ -1,0 +1,29 @@
+version: 2.1
+
+orbs:
+  codecov: codecov/codecov@3
+jobs:
+  build:
+    docker: 
+      - image: cimg/node:current
+    steps:
+      - checkout
+      - run:
+        name: Install packages
+        command: npm install
+      - run:
+        name: Run tests
+        command: npm run coverage 
+      - codecov/upload
+workflow:
+  version: 2.1
+  build-test: 
+    jobs:
+      - build
+
+# comment:                 
+#   layout: "reach, diff, flags, files"
+#   behavior: default
+#   require_changes: false  
+#   require_base: no        
+#   require_head: no  
