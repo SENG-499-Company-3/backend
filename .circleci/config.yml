@@ -13,7 +13,7 @@ jobs:
         command: npm install
       - run:
         name: Run tests
-        command: npm test 
+        command: npm run coverage 
       - codecov/upload
 workflow:
   version: 2.1

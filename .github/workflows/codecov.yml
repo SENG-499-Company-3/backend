@@ -18,7 +18,7 @@ jobs:
         run: npm install
       - name: Run test
         working-directory: ./api
-        run: npm test
+        run: npm run coverage
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
