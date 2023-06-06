@@ -2,9 +2,9 @@ name: CodeCov
 
 on:
   push:
-    branches: [codecov_dev]
+    branches: [codecov_mocha]
   pull_request:
-    branches: [codecov_dev]
+    branches: [codecov_mocha]
 jobs:
   run:
     runs-on: ubuntu-latest
