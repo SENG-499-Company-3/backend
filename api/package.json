@@ -12,7 +12,7 @@
     "start:watch": "nodemon src/app.ts",
     "local": "npx ts-node .",
     "test": "mocha './src/**/*.test.ts'",
-    "coverage": "npx nyc --reporter=json-summary --reporter=text-lcov npm run test"
+    "coverage": "npx nyc --reporter=text-summary npm run test"
   },
   "author": "",
   "license": "ISC",
