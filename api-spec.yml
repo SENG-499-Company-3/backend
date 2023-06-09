@@ -1,0 +1,449 @@
+openapi: 3.0.1
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/seng_499_api/BackendApi/1.0.0 
+    
+  - description: Local server
+    url: http://localhost:3001  
+  #Can be updated to AWS link later
+info:
+  description: This is SENG 499 Company 3 API
+  version: 1.0.2
+  title: SENG 499 API
+  contact:
+    email: kjartanreinarsson@gmail.com
+    name: Kjartan Einarsson
+    url: https://github.com/orgs/SENG-499-Company-3/projects/1/views/1
+tags:
+  - name: admin
+    description: Secured Admin-only calls
+  - name: frontend
+    description: Operations available to frontend
+  - name: algorithm1
+    description: Operations available to algorithm1
+  - name: algorithm2
+    description: Operations available to algorithm2
+    
+paths:
+
+### Backend Created ###
+  /user/create:
+    post:
+      tags:
+        - admin
+      summary: 'create endpoint for admin to create user'
+      operationId: createUser
+      description: |
+        By passing in the appropriate user object, you can create new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        '400':
+          description: 'user create failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /user/login:
+    post:
+      tags:
+        - frontend
+      summary: login endpoint for user
+      operationId: loginUser
+      description: |
+        By passing in the appropriate log creds, you can log into the application
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userLogin'
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/jwt'
+        '400':
+          description: 'user login failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+              
+  /user/self:
+    get:
+      tags: 
+        - frontend
+      summary: self endpoint for user to re-auth
+      operationId: selfUser
+      description: |
+        Self endpoint for Frontend to re-authenicate user
+      parameters: 
+        - in: query
+          name: jwt
+          schema:
+            $ref: '#/components/schemas/jwt'
+          required: true
+          description: 'User JWT to re-authenicate'
+      responses:
+        '200':
+          description: 'User is authenicated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        '400':
+          description: 'user jwt re-auth failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+                
+  /teacher/preference:
+    post:
+      tags: 
+        - frontend
+      summary: form endpoint for teacher preference availability
+      operationId: teacherPref
+      description: | 
+        form endpoint for teacher preference availability
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/coursePreference'
+      responses:
+        '200':
+          description: 'User is authenicated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/success'
+        '400':
+          description: 'user jwt re-auth failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      
+      
+
+### Algorithm 1 Endpoints (Required) ###
+  /schedule/create:
+    post:
+      tags: 
+        - algorithm1
+      summary: algorithm 1 endpoint to generate a schedule
+      operationId: createSchedule
+      description: | 
+        Algorithm 1 endpoint to generate a schedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/scheduleInput'
+      responses:
+        '200':
+          description: schedule generation completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schedule'
+        '400':
+          description: schedule generation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      
+  /schedule/validate:
+    post:
+      tags:
+        - algorithm1
+      summary: algorithm 1 endpoint to validate an existing schedule
+      operationId: validateSchedule
+      description: | 
+        Algorithm 1 endpoint to validate a schedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/schedule'
+      responses:
+        '200':
+          description: schedule validation completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/isValidSchedule'
+        '400':
+          description: schedule validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          
+          
+##### SCHEMAS #####          
+components:
+  schemas:
+  
+### Frontend User Schemas  ###
+    jwt:
+      type: object
+      required: 
+        - jwt
+      properties:
+        jwt:
+          type: string
+          description: Json Web Token
+
+    userLogin:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: 'user@email.com'
+        password:
+          type: string
+          format: password
+          example: 'password'
+          description: 'password hashed in db'
+       
+    user:
+      allOf:
+        - $ref: '#/components/schemas/userLogin'
+        - type: object
+          required:
+            - name
+            - userRole
+          properties:
+            name:
+              type: string
+              example: 'User name'
+            userRole:
+              $ref: '#/components/schemas/userRole'
+
+
+### Course Schemas ###
+    meetingTime:
+      type: object
+      required: 
+        - days
+        - startTime
+        - endTime
+      properties:
+        days:
+          type: array
+          items:
+            $ref: '#/components/schemas/days'
+        startTime:
+          type: string
+          format: time
+          example: '08:00'
+        endTime:
+          type: string
+          format: time
+          example: '09:00'
+
+    courseId:
+      type: object
+      required: 
+        - subject
+        - code
+        - term
+      properties:
+        subject:
+          type: string
+          description: Course subject, e.g. SENG, CSC
+        code:
+          type: string
+          description: Course code, e.g. 499,310
+        term:
+          $ref: '#/components/schemas/term'
+      
+    coursePreference:
+      type: object
+      required: 
+        - courseId
+        - preference
+      properties:
+        courseId:
+           $ref: '#/components/schemas/courseId'
+        preference:
+          type: number
+          description: Preference Value
+    
+    courseSection:
+      type: object
+      required: 
+        - courseId
+        - hoursPerWeek
+        - capacity
+        - professors
+        - startDate
+        - endDate
+        - meetingTimes
+      properties:
+        courseId:
+          $ref: '#/components/schemas/courseId'
+        hoursPerWeek:
+          type: number
+          description: Hours per week course is offered
+        capacity:
+          type: number
+          description: Capacity of course
+        professors:
+          type: array
+          description: Professor teaching course
+          items:
+            $ref: '#/components/schemas/user'
+        startDate:
+          type: string
+          format: date
+          description: Start date of course
+        endDate:
+          type: string
+          format: date
+          description: End date of course
+        meetingTimes:
+          $ref: '#/components/schemas/meetingTime'
+
+
+    teacherPreferenceForm:
+      type: object
+      required: 
+        - peng
+        - userId
+        - courses
+      properties:
+        peng:
+          type: boolean
+          description: Professional Engineer certified
+        userId:
+          $ref: '#/components/schemas/user'
+        courses:
+           $ref: '#/components/schemas/courseId'
+
+### Algorithm 1 Schemas ###
+    isValidSchedule:
+      type: boolean
+      
+    schedule:
+      type: object
+      required:
+        - assignments
+        - complete
+      properties:
+        assignments:
+          type: array
+          items:
+            type: array
+            items:
+              type: integer 
+        valid:
+          nullable: true
+          type: boolean
+        complete:
+          nullable: true
+          type: boolean
+
+    scheduleInput:
+      type: object
+      required:
+        - dimensions
+        - preferences
+        - loads
+        - availabilities
+        - p_tgt
+      properties:
+        dimensions:
+          type: array
+          items:
+            type: object
+            properties:
+              courses:
+                type: integer
+              times:
+                type: integer
+              teachers:
+                type: integer
+              rooms:
+                type: integer 
+        preferences:
+          type: array
+          items:
+            type: array
+            items:
+              type: integer   
+        loads:
+          type: array
+          items:
+            type: array
+            items:
+              type: integer
+        availabilities:
+          type: array
+          items:
+            type: array
+            items:
+              type: integer  
+        p_tgt:
+          type: integer
+
+### Generic Schemas ###
+    userRole: 
+      type: string
+      enum: ['ADMIN', 'TEACHER']
+      description: 'User roles'
+          
+    term:
+      type: string
+      enum: ['FALL', 'SPRING', 'SUMMER']
+      description: 'Term course is offered in'
+    
+    days:
+      type: string
+      enum: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY']
+      description: 'Days course is offered on'
+
+    error:
+      type: object
+      required:
+        - message
+        - errors
+      properties:
+        message:
+          type: string
+          description: Error message
+        errors:
+          $ref: '#/components/schemas/error'
+          
+    success:
+      type: object
+      required:
+        - success
+        - message
+      properties:
+        success:
+          type: boolean
+          description: Success
+        message:
+          type: string
+          description: Success message
