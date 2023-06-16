@@ -4,13 +4,54 @@ import { UserController } from '../controllers/user.controller';
 const router = express.Router();
 const userController: UserController = new UserController();
 
-// Create a new Tutorial
-router.post('/create', userController.create);
+// Create a new User (./user/create)
+const create = async (req, res) => {
+  // Validate request
+  if (!req.body.email || !req.body.password || !req.body.name || !req.body.role) {
+    res.status(400).send({ message: 'Content can not be empty!' });
+    return;
+  }
 
-// Retrieve all Tutorials
-router.get('/list', userController.list);
+  const { email, password, name, role } = req.body;
 
-// Self authentication
-router.post('/self', userController.self);
+  try {
+    const response = await userController.create(email, password, name, role);
+
+    res.status(200).send(response);
+  } catch (err) {
+    res.status(401).send({ message: err });
+  }
+};
+router.post('/create', create);
+
+// List all Users (./user/list)
+const list = async (req, res) => {
+  try {
+    const response = await userController.list();
+
+    res.status(200).send(response);
+  } catch (err) {
+    res.status(401).send({ message: err });
+  }
+};
+router.get('/list', list);
+
+// Get the current User (./user/self)
+const self = async (req, res) => {
+  if (!req.headers.authorization) {
+    res.status(400).send({ message: 'Self endpoint requires authorization header.' });
+  }
+
+  const token = req.headers.authorization.split(' ')[1];
+
+  try {
+    const response = await userController.self(token);
+
+    res.status(200).send(response);
+  } catch (err) {
+    res.status(401).send({ message: err });
+  }
+};
+router.post('/self', self);
 
 module.exports = router;

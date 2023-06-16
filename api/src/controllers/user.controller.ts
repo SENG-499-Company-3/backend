@@ -1,92 +1,67 @@
+import { IUser, UserRoles } from '../interfaces/User';
+
 const db = require('../models');
 const bcrypt = require('bcrypt');
 const jwt_decode = require('jwt-decode');
 const User = db.users;
 
-// Create and Save a new User
 export class UserController {
-  public create = (req, res) => {
-    // Validate request
-    if (!req.body.username) {
-      res.status(400).send({ message: 'Content can not be empty!' });
-      return;
-    }
-
+  async create(email: string, password: string, name: string, role: UserRoles): Promise<void> {
     // Create a User
-    const user = new User({
-      username: req.body.username,
-      password: req.body.password
+    const user: IUser = new User({
+      email: email,
+      password: password,
+      name: name,
+      role: role
     });
 
     // Encrypt the user's password
     const saltRounds = 10;
-    bcrypt.genSalt(saltRounds, function (err, salt) {
-      bcrypt.hash(user.password, salt, function (err, hash) {
+    bcrypt.genSalt(saltRounds, async function (err, salt) {
+      bcrypt.hash(user.password, salt, async function (err, hash) {
         //Set the user's password to the new hashed version
         user.password = hash;
 
         // Save User in the database
-        user
-          .save(user)
-          .then((data) => {
-            res.send(data);
-          })
-          .catch((err) => {
-            res.status(500).send({
-              message: err.message || 'Some error occurred while creating the User.'
-            });
-          });
+        try {
+          await user.save(user).catch((err) => err);
+        } catch (err) {
+          throw new Error('Some error occurred while creating the User.');
+        }
       });
     });
-  };
+  }
 
   // Retrieve all Users from the database.
-  public list = (req, res) => {
-    User.find()
-      .then((data) => {
-        res.send(data);
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message: err.message || 'Some error occurred while retrieving users.'
-        });
-      });
-  };
+  async list(): Promise<IUser[]> {
+    try {
+      const users: IUser[] = await User.find().catch((err) => err);
 
-  public self = (req, res) => {
-    if (!req.headers.authorization) {
-      res.status(400).send({ message: 'Self endpoint requires authorization header.' });
+      return users;
+    } catch (err) {
+      throw new Error('Some error occurred while retrieving users.');
     }
+  }
 
-    const authToken = req.headers.authorization.split(' ')[1];
-    let decoded_username = "";
+  async self(authToken: string): Promise<IUser> {
+    let decoded_email = '';
+    let selfUser: IUser = {} as IUser;
 
     try {
-      decoded_username = jwt_decode(authToken).username;
+      decoded_email = jwt_decode(authToken).email;
     } catch (err) {
-      res.status(401).send({message: "This token was invalid!"});
+      throw new Error('This token was invalid!');
     }
 
-    User.findOne({ username: decoded_username })
-      .then((data) => {
-        if (!data) {
-          res.send({ message: 'There was no user with that username.' });
-        }
+    try {
+      selfUser = await User.findOne({ email: decoded_email }).catch((err) => err);
+      if (!selfUser) {
+        throw new Error('There was no user with that email.');
+      }
+    } catch (err) {
+      throw new Error('Some error occurred while retrieving user.');
+    }
 
-        const dbToken = authToken;
-
-        if (authToken != dbToken) {
-          res.status(401).send({ message: 'Tokens do not match!' });
-        }
-        
-        //TODO
-        //Decide what to send back to the client when their session has been verified.
-        res.send(data);
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message: err.message || 'Some error occured while trying to retrieve a user.'
-        });
-      });
-  };
+    return selfUser;
+  }
 }
