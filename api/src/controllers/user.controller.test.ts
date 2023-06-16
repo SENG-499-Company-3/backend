@@ -1,5 +1,6 @@
 import { beforeEach, describe, it } from "mocha";
 import { UserController } from "./user.controller";
+import { AuthController } from "./auth.controller";
 
 const { expect } = require('chai');
 
@@ -9,9 +10,11 @@ const { expect } = require('chai');
 
 describe('UserController', () => {
   let userController;
+  let authController;
 
   beforeEach(() => {
     userController = new UserController();
+    authController = new AuthController();
   });
 
   describe('create', () => {
@@ -83,4 +86,53 @@ describe('UserController', () => {
       // Add additional assertions as needed
     });
   });
+
+  describe('self', () => {
+    it('should check the users credentials whenever the page is reloaded', () => {
+      //Arrange
+      let createReq = {
+        body: {
+          username: 'john_doe',
+          password: 'password123'
+        }
+      };
+      let createRes  = {
+        send: () => {},
+        status: () => createRes,
+        statusCode: 0
+      };
+
+      userController.create(createReq, createRes);
+
+      let loginReq = {
+        body: {
+          username: 'john_doe',
+          password: 'password123'
+        }
+      };
+      let loginRes = {
+        send: () => {},
+        status: () => loginRes,
+        statusCode: 0
+      };
+
+      authController.login(loginReq, loginRes);
+
+      let selfReq = {
+        headers: {
+          authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG5fZG9lIiwiaWF0IjoxNjg2ODczMTE0fQ.LSqb0a2qBd11hcpV0w570Ma-KfG9YF_0plKKOQKuyCU"
+        }
+      };
+      let selfRes = {
+        send: () => {},
+        status: () => selfRes,
+        statusCode: 0
+      };
+
+      userController.self(selfReq, selfRes);
+
+      expect(true);
+    })
+  })
+
 });
