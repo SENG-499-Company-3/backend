@@ -5,7 +5,7 @@ export const userSchema = {
   password: String,
   name: String,
   role: userRoleSchema,
-  token: String
+  token: { type: String, default: '' }
 };
 
 module.exports = (mongoose) => {
