@@ -36,22 +36,4 @@ const list = async (req, res) => {
 };
 router.get('/list', list);
 
-// Get the current User (./user/self)
-const self = async (req, res) => {
-  if (!req.headers.authorization) {
-    res.status(400).send({ message: 'Self endpoint requires authorization header.' });
-  }
-
-  const token = req.headers.authorization.split(' ')[1];
-
-  try {
-    const response = await userController.self(token);
-
-    res.status(200).send(response);
-  } catch (err) {
-    res.status(401).send({ message: err });
-  }
-};
-router.post('/self', self);
-
 module.exports = router;
