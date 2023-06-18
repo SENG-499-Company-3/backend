@@ -1,15 +1,15 @@
+export const userRoleSchema = { type: String, enum: ['TEACHER', 'ADMIN'], default: 'TEACHER' };
+
+export const userSchema = {
+  email: String,
+  password: String,
+  name: String,
+  role: userRoleSchema,
+  token: String
+};
+
 module.exports = (mongoose) => {
-  var schema = mongoose.Schema(
-    {
-      _id: Number,
-      email: String,
-      password: String,
-      name: String,
-      role: String,
-      token: String
-    },
-    { timestamps: true, unique: true }
-  );
+  var schema = mongoose.Schema(userSchema, { timestamps: true, unique: true });
 
   schema.method('toJSON', function () {
     // eslint-disable-next-line no-unused-vars
