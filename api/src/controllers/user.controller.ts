@@ -2,7 +2,6 @@ import { IUser, UserRoles } from '../interfaces/User';
 
 const db = require('../models');
 const bcrypt = require('bcrypt');
-const jwt_decode = require('jwt-decode');
 const User = db.users;
 
 export class UserController {
@@ -41,27 +40,5 @@ export class UserController {
     } catch (err) {
       throw new Error('Some error occurred while retrieving users.');
     }
-  }
-
-  async self(authToken: string): Promise<IUser> {
-    let decoded_email = '';
-    let selfUser: IUser = {} as IUser;
-
-    try {
-      decoded_email = jwt_decode(authToken).email;
-    } catch (err) {
-      throw new Error('This token was invalid!');
-    }
-
-    try {
-      selfUser = await User.findOne({ email: decoded_email }).catch((err) => err);
-      if (!selfUser) {
-        throw new Error('There was no user with that email.');
-      }
-    } catch (err) {
-      throw new Error('Some error occurred while retrieving user.');
-    }
-
-    return selfUser;
   }
 }

@@ -2,9 +2,9 @@ import cors from 'cors';
 // import helmet from 'helmet';
 import morgan from 'morgan';
 import express from 'express';
+import { userData } from './models/data/userData';
 const user = require('./routes/user.routes');
 const auth = require('./routes/auth.routes');
-
 
 const app = express();
 
@@ -42,9 +42,24 @@ db.mongoose
     process.exit();
   });
 
-app.use('/user', user);
-app.use('/auth', auth)
+const User = db.users;
 
+// Create a new User if one doesn't already exist
+User.findOne({ email: userData[0].email }).then((user) => {
+  if (!user) {
+    User.create(userData[0])
+      .then(() => {
+        console.log('Users created!');
+      })
+      .catch((err) => {
+        console.log('Error creating users!', err);
+      });
+  }
+});
+
+app.use('/user', user);
+app.use('/auth', auth);
+//ASDASD
 // Global error handling
 // eslint-disable-next-line no-unused-vars
 app.use((err, _req, res, next) => {
