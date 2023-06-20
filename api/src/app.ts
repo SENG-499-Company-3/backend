@@ -59,7 +59,7 @@ User.findOne({ email: userData[0].email }).then((user) => {
 
 app.use('/user', user);
 app.use('/auth', auth);
-//ASDASD
+
 // Global error handling
 // eslint-disable-next-line no-unused-vars
 app.use((err, _req, res, next) => {
