@@ -42,7 +42,7 @@ db.mongoose
     process.exit();
   });
 
-const User = db.users;
+const User = require('./models/user.model');
 
 // Create a new User if one doesn't already exist
 User.findOne({ email: userData[0].email }).then((user) => {
