@@ -1,7 +1,9 @@
-import { describe, expect, beforeAll, afterAll, afterEach, it } from '@jest/globals';
+import { describe, expect, beforeAll, afterAll, afterEach, it, beforeEach } from '@jest/globals';
 import { UserController } from './user.controller';
 import * as tempdb from '../../tests/db';
+
 const UserModel = require('../models/user.model');
+const sinon = require('sinon');
 
 beforeAll(async () => await tempdb.connect());
 afterEach(async () => await tempdb.clearDatabase());
@@ -9,6 +11,10 @@ afterAll(async () => await tempdb.closeDatabase());
 
 describe('UserController', () => {
   describe('create', () => {
+    beforeEach(() => {
+      sinon.restore();
+    });
+
     it('should create and save a new user', async () => {
       const userController = new UserController();
       const response = await userController.create('test@email.com', 'pass', 'user', 'TEACHER');
@@ -20,17 +26,27 @@ describe('UserController', () => {
     });
 
     it('should throw an error if insert fails', async () => {
-      // Arrange
+      sinon.mock(UserModel.prototype).expects('save').throws();
+
       const userController = new UserController();
+
+      let err;
       try {
         await userController.create('', 'pass', 'user', 'TEACHER');
-      } catch (err: any) {
-        expect(err.message).toBe('Some error occurred while creating the User.');
+      } catch (e) {
+        err = e;
       }
+
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toBe('Some error occurred while creating the User.');
     });
   });
 
   describe('list', () => {
+    beforeEach(() => {
+      sinon.restore();
+    });
+
     it('should return empty list if no users', async () => {
       const userController = new UserController();
       const response = await userController.list();
@@ -57,12 +73,19 @@ describe('UserController', () => {
 
     //This test "succeeds" because no Schema is inserted into `UserModel` so the query fails
     it('should throw an error if query fails', async () => {
+      sinon.mock(UserModel).expects('find').throws();
+
       const userController = new UserController();
+
+      let err;
       try {
         await userController.list();
-      } catch (err: any) {
-        expect(err.message).toBe('Some error occurred while creating the User.');
+      } catch (e) {
+        err = e;
       }
+
+      expect(err).toBeInstanceOf(Error);
+      expect(err.message).toBe('Some error occurred while retrieving users.');
     });
   });
 });
