@@ -1,86 +1,68 @@
-import { beforeEach, describe, it } from "mocha";
-import { UserController } from "./user.controller";
+import { describe, expect, beforeAll, afterAll, afterEach, it } from '@jest/globals';
+import { UserController } from './user.controller';
+import * as tempdb from '../../tests/db';
+const UserModel = require('../models/user.model');
 
-const { expect } = require('chai');
-
-
-// basic user controller test, tests are failing right now 
-// but better testability will be added in the following sprint.
+beforeAll(async () => await tempdb.connect());
+afterEach(async () => await tempdb.clearDatabase());
+afterAll(async () => await tempdb.closeDatabase());
 
 describe('UserController', () => {
-  let userController;
-
-  beforeEach(() => {
-    userController = new UserController();
-  });
-
   describe('create', () => {
-    it('should create and save a new user', () => {
-      // Arrange
-      let req = {
-        body: {
-          username: 'john_doe',
-          password: 'password123'
-        }
-      };
-      let res  = {
-        send: () => {},
-        status: () => res,
-        statusCode: 0
-      };
+    it('should create and save a new user', async () => {
+      const userController = new UserController();
+      const response = await userController.create('test@email.com', 'pass', 'user', 'TEACHER');
 
-      // Act
-      userController.create(req, res);
+      const users = await UserModel.find({ email: 'test@email.com' });
 
-      // Assert
-      // Check if the response is sent successfully
-      //expect(res.statusCode).to.equal(200); //TODO uncomment
-      expect(true);
-      // Add additional assertions as needed
+      expect(response).toBe(undefined);
+      expect(users.length).toBe(1);
     });
 
-    it('should return an error when request body is missing username', () => {
+    it('should throw an error if insert fails', async () => {
       // Arrange
-      let req = {
-        body: {
-          password: 'password123'
-        }
-      };
-      let res = {
-        send: () => {},
-        status: () => res,
-        statusCode: 0
-      };
-
-      // Act
-      userController.create(req, res);
-
-      // Assert
-      // Check if the response has an error status code
-      //expect(res.statusCode).to.equal(400); //TODO uncomment
-      expect(true);
-      // Add additional assertions as needed
+      const userController = new UserController();
+      try {
+        await userController.create('', 'pass', 'user', 'TEACHER');
+      } catch (err: any) {
+        expect(err.message).toBe('Some error occurred while creating the User.');
+      }
     });
   });
 
   describe('list', () => {
-    it('should retrieve all users from the database', () => {
-      // Arrange
-      let res = {
-        send: () => {},
-        status: () => res,
-        statusCode: 0
-      };
+    it('should return empty list if no users', async () => {
+      const userController = new UserController();
+      const response = await userController.list();
 
-      // Act
-      userController.list({}, res);
+      expect(response).toStrictEqual([]);
+    });
 
-      // Assert
-      // Check if the response is sent successfully
-      //expect(res.statusCode).to.equal(200); //TODO uncomment
-      expect(true);
+    it('should return list of users', async () => {
+      const user = new UserModel({
+        email: 'email',
+        password: 'password',
+        name: 'name',
+        role: 'TEACHER',
+        token: ''
+      });
 
-      // Add additional assertions as needed
+      await user.save(user);
+
+      const userController = new UserController();
+      const response = await userController.list();
+
+      expect(response.length).toBe(1);
+    });
+
+    //This test "succeeds" because no Schema is inserted into `UserModel` so the query fails
+    it('should throw an error if query fails', async () => {
+      const userController = new UserController();
+      try {
+        await userController.list();
+      } catch (err: any) {
+        expect(err.message).toBe('Some error occurred while creating the User.');
+      }
     });
   });
 });

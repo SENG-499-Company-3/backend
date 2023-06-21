@@ -1,23 +1,17 @@
-export const userRoleSchema = { type: String, enum: ['TEACHER', 'ADMIN'], default: 'TEACHER' };
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-export const userSchema = {
-  email: String,
-  password: String,
-  name: String,
-  role: userRoleSchema,
-  token: { type: String, default: '' }
-};
+export const userRoleSchema = { type: String, enum: ['TEACHER', 'ADMIN'], default: 'TEACHER', required: true };
 
-module.exports = (mongoose) => {
-  var schema = mongoose.Schema(userSchema, { timestamps: true, unique: true });
+export const userSchema = new Schema(
+  {
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    name: { type: String, required: true },
+    role: userRoleSchema,
+    token: { type: String, default: '' }
+  },
+  { timestamps: true, unique: true }
+);
 
-  schema.method('toJSON', function () {
-    // eslint-disable-next-line no-unused-vars
-    const { __v, _id, ...object } = this.toObject();
-    object.id = _id;
-    return object;
-  });
-
-  const User = mongoose.model('user', schema);
-  return User;
-};
+module.exports = mongoose.model('User', userSchema);

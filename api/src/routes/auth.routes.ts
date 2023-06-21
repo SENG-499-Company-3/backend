@@ -29,7 +29,6 @@ const self = async (req, res) => {
   }
 
   const token = req.headers.authorization;
-  console.log('token', token);
 
   try {
     const response = await authController.self(token);
