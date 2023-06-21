@@ -1,0 +1,25 @@
+{
+  "allOf": [
+    {
+      "$ref": "userLogin.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "name",
+        "userRole"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "User name"
+        },
+        "userRole": {
+          "$ref": "userRole.json"
+        }
+      }
+    }
+  ],
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object"
+}

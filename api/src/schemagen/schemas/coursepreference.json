@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "required": [
+    "courseId",
+    "preference"
+  ],
+  "properties": {
+    "courseId": {
+      "$ref": "courseId.json"
+    },
+    "preference": {
+      "type": "number",
+      "description": "Preference Value"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

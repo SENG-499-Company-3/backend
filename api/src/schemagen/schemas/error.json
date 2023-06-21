@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "required": [
+    "message",
+    "errors"
+  ],
+  "properties": {
+    "message": {
+      "type": "string",
+      "description": "Error message"
+    },
+    "errors": {
+      "$ref": "error.json"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

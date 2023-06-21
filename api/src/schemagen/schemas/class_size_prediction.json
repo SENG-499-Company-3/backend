@@ -1,0 +1,54 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "course",
+      "prereq",
+      "coreq",
+      "pastEnrol"
+    ],
+    "properties": {
+      "course": {
+        "type": "string"
+      },
+      "prereq": {
+        "nullable": true,
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "coreq": {
+        "nullable": true,
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "pastEnrol": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "year",
+            "term",
+            "size"
+          ],
+          "properties": {
+            "year": {
+              "type": "integer"
+            },
+            "term": {
+              "type": "integer"
+            },
+            "size": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}
