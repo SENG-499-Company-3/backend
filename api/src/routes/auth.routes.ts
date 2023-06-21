@@ -26,7 +26,7 @@ const login = async (req, res) => {
     res.status(401).send({ message: err });
   }
 };
-router.post('/login', validate({ body: userlogin }), login);
+router.post('/login', validate({ body: { id: 'userlogin.json', ...userlogin } }), login);
 
 // Get the current User (./auth/self)
 const self = async (req, res) => {
@@ -44,6 +44,6 @@ const self = async (req, res) => {
     res.status(401).send({ message: err });
   }
 };
-router.post('/self', validate({ body: jwt }), self);
+router.post('/self', validate({ body: { id: 'jwt.json', ...userlogin } }), self);
 
 module.exports = router;
