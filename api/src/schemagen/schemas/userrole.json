@@ -1,0 +1,9 @@
+{
+  "type": "string",
+  "enum": [
+    "ADMIN",
+    "TEACHER"
+  ],
+  "description": "User roles",
+  "$schema": "http://json-schema.org/schema#"
+}

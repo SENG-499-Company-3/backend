@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "required": [
+    "days",
+    "startTime",
+    "endTime"
+  ],
+  "properties": {
+    "days": {
+      "type": "array",
+      "items": {
+        "$ref": "days.json"
+      }
+    },
+    "startTime": {
+      "type": "string",
+      "format": "time",
+      "example": "08:00"
+    },
+    "endTime": {
+      "type": "string",
+      "format": "time",
+      "example": "09:00"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}
