@@ -1,9 +1,15 @@
 import express from 'express';
+import validate from 'express-jsonschema';
+import { readFile } from 'fs/promises';
+import bodyParser from 'body-parser';
+import userlogin from '../schemagen/schemas/userlogin.json';
+import jwt from '../schemagen/schemas/jwt.json';
 import { AuthController } from '../controllers/auth.controller';
 
 const router = express.Router();
 const authController: AuthController = new AuthController();
 
+router.use(bodyParser.json());
 //Login user  (./auth/login)
 const login = async (req, res) => {
   //Validate request
@@ -20,7 +26,7 @@ const login = async (req, res) => {
     res.status(401).send({ message: err });
   }
 };
-router.post('/login', login);
+router.post('/login', validate({ body: userlogin }), login);
 
 // Get the current User (./auth/self)
 const self = async (req, res) => {
@@ -39,6 +45,6 @@ const self = async (req, res) => {
     res.status(401).send({ message: err });
   }
 };
-router.post('/self', self);
+router.post('/self', validate({ body: jwt }), self);
 
 module.exports = router;
