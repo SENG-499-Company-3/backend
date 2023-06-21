@@ -11,7 +11,7 @@
     "start:dev": "node dist/app.js",
     "start:watch": "nodemon src/app.ts",
     "local": "npx ts-node .",
-    "test": "jest --detectOpenHandles",
+    "test": "jest --detectOpenHandles --forceExit --coverage",
     "coverage": "npx nyc --reporter=text-summary --reporter=cobertura npm run test"
   },
   "author": "",
