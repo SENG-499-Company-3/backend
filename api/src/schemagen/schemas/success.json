@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "required": [
+    "success",
+    "message"
+  ],
+  "properties": {
+    "success": {
+      "type": "boolean",
+      "description": "Success"
+    },
+    "message": {
+      "type": "string",
+      "description": "Success message"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

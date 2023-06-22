@@ -1,0 +1,24 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "course": {
+        "type": "string"
+      },
+      "size": {
+        "type": "integer"
+      },
+      "constraints": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "term": {
+        "type": "integer"
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

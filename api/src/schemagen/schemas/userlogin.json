@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "required": [
+    "email",
+    "password"
+  ],
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "example": "user@email.com"
+    },
+    "password": {
+      "type": "string",
+      "format": "password",
+      "example": "password",
+      "description": "password hashed in db"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

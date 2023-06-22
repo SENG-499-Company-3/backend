@@ -1,11 +1,16 @@
-import { hashPassword } from '../helpers/auth';
+import { comparePassword } from '../helpers/auth';
 import { IUser } from '../interfaces/User';
 
 const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const jwt_decode = require('jwt-decode');
 
-//login user
+/**
+ * Auth Controller
+ *
+ * @export
+ * @class AuthController
+ */
 export class AuthController {
   #JWT_SECRET: string = 'sadlfkjsfk';
 
@@ -25,45 +30,59 @@ export class AuthController {
     }
   };
 
-  //login user
+  /**
+   * Login user
+   *
+   * @param {string} email
+   * @param {string} password
+   * @return {*}  {Promise<string>}
+   * @memberof AuthController
+   */
   async login(email: string, password: string): Promise<string> {
     let verifiedJWT = '';
 
-    //attempt to login the user
-    //if user and password found, generate jwt token, store it in database
-    //and return it
-    const hash = await hashPassword(password);
+    const user = await User.findOne({ email: email }).catch((err) => err);
 
-    await User.findOne({ email: email, password: hash })
-      .then(async () => {
-        var jwtToken = await this.makeJWT({ email: email });
-        await User.findOneAndUpdate({ email: email }, { $set: { token: jwtToken } }).then(async () => {
-          verifiedJWT = jwtToken;
-        });
-      })
-      .catch((err) => err);
+    if (!user) {
+      throw new Error('User not found.');
+    }
+
+    const match = await comparePassword(password, user.password);
+
+    if (!match) {
+      throw new Error('Invalid password.');
+    }
+
+    var jwtToken = await this.makeJWT({ email: email });
+
+    await User.findOneAndUpdate({ email: email }, { $set: { token: jwtToken } }).then(async () => {
+      verifiedJWT = jwtToken;
+    });
 
     return verifiedJWT;
   }
 
-  // Self
+  /**
+   * Get self
+   *
+   * @param {string} authToken
+   * @return {*}  {Promise<IUser>}
+   * @memberof AuthController
+   */
   async self(authToken: string): Promise<IUser> {
     let decoded_email = '';
     let selfUser: IUser = {} as IUser;
 
-    try {
-      decoded_email = jwt_decode(authToken).email;
-    } catch (err) {
+    decoded_email = jwt_decode(authToken).email;
+
+    if (!decoded_email) {
       throw new Error('This token was invalid!');
     }
 
-    try {
-      selfUser = await User.findOne({ email: decoded_email }).catch((err) => err);
-      if (!selfUser) {
-        throw new Error('There was no user with that email.');
-      }
-    } catch (err) {
-      throw new Error('Some error occurred while retrieving user.');
+    selfUser = await User.findOne({ email: decoded_email }).catch((err) => err);
+
+    if (!selfUser) {
+      throw new Error('There was no user with that email.');
     }
 
     return selfUser;

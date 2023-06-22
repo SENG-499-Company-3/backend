@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "required": [
+    "jwt"
+  ],
+  "properties": {
+    "jwt": {
+      "type": "string",
+      "description": "Json Web Token"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

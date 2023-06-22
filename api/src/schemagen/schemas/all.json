@@ -1,0 +1,58 @@
+{
+  "oneOf": [
+    {
+      "$ref": "jwt.json"
+    },
+    {
+      "$ref": "userLogin.json"
+    },
+    {
+      "$ref": "user.json"
+    },
+    {
+      "$ref": "meetingTime.json"
+    },
+    {
+      "$ref": "courseId.json"
+    },
+    {
+      "$ref": "coursePreference.json"
+    },
+    {
+      "$ref": "courseSection.json"
+    },
+    {
+      "$ref": "teacherPreferenceForm.json"
+    },
+    {
+      "$ref": "isValidSchedule.json"
+    },
+    {
+      "$ref": "schedule.json"
+    },
+    {
+      "$ref": "InputData.json"
+    },
+    {
+      "$ref": "class_size_prediction.json"
+    },
+    {
+      "$ref": "predicted_class_size.json"
+    },
+    {
+      "$ref": "userRole.json"
+    },
+    {
+      "$ref": "term.json"
+    },
+    {
+      "$ref": "days.json"
+    },
+    {
+      "$ref": "error.json"
+    },
+    {
+      "$ref": "success.json"
+    }
+  ]
+}

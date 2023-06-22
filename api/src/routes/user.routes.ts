@@ -4,7 +4,13 @@ import { UserController } from '../controllers/user.controller';
 const router = express.Router();
 const userController: UserController = new UserController();
 
-// Create a new User (./user/create)
+/**
+ * Create a new User
+ * (./user/create)
+ * @param {*} req
+ * @param {*} res
+ * @return {*}
+ */
 const create = async (req, res) => {
   // Validate request
   if (!req.body.email || !req.body.password || !req.body.name || !req.body.role) {
@@ -24,7 +30,12 @@ const create = async (req, res) => {
 };
 router.post('/create', create);
 
-// List all Users (./user/list)
+/**
+ * List all Users
+ * (./user/list)
+ * @param {*} req
+ * @param {*} res
+ */
 const list = async (req, res) => {
   try {
     const response = await userController.list();

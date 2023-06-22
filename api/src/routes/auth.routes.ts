@@ -1,10 +1,21 @@
 import express from 'express';
+import { validate } from 'express-jsonschema';
+import bodyParser from 'body-parser';
+import userlogin from '../schemagen/schemas/userlogin.json';
 import { AuthController } from '../controllers/auth.controller';
 
 const router = express.Router();
 const authController: AuthController = new AuthController();
 
-//Login user  (./auth/login)
+router.use(bodyParser.json());
+
+/**
+ * Login user
+ * (./auth/login)
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 const login = async (req, res) => {
   //Validate request
   if (!req.body.email || !req.body.password) {
@@ -20,9 +31,14 @@ const login = async (req, res) => {
     res.status(401).send({ message: err });
   }
 };
-router.post('/login', login);
+router.post('/login', validate({ body: { ...userlogin } }), login);
 
-// Get the current User (./auth/self)
+/**
+ * Get the current User
+ * (./auth/self)
+ * @param {*} req
+ * @param {*} res
+ */
 const self = async (req, res) => {
   if (!req.headers.authorization) {
     res.status(400).send({ message: 'Self endpoint requires authorization header.' });
@@ -38,6 +54,6 @@ const self = async (req, res) => {
     res.status(401).send({ message: err });
   }
 };
-router.post('/self', self);
+router.post('/self', validate({ body: { id: 'jwt.json', ...userlogin } }), self);
 
 module.exports = router;

@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "required": [
+    "courseId",
+    "hoursPerWeek",
+    "capacity",
+    "professors",
+    "startDate",
+    "endDate",
+    "meetingTimes"
+  ],
+  "properties": {
+    "courseId": {
+      "$ref": "courseId.json"
+    },
+    "hoursPerWeek": {
+      "type": "number",
+      "description": "Hours per week course is offered"
+    },
+    "capacity": {
+      "type": "number",
+      "description": "Capacity of course"
+    },
+    "professors": {
+      "type": "array",
+      "description": "Professor teaching course",
+      "items": {
+        "$ref": "user.json"
+      }
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Start date of course"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date",
+      "description": "End date of course"
+    },
+    "meetingTimes": {
+      "$ref": "meetingTime.json"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

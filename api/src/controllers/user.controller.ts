@@ -3,7 +3,23 @@ import { IUser, UserRoles } from '../interfaces/User';
 
 const User = require('../models/user.model');
 
+/**
+ * User Controller
+ *
+ * @export
+ * @class UserController
+ */
 export class UserController {
+  /**
+   * Creates an instance of UserController.
+   *
+   * @param {string} email
+   * @param {string} password
+   * @param {string} name
+   * @param {UserRoles} role
+   * @return {*}  {Promise<void>}
+   * @memberof UserController
+   */
   async create(email: string, password: string, name: string, role: UserRoles): Promise<void> {
     // Create a User
     const user = new User({
@@ -25,7 +41,12 @@ export class UserController {
     }
   }
 
-  // Retrieve all Users from the database.
+  /**
+   * List all users
+   *
+   * @return {*}  {Promise<IUser[]>}
+   * @memberof UserController
+   */
   async list(): Promise<IUser[]> {
     try {
       const users: IUser[] = await User.find().catch((err) => err);

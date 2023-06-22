@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "required": [
+    "assignments",
+    "valid",
+    "complete"
+  ],
+  "properties": {
+    "assignments": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
+      }
+    },
+    "valid": {
+      "nullable": true,
+      "type": "boolean"
+    },
+    "complete": {
+      "nullable": true,
+      "type": "boolean"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

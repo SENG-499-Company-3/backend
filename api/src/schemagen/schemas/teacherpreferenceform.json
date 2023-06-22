@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "required": [
+    "peng",
+    "userId",
+    "courses"
+  ],
+  "properties": {
+    "peng": {
+      "type": "boolean",
+      "description": "Professional Engineer certified"
+    },
+    "userId": {
+      "$ref": "user.json"
+    },
+    "courses": {
+      "$ref": "courseId.json"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

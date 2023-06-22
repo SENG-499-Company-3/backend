@@ -1,0 +1,154 @@
+{
+  "type": "object",
+  "properties": {
+    "rooms": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "capacity": {
+          "type": "integer"
+        },
+        "equipment": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "timeslots": {
+      "type": "object",
+      "properties": {
+        "day": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "length": {
+          "type": "integer"
+        },
+        "startTime": {
+          "type": "integer"
+        }
+      }
+    },
+    "courses": {
+      "type": "object",
+      "properties": {
+        "coursename": {
+          "type": "string"
+        },
+        "noScheduleOverlap": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lecturesNumber": {
+          "type": "integer"
+        },
+        "labsNumber": {
+          "type": "integer"
+        },
+        "tutorialsNumber": {
+          "type": "integer"
+        },
+        "capacity": {
+          "type": "integer"
+        }
+      }
+    },
+    "professors": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "courses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "timePreferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "coursePreferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dayPreferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "equipmentPreferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "dimensions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "courses": {
+            "type": "integer"
+          },
+          "times": {
+            "type": "integer"
+          },
+          "teachers": {
+            "type": "integer"
+          },
+          "rooms": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "preferences": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
+      }
+    },
+    "loads": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
+      }
+    },
+    "availabilities": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
+      }
+    },
+    "p_tgt": {
+      "type": "integer"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}
