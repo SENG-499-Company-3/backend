@@ -1,15 +1,13 @@
+import { hashPassword } from '../helpers/auth';
 import { IUser } from '../interfaces/User';
 
-const db = require('../models');
-const User = db.users;
+const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 const jwt_decode = require('jwt-decode');
 
 //login user
 export class AuthController {
   #JWT_SECRET: string = 'sadlfkjsfk';
-  #saltRounds: number = 10;
 
   //returns a jwt token
   public makeJWT = (user) => {
@@ -27,18 +25,6 @@ export class AuthController {
     }
   };
 
-  // hash the password
-  async hashPassword(password: string) {
-    const hashedPassword = await new Promise((resolve, reject) => {
-      bcrypt.hash(password, this.#saltRounds, function (err, hash) {
-        if (err) reject(err);
-        resolve(hash);
-      });
-    });
-
-    return hashedPassword;
-  }
-
   //login user
   async login(email: string, password: string): Promise<string> {
     let verifiedJWT = '';
@@ -46,7 +32,7 @@ export class AuthController {
     //attempt to login the user
     //if user and password found, generate jwt token, store it in database
     //and return it
-    const hash = await this.hashPassword(password);
+    const hash = await hashPassword(password);
 
     await User.findOne({ email: email, password: hash })
       .then(async () => {
