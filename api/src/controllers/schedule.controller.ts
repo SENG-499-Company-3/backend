@@ -78,8 +78,7 @@ export class ScheduleController
 
         try 
         {
-            console.log(user.name);
-            const schedules: ISchedule[] = await Schedule.find({instructor: user.name}).catch((err) => err);
+            const schedules: ISchedule[] = await Schedule.find({email: user.email}).catch((err) => err);
             return schedules;
         } catch (err)
         {

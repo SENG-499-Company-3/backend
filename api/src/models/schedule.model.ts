@@ -20,6 +20,7 @@ export const scheduleSchema = new Schema(
         course: {type: String, required: true},
         section: {type: String, required: true},
         instructor: {type: String, required: true},
+        email: {type: String, required: true},
         capacity: {type: String, required: true},
         location: {type: String, required: true},
         days: daysSchema,

@@ -11,6 +11,7 @@ export async function create_schedule_one(num: number)
         course: "CSC 11"+num,
         section: "A0"+num,
         instructor: "Tony Stank",
+        email: "tony@gmail.com",
         capacity: 50+num,
         location: "ECS 11"+num,
         days: ["MONDAY", "THURSDAY"],

@@ -47,7 +47,7 @@ const list = async (req, res) => {
         res.status(200).send(response);
     } catch (err)
     {
-        res.status(401).send({message: err});
+        res.status(401).send("Error: " + err);
     }
 }
 router.get('/list', list);
@@ -77,10 +77,10 @@ const my = async (req, res) => {
 }
 router.get('/my', my);
 
-//export schedule 
-
 
 //teacher set preferences: courses, time slots, peng (boolean), userid, 
+
+
 
 //teacher: view my preference
 
@@ -94,7 +94,7 @@ router.get('/my', my);
 
 //change course type (elective and core)
 
-//export schedule
+//export schedule?
 
 
 
