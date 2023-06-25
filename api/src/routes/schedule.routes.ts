@@ -34,9 +34,16 @@ router.get('/create', create);
  * @return {*} ISchedule[]
 */
 const list = async (req, res) => {
+    if(!req.headers.authorization)
+    {
+        res.status(400).send({ message: "This endpoint requires authorization header."});
+    }
+
+    const token = req.headers.authorization;
+
     try
     {
-        const response = await scheduleController.list();
+        const response = await scheduleController.list(token);
         res.status(200).send(response);
     } catch (err)
     {
@@ -46,25 +53,29 @@ const list = async (req, res) => {
 router.get('/list', list);
 
 
-//teacher: get my schedule
-// const get_one = async (req, res) => {
-//     if(!req.headers.authorization)
-//     {
-//         res.status(400).send({ message: "This endpoint requires authorization header."});
-//     }
+/** teacher: get my schedule
+ *  * @param {*} req
+ * @param {*} res
+ * @return {*} ISchedule[]
+*/
+const my = async (req, res) => {
+    if(!req.headers.authorization)
+    {
+        res.status(400).send({ message: "This endpoint requires authorization header."});
+    }
 
-//     const token = req.headers.authorization;
+    const token = req.headers.authorization;
 
-//     try
-//     {
-//         const response = await scheduleController.get_one(token);
-//         res.status(200).send(response);
-//     } catch (err)
-//     {
-//         res.status(401).send({message: err});
-//     }
-// }
-// router.get('/getone', get_one);
+    try
+    {
+        const response = await scheduleController.my(token);
+        res.status(200).send(response);
+    } catch (err)
+    {
+        res.status(401).send({message: err});
+    }
+}
+router.get('/my', my);
 
 //export schedule 
 
