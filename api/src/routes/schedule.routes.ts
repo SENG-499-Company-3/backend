@@ -5,9 +5,13 @@ const router = express.Router();
 const scheduleController: ScheduleController = new ScheduleController();
 
 
-//admin: build schedule
-//Make schedule by running the algorithms and saving it in the database,
-//and redirecting to the view schedule page
+/**
+ * admin triggers build schedule
+ * Make schedule by running the algorithms (currently just creates a mock schedule)
+ * @param {*} req
+ * @param {*} res
+ * @return {*}
+ * */
 const create = async (req, res) => {
     try
     {
@@ -22,19 +26,24 @@ router.get('/create', create);
 
 
 
-//admin: get entire schedule
-//Get the created schedule from the database
-const get_all = async (req, res) => {
+/**
+ * Admin list entire schedule
+ * Get the entire schedule that has been created from the database
+ * @param {*} req
+ * @param {*} res
+ * @return {*} ISchedule[]
+*/
+const list = async (req, res) => {
     try
     {
-        const response = await scheduleController.get_all();
+        const response = await scheduleController.list();
         res.status(200).send(response);
     } catch (err)
     {
         res.status(401).send({message: err});
     }
 }
-router.get('/getall', get_all);
+router.get('/list', list);
 
 
 //teacher: get my schedule

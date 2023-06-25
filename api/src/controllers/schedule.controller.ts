@@ -1,21 +1,27 @@
 import { ISchedule, Days } from '../interfaces/Schedule';
-import { create_schedule_one } from '../helpers/createMockData';
+import { create_schedule } from '../helpers/createMockData';
 
 const Schedule = require('../models/schedule.model');
 
-
+/**
+ * Schedule Controller
+ *
+ * @export
+ * @class ScheduleController
+ */
 export class ScheduleController 
 {
 
     /**
-     * Creates a schedule 
-     * 
+     * Creates a schedule (currently mock)
+     * @return {*}
+     * @memberof ScheduleController
      */
     async create(): Promise<void> 
     {
         try
         {
-            await create_schedule_one(1);
+            await create_schedule(10); //creates mock schedule
         } catch (err) 
         {
             throw new Error('Error creating schedule.');
@@ -24,8 +30,10 @@ export class ScheduleController
 
     /**
      * Retrieves the entire schedule that was previously created
+     * @return {*}  {Promise<ISchedule[]>}
+     * @memberof ScheduleController
      */
-    async get_all(): Promise<ISchedule[]>
+    async list(): Promise<ISchedule[]>
     {
         try 
         {
