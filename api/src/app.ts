@@ -5,6 +5,7 @@ import express from 'express';
 import { userData } from './models/data/userData';
 const user = require('./routes/user.routes');
 const auth = require('./routes/auth.routes');
+const schedule = require('./routes/schedule.routes');
 
 const app = express();
 
@@ -59,6 +60,7 @@ User.findOne({ email: userData[0].email }).then((user) => {
 
 app.use('/user', user);
 app.use('/auth', auth);
+app.use('/schedule', schedule);
 
 // Global error handling
 // eslint-disable-next-line no-unused-vars

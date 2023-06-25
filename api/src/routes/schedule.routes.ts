@@ -1,4 +1,100 @@
-// import express from 'express';
+import express from 'express';
+import { ScheduleController } from '../controllers/schedule.controller';
+
+const router = express.Router();
+const scheduleController: ScheduleController = new ScheduleController();
+
+
+//admin: build schedule
+//Make schedule by running the algorithms and saving it in the database,
+//and redirecting to the view schedule page
+const create = async (req, res) => {
+    try
+    {
+        const response = await scheduleController.create();
+        res.status(200).send("Created schedule.");
+    } catch (err)
+    {
+        res.status(401).send({message: err});
+    }
+}
+router.get('/create', create);
+
+
+
+//admin: get entire schedule
+//Get the created schedule from the database
+const get_all = async (req, res) => {
+    try
+    {
+        const response = await scheduleController.get_all();
+        res.status(200).send(response);
+    } catch (err)
+    {
+        res.status(401).send({message: err});
+    }
+}
+router.get('/getall', get_all);
+
+
+//teacher: get my schedule
+// const get_one = async (req, res) => {
+//     if(!req.headers.authorization)
+//     {
+//         res.status(400).send({ message: "This endpoint requires authorization header."});
+//     }
+
+//     const token = req.headers.authorization;
+
+//     try
+//     {
+//         const response = await scheduleController.get_one(token);
+//         res.status(200).send(response);
+//     } catch (err)
+//     {
+//         res.status(401).send({message: err});
+//     }
+// }
+// router.get('/getone', get_one);
+
+//export schedule 
+
+
+//teacher set preferences: courses, time slots, peng (boolean), userid, 
+
+//teacher: view my preference
+
+//admin: view all teachers' preference
+
+//admin: change schedule?
+
+//admin: get all coureses list
+
+//admin: choose which courses to offer in the year
+
+//change course type (elective and core)
+
+//export schedule
+
+
+
+
+module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//old code:
 // import { parseAndStore } from '../database/db';
 // import { Room } from '../interfaces/ClassDetails';
 
