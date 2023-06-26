@@ -78,26 +78,6 @@ const my = async (req, res) => {
 router.get('/my', my);
 
 
-//teacher set preferences: courses, time slots, peng (boolean), userid, 
-
-
-
-//teacher: view my preference
-
-//admin: view all teachers' preference
-
-//admin: change schedule?
-
-//admin: get all coureses list
-
-//admin: choose which courses to offer in the year
-
-//change course type (elective and core)
-
-//export schedule?
-
-
-
 
 module.exports = router;
 
