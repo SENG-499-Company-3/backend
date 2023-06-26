@@ -1,4 +1,8 @@
+import { IUser } from '../interfaces/User';
+
+const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
+const jwt_decode = require('jwt-decode');
 
 /**
  * Hashes a password
@@ -39,4 +43,21 @@ export async function comparePassword(password: string, hash: string) {
   });
 
   return match;
+}
+
+/**
+ * 
+ * @param authToken 
+ * @returns {Promise<IUser>}
+ */
+export async function getUser(authToken: string)
+{
+  let decoded_email = '';
+  decoded_email = jwt_decode(authToken).email;
+  if(!decoded_email) throw new Error("Invalid authentication token.");
+
+  let user: IUser = {} as IUser;
+  user = await User.findOne({email: decoded_email}).catch((err) => err);
+  if(!user) throw new Error("Authentication token not tied to any user.");
+  return user;
 }

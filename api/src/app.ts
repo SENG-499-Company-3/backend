@@ -3,9 +3,11 @@ import cors from 'cors';
 import morgan from 'morgan';
 import express from 'express';
 import { userData } from './models/data/userData';
+
 const user = require('./routes/user.routes');
 const auth = require('./routes/auth.routes');
 const schedule = require('./routes/schedule.routes');
+const teacherPref = require('./routes/teacherpref.routes');
 
 const app = express();
 
@@ -61,6 +63,8 @@ User.findOne({ email: userData[0].email }).then((user) => {
 app.use('/user', user);
 app.use('/auth', auth);
 app.use('/schedule', schedule);
+app.use('/teacherpref', teacherPref);
+
 
 // Global error handling
 // eslint-disable-next-line no-unused-vars
