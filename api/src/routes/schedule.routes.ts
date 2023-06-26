@@ -11,7 +11,7 @@ const scheduleController: ScheduleController = new ScheduleController();
  * @param {*} req
  * @param {*} res
  * @return {*}
- * */
+ */
 const create = async (req, res) => {
     try
     {

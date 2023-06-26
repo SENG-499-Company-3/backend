@@ -1,25 +1,32 @@
 import { ITeacherPref } from '../interfaces/TeacherPref';
-import { IUser } from '../interfaces/User';
 import { getUser } from '../helpers/auth';
 
-const User = require('../models/user.model');
 const TeacherPref = require('../models/teacherpref.model');
-//const jwt_decode = require('jwt-decode');
 
 
 /**
  * Teacher preferences controller
- * 
+ * @export
+ * @class TeacherPrefController
  */
 export class TeacherPrefController
 {
     /**
-     * Updates teacher preference, or creates it if it doesn't exist
+     * Updates the user's preferences (or creates if it doesn't already exist)
+     * @param {string} authToken 
+     * @param {string} email 
+     * @param {string} courses 
+     * @param {string} start 
+     * @param {string} end 
+     * @param {string} peng 
+     * @return {*} {Promise<void>}
+     * @memberof TeacherPrefController
      */
     async update(authToken: string, email: string, courses: string[], start: string, end: string, peng: string): Promise<void>
     {
         let user = await getUser(authToken);
-
+        //await TeacherPref.deleteMany();
+        //return;
         if(user.email != email)
         {
             throw new Error("Provided email does not match the email associated with the auth token.");
@@ -36,28 +43,29 @@ export class TeacherPrefController
                 end: end,
                 peng: peng
             });
-            //await TeacherPref.deleteMany();
-            //await TeacherPref.findOneAndUpdate({email: email}, pref, {upsert: true, returnOriginal: false}, function() {console.log("test");});//.catch((err) => err);
             const pref_curr = await TeacherPref.findOne({email: email}).catch((err) => err);
             if(!pref_curr) //insert if doesn't exist
             {
-                console.log("no");
                 await pref.save(pref).catch((err) => err);
-            } else
+            } else //replace if already exists
             {
-                console.log("yes");
                 const doc = await TeacherPref.findOne({email: email}).catch((err) => err);
                 doc.overwrite(pref);
                 await doc.save();
-                //await TeacherPref.replaceOne({email: email}, pref).catch((err) => err);
             }
         } catch (err) 
         {
             console.log(err);
-            //throw new Error('Error updating teacher preference.');
+            throw new Error('Error updating teacher preference.');
         }
     }
     
+    /**
+     * Get teacher preference of all teachers
+     * @param {string} authToken 
+     * @returns {Promise<ITeacherPref[]}
+     * @memberof TeacherPrefController
+     */
     async list(authToken: string): Promise<ITeacherPref[]>
     {
         let user = await getUser(authToken);
@@ -74,7 +82,12 @@ export class TeacherPrefController
 
     }
     
-    //get the teacher preference whose authToken is provided
+    /**
+     * get the teacher preference whose authToken is provided
+     * @param {string} authToken 
+     * @returns {Promise<ITeacherPref}
+     * @memberof TeacherPrefController
+     */
     async my(authToken: string): Promise<ITeacherPref>
     {
         let user = await getUser(authToken);
@@ -82,7 +95,12 @@ export class TeacherPrefController
         try
         {
             const teacherPref: ITeacherPref = await TeacherPref.findOne({email: user.email}).catch((err) => err);
-            return teacherPref;
+            if(!teacherPref) //if it doesn't exist, create one
+            {
+                await this.update(authToken, user.email, [""], "08:30", "22:00", "false");
+            }
+            const teacherPref2: ITeacherPref= await TeacherPref.findOne({email: user.email}).catch((err) => err);
+            return teacherPref2;
         } catch(err)
         {
             throw new Error('Error while retrieving your preferences');

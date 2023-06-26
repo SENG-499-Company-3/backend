@@ -6,8 +6,10 @@ const teacherPrefController: TeacherPrefController = new TeacherPrefController()
 
 
 /**
- * Teacher: Create/update teacher pref
- * 
+ * Teacher: Update this teacher's preferences (or create it if it doesn't exist)
+ * @param {*} req
+ * @param {*} res
+ * @return {*}
  */
 const update = async (req, res) => {
     if(!req.headers.authorization) res.status(400).send({ message: "This endpoint requires authorization header."});
@@ -35,7 +37,12 @@ const update = async (req, res) => {
 }
 router.post('/update', update);
 
-
+/**
+ * Admin: get list of all teachers' preferences
+ * @param {*} req 
+ * @param {*} res 
+ * @return {*} ITeacherPref[]
+ */
 const list = async (req, res) => {
     if(!req.headers.authorization) res.status(400).send({message: "This endpoint requires authorization header."});
 
@@ -53,7 +60,10 @@ const list = async (req, res) => {
 router.get('/list', list);
 
 /**
- * Teacher: get my teacher prefernces
+ * Teacher: get this teacher's preferences
+ * @param {*} req 
+ * @param {*} res 
+ * @return {*} ITeacherPref
 */
 const my = async (req, res) => {
     if(!req.headers.authorization) res.status(400).send({ message: "This endpoint requires authorization header."});
