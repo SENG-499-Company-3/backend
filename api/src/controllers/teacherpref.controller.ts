@@ -75,18 +75,19 @@ export class TeacherPrefController
     }
     
     //get the teacher preference whose authToken is provided
-    // async my(authToken: string): Promise<ITeacherPref>
-    // {
-    //     let user = await getUser(authToken);
+    async my(authToken: string): Promise<ITeacherPref>
+    {
+        let user = await getUser(authToken);
 
-    //     try
-    //     {
-    //         const teacherPref: ITeacherPref[] = await TeacherPref.find({email: user.email}).catch((err) => err);
-    //     } catch(err)
-    //     {
-    //         throw new Error('Error while retrieving your preferences');
-    //     }
-    // }
+        try
+        {
+            const teacherPref: ITeacherPref = await TeacherPref.findOne({email: user.email}).catch((err) => err);
+            return teacherPref;
+        } catch(err)
+        {
+            throw new Error('Error while retrieving your preferences');
+        }
+    }
 
 
 }

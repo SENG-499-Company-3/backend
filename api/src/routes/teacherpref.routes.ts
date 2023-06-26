@@ -55,18 +55,20 @@ router.get('/list', list);
 /**
  * Teacher: get my teacher prefernces
 */
-// const my = async (req, res) => {
-//     try
-//     {
-//         const response = await teacherPrefController.my();
-//         res.status(200).send(response);
-//     } catch (err)
-//     {
-//         res.status(401).send(err + "Error retrieving teacher preference.");
-//     }
-//     router.get('/my', my);
-// }
-// router.post('/my', my);
+const my = async (req, res) => {
+    if(!req.headers.authorization) res.status(400).send({ message: "This endpoint requires authorization header."});
+    const token = req.headers.authorization;
+
+    try
+    {
+        const response = await teacherPrefController.my(token);
+        res.status(200).send(response);
+    } catch (err)
+    {
+        res.status(401).send("Error retrieving teacher preference.");
+    }
+}
+router.get('/my', my);
 
 
 module.exports = router;
