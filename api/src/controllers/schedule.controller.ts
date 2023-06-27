@@ -1,10 +1,7 @@
 import { ISchedule, Days } from '../interfaces/Schedule';
 import { create_schedule } from '../helpers/createMockData';
-import { IUser } from '../interfaces/User';
 
 const Schedule = require('../models/schedule.model');
-const User = require('../models/user.model');
-const jwt_decode = require('jwt-decode');
 
 /**
  * Schedule Controller
@@ -16,7 +13,7 @@ export class ScheduleController
 {
 
     /**
-     * Creates a schedule (currently mock)
+     * Creates a schedule (currently mock data)
      * @return {*}
      * @memberof ScheduleController
      */
@@ -33,20 +30,11 @@ export class ScheduleController
 
     /**
      * Retrieves the entire schedule that was previously created
-     * @param {string} authToken
      * @return {*}  {Promise<ISchedule[]>}
      * @memberof ScheduleController
      */
-    async list(authToken: string): Promise<ISchedule[]>
+    async list(): Promise<ISchedule[]>
     {
-        let decoded_email = '';
-        decoded_email = jwt_decode(authToken).email;
-        if(!decoded_email) throw new Error("Invalid authentication token.");
-        
-        let user: IUser = {} as IUser;
-        user = await User.findOne({ email: decoded_email }).catch((err) => err);
-
-        if(user.role != "ADMIN") throw new Error ("Unauthorized; neeed Admin access.");
 
         try 
         {
@@ -61,24 +49,15 @@ export class ScheduleController
 
     /**
      * Retrieves the schedule of the teacher to whom the authToken belongs to
-     * @param {string} authToken
+     * @param {string} email
      * @return {*}  {Promise<ISchedule[]>}
      * @memberof ScheduleController
      */
-    async my(authToken: string): Promise<ISchedule[]>
+    async my(email: string): Promise<ISchedule[]>
     {
-        let decoded_email = '';
-        decoded_email = jwt_decode(authToken).email;
-        if(!decoded_email) throw new Error("Invalid authentication token.");
-        
-        let user: IUser = {} as IUser;
-        user = await User.findOne({email: decoded_email}).catch((err) => err);
-        
-        if(!user) throw new Error("Authentication token not tied to any user.");
-
         try 
         {
-            const schedules: ISchedule[] = await Schedule.find({email: user.email}).catch((err) => err);
+            const schedules: ISchedule[] = await Schedule.find({email: email}).catch((err) => err);
             return schedules;
         } catch (err)
         {

@@ -1,5 +1,4 @@
 import { ITeacherPref } from '../interfaces/TeacherPref';
-import { getUser } from '../helpers/auth';
 
 const TeacherPref = require('../models/teacherpref.model');
 
@@ -22,15 +21,8 @@ export class TeacherPrefController
      * @return {*} {Promise<void>}
      * @memberof TeacherPrefController
      */
-    async update(authToken: string, email: string, courses: string[], start: string, end: string, peng: string): Promise<void>
+    async update(email: string, courses: string[], start: string, end: string, peng: string): Promise<void>
     {
-        let user = await getUser(authToken);
-        //await TeacherPref.deleteMany();
-        //return;
-        if(user.email != email)
-        {
-            throw new Error("Provided email does not match the email associated with the auth token.");
-        }
 
         try
         {
@@ -62,14 +54,12 @@ export class TeacherPrefController
     
     /**
      * Get teacher preference of all teachers
-     * @param {string} authToken 
-     * @returns {Promise<ITeacherPref[]}
+     * @returns {Promise<ITeacherPref[]>}
      * @memberof TeacherPrefController
      */
-    async list(authToken: string): Promise<ITeacherPref[]>
+    async list(): Promise<ITeacherPref[]>
     {
-        let user = await getUser(authToken);
-        if(user.role != "ADMIN") throw new Error("Unaurhoized; need Admin access.");
+
         try 
         {
             const prefs: ITeacherPref[] = await TeacherPref.find().catch((err) => err);
@@ -84,22 +74,21 @@ export class TeacherPrefController
     
     /**
      * get the teacher preference whose authToken is provided
-     * @param {string} authToken 
-     * @returns {Promise<ITeacherPref}
+     * @param {string} email 
+     * @returns {Promise<ITeacherPref>}
      * @memberof TeacherPrefController
      */
-    async my(authToken: string): Promise<ITeacherPref>
+    async my(email: string): Promise<ITeacherPref>
     {
-        let user = await getUser(authToken);
 
         try
         {
-            const teacherPref: ITeacherPref = await TeacherPref.findOne({email: user.email}).catch((err) => err);
+            const teacherPref: ITeacherPref = await TeacherPref.findOne({email: email}).catch((err) => err);
             if(!teacherPref) //if it doesn't exist, create one
             {
-                await this.update(authToken, user.email, [""], "08:30", "22:00", "false");
+                await this.update(email, [""], "08:30", "22:00", "false");
             }
-            const teacherPref2: ITeacherPref= await TeacherPref.findOne({email: user.email}).catch((err) => err);
+            const teacherPref2: ITeacherPref= await TeacherPref.findOne({email: email}).catch((err) => err);
             return teacherPref2;
         } catch(err)
         {

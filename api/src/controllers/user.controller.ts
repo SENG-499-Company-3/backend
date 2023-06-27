@@ -56,4 +56,18 @@ export class UserController {
       throw new Error('Some error occurred while retrieving users.');
     }
   }
+
+
+  /**
+   * Get user data based on their email
+   * @param {string} email 
+   * @returns {Promise<IUser>}
+   */
+  async getUser(email: string): Promise<IUser>
+  {
+    let user: IUser = {} as IUser;
+    user = await User.findOne({email: email}).catch((err) => err);
+    if(!user) throw new Error("No user associated with given email.");
+    return user;
+  }
 }
