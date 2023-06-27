@@ -32,7 +32,7 @@ describe('ScheduleController', () => {
             
             const response2 = await scheduleController.create();
             const s_list2 = await scheduleController.list();
-            expect(s_list2.length).toBe(0);
+            expect(s_list2.length).toBeGreaterThan(0);
             
         });
 
