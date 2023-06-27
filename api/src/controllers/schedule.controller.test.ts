@@ -25,6 +25,13 @@ describe('ScheduleController', () => {
             expect(schedules.length).toBeGreaterThan(0);
         });
 
+    });
+
+    describe('list', () => {
+        beforeEach(() => {
+            sinon.restore();
+        });
+
         it('Should get schedule properly', async() => {
             const scheduleController = new ScheduleController();
             const s_list1 = await scheduleController.list();
@@ -34,6 +41,14 @@ describe('ScheduleController', () => {
             const s_list2 = await scheduleController.list();
             expect(s_list2.length).toBeGreaterThan(0);
             
+        });
+
+    });
+
+
+    describe('my', () => {
+        beforeEach(() => {
+            sinon.restore();
         });
 
         it('Should get this users schedule', async() => {
