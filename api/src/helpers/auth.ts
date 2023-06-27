@@ -18,7 +18,7 @@ export async function hashPassword(password: string) {
       });
     });
   });
-
+  
   return hashedPassword;
 }
 

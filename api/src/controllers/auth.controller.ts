@@ -20,16 +20,6 @@ export class AuthController {
     return jwtToken;
   };
 
-  //returns the username if jwt token is invalid, else returns empty string.
-  public verifyJWT = (jwtToken) => {
-    try {
-      const user = jwt.verify(jwtToken, process.env.JWT_SECRET || this.#JWT_SECRET, { expiresIn: 60 * 60 * 4 });
-      return user;
-    } catch (err) {
-      return '';
-    }
-  };
-
   /**
    * Login user
    *
@@ -41,7 +31,7 @@ export class AuthController {
   async login(email: string, password: string): Promise<string> {
     let verifiedJWT = '';
 
-    const user = await User.findOne({ email: email }).catch((err) => err);
+    const user = await User.findOne({ email: email });
 
     if (!user) {
       throw new Error('User not found.');
@@ -79,7 +69,8 @@ export class AuthController {
       throw new Error('This token was invalid!');
     }
 
-    selfUser = await User.findOne({ email: decoded_email }).catch((err) => err);
+    selfUser = await User.findOne({ email: decoded_email });
+
 
     if (!selfUser) {
       throw new Error('There was no user with that email.');
