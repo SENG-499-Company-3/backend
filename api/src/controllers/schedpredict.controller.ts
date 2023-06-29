@@ -37,12 +37,12 @@ export class PredictScheduleController {
    * @memberof PredictScheduleController
    */
 
-  async predict(courses: string, csc_to_seng_ratio: string, class_year_split: string): Promise<void> {
-    const schedule = new Schedule({
+  async predict_class_sizes(courses: string, csc_to_seng_ratio: string, class_year_split: string): Promise<void> {
+    const class_sizes = new Schedule({
       courses: courses,
       csc_to_seng_ratio: csc_to_seng_ratio,
       class_year_split: class_year_split
     });
-    return schedule;
+    return class_sizes;
   }
 }

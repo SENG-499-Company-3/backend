@@ -21,7 +21,7 @@ const predict_class_sizes = async (req, res) => {
   const { courses, csc_to_seng_ratio, class_year_split } = req.body;
 
   try {
-    const response = await predictscheduleController.predict(courses, csc_to_seng_ratio, class_year_split);
+    const response = await predictscheduleController.predict_class_sizes(courses, csc_to_seng_ratio, class_year_split);
     res.status(200).send(response);
   } catch (err) {
     res.status(401).send({ message: err });
