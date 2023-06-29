@@ -1,6 +1,4 @@
 // import { ISchedule, Days } from '../interfaces/Schedule';
-import { create_schedule } from '../helpers/createMockData';
-
 const Schedule = require('../models/schedpredict.model');
 
 // include a function to handle the logic for predicting class sizes
@@ -15,19 +13,6 @@ const Schedule = require('../models/schedpredict.model');
  */
 
 export class PredictScheduleController {
-  /**
-   * Creates a schedule (currently mock data)
-   * @return {*}
-   * @memberof PredictScheduleController
-   */
-  async create(): Promise<void> {
-    try {
-      await create_schedule(10); //creates mock schedule
-    } catch (err) {
-      throw new Error('Error creating schedule.');
-    }
-  }
-
   /**
    * Predicts schedule based off three parameters
    *

@@ -1,5 +1,5 @@
 import express from 'express';
-import { PredictScheduleController } from '../controllers/schedpredict.controller';
+import { PredictScheduleController } from '../controllers/predictSchedule.controller';
 
 const router = express.Router();
 const predictscheduleController: PredictScheduleController = new PredictScheduleController();
@@ -27,6 +27,6 @@ const predict_class_sizes = async (req, res) => {
     res.status(401).send({ message: err });
   }
 };
-router.post('/predict', predict_class_sizes);
+router.post('/schedule/predict_class_sizes', predict_class_sizes);
 
 module.exports = router;
