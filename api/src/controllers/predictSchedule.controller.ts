@@ -1,7 +1,5 @@
-import axios from 'axios';
-
 // import { ISchedule, Days } from '../interfaces/Schedule';
-const Schedule = require('../models/classSizePrediction.model');
+const Schedule = require('../models/schedpredict.model');
 
 // include a function to handle the logic for predicting class sizes
 // and also validate incoming payload according to the API spec
@@ -13,29 +11,23 @@ const Schedule = require('../models/classSizePrediction.model');
  * @export
  * @class PredictScheduleController
  */
+
 export class PredictScheduleController {
   /**
    * Predicts schedule based off three parameters
    *
-   * @param {Array} coreq
-   * @param {string} course
-   * @param {Array} pastEnrol
-   * @param {Array} prereq
+   * @param {string} courses[]
+   * @param {string} csc_to_seng_ratio
+   * @param {string} class_year_split
    * @memberof PredictScheduleController
    */
 
-  async class_size_prediction(): Promise<any> {
-    const previousEnrolment = await Schedule.find().catch((err) => err);
-
-    const algorithm2IP = process.env.ALGORITHM_2_IP || 'localhost';
-    const algorithm2Port = process.env.ALGORITHM_2_PORT || '5000';
-
-    const response = await axios
-      .post(`${algorithm2IP}:${algorithm2Port}/schedule/predict_class_sizes`, {
-        class_size_prediction: previousEnrolment
-      })
-      .catch((err) => err);
-
-    return response;
+  async predict_class_sizes(courses: string, csc_to_seng_ratio: string, class_year_split: string): Promise<void> {
+    const class_sizes = new Schedule({
+      courses: courses,
+      csc_to_seng_ratio: csc_to_seng_ratio,
+      class_year_split: class_year_split
+    });
+    return class_sizes;
   }
 }
