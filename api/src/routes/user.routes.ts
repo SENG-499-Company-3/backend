@@ -1,9 +1,13 @@
 import express from 'express';
 import { UserController } from '../controllers/user.controller';
+import { validate } from 'express-jsonschema';
+import bodyParser from 'body-parser';
+import user from '../schemagen/schemas/user.json';
 
 const router = express.Router();
 const userController: UserController = new UserController();
 
+router.use(bodyParser.json());
 /**
  * Create a new User
  * (./user/create)
@@ -28,7 +32,7 @@ const create = async (req, res) => {
     res.status(401).send({ message: err });
   }
 };
-router.post('/create', create);
+router.post('/create', validate({ body: user }), create);
 
 /**
  * List all Users

@@ -1,25 +1,27 @@
 {
-  "allOf": [
-    {
-      "$ref": "userLogin.json"
+  "type": "object",
+  "required": ["name", "role", "email", "password"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "example": "User name"
     },
-    {
-      "type": "object",
-      "required": [
-        "name",
-        "userRole"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "example": "User name"
-        },
-        "userRole": {
-          "$ref": "userRole.json"
-        }
-      }
+    "role": {
+      "type": "string",
+      "enum": ["ADMIN", "TEACHER"],
+      "description": "User roles"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "example": "user@email.com"
+    },
+    "password": {
+      "type": "string",
+      "format": "password",
+      "example": "password",
+      "description": "password hashed in db"
     }
-  ],
-  "$schema": "http://json-schema.org/schema#",
-  "type": "object"
+  },
+  "$schema": "http://json-schema.org/schema#"
 }

@@ -2,6 +2,7 @@ import express from 'express';
 import { validate } from 'express-jsonschema';
 import bodyParser from 'body-parser';
 import userlogin from '../schemagen/schemas/userlogin.json';
+import jwt from '../schemagen/schemas/jwt.json';
 import { AuthController } from '../controllers/auth.controller';
 
 const router = express.Router();
@@ -28,11 +29,10 @@ const login = async (req, res) => {
     const response = await authController.login(email, password);
     res.status(200).send(response);
   } catch (err) {
-    
     res.status(401).send({ message: err });
   }
 };
-router.post('/login', validate({ body: { ...userlogin } }), login);
+router.post('/login', validate({ body: userlogin }), login);
 
 /**
  * Get the current User
@@ -55,6 +55,6 @@ const self = async (req, res) => {
     res.status(401).send({ message: err });
   }
 };
-router.post('/self', validate({ body: { id: 'jwt.json', ...userlogin } }), self);
+router.post('/self', validate({ headers: { ...jwt } }), self);
 
 module.exports = router;

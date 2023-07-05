@@ -1,10 +1,8 @@
 {
   "type": "object",
-  "required": [
-    "jwt"
-  ],
+  "required": ["authorization"],
   "properties": {
-    "jwt": {
+    "authorization": {
       "type": "string",
       "description": "Json Web Token"
     }
