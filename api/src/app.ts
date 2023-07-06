@@ -2,12 +2,13 @@ import cors from 'cors';
 import morgan from 'morgan';
 import express from 'express';
 import { userData } from './models/data/userData';
+import { courseData2023 } from './models/data/courseData';
 
 const user = require('./routes/user.routes');
 const auth = require('./routes/auth.routes');
 const schedule = require('./routes/schedule.routes');
 const teacherPref = require('./routes/teacherpref.routes');
-const predictSchedule = require('./routes/predictSchedule.routes')
+const predictSchedule = require('./routes/predictSchedule.routes');
 
 const app = express();
 
@@ -52,8 +53,16 @@ User.findOne({ email: userData[0].email }).then((user) => {
   }
 });
 
-// Predict a schedule
-
+// Create data for previous enrolment
+const Schedule = require('./models/classSizePrediction.model');
+Schedule.findOne({ course: courseData2023[0].course }).then((course) => {
+  if (!course) {
+    courseData2023.forEach((data) => {
+      Schedule.create(data);
+    });
+    console.log('Courses created!');
+  }
+});
 
 app.use('/user', user);
 app.use('/auth', auth);

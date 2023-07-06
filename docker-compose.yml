@@ -23,6 +23,12 @@ services:
       - DB_ADMIN_PASS=${DB_ADMIN_PASS}
       - DB_DATABASE=${DB_DATABASE}
       - DB_PORT=${DB_PORT}
+      - PORT=${PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - ALGORITHM_1_IP=${ALGORITHM_1_IP}
+      - ALGORITHM_1_PORT=${ALGORITHM_1_PORT}
+      - ALGORITHM_2_IP=${ALGORITHM_2_IP}
+      - ALGORITHM_2_PORT=${ALGORITHM_2_PORT}      
     networks:
       net-10.9.0.0:
         ipv4_address: 10.9.0.4
