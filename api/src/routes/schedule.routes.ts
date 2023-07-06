@@ -30,7 +30,7 @@ const create = async (req, res) => {
     try
     {
 
-        const response = await scheduleController.create();
+        await scheduleController.create();
         res.status(200).send("Created schedule.");
     } catch (err)
     {

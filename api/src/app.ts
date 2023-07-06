@@ -1,5 +1,4 @@
 import cors from 'cors';
-// import helmet from 'helmet';
 import morgan from 'morgan';
 import express from 'express';
 import { userData } from './models/data/userData';
@@ -11,14 +10,6 @@ const teacherPref = require('./routes/teacherpref.routes');
 
 const app = express();
 
-// adding Helmet to enhance your API's security
-// app.use(helmet());
-
-// enabling CORS for all local requests
-// var corsOptions = {
-//   origin: 'http://localhost:10.9.0.4'
-// };
-// app.use(cors(corsOptions));
 app.use(cors());
 
 // parse requests of content-type - application/json
@@ -65,12 +56,42 @@ app.use('/auth', auth);
 app.use('/schedule', schedule);
 app.use('/teacherpref', teacherPref);
 
-
 // Global error handling
 // eslint-disable-next-line no-unused-vars
-app.use((err, _req, res, next) => {
+app.use((err, req, res, next) => {
   console.log('err', err);
-  res.status(500).send('Uh oh! An unexpected error occured.');
+
+  var responseData;
+
+  if (err.name === 'JsonSchemaValidation') {
+    // Log the error however you please
+    console.log(err.message);
+    // logs "express-jsonschema: Invalid data found"
+
+    // Set a bad request http response status or whatever you want
+    res.status(400);
+
+    // Format the response body however you want
+    responseData = {
+      statusText: 'Bad Request',
+      jsonSchemaValidation: true,
+      validations: err.validations // All of your validation information
+    };
+
+    // Take into account the content type if your app serves various content types
+    if (req.xhr || req.get('Content-Type') === 'application/json') {
+      res.json(responseData);
+  } else {
+      // If this is an html request then you should probably have
+      // some type of Bad Request html template to respond with
+      res.render('badrequestTemplate', responseData);
+  }
+  }else {
+    // pass error to next error middleware handler
+    return next(err);
+  }
+
+  res.status(500).send(responseData);
 });
 
 // simple route
