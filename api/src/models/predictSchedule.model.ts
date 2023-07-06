@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 export const predictScheduleSchema = new Schema(
   {
-    courses: {type: String, required: true, unique: true},
+    courses: {type: Array, required: true, unique: true},
     csc_to_seng_ratio: {type: String, required: true, unique: true},
     class_year_split: {type: String, required: true, unique: true}
   },

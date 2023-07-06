@@ -59,7 +59,7 @@ app.use('/user', user);
 app.use('/auth', auth);
 app.use('/schedule', schedule);
 app.use('/teacherpref', teacherPref);
-app.use('/predict', predictSchedule);
+app.use('/schedule', predictSchedule);
 
 // Global error handling
 // eslint-disable-next-line no-unused-vars
