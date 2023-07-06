@@ -14,19 +14,19 @@ const predictscheduleController: PredictScheduleController = new PredictSchedule
 const predict_class_sizes = async (req, res) => {
   // Validate request
   if (!req.body.courses || !req.body.csc_to_seng_ratio || !req.body.class_year_split) {
-    res.status(400).send({ message: 'Content can not be empty!' });
+    res.status(400).send({ message: 'Unable to predict class size'});
     return;
   }
 
-  const { courses, csc_to_seng_ratio, class_year_split } = req.body;
+  const { coreq,course, pastEnrol, prereq} = req.body;
 
   try {
-    const response = await predictscheduleController.predict_class_sizes(courses, csc_to_seng_ratio, class_year_split);
+    const response = await predictscheduleController.class_size_prediction(coreq, course, pastEnrol, prereq);
     res.status(200).send(response);
   } catch (err) {
     res.status(401).send({ message: err });
   }
 };
-router.post('/schedule/predict_class_sizes', predict_class_sizes);
+router.post('/predict_class_sizes', predict_class_sizes);
 
 module.exports = router;

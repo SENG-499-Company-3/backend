@@ -16,18 +16,25 @@ export class PredictScheduleController {
   /**
    * Predicts schedule based off three parameters
    *
-   * @param {string} courses[]
-   * @param {string} csc_to_seng_ratio
-   * @param {string} class_year_split
+   * @param {Array} coreq
+   * @param {string} course
+   * @param {Array} pastEnrol
+   * @param {Array} prereq
    * @memberof PredictScheduleController
    */
 
-  async predict_class_sizes(courses: string, csc_to_seng_ratio: string, class_year_split: string): Promise<void> {
+  async class_size_prediction(coreq: string, course: string, pastEnrol: string, prereq: string): Promise<void> {
     const class_sizes = new Schedule({
-      courses: courses,
-      csc_to_seng_ratio: csc_to_seng_ratio,
-      class_year_split: class_year_split
+      coreq: coreq,
+      course: course,
+      pastEnrol: pastEnrol,
+      prereq: prereq,
     });
     return class_sizes;
+  }
+
+  async predicted_class_size(course: string, size: number, constraints: string, term: number) {
+
+   return
   }
 }
