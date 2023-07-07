@@ -129,17 +129,16 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZ21haWwuY29tIiwiaWF0IjoxNjg3NzMyOTQxfQ.W01Z05c0j90QhgFKfMdUOiDG3-0w__HqSfmL5-HiNaU",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZ21haWwuY29tIiwiaWF0IjoxNjg4Njg3OTAzfQ.nwjjhkuTrWHIPoKBqzZ0f8TWo0nWwmHO0Fp_2EmPBrQ",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3001/teacherpref/list",
-							"protocol": "http",
+							"raw": "{{backend_ip}}:{{backend_port}}/teacherpref/list",
 							"host": [
-								"localhost"
+								"{{backend_ip}}"
 							],
-							"port": "3001",
+							"port": "{{backend_port}}",
 							"path": [
 								"teacherpref",
 								"list"
@@ -161,7 +160,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"tony@gmail.com\",\n    \"courses\": [\"CSC 110\", \"CSC 111\", \"SENG 265\"],\n    \"start\": \"10:00\",\n    \"end\": \"11:00\",\n    \"peng\": \"false\"\n}",
+							"raw": "{\n    \"email\": \"tony@gmail.com\",\n    \"courses\": [\"CSC 110\", \"CSC 111\", \"SENG 265\"],\n    \"start\": \"10:00\",\n    \"end\": \"15:30\",\n    \"peng\": \"true\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -169,12 +168,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/teacherpref/update",
-							"protocol": "http",
+							"raw": "{{backend_ip}}:{{backend_port}}/teacherpref/update",
 							"host": [
-								"localhost"
+								"{{backend_ip}}"
 							],
-							"port": "3001",
+							"port": "{{backend_port}}",
 							"path": [
 								"teacherpref",
 								"update"
@@ -190,20 +188,19 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZ21haWwuY29tIiwiaWF0IjoxNjg3NzMyOTQxfQ.W01Z05c0j90QhgFKfMdUOiDG3-0w__HqSfmL5-HiNaU",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZ21haWwuY29tIiwiaWF0IjoxNjg4Njg3OTAzfQ.nwjjhkuTrWHIPoKBqzZ0f8TWo0nWwmHO0Fp_2EmPBrQ",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3001/teacherpref/list",
-							"protocol": "http",
+							"raw": "{{backend_ip}}:{{backend_port}}/teacherpref/my",
 							"host": [
-								"localhost"
+								"{{backend_ip}}"
 							],
-							"port": "3001",
+							"port": "{{backend_port}}",
 							"path": [
 								"teacherpref",
-								"list"
+								"my"
 							]
 						}
 					},
@@ -244,7 +241,24 @@
 					"name": "schedule/create",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZ21haWwuY29tIiwiaWF0IjoxNjg4Njg3OTAzfQ.nwjjhkuTrWHIPoKBqzZ0f8TWo0nWwmHO0Fp_2EmPBrQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{backend_ip}}:{{backend_port}}/schedule/create",
+							"host": [
+								"{{backend_ip}}"
+							],
+							"port": "{{backend_port}}",
+							"path": [
+								"schedule",
+								"create"
+							]
+						}
 					},
 					"response": []
 				},
@@ -255,17 +269,16 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZ21haWwuY29tIiwiaWF0IjoxNjg3NzE2ODQwfQ.ZGR7XTBp-UNfXQU1hB9Aq_pyCvpeG-=sqIVnIU6BCjds",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZ21haWwuY29tIiwiaWF0IjoxNjg4Njg3OTAzfQ.nwjjhkuTrWHIPoKBqzZ0f8TWo0nWwmHO0Fp_2EmPBrQ",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3001/schedule/my",
-							"protocol": "http",
+							"raw": "{{backend_ip}}:{{backend_port}}/schedule/my",
 							"host": [
-								"localhost"
+								"{{backend_ip}}"
 							],
-							"port": "3001",
+							"port": "{{backend_port}}",
 							"path": [
 								"schedule",
 								"my"
@@ -281,17 +294,16 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZ21haWwuY29tIiwiaWF0IjoxNjg3NzE2ODQwfQ.ZGR7XTBp-UNfXQU1hB9Aq_pyCvpeG-sqIVnIU6BCjds",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZ21haWwuY29tIiwiaWF0IjoxNjg4Njg3OTAzfQ.nwjjhkuTrWHIPoKBqzZ0f8TWo0nWwmHO0Fp_2EmPBrQ",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3001/schedule/list",
-							"protocol": "http",
+							"raw": "{{backend_ip}}:{{backend_port}}/schedule/list",
 							"host": [
-								"localhost"
+								"{{backend_ip}}"
 							],
-							"port": "3001",
+							"port": "{{backend_port}}",
 							"path": [
 								"schedule",
 								"list"
