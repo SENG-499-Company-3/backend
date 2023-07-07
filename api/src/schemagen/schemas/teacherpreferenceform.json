@@ -7,22 +7,11 @@
       "description": "Professional Engineer certified"
     },
     "courses": {
-      "type": "object",
-      "required": ["subject", "code", "term"],
-      "properties": {
-        "subject": {
-          "type": "string",
-          "description": "Course subject, e.g. SENG, CSC"
-        },
-        "code": {
-          "type": "string",
-          "description": "Course code, e.g. 499,310"
-        },
-        "term": {
-          "type": "string",
-          "enum": ["FALL", "SPRING", "SUMMER"],
-          "description": "Term course is offered in"
-        }
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Course name",
+        "example": "Introduction to Python"
       }
     },
     "email": {
@@ -32,12 +21,10 @@
     },
     "start": {
       "type": "string",
-      "format": "date-time",
       "description": "Start date of the course"
     },
     "end": {
       "type": "string",
-      "format": "date-time",
       "description": "End date of the course"
     }
   },
