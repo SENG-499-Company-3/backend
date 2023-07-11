@@ -1,9 +1,9 @@
 {
-  "type": "object",
   "required": [
     "email",
     "password"
   ],
+  "type": "object",
   "properties": {
     "email": {
       "type": "string",
@@ -12,9 +12,9 @@
     },
     "password": {
       "type": "string",
+      "description": "password hashed in db",
       "format": "password",
-      "example": "password",
-      "description": "password hashed in db"
+      "example": "password"
     }
   },
   "$schema": "http://json-schema.org/schema#"

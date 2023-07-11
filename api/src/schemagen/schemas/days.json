@@ -1,5 +1,6 @@
 {
   "type": "string",
+  "description": "Days course is offered on",
   "enum": [
     "MONDAY",
     "TUESDAY",
@@ -7,6 +8,5 @@
     "THURSDAY",
     "FRIDAY"
   ],
-  "description": "Days course is offered on",
   "$schema": "http://json-schema.org/schema#"
 }

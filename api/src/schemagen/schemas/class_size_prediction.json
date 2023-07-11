@@ -1,27 +1,27 @@
 {
   "type": "array",
   "items": {
-    "type": "object",
     "required": [
-      "course",
-      "prereq",
       "coreq",
-      "pastEnrol"
+      "course",
+      "pastEnrol",
+      "prereq"
     ],
+    "type": "object",
     "properties": {
       "course": {
         "type": "string"
       },
       "prereq": {
-        "nullable": true,
         "type": "array",
+        "nullable": true,
         "items": {
           "type": "string"
         }
       },
       "coreq": {
-        "nullable": true,
         "type": "array",
+        "nullable": true,
         "items": {
           "type": "string"
         }
@@ -29,12 +29,12 @@
       "pastEnrol": {
         "type": "array",
         "items": {
-          "type": "object",
           "required": [
-            "year",
+            "size",
             "term",
-            "size"
+            "year"
           ],
+          "type": "object",
           "properties": {
             "year": {
               "type": "integer"
@@ -48,7 +48,8 @@
           }
         }
       }
-    }
+    },
+    "$schema": "http://json-schema.org/schema#"
   },
   "$schema": "http://json-schema.org/schema#"
 }

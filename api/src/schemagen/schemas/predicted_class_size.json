@@ -18,7 +18,8 @@
       "term": {
         "type": "integer"
       }
-    }
+    },
+    "$schema": "http://json-schema.org/schema#"
   },
   "$schema": "http://json-schema.org/schema#"
 }

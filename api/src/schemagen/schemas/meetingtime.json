@@ -1,15 +1,24 @@
 {
-  "type": "object",
   "required": [
     "days",
-    "startTime",
-    "endTime"
+    "endTime",
+    "startTime"
   ],
+  "type": "object",
   "properties": {
     "days": {
       "type": "array",
       "items": {
-        "$ref": "days.json"
+        "type": "string",
+        "description": "Days course is offered on",
+        "enum": [
+          "MONDAY",
+          "TUESDAY",
+          "WEDNESDAY",
+          "THURSDAY",
+          "FRIDAY"
+        ],
+        "$schema": "http://json-schema.org/schema#"
       }
     },
     "startTime": {
