@@ -16,7 +16,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "$schema": "http://json-schema.org/schema#"
     },
     "timeslots": {
       "type": "object",
@@ -33,7 +34,8 @@
         "startTime": {
           "type": "integer"
         }
-      }
+      },
+      "$schema": "http://json-schema.org/schema#"
     },
     "courses": {
       "type": "object",
@@ -59,7 +61,8 @@
         "capacity": {
           "type": "integer"
         }
-      }
+      },
+      "$schema": "http://json-schema.org/schema#"
     },
     "professors": {
       "type": "object",
@@ -97,7 +100,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "$schema": "http://json-schema.org/schema#"
     },
     "dimensions": {
       "type": "array",
@@ -116,7 +120,8 @@
           "rooms": {
             "type": "integer"
           }
-        }
+        },
+        "$schema": "http://json-schema.org/schema#"
       }
     },
     "preferences": {

@@ -1,9 +1,9 @@
 {
-  "type": "object",
   "required": [
-    "success",
-    "message"
+    "message",
+    "success"
   ],
+  "type": "object",
   "properties": {
     "success": {
       "type": "boolean",

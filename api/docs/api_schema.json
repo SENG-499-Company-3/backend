@@ -88,7 +88,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/userLogin"
+                "$ref": "#/components/schemas/userlogin"
               }
             }
           }
@@ -170,7 +170,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/coursePreference"
+                "$ref": "#/components/schemas/coursepreference"
               }
             }
           }
@@ -209,7 +209,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/InputData"
+                "$ref": "#/components/schemas/inputdata"
               }
             }
           }
@@ -259,7 +259,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/isValidSchedule"
+                  "$ref": "#/components/schemas/isvalidschedule"
                 }
               }
             }
@@ -329,7 +329,7 @@
           }
         }
       },
-      "userLogin": {
+      "userlogin": {
         "required": ["email", "password"],
         "type": "object",
         "properties": {
@@ -349,24 +349,24 @@
       "user": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/userLogin"
+            "$ref": "#/components/schemas/userlogin"
           },
           {
-            "required": ["name", "userRole"],
+            "required": ["name", "userrole"],
             "type": "object",
             "properties": {
               "name": {
                 "type": "string",
                 "example": "User name"
               },
-              "userRole": {
-                "$ref": "#/components/schemas/userRole"
+              "userrole": {
+                "$ref": "#/components/schemas/userrole"
               }
             }
           }
         ]
       },
-      "meetingTime": {
+      "meetingtime": {
         "required": ["days", "endTime", "startTime"],
         "type": "object",
         "properties": {
@@ -388,7 +388,7 @@
           }
         }
       },
-      "courseId": {
+      "courseid": {
         "required": ["code", "subject", "term"],
         "type": "object",
         "properties": {
@@ -405,12 +405,12 @@
           }
         }
       },
-      "coursePreference": {
-        "required": ["courseId", "preference"],
+      "coursepreference": {
+        "required": ["courseid", "preference"],
         "type": "object",
         "properties": {
-          "courseId": {
-            "$ref": "#/components/schemas/courseId"
+          "courseid": {
+            "$ref": "#/components/schemas/courseid"
           },
           "preference": {
             "type": "number",
@@ -418,12 +418,12 @@
           }
         }
       },
-      "courseSection": {
-        "required": ["capacity", "courseId", "endDate", "hoursPerWeek", "meetingTimes", "professors", "startDate"],
+      "coursesection": {
+        "required": ["capacity", "courseid", "enddate", "hoursperweek", "meetingtimes", "professors", "startdate"],
         "type": "object",
         "properties": {
-          "courseId": {
-            "$ref": "#/components/schemas/courseId"
+          "courseid": {
+            "$ref": "#/components/schemas/courseid"
           },
           "hoursPerWeek": {
             "type": "number",
@@ -450,12 +450,12 @@
             "description": "End date of course",
             "format": "date"
           },
-          "meetingTimes": {
-            "$ref": "#/components/schemas/meetingTime"
+          "meetingtimes": {
+            "$ref": "#/components/schemas/meetingtime"
           }
         }
       },
-      "teacherPreferenceForm": {
+      "teacherpreferenceform": {
         "required": ["courses", "peng", "userId"],
         "type": "object",
         "properties": {
@@ -467,11 +467,11 @@
             "$ref": "#/components/schemas/user"
           },
           "courses": {
-            "$ref": "#/components/schemas/courseId"
+            "$ref": "#/components/schemas/courseid"
           }
         }
       },
-      "isValidSchedule": {
+      "isvalidschedule": {
         "required": ["valid"],
         "type": "object"
       },
@@ -498,25 +498,25 @@
           }
         }
       },
-      "InputData": {
+      "inputdata": {
         "type": "object",
         "properties": {
           "rooms": {
-            "$ref": "#/components/schemas/InputData_rooms"
+            "$ref": "#/components/schemas/inputdata_rooms"
           },
           "timeslots": {
-            "$ref": "#/components/schemas/InputData_timeslots"
+            "$ref": "#/components/schemas/inputdata_timeslots"
           },
           "courses": {
-            "$ref": "#/components/schemas/InputData_courses"
+            "$ref": "#/components/schemas/inputdata_courses"
           },
           "professors": {
-            "$ref": "#/components/schemas/InputData_professors"
+            "$ref": "#/components/schemas/inputdata_professors"
           },
           "dimensions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/InputData_dimensions"
+              "$ref": "#/components/schemas/inputdata_dimensions"
             }
           },
           "preferences": {
@@ -563,7 +563,7 @@
           "$ref": "#/components/schemas/predicted_class_size_inner"
         }
       },
-      "userRole": {
+      "userrole": {
         "type": "string",
         "description": "User roles",
         "enum": ["ADMIN", "TEACHER"]
@@ -605,7 +605,7 @@
           }
         }
       },
-      "InputData_rooms": {
+      "inputdata_rooms": {
         "type": "object",
         "properties": {
           "location": {
@@ -622,7 +622,7 @@
           }
         }
       },
-      "InputData_timeslots": {
+      "inputdata_timeslots": {
         "type": "object",
         "properties": {
           "day": {
@@ -639,7 +639,7 @@
           }
         }
       },
-      "InputData_courses": {
+      "inputdata_courses": {
         "type": "object",
         "properties": {
           "coursename": {
@@ -665,7 +665,7 @@
           }
         }
       },
-      "InputData_professors": {
+      "inputdata_professors": {
         "type": "object",
         "properties": {
           "name": {
@@ -703,7 +703,7 @@
           }
         }
       },
-      "InputData_dimensions": {
+      "inputdata_dimensions": {
         "type": "object",
         "properties": {
           "courses": {

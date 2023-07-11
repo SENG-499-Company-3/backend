@@ -1,27 +1,49 @@
 {
-  "type": "object",
-  "required": ["name", "role", "email", "password"],
-  "properties": {
-    "name": {
-      "type": "string",
-      "example": "User name"
+  "allOf": [
+    {
+      "required": [
+        "email",
+        "password"
+      ],
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "example": "user@email.com"
+        },
+        "password": {
+          "type": "string",
+          "description": "password hashed in db",
+          "format": "password",
+          "example": "password"
+        }
+      },
+      "$schema": "http://json-schema.org/schema#"
     },
-    "role": {
-      "type": "string",
-      "enum": ["ADMIN", "TEACHER"],
-      "description": "User roles"
-    },
-    "email": {
-      "type": "string",
-      "format": "email",
-      "example": "user@email.com"
-    },
-    "password": {
-      "type": "string",
-      "format": "password",
-      "example": "password",
-      "description": "password hashed in db"
+    {
+      "required": [
+        "name",
+        "userrole"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "User name"
+        },
+        "userrole": {
+          "type": "string",
+          "description": "User roles",
+          "enum": [
+            "ADMIN",
+            "TEACHER"
+          ],
+          "$schema": "http://json-schema.org/schema#"
+        }
+      }
     }
-  },
-  "$schema": "http://json-schema.org/schema#"
+  ],
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object"
 }

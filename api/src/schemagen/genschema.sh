@@ -2,4 +2,4 @@
 
 # requires openapi2jsonschema via `pip install openapi2jsonschema`
 
-openapi2jsonschema ../../docs/api_schema.json
+openapi2jsonschema --stand-alone ../../docs/api_schema.json

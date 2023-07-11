@@ -1,17 +1,43 @@
 {
-  "type": "object",
   "required": [
-    "courseId",
-    "hoursPerWeek",
     "capacity",
+    "courseid",
+    "enddate",
+    "hoursperweek",
+    "meetingtimes",
     "professors",
-    "startDate",
-    "endDate",
-    "meetingTimes"
+    "startdate"
   ],
+  "type": "object",
   "properties": {
-    "courseId": {
-      "$ref": "courseId.json"
+    "courseid": {
+      "required": [
+        "code",
+        "subject",
+        "term"
+      ],
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "description": "Course subject, e.g. SENG, CSC"
+        },
+        "code": {
+          "type": "string",
+          "description": "Course code, e.g. 499,310"
+        },
+        "term": {
+          "type": "string",
+          "description": "Term course is offered in",
+          "enum": [
+            "FALL",
+            "SPRING",
+            "SUMMER"
+          ],
+          "$schema": "http://json-schema.org/schema#"
+        }
+      },
+      "$schema": "http://json-schema.org/schema#"
     },
     "hoursPerWeek": {
       "type": "number",
@@ -25,21 +51,100 @@
       "type": "array",
       "description": "Professor teaching course",
       "items": {
-        "$ref": "user.json"
+        "allOf": [
+          {
+            "required": [
+              "email",
+              "password"
+            ],
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "format": "email",
+                "example": "user@email.com"
+              },
+              "password": {
+                "type": "string",
+                "description": "password hashed in db",
+                "format": "password",
+                "example": "password"
+              }
+            },
+            "$schema": "http://json-schema.org/schema#"
+          },
+          {
+            "required": [
+              "name",
+              "userrole"
+            ],
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "User name"
+              },
+              "userrole": {
+                "type": "string",
+                "description": "User roles",
+                "enum": [
+                  "ADMIN",
+                  "TEACHER"
+                ],
+                "$schema": "http://json-schema.org/schema#"
+              }
+            }
+          }
+        ],
+        "$schema": "http://json-schema.org/schema#",
+        "type": "object"
       }
     },
     "startDate": {
       "type": "string",
-      "format": "date",
-      "description": "Start date of course"
+      "description": "Start date of course",
+      "format": "date"
     },
     "endDate": {
       "type": "string",
-      "format": "date",
-      "description": "End date of course"
+      "description": "End date of course",
+      "format": "date"
     },
-    "meetingTimes": {
-      "$ref": "meetingTime.json"
+    "meetingtimes": {
+      "required": [
+        "days",
+        "endTime",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "days": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Days course is offered on",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY"
+            ],
+            "$schema": "http://json-schema.org/schema#"
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "format": "time",
+          "example": "08:00"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "time",
+          "example": "09:00"
+        }
+      },
+      "$schema": "http://json-schema.org/schema#"
     }
   },
   "$schema": "http://json-schema.org/schema#"

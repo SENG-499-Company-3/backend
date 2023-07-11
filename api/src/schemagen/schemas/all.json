@@ -4,34 +4,34 @@
       "$ref": "jwt.json"
     },
     {
-      "$ref": "userLogin.json"
+      "$ref": "userlogin.json"
     },
     {
       "$ref": "user.json"
     },
     {
-      "$ref": "meetingTime.json"
+      "$ref": "meetingtime.json"
     },
     {
-      "$ref": "courseId.json"
+      "$ref": "courseid.json"
     },
     {
-      "$ref": "coursePreference.json"
+      "$ref": "coursepreference.json"
     },
     {
-      "$ref": "courseSection.json"
+      "$ref": "coursesection.json"
     },
     {
-      "$ref": "teacherPreferenceForm.json"
+      "$ref": "teacherpreferenceform.json"
     },
     {
-      "$ref": "isValidSchedule.json"
+      "$ref": "isvalidschedule.json"
     },
     {
       "$ref": "schedule.json"
     },
     {
-      "$ref": "InputData.json"
+      "$ref": "inputdata.json"
     },
     {
       "$ref": "class_size_prediction.json"
@@ -40,7 +40,7 @@
       "$ref": "predicted_class_size.json"
     },
     {
-      "$ref": "userRole.json"
+      "$ref": "userrole.json"
     },
     {
       "$ref": "term.json"
@@ -53,6 +53,27 @@
     },
     {
       "$ref": "success.json"
+    },
+    {
+      "$ref": "inputdata_rooms.json"
+    },
+    {
+      "$ref": "inputdata_timeslots.json"
+    },
+    {
+      "$ref": "inputdata_courses.json"
+    },
+    {
+      "$ref": "inputdata_professors.json"
+    },
+    {
+      "$ref": "inputdata_dimensions.json"
+    },
+    {
+      "$ref": "class_size_prediction_inner.json"
+    },
+    {
+      "$ref": "predicted_class_size_inner.json"
     }
   ]
 }
