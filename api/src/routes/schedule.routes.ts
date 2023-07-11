@@ -62,29 +62,6 @@ const list = async (req, res) => {
 };
 router.get('/list', list);
 
-/** teacher: get my schedule
- *  * @param {*} req
- * @param {*} res
- * @return {*} ISchedule[]
- */
-const my = async (req, res) => {
-  if (!req.headers.authorization) {
-    res.status(401).send({ message: 'This endpoint requires authorization header.' });
-    return;
-  }
-  const authToken = req.headers.authorization;
-
-    try
-    {
-        const userName = await getName(authToken);
-        const response = await scheduleController.my(userName);
-        res.status(200).send(response);
-    } catch (err)
-    {
-        res.status(401).send({message: err});
-    }
-}
-router.get('/my', my);
 
 /**
  * Admin: triggers build schedule
@@ -153,6 +130,33 @@ const update = async (req, res) => {
     }
 }
 router.get('/update', update);
+
+
+/** teacher: get my schedule
+ *  * @param {*} req
+ * @param {*} res
+ * @return {*} ISchedule[]
+*/
+const my = async (req, res) => {
+    if(!req.headers.authorization)
+    {
+        res.status(401).send({ message: "This endpoint requires authorization header."});
+        return;
+    }
+    const authToken = req.headers.authorization;
+
+    try
+    {
+        const userName = await getName(authToken);
+        const response = await scheduleController.my(userName);
+        res.status(200).send(response);
+    } catch (err)
+    {
+        res.status(401).send({message: err});
+    }
+}
+router.get('/my', my);
+
 
 
 
