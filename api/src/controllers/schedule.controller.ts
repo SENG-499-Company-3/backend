@@ -40,20 +40,24 @@ export class ScheduleController {
     }
   }
 
-  /**
-   * Retrieves the schedule of the teacher to whom the authToken belongs to
-   * @param {string} email
-   * @return {*}  {Promise<ISchedule[]>}
-   * @memberof ScheduleController
-   */
-  async my(email: string): Promise<ISchedule[]> {
-    try {
-      const schedules: ISchedule[] = await Schedule.find({ email: email }).catch((err) => err);
-      return schedules;
-    } catch (err) {
-      throw new Error('Error while retrieving your schedule');
+    /**
+     * Retrieves the schedule of the teacher to whom the authToken belongs to
+     * @param {string} name
+     * @return {*}  {Promise<ISchedule[]>}
+     * @memberof ScheduleController
+     */
+    async my(name: string): Promise<ISchedule[]>
+    {
+        try 
+        {
+            const schedules: ISchedule[] = await Schedule.find({Instructor: name}).catch((err) => err);
+            return schedules;
+        } catch (err)
+        {
+            throw new Error('Error while retrieving your schedule');
+        }
     }
-  }
+  
 
   /**
    * trigger the algorithm to create a schedule
