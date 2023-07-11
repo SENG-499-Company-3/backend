@@ -7,16 +7,21 @@ const Schedule = require('../models/schedule.model');
 export async function create_schedule_one(num: number)
 {
     const schedule1 = new Schedule({
-        term: "2023-0"+num,
-        course: "CSC 11"+num,
-        section: "A0"+num,
-        instructor: "Tony Stank",
-        email: "tony@gmail.com",
-        capacity: 50+num,
-        location: "ECS 11"+num,
-        days: ["MONDAY", "THURSDAY"],
-        start: "09:30",
-        end: "11:00"
+        Term: 202305,
+        Subj: 'CSC',
+        Num: 100+num,
+        Section: "A0"+num,
+        Title: 'Fundamental Programming:I',
+        SchedType: 'LEC',
+        Instructor: 'Stank, Tony',
+        Bldg: 'ECS',
+        Room: '1'+num,
+        Begin: 1000+num,
+        End: 1120+num,
+        Days: 'MR',
+        StartDate: '04 May 2023',
+        EndDate: '29 Jul 2023',
+        Cap: 20+num
     });
 
     try
@@ -32,6 +37,7 @@ export async function create_schedule_one(num: number)
 //creates mock data for specified number of rows for the schedule
 export async function create_schedule(num: number)
 {
+    await Schedule.deleteMany({});
     var i = 0;
     for(i = 0; i < num; i++)
     {

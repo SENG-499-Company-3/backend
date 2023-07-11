@@ -1,6 +1,6 @@
 import express from 'express';
 import { ScheduleController } from '../controllers/schedule.controller';
-import { isAdmin, getEmail } from '../helpers/auth';
+import { isAdmin, getName } from '../helpers/auth';
 
 const router = express.Router();
 const scheduleController: ScheduleController = new ScheduleController();
@@ -88,8 +88,8 @@ const my = async (req, res) => {
 
     try
     {
-        const email = await getEmail(authToken);
-        const response = await scheduleController.my(email);
+        const userName = await getName(authToken);
+        const response = await scheduleController.my(userName);
         res.status(200).send(response);
     } catch (err)
     {

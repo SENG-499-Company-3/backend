@@ -1,4 +1,4 @@
-import { ISchedule, Days } from '../interfaces/Schedule';
+import { ISchedule } from '../interfaces/Schedule';
 import { create_schedule } from '../helpers/createMockData';
 
 const Schedule = require('../models/schedule.model');
@@ -49,15 +49,15 @@ export class ScheduleController
 
     /**
      * Retrieves the schedule of the teacher to whom the authToken belongs to
-     * @param {string} email
+     * @param {string} name
      * @return {*}  {Promise<ISchedule[]>}
      * @memberof ScheduleController
      */
-    async my(email: string): Promise<ISchedule[]>
+    async my(name: string): Promise<ISchedule[]>
     {
         try 
         {
-            const schedules: ISchedule[] = await Schedule.find({email: email}).catch((err) => err);
+            const schedules: ISchedule[] = await Schedule.find({Instructor: name}).catch((err) => err);
             return schedules;
         } catch (err)
         {
