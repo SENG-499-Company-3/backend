@@ -88,3 +88,19 @@ export async function isAdmin(authToken: string)
 
   return user.role=="ADMIN";
 }
+
+/**
+ * Returns the name of the user associated with this authToken. Throws exception if authtoken is invalid or user not found.
+ * @param {string} authToken 
+ * @returns {string}
+ */
+export async function getName(authToken: string)
+{
+  const decoded_email = await getEmail(authToken);
+  let user: IUser = {} as IUser;
+  user = await User.findOne({ email: decoded_email }).catch((err) => err);
+
+  if(!user) throw new Error("User not found.");
+
+  return user.name; 
+}

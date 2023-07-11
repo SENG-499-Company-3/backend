@@ -1,6 +1,6 @@
 import express from 'express';
 import { ScheduleController } from '../controllers/schedule.controller';
-import { isAdmin, getEmail } from '../helpers/auth';
+import { isAdmin, getName } from '../helpers/auth';
 
 const router = express.Router();
 const scheduleController: ScheduleController = new ScheduleController();
@@ -71,14 +71,16 @@ const my = async (req, res) => {
   }
   const authToken = req.headers.authorization;
 
-  try {
-    const email = await getEmail(authToken);
-    const response = await scheduleController.my(email);
-    res.status(200).send(response);
-  } catch (err) {
-    res.status(401).send({ message: err });
-  }
-};
+    try
+    {
+        const userName = await getName(authToken);
+        const response = await scheduleController.my(userName);
+        res.status(200).send(response);
+    } catch (err)
+    {
+        res.status(401).send({message: err});
+    }
+}
 router.get('/my', my);
 
 /**
