@@ -34,18 +34,19 @@ export class CourseController
             await course.save(course).catch((err) => err);
         } catch (err)
         {
-            throw new Error('Error adding course.');
+            throw new Error('Error adding course: ' + err);
         }
     }
 
-    async remove(): Promise<void>
+    async remove(course: ICourse): Promise<void>
     {
         try
         {
+            await Course.deleteOne({Subj: course.Subj, Num: course.Num, Section: course.Section}).catch((err) => err);
             
         } catch (err)
         {
-
+            throw new Error('Error deleting course: ' + err);
         }
     }
 
