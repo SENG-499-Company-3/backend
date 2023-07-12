@@ -67,6 +67,7 @@ const add = async (req, res) => {
             Section: req.body.Section,
             Title: req.body.Title,
             SchedType: req.body.SchedType,
+            Type: req.body.Type,
             Cap: req.body.Cap 
           });
         await courseController.add(course_new);
@@ -102,6 +103,7 @@ const remove = async (req, res) => {
             Section: req.body.Section,
             Title: req.body.Title,
             SchedType: req.body.SchedType,
+            Type: req.body.Type,
             Cap: req.body.Cap 
           });
         await courseController.remove(course_remove);
