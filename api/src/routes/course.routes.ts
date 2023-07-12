@@ -16,7 +16,6 @@ const Course = require('../models/course.model');
  * @param {*} res 
  * @returns {*}
  */
-
 const list = async (req, res) => {
     if(!req.headers.authorization)
     {
@@ -43,44 +42,12 @@ const list = async (req, res) => {
 router.get('/list', list);
 
 
-
-//Add course
-const add = async (req, res) => {
-    if(!req.headers.authorization)
-    {
-        res.status(401).send({ message: "This endpoint requires authorization header."});
-        return;
-    }
-    const authToken = req.headers.authorization;
-    const isAdm = await isAdmin(authToken);
-    if(!isAdm) 
-    {
-        res.status(401).send({message: "Need admin access."});
-        return;
-    }
-
-    try
-    {
-        const course_new = new Course({
-            Subj: req.body.Subj,
-            Num: req.body.Num,
-            Section: req.body.Section,
-            Title: req.body.Title,
-            SchedType: req.body.SchedType,
-            Type: req.body.Type,
-            Cap: req.body.Cap 
-          });
-        await courseController.add(course_new);
-        res.status(200).send({message: "Added course."});
-    } catch (err)
-    {
-        res.status(401).send({message: err});
-    }
-}
-router.get('/add', validate({body: courseValidate}), add);
-
-
-//Remove course
+/**
+ * Admin: remove given course if exists
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {*}
+ */
 const remove = async (req, res) => {
     if(!req.headers.authorization)
     {
@@ -114,6 +81,48 @@ const remove = async (req, res) => {
     }
 }
 router.get('/remove',validate({body: courseValidate}), remove);
+
+
+/**
+ * Admin: add course if doesn't exist, otherwise update course type and/or capacity
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {*}
+ */
+
+const update = async (req, res) => {
+    if(!req.headers.authorization)
+    {
+        res.status(401).send({ message: "This endpoint requires authorization header."});
+        return;
+    }
+    const authToken = req.headers.authorization;
+    const isAdm = await isAdmin(authToken);
+    if(!isAdm) 
+    {
+        res.status(401).send({message: "Need admin access."});
+        return;
+    }
+
+    try
+    {
+        const course_update = new Course({
+            Subj: req.body.Subj,
+            Num: req.body.Num,
+            Section: req.body.Section,
+            Title: req.body.Title,
+            SchedType: req.body.SchedType,
+            Type: req.body.Type,
+            Cap: req.body.Cap 
+          });
+        await courseController.update(course_update);
+        res.status(200).send({message: "Updated course."});
+    } catch (err)
+    {
+        res.status(401).send({message: err});
+    }
+}
+router.get('/update', validate({body: courseValidate}), update);
 
 
 module.exports = router;
