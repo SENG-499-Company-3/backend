@@ -1,8 +1,9 @@
 import express from 'express';
 import { CourseController } from '../controllers/course.controller';
 import { isAdmin, getName } from '../helpers/auth';
-import course from '../schemagen/schemas/course.json';
 import { validate } from 'express-jsonschema';
+
+import courseValidate from '../schemagen/schemas/course.json';
 
 const router = express.Router();
 const courseController: CourseController = new CourseController();
@@ -75,7 +76,7 @@ const add = async (req, res) => {
         res.status(401).send({message: err});
     }
 }
-router.get('/add', validate({body: course}), add);
+router.get('/add', validate({body: courseValidate}), add);
 
 
 //Remove course
@@ -95,14 +96,22 @@ const remove = async (req, res) => {
 
     try
     {
-        await courseController.remove();
+        const course_remove = new Course({
+            Subj: req.body.Subj,
+            Num: req.body.Num,
+            Section: req.body.Section,
+            Title: req.body.Title,
+            SchedType: req.body.SchedType,
+            Cap: req.body.Cap 
+          });
+        await courseController.remove(course_remove);
         res.status(200).send({message: "Removed course"});
     } catch (err)
     {
         res.status(401).send({message: err});
     }
 }
-router.get('/remove',validate({body: course}), remove);
+router.get('/remove',validate({body: courseValidate}), remove);
 
 
 
@@ -129,7 +138,7 @@ const update = async (req, res) => {
         res.status(401).send({message: err});
     }
 }
-router.get('/update', update);
+router.get('/update', validate({body: courseValidate}), update);
 
 
 module.exports = router;
