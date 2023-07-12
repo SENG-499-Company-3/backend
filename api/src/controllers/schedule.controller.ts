@@ -104,4 +104,33 @@ export class ScheduleController {
 
     return response.data.valid;
   }
+    /**
+     * Replaces the entire schedule by the one provided (if admin wants to move courses around)
+     * @param {ISchedule[]} schedules
+     * @return {*} 
+     * @memberof ScheduleController
+     */
+    async update(schedules: ISchedule[], numSchedules: number): Promise<void>
+    {
+
+        try 
+        {
+            await Schedule.deleteMany();
+            console.log("Length: ");
+            console.log(schedules.length);
+            for(let i = 0; i < numSchedules ; i++)
+            {
+                const s = new Schedule(schedules[i]);
+                console.log("Inside");
+                // console.log(s.Begin);
+                await s.save(s).catch((err) => err);
+            }
+            // await Schedule.insertMany(schedules).catch((err) => err);
+            console.log("done");
+        } catch (err)
+        {
+            throw new Error('Error while retrieving the entire schedule: '+err);
+        }
+    }
+
 }
