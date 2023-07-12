@@ -179,26 +179,12 @@ const update = async (req, res) => {
     }
     try
     {
-        console.log("before json parse\n");
-        // let schedules;
         let schedules = {} as ISchedule[];
-        // let schedules : ISchedule[4] = {};
         const numSchedules = req.body.length;
         for(let i = 0; i < numSchedules; i++)
         {
-            //console.log(req.body[i]);
-            //schedules.push(<ISchedule>JSON.parse(req.body[i]));
-        // console.log("before json parse\n");
-
-        //     console.log(req.body);
-        //     (<ISchedule[]>JSON.parse(req.body));
             schedules[i] = <ISchedule>req.body[i];
-            // console.log(schedules[i].Subj);
-
-            //let schedule = new Schedule
         }
-        //const schedules = <ISchedule[]>JSON.parse(req.body);
-        console.log("After json parse\n");
         await scheduleController.update(schedules, numSchedules);
         res.status(200).send({message: "Updated schedule."});
     } catch (err)
