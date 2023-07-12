@@ -68,6 +68,7 @@ export class ScheduleController
     /**
      * Replaces the entire schedule by the one provided
      * @param {ISchedule[]} schedules
+     * @param {string} numSchedules
      * @return {*} 
      * @memberof ScheduleController
      */
@@ -76,18 +77,13 @@ export class ScheduleController
 
         try 
         {
+            //delete current schedule and insert the new one
             await Schedule.deleteMany();
-            console.log("Length: ");
-            console.log(schedules.length);
             for(let i = 0; i < numSchedules ; i++)
             {
                 const s = new Schedule(schedules[i]);
-                console.log("Inside");
-                // console.log(s.Begin);
                 await s.save(s).catch((err) => err);
             }
-            // await Schedule.insertMany(schedules).catch((err) => err);
-            console.log("done");
         } catch (err)
         {
             throw new Error('Error while retrieving the entire schedule: '+err);
