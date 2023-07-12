@@ -114,31 +114,4 @@ const remove = async (req, res) => {
 router.get('/remove',validate({body: courseValidate}), remove);
 
 
-
-const update = async (req, res) => {
-    if(!req.headers.authorization)
-    {
-        res.status(401).send({ message: "This endpoint requires authorization header."});
-        return;
-    }
-    const authToken = req.headers.authorization;
-    const isAdm = await isAdmin(authToken);
-    if(!isAdm) 
-    {
-        res.status(401).send({message: "Need admin access."});
-        return;
-    }
-
-    try
-    {
-        await courseController.update();
-        res.status(200).send({message: "Updated course."});
-    } catch (err)
-    {
-        res.status(401).send({message: err});
-    }
-}
-router.get('/update', validate({body: courseValidate}), update);
-
-
 module.exports = router;

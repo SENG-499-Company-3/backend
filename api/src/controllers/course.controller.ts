@@ -50,16 +50,6 @@ export class CourseController
         }
     }
 
-    async update(): Promise<void>
-    {
-        try
-        {
-            
-        } catch (err)
-        {
-
-        }
-    }
 
     
 }
