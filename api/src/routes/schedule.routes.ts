@@ -139,16 +139,11 @@ const update = async (req, res) => {
     }
     try
     {
-        console.log("before json parse\n");
-        // let schedules;
         let schedules = {} as ISchedule[];
-        // let schedules : ISchedule[4] = {};
         const numSchedules = req.body.length;
         for(let i = 0; i < numSchedules; i++)
         {
-
             schedules[i] = <ISchedule>req.body[i];
-
         }
         await scheduleController.update(schedules, numSchedules);
         res.status(200).send({message: "Updated schedule."});
