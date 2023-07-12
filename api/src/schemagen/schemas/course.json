@@ -1,6 +1,6 @@
 {
     "type": "object",
-    "required": ["Subj", "Num", "Section", "Title", "SchedType", "Cap"],
+    "required": ["Subj", "Num", "Section", "Title", "SchedType", "Type","Cap"],
     "properties": {
       "Subj": {
         "type": "string",
@@ -18,6 +18,10 @@
       ,
       "SchedType": {
         "type": "string"
+      },
+      "Type": {
+        "type": "string",
+        "example": "CORE"
       },
       "Cap": {
         "type": "number"

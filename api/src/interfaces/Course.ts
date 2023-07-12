@@ -8,5 +8,6 @@ export interface ICourse extends Document
     Section: string,
     Title: string,
     SchedType: string,
+    Type: string,
     Cap: Number
 }
