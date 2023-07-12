@@ -5,7 +5,6 @@ import { isAdmin, getEmail } from '../helpers/auth';
 const router = express.Router();
 const scheduleController: ScheduleController = new ScheduleController();
 
-
 /**
  * Admin: triggers build schedule
  * Make schedule by running the algorithms (currently just creates a mock schedule)
@@ -14,32 +13,24 @@ const scheduleController: ScheduleController = new ScheduleController();
  * @return {*}
  */
 const create = async (req, res) => {
-
-    if(!req.headers.authorization) 
-    {
-        res.status(401).send({ message: "This endpoint requires authorization header."});
-        return;
-    }
-    const authToken = req.headers.authorization;
-    const isAdm = await isAdmin(authToken);
-    if(!isAdm) 
-    {
-        res.status(401).send({message: "Need admin access."});
-        return;
-    }
-    try
-    {
-
-        await scheduleController.create();
-        res.status(200).send("Created schedule.");
-    } catch (err)
-    {
-        res.status(401).send({message: err});
-    }
-}
+  if (!req.headers.authorization) {
+    res.status(401).send({ message: 'This endpoint requires authorization header.' });
+    return;
+  }
+  const authToken = req.headers.authorization;
+  const isAdm = await isAdmin(authToken);
+  if (!isAdm) {
+    res.status(401).send({ message: 'Need admin access.' });
+    return;
+  }
+  try {
+    await scheduleController.create();
+    res.status(200).send('Created schedule.');
+  } catch (err) {
+    res.status(401).send({ message: err });
+  }
+};
 router.get('/create', create);
-
-
 
 /**
  * Admin list entire schedule
@@ -47,57 +38,80 @@ router.get('/create', create);
  * @param {*} req
  * @param {*} res
  * @return {*} ISchedule[]
-*/
+ */
 const list = async (req, res) => {
-    if(!req.headers.authorization) 
-    {
-        res.status(401).send({ message: "This endpoint requires authorization header."});
-        return;
-    }
-    const authToken = req.headers.authorization;
-    const isAdm = await isAdmin(authToken);
-    if(!isAdm)
-    {
-        res.status(401).send({message: "Need admin access."});
-        return;
-    }
-    try
-    {
-        const response = await scheduleController.list();
-        res.status(200).send(response);
-    } catch (err)
-    {
-        res.status(401).send("Error: " + err);
-    }
-}
+  if (!req.headers.authorization) {
+    res.status(401).send({ message: 'This endpoint requires authorization header.' });
+    return;
+  }
+  const authToken = req.headers.authorization;
+  const isAdm = await isAdmin(authToken);
+  if (!isAdm) {
+    res.status(401).send({ message: 'Need admin access.' });
+    return;
+  }
+  try {
+    const response = await scheduleController.list();
+    res.status(200).send(response);
+  } catch (err) {
+    res.status(401).send('Error: ' + err);
+  }
+};
 router.get('/list', list);
-
 
 /** teacher: get my schedule
  *  * @param {*} req
  * @param {*} res
  * @return {*} ISchedule[]
-*/
+ */
 const my = async (req, res) => {
-    if(!req.headers.authorization)
-    {
-        res.status(401).send({ message: "This endpoint requires authorization header."});
-        return;
-    }
-    const authToken = req.headers.authorization;
+  if (!req.headers.authorization) {
+    res.status(401).send({ message: 'This endpoint requires authorization header.' });
+    return;
+  }
+  const authToken = req.headers.authorization;
 
-    try
-    {
-        const email = await getEmail(authToken);
-        const response = await scheduleController.my(email);
-        res.status(200).send(response);
-    } catch (err)
-    {
-        res.status(401).send({message: err});
-    }
-}
+  try {
+    const email = await getEmail(authToken);
+    const response = await scheduleController.my(email);
+    res.status(200).send(response);
+  } catch (err) {
+    res.status(401).send({ message: err });
+  }
+};
 router.get('/my', my);
 
+/**
+ * Admin: triggers build schedule
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+const generate_trigger = async (req, res) => {
+  try {
+    const response = await scheduleController.trigger();
+    res.status(200).send(response);
+  } catch (err) {
+    res.status(401).send({ message: err });
+  }
+};
+router.get('/generate_trigger', generate_trigger);
 
+/**
+ * Admin: triggers validate schedule
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+const validate_trigger = async (req, res) => {
+    const id = req.param.id;
+    try {
+      const response = await scheduleController.validate(id);
+      res.status(200).send(response);
+    } catch (err) {
+      res.status(401).send({ message: err });
+    }
+  };
+  router.get('/validate_trigger', validate_trigger);
 
 module.exports = router;

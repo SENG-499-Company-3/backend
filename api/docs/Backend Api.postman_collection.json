@@ -161,7 +161,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"kjartan@email.com\",\n    \"courses\": [\"CSC 110\", \"CSC 111\", \"SENG 265\"],\n    \"start\": \"10:00\",\n    \"end\": \"15:30\",\n    \"peng\": true\n}",
+							"raw": "{\n    \"email\": \"kjartan1@email.com\",\n    \"courses\": [\"CSC 999\", \"CSC 151\", \"SENG 265\"],\n    \"start\": \"10:00\",\n    \"end\": \"15:30\",\n    \"peng\": true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -308,6 +308,50 @@
 							"path": [
 								"schedule",
 								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "schedule_trigger",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{backend_ip}}:{{backend_port}}/schedule/generate_trigger",
+							"host": [
+								"{{backend_ip}}"
+							],
+							"port": "{{backend_port}}",
+							"path": [
+								"schedule",
+								"generate_trigger"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validate_trigger",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{backend_ip}}:{{backend_port}}/schedule/validate_trigger?id=64adbe51c357adddab4c2eb8",
+							"host": [
+								"{{backend_ip}}"
+							],
+							"port": "{{backend_port}}",
+							"path": [
+								"schedule",
+								"validate_trigger"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "64adbe51c357adddab4c2eb8"
+								}
 							]
 						}
 					},
