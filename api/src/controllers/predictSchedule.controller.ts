@@ -35,7 +35,7 @@ export class PredictScheduleController {
     const response = await axios
       .post(`http://${algorithm2IP}:${algorithm2Port}/schedule`, previousEnrolment)
       .catch((err) => err);
-    
+
     const newClassSizePrediction = new classSizePrediction({
       courses: response.data
     });
