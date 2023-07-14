@@ -6,5 +6,5 @@ export interface ITeacherPref extends Document {
     courses: [string],
     start: string,
     end: string,
-    peng: string
+    peng: string,
 }
