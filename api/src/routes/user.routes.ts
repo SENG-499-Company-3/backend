@@ -42,9 +42,17 @@ router.post('/create', validate({ body: user }), create);
  */
 const list = async (req, res) => {
   try {
-    const response = await userController.list();
+    let users = await userController.list();
 
-    res.status(200).send(response);
+    users = users.filter(function (user) {
+      console.log(user.password);
+      user.password = undefined;
+      user.token = undefined;
+      return true;
+
+    });
+
+    res.status(200).send(users);
   } catch (err) {
     res.status(401).send({ message: err });
   }
