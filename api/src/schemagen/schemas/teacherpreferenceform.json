@@ -1,9 +1,12 @@
 {
   "type": "object",
-  "required": ["peng", "courses", "email", "start", "end"],
+  "required": ["_id","peng", "courses", "email", "start", "end"],
   "properties": {
+    "_id": {
+      "type": "string"
+    },
     "peng": {
-      "type": "boolean",
+      "type": "string",
       "description": "Professional Engineer certified"
     },
     "courses": {
