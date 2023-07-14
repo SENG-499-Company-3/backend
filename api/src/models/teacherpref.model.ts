@@ -8,7 +8,8 @@ export const teacherPrefSchema = new Schema(
         courses: { type: [String], required: true},
         start: { type: String, required: true},
         end: { type: String, required: true},
-        peng: { type: String, required: true}
+        peng: { type: String, required: true},
+        last_updated: {type: String}
     }
 );
 

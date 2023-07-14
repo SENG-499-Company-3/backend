@@ -80,8 +80,6 @@ router.get('/list', list);
  * @return {*} ITeacherPref
  */
 const my = async (req, res) => {
-  // let time = new Date();
-  // console.log(time);
   if (!req.headers.authorization) {
     res.status(401).send({ message: 'This endpoint requires authorization header.' });
     return;

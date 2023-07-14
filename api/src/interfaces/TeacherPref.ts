@@ -7,4 +7,5 @@ export interface ITeacherPref extends Document {
     start: string,
     end: string,
     peng: string,
+    last_updated: string
 }
