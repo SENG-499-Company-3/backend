@@ -1,5 +1,6 @@
 import { hashPassword } from '../helpers/auth';
 import { IUser, UserRoles } from '../interfaces/User';
+import { IUserVisible } from '../interfaces/UserVisible';
 
 const User = require('../models/user.model');
 
@@ -49,8 +50,8 @@ export class UserController {
    */
   async list(): Promise<IUser[]> {
     try {
-      const users: IUser[] = await User.find().catch((err) => err);
-
+      let users: IUser[] = await User.find().catch((err) => err);
+      
       return users;
     } catch (err) {
       throw new Error('Some error occurred while retrieving users.');
