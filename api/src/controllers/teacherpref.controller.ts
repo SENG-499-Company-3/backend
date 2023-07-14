@@ -27,14 +27,16 @@ export class TeacherPrefController
         try
         {
             //try finding the teacher's current preference
-            
+            let time = new Date();
+            let time_local = time.toLocaleString("en-CA", {timeZone: "America/Vancouver"});
             const pref = new TeacherPref({
                 _id: uid,
                 email: email,
                 courses: courses,
                 start: start,
                 end: end,
-                peng: peng
+                peng: peng,
+                last_updated: time_local
             });
             const pref_curr = await TeacherPref.findOne({email: email}).catch((err) => err);
             if(!pref_curr) //insert if doesn't exist
