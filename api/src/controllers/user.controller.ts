@@ -1,5 +1,6 @@
 import { hashPassword } from '../helpers/auth';
 import { IUser, UserRoles } from '../interfaces/User';
+import { IUserVisible } from '../interfaces/UserVisible';
 
 const User = require('../models/user.model');
 const TeacherPref = require('../models/teacherpref.model');
