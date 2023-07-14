@@ -19,6 +19,6 @@ const predict_class_size_trigger = async (req, res) => {
     res.status(401).send({ message: err });
   }
 };
-router.get('/predict_class_size_trigger', predict_class_size_trigger);
+router.post('/predict_class_size_trigger', predict_class_size_trigger);
 
 module.exports = router;

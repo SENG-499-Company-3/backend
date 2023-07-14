@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { courseData2023 } from '../models/data/courseData';
 
 // import { ISchedule, Days } from '../interfaces/Schedule';
-const Schedule = require('../models/classSizePrediction.model');
+const classSizePrediction = require('../models/classSizePrediction.model');
 
 // include a function to handle the logic for predicting class sizes
 // and also validate incoming payload according to the API spec
@@ -24,18 +25,28 @@ export class PredictScheduleController {
    * @memberof PredictScheduleController
    */
 
-  async class_size_prediction(): Promise<any> {
-    const previousEnrolment = await Schedule.find().catch((err) => err);
+  async class_size_prediction(): Promise<String> {
+    // const previousEnrolment = await Schedule.find().catch((err) => err);
+    const previousEnrolment = courseData2023[0];
 
     const algorithm2IP = process.env.ALGORITHM_2_IP || 'localhost';
     const algorithm2Port = process.env.ALGORITHM_2_PORT || '5000';
 
     const response = await axios
-      .post(`${algorithm2IP}:${algorithm2Port}/schedule/predict_class_sizes`, {
-        class_size_prediction: previousEnrolment
-      })
+      .post(`http://${algorithm2IP}:${algorithm2Port}/schedule`, previousEnrolment)
       .catch((err) => err);
 
-    return response;
+    const newClassSizePrediction = new classSizePrediction({
+      courses: response.data
+    });
+
+    var id = newClassSizePrediction._id;
+
+    await newClassSizePrediction
+      .save()
+      .then((res) => id = res._id)
+      .catch((err) => console.log('err', err));
+
+    return id;
   }
 }
