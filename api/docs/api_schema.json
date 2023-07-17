@@ -721,11 +721,14 @@
         }
       },
       "class_size_prediction_inner": {
-        "required": ["coreq", "course", "pastEnrol", "prereq"],
+        "required": ["coreq", "course", "term","pastEnrol", "prereq"],
         "type": "object",
         "properties": {
           "course": {
             "type": "string"
+          },
+          "term": {
+            "type" : "integer"
           },
           "prereq": {
             "type": "array",
