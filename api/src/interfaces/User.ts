@@ -6,6 +6,7 @@ export interface IUser extends Document {
   name: string;
   role: UserRoles;
   token?: string;
+  preferencesSubmitted: boolean;
 }
 
 export type UserRoles = 'TEACHER' | 'ADMIN';
