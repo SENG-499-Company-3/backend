@@ -14,7 +14,7 @@ const jwt_decode = require('jwt-decode');
 export async function hashPassword(password: string) {
   const saltRounds: number = 10;
 
-  const hashedPassword = await new Promise((resolve, reject) => {
+  const hashedPassword = await new Promise<string>((resolve, reject) => {
     bcrypt.genSalt(saltRounds, async function (err, salt) {
       bcrypt.hash(password, salt, async function (err, hash) {
         if (err) reject(err);
