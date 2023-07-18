@@ -27,26 +27,12 @@ export class CourseController
     }
 
 
-<<<<<<< HEAD
     /**
      * remove the given course
      * @param {ICourse} course
      * @returns {*} {Promise<ICourse[]>}
      * @memberof CourseController
      */
-=======
-    async add(course: ICourse): Promise<void>
-    {
-        try
-        {
-            await course.save(course).catch((err) => err);
-        } catch (err)
-        {
-            throw new Error('Error adding course: ' + err);
-        }
-    }
-
->>>>>>> 1a9bda3 (Added remove course function)
     async remove(course: ICourse): Promise<void>
     {
         try

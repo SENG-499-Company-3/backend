@@ -158,6 +158,57 @@ const my = async (req, res) => {
 router.get('/my', my);
 
 
+/**
+ * Admin: update the entire schedule
+ * @param {*} req
+ * @param {*} res
+ * @return {*} 
+*/
+const update = async (req, res) => {
+    if(!req.headers.authorization) 
+    {
+        res.status(401).send({ message: "This endpoint requires authorization header."});
+        return;
+    }
+    const authToken = req.headers.authorization;
+    const isAdm = await isAdmin(authToken);
+    if(!isAdm)
+    {
+        res.status(401).send({message: "Need admin access."});
+        return;
+    }
+    try
+    {
+        console.log("before json parse\n");
+        // let schedules;
+        let schedules = {} as ISchedule[];
+        // let schedules : ISchedule[4] = {};
+        const numSchedules = req.body.length;
+        for(let i = 0; i < numSchedules; i++)
+        {
+            //console.log(req.body[i]);
+            //schedules.push(<ISchedule>JSON.parse(req.body[i]));
+        // console.log("before json parse\n");
+
+        //     console.log(req.body);
+        //     (<ISchedule[]>JSON.parse(req.body));
+            schedules[i] = <ISchedule>req.body[i];
+            // console.log(schedules[i].Subj);
+
+            //let schedule = new Schedule
+        }
+        //const schedules = <ISchedule[]>JSON.parse(req.body);
+        console.log("After json parse\n");
+        await scheduleController.update(schedules, numSchedules);
+        res.status(200).send({message: "Updated schedule."});
+    } catch (err)
+    {
+        res.status(401).send({message: "Error creating schedule: " + err});
+    }
+}
+router.get('/update', update);
+
+
 
 
 module.exports = router;
