@@ -1,10 +1,6 @@
 {
     "type": "object",
-<<<<<<< HEAD
     "required": ["Subj", "Num", "Section", "Title", "SchedType", "Type", "Cap"],
-=======
-    "required": ["Subj", "Num", "Section", "Title", "SchedType", "Type","Cap"],
->>>>>>> 6bbc5b6feb457f293349a72d031ccd5ebea1079d
     "properties": {
       "Subj": {
         "type": "string",
