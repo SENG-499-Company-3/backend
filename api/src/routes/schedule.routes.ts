@@ -96,40 +96,7 @@ const validate_trigger = async (req, res) => {
 };
 router.get('/validate_trigger', validate_trigger);
  
-  /* Admin: update the entire schedule
- * @param {*} req
- * @param {*} res
- * @return {*} 
-*/
-const update = async (req, res) => {
-    if(!req.headers.authorization) 
-    {
-        res.status(401).send({ message: "This endpoint requires authorization header."});
-        return;
-    }
-    const authToken = req.headers.authorization;
-    const isAdm = await isAdmin(authToken);
-    if(!isAdm)
-    {
-        res.status(401).send({message: "Need admin access."});
-        return;
-    }
-    try
-    {
-        let schedules = {} as ISchedule[];
-        const numSchedules = req.body.length;
-        for(let i = 0; i < numSchedules; i++)
-        {
-            schedules[i] = <ISchedule>req.body[i];
-        }
-        await scheduleController.update(schedules, numSchedules);
-        res.status(200).send({message: "Updated schedule."});
-    } catch (err)
-    {
-        res.status(401).send({message: "Error creating schedule: " + err});
-    }
-}
-router.get('/update', update);
+
 
 
 /** teacher: get my schedule
