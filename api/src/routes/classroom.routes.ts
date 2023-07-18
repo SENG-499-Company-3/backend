@@ -56,8 +56,6 @@ const list = async (req, res) => {
     }
     try
     {
-
-
         const resp = await classroomController.list();
         res.status(200).send(resp);
     } catch (err)
