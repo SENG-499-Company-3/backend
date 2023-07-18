@@ -1,8 +1,8 @@
 import cors from 'cors';
 import morgan from 'morgan';
 import express from 'express';
-import { userData } from './models/data/userData';
 import { courseData2023 } from './models/data/courseData';
+import { create_professors } from './helpers/createMockData';
 
 const user = require('./routes/user.routes');
 const auth = require('./routes/auth.routes');
@@ -38,31 +38,18 @@ db.mongoose
     process.exit();
   });
 
-const User = require('./models/user.model');
+create_professors();
 
-// Create a new User if one doesn't already exist
-User.findOne({ email: userData[0].email }).then((user) => {
-  if (!user) {
-    User.create(userData[0])
-      .then(() => {
-        console.log('Users created!');
-      })
-      .catch((err) => {
-        console.log('Error creating users!', err);
-      });
-  }
-});
-
-// Create data for previous enrolment
-const Schedule = require('./models/classSizePrediction.model');
-Schedule.findOne({ course: courseData2023[0].course }).then((course) => {
-  if (!course) {
-    courseData2023.forEach((data) => {
-      Schedule.create(data);
-    });
-    console.log('Courses created!');
-  }
-});
+// // Create data for previous enrolment
+// const Schedule = require('./models/classSizePrediction.model');
+// Schedule.findOne({ course: courseData2023[0].course }).then((course) => {
+//   if (!course) {
+//     courseData2023.forEach((data) => {
+//       Schedule.create(data);
+//     });
+//     console.log('Courses created!');
+//   }
+// });
 
 app.use('/user', user);
 app.use('/auth', auth);
@@ -95,12 +82,12 @@ app.use((err, req, res, next) => {
     // Take into account the content type if your app serves various content types
     if (req.xhr || req.get('Content-Type') === 'application/json') {
       res.json(responseData);
-  } else {
+    } else {
       // If this is an html request then you should probably have
       // some type of Bad Request html template to respond with
       res.render('badrequestTemplate', responseData);
-  }
-  }else {
+    }
+  } else {
     // pass error to next error middleware handler
     return next(err);
   }
