@@ -104,7 +104,7 @@
 							},
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtqYXJ0YW5AZW1haWwuY29tIiwiaWF0IjoxNjg4NzQ1MTkzfQ.Uta7X1zeOUAmveFAehACAcvz5jePKAygcp6BuoNGrOU",
+								"value": "{{authTokenVar}}",
 								"type": "text"
 							}
 						],
@@ -135,7 +135,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtqYXJ0YW5AZW1haWwuY29tIiwiaWF0IjoxNjg4NzQ1MTkzfQ.Uta7X1zeOUAmveFAehACAcvz5jePKAygcp6BuoNGrOU",
+								"value": "{{authTokenVar}}",
 								"type": "text"
 							}
 						],
@@ -160,13 +160,13 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtqYXJ0YW5AZW1haWwuY29tIiwiaWF0IjoxNjg4NzQ1MTkzfQ.Uta7X1zeOUAmveFAehACAcvz5jePKAygcp6BuoNGrOU",
+								"value": "{{authTokenVar}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"kjartan1@email.com\",\n    \"courses\": [\"CSC 999\", \"CSC 151\", \"SENG 265\"],\n    \"start\": \"10:00\",\n    \"end\": \"15:30\",\n    \"peng\": true\n}",
+							"raw": "{\n    \"_id\": \"64b5f5155b6a9e778905bf44\",\n    \"email\": \"tony@gmail.com\",\n    \"courses\": [\"CSC 110\", \"CSC 111\", \"SENG 265\"],\n    \"start\": \"10:00\",\n    \"end\": \"15:10\",\n    \"peng\": \"true\" \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -194,12 +194,12 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZW1haWwuY29tIiwiaWF0IjoxNjg5Mzc2MjE5fQ.YW4Vg4KBdmxBiIaxbF87lWO0xqgcxer0134hEiz6pi0",
+								"value": "{{authTokenVar}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{backend_ip}}:{{backend_port}}/teacherpref?id=64b1ce2f45a9ab31426e6bd4",
+							"raw": "{{backend_ip}}:{{backend_port}}/teacherpref?id=64b5f5155b6a9e778905bf44",
 							"host": [
 								"{{backend_ip}}"
 							],
@@ -210,7 +210,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "64b1ce2f45a9ab31426e6bd4"
+									"value": "64b5f5155b6a9e778905bf44"
 								}
 							]
 						}
@@ -224,7 +224,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtqYXJ0YW5AZW1haWwuY29tIiwiaWF0IjoxNjg4NzQ1MTkzfQ.Uta7X1zeOUAmveFAehACAcvz5jePKAygcp6BuoNGrOU",
+								"value": "{{authTokenVar}}",
 								"type": "text"
 							}
 						],
@@ -279,7 +279,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZ21haWwuY29tIiwiaWF0IjoxNjg4Njg3OTAzfQ.nwjjhkuTrWHIPoKBqzZ0f8TWo0nWwmHO0Fp_2EmPBrQ",
+								"value": "{{authTokenVar}}",
 								"type": "text"
 							}
 						],
@@ -304,7 +304,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZ21haWwuY29tIiwiaWF0IjoxNjg4Njg3OTAzfQ.nwjjhkuTrWHIPoKBqzZ0f8TWo0nWwmHO0Fp_2EmPBrQ",
+								"value": "{{authTokenVar}}",
 								"type": "text"
 							}
 						],
@@ -329,7 +329,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZ21haWwuY29tIiwiaWF0IjoxNjg4Njg3OTAzfQ.nwjjhkuTrWHIPoKBqzZ0f8TWo0nWwmHO0Fp_2EmPBrQ",
+								"value": "{{authTokenVar}}",
 								"type": "text"
 							}
 						],
@@ -401,7 +401,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZW1haWwuY29tIiwiaWF0IjoxNjg5NjQ1NzAzfQ.2dgabWeDOxev4suJJDehMEqTmRHS9Ss1Ab0cIf8Cud4",
+								"value": "{{authTokenVar}}",
 								"type": "text"
 							}
 						],
@@ -440,7 +440,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZW1haWwuY29tIiwiaWF0IjoxNjg5MTczNjkzfQ.AHyxLpymBfA3kjKf4LsvzBrEOyNGwHJjKFsdaHvpSRA",
+								"value": "{{authTokenVar}}",
 								"type": "text"
 							}
 						],
@@ -468,7 +468,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZW1haWwuY29tIiwiaWF0IjoxNjg5MTczNjkzfQ.AHyxLpymBfA3kjKf4LsvzBrEOyNGwHJjKFsdaHvpSRA",
+								"value": "{{authTokenVar}}",
 								"type": "text"
 							}
 						],
@@ -505,13 +505,13 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZW1haWwuY29tIiwiaWF0IjoxNjg5MTI4MDk5fQ.wkdtqUPm572e5atYgKw4pQ1cfGkce9Bo3TwH3AP717k",
+								"value": "{{authTokenVar}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"Subj\": \"CSC\",\n    \"Num\": 1121,\n    \"Section\": \"A01\",\n    \"Title\": \"Fundamental Programming\",\n    \"SchedType\": \"Lec\",\n    \"Type\": \"CORE\",\n    \"Cap\": 521\n}",
+							"raw": "{\n    \"Subj\": \"CSC\",\n    \"Num\": 111,\n    \"Section\": \"A01\",\n    \"Title\": \"Fundamental Programming\",\n    \"SchedType\": \"Lec\",\n    \"Type\": \"CORE\",\n    \"Cap\": 521\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -544,7 +544,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAZ21haWwuY29tIiwiaWF0IjoxNjg5NjQ2MzYyfQ.jcW3dMZo3GAUYBNRQ35i4iQLAZTCaXup3oK2gQfQbEI",
+								"value": "{{authTokenVar}}",
 								"type": "text"
 							}
 						],
