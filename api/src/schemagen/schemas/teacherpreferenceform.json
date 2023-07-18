@@ -6,8 +6,11 @@
   ],
   "type": "object",
   "properties": {
+    "_id": {
+      "type": "string"
+    },
     "peng": {
-      "type": "boolean",
+      "type": "string",
       "description": "Professional Engineer certified"
     },
     "userId": {
