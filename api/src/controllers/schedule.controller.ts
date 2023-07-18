@@ -129,4 +129,29 @@ export class ScheduleController {
         }
     }
 
+    /**
+     * Replaces the entire schedule by the one provided
+     * @param {ISchedule[]} schedules
+     * @param {string} numSchedules
+     * @return {*} 
+     * @memberof ScheduleController
+     */
+    async update(schedules: ISchedule[], numSchedules: number): Promise<void>
+    {
+
+        try 
+        {
+            //delete current schedule and insert the new one
+            await Schedule.deleteMany();
+            for(let i = 0; i < numSchedules ; i++)
+            {
+                const s = new Schedule(schedules[i]);
+                await s.save(s).catch((err) => err);
+            }
+        } catch (err)
+        {
+            throw new Error('Error while retrieving the entire schedule: '+err);
+        }
+    }
+
 }
