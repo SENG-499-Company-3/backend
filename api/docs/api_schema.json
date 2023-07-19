@@ -476,7 +476,7 @@
         "type": "object"
       },
       "schedule": {
-        "required": ["assignments", "complete", "valid", "reward", "iterations", "c_hat", "quality"],
+        "required": ["assignments", "complete", "valid"],
         "type": "object",
         "properties": {
           "assignments": {
@@ -495,18 +495,6 @@
           "complete": {
             "type": "boolean",
             "nullable": true
-          },
-          "reward": {
-            "type": "float"
-          },
-          "iterations": {
-            "type": "integer"
-          },
-          "c_hat": {
-            "type": "float"
-          },
-          "quality": {
-            "type": "float"
           }
         }
       },
@@ -526,7 +514,10 @@
             "$ref": "#/components/schemas/inputdata_professors"
           },
           "dimensions": {
-            "$ref": "#/components/schemas/inputdata_dimensions"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inputdata_dimensions"
+            }
           },
           "preferences": {
             "type": "array",
@@ -540,7 +531,10 @@
           "loads": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
             }
           },
           "availabilities": {
@@ -553,9 +547,6 @@
             }
           },
           "p_tgt": {
-            "type": "integer"
-          },
-          "max_iter": {
             "type": "integer"
           }
         }
