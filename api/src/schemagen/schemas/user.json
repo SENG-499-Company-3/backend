@@ -24,7 +24,7 @@
     {
       "required": [
         "name",
-        "userrole"
+        "role"
       ],
       "type": "object",
       "properties": {
@@ -32,7 +32,7 @@
           "type": "string",
           "example": "User name"
         },
-        "userrole": {
+        "role": {
           "type": "string",
           "description": "User roles",
           "enum": [

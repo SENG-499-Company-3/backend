@@ -54,13 +54,13 @@ describe('ScheduleController', () => {
         it('Should get this users schedule', async() => {
             const scheduleController = new ScheduleController();
             const userController = new UserController();
-            const email = 'tony@gmail.com';
+            const email = 'tony@email.com';
             const response_uc = await userController.create(email, 'test', 'test', 'TEACHER');
-            const schedules_empty = await scheduleController.my(email);
+            const schedules_empty = await scheduleController.my("Stank, Tony");
             expect(schedules_empty.length).toBe(0);
 
             const response_sc = await scheduleController.create();
-            const schedules = await scheduleController.my(email);
+            const schedules = await scheduleController.my("Stank, Tony");
             expect(schedules.length).toBeGreaterThan(0);
 
         });

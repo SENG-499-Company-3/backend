@@ -3,6 +3,7 @@ import { UserController } from '../controllers/user.controller';
 import { validate } from 'express-jsonschema';
 import bodyParser from 'body-parser';
 import user from '../schemagen/schemas/user.json';
+import { isAdmin } from '../helpers/auth';
 
 const router = express.Router();
 const userController: UserController = new UserController();
@@ -42,13 +43,55 @@ router.post('/create', validate({ body: user }), create);
  */
 const list = async (req, res) => {
   try {
-    const response = await userController.list();
+    let users = await userController.list();
 
-    res.status(200).send(response);
+    users = users.filter(function (user) {
+      user.password = undefined;
+      user.token = undefined;
+      return true;
+
+    });
+
+    res.status(200).send(users);
   } catch (err) {
     res.status(401).send({ message: err });
   }
 };
 router.get('/list', list);
+
+
+//get user by id
+const byId = async (req, res) => {
+  if(!req.headers.authorization) 
+  {
+      res.status(401).send({ message: "This endpoint requires authorization header."});
+      return;
+  }
+  const authToken = req.headers.authorization;
+  const isAdm = await isAdmin(authToken);
+  if(!isAdm) 
+  {
+      res.status(401).send({message: "Need admin access."});
+      return;
+  }
+  
+  if(!req.query.id)
+  {
+    res.status(400).send({message: "Need to provide user id in url"});
+    return;
+  }
+  try{
+    let user = await userController.byId(req.query.id);
+    user.password = undefined;
+    res.status(200).send(user);
+  } catch(err) {
+    res.status(401).send({messge: err});
+  }
+}
+
+router.get('', byId);
+
+
+
 
 module.exports = router;
