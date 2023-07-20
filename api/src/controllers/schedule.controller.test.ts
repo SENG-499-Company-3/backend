@@ -60,7 +60,7 @@ describe('ScheduleController', () => {
             expect(schedules_empty.length).toBe(0);
 
             const response_sc = await scheduleController.create();
-            const schedules = await scheduleController.my("Stank, Tony");
+            const schedules = await scheduleController.my("Michael Zastre");
             expect(schedules.length).toBeGreaterThan(0);
 
         });
