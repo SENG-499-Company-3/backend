@@ -21,19 +21,22 @@ export class TeacherPrefController
      * @return {*} {Promise<void>}
      * @memberof TeacherPrefController
      */
-    async update(email: string, courses: string[], start: string, end: string, peng: string): Promise<void>
+    async update(uid: string, email: string, courses: string[], start: string, end: string, peng: string): Promise<void>
     {
 
         try
         {
             //try finding the teacher's current preference
-            
+            let time = new Date();
+            let time_local = time.toLocaleString("en-CA", {timeZone: "America/Vancouver"});
             const pref = new TeacherPref({
+                _id: uid,
                 email: email,
                 courses: courses,
                 start: start,
                 end: end,
-                peng: peng
+                peng: peng,
+                last_updated: time_local
             });
             const pref_curr = await TeacherPref.findOne({email: email}).catch((err) => err);
             if(!pref_curr) //insert if doesn't exist
@@ -78,7 +81,7 @@ export class TeacherPrefController
      * @returns {Promise<ITeacherPref>}
      * @memberof TeacherPrefController
      */
-    async my(email: string): Promise<ITeacherPref>
+    async my(email: string, uid): Promise<ITeacherPref>
     {
 
         try
@@ -86,10 +89,25 @@ export class TeacherPrefController
             const teacherPref: ITeacherPref = await TeacherPref.findOne({email: email}).catch((err) => err);
             if(!teacherPref) //if it doesn't exist, create one
             {
-                await this.update(email, [""], "08:30", "22:00", "false");
+                await this.update(uid, email, [""], "08:30", "22:00", "false");
             }
             const teacherPref2: ITeacherPref= await TeacherPref.findOne({email: email}).catch((err) => err);
             return teacherPref2;
+        } catch(err)
+        {
+            throw new Error('Error while retrieving your preferences');
+        }
+    }
+
+    //get teacher pref by id
+    async byId(uid: string): Promise<ITeacherPref>
+    {
+
+        try
+        {
+            const teacherPref: ITeacherPref = await TeacherPref.findOne({_id: uid}).catch((err) => err);
+            if(!teacherPref) throw new Error('No user prefernces for specified user found');
+            return teacherPref;
         } catch(err)
         {
             throw new Error('Error while retrieving your preferences');

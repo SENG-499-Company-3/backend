@@ -40,20 +40,24 @@ export class ScheduleController {
     }
   }
 
-  /**
-   * Retrieves the schedule of the teacher to whom the authToken belongs to
-   * @param {string} email
-   * @return {*}  {Promise<ISchedule[]>}
-   * @memberof ScheduleController
-   */
-  async my(email: string): Promise<ISchedule[]> {
-    try {
-      const schedules: ISchedule[] = await Schedule.find({ email: email }).catch((err) => err);
-      return schedules;
-    } catch (err) {
-      throw new Error('Error while retrieving your schedule');
+    /**
+     * Retrieves the schedule of the teacher to whom the authToken belongs to
+     * @param {string} name
+     * @return {*}  {Promise<ISchedule[]>}
+     * @memberof ScheduleController
+     */
+    async my(name: string): Promise<ISchedule[]>
+    {
+        try 
+        {
+            const schedules: ISchedule[] = await Schedule.find({Instructor: name}).catch((err) => err);
+            return schedules;
+        } catch (err)
+        {
+            throw new Error('Error while retrieving your schedule');
+        }
     }
-  }
+  
 
   /**
    * trigger the algorithm to create a schedule
@@ -100,4 +104,31 @@ export class ScheduleController {
 
     return response.data.valid;
   }
+    
+
+    /**
+     * Replaces the entire schedule by the one provided
+     * @param {ISchedule[]} schedules
+     * @param {string} numSchedules
+     * @return {*} 
+     * @memberof ScheduleController
+     */
+    async update(schedules: ISchedule[], numSchedules: number): Promise<void>
+    {
+
+        try 
+        {
+            //delete current schedule and insert the new one
+            await Schedule.deleteMany();
+            for(let i = 0; i < numSchedules ; i++)
+            {
+                const s = new Schedule(schedules[i]);
+                await s.save(s).catch((err) => err);
+            }
+        } catch (err)
+        {
+            throw new Error('Error while retrieving the entire schedule: '+err);
+        }
+    }
+
 }
