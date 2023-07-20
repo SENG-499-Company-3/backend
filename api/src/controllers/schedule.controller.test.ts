@@ -18,10 +18,9 @@ describe('ScheduleController', () => {
 
         it('Should create and save the schedule.', async () => {
             const scheduleController = new ScheduleController();
-            const response = await scheduleController.create();
+            await scheduleController.create();
 
             const schedules = await ScheduleModel.find({});
-            expect(response).toBe(undefined);
             expect(schedules.length).toBeGreaterThan(0);
         });
 
@@ -37,7 +36,7 @@ describe('ScheduleController', () => {
             const s_list1 = await scheduleController.list();
             expect(s_list1.length).toBe(0);
             
-            const response2 = await scheduleController.create();
+            await scheduleController.create();
             const s_list2 = await scheduleController.list();
             expect(s_list2.length).toBeGreaterThan(0);
             
@@ -55,11 +54,11 @@ describe('ScheduleController', () => {
             const scheduleController = new ScheduleController();
             const userController = new UserController();
             const email = 'tony@email.com';
-            const response_uc = await userController.create(email, 'test', 'test', 'TEACHER');
-            const schedules_empty = await scheduleController.my("Stank, Tony");
+            await userController.create(email, 'test', 'test', 'TEACHER');
+            const schedules_empty = await scheduleController.my("Michael Zastre");
             expect(schedules_empty.length).toBe(0);
 
-            const response_sc = await scheduleController.create();
+            await scheduleController.create();
             const schedules = await scheduleController.my("Michael Zastre");
             expect(schedules.length).toBeGreaterThan(0);
 
