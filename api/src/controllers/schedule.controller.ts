@@ -76,7 +76,11 @@ export class ScheduleController {
     const genSchedule = new generatedSchedule({
       assignments: response.data.assignments,
       valid: response.data.valid,
-      complete: response.data.complete
+      complete: response.data.complete,
+      reward: response.data.reward,
+      iterations: response.data.iterations,
+      c_hat: response.data.c_hat,
+      quality: response.data.quality
     });
 
     var id = genSchedule._id;
@@ -84,7 +88,7 @@ export class ScheduleController {
     await genSchedule
       .save()
       .then((res) => id = res._id)
-      .error((err) => console.log('err', err));
+      .catch((err) => console.log('err', err));
 
     return id;
   }
