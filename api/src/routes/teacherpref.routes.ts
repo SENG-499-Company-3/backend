@@ -21,7 +21,7 @@ const update = async (req, res) => {
     res.status(400).send({ message: 'This endpoint requires authorization header.' });
     return;
   }
-  if (!req.body.email || !req.body.courses || !req.body.start || !req.body.end || !req.body.peng) {
+  if (!req.body._id || !req.body.email || !req.body.courses || !req.body.start || !req.body.end ) {
     res.status(400).send({ message: 'Need to provide all information to update teacher preference.' });
     return;
   }

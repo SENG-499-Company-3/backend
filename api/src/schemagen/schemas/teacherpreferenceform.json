@@ -6,7 +6,7 @@
       "type": "string"
     },
     "peng": {
-      "type": "string",
+      "type": "boolean",
       "description": "Professional Engineer certified"
     },
     "courses": {
