@@ -12,7 +12,7 @@ import { hashPassword } from './auth';
 // Create data for previous enrolment
 export async function create_schedule() {
   courseScheduleData.forEach(async (data, index) => {
-    Schedule.findOne({ course: data.course, term: data.term }).then(async (schedule: any) => {
+    Schedule.findOne({ course: data.Subj, term: data.Term }).then(async (schedule: any) => {
       if (!schedule) {
         Schedule.create(data)
           .then(() => {
