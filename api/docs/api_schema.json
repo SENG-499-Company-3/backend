@@ -514,10 +514,7 @@
             "$ref": "#/components/schemas/inputdata_professors"
           },
           "dimensions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/inputdata_dimensions"
-            }
+            "$ref": "#/components/schemas/inputdata_dimensions"
           },
           "preferences": {
             "type": "array",
@@ -531,10 +528,7 @@
           "loads": {
             "type": "array",
             "items": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
+              "type": "integer"
             }
           },
           "availabilities": {
@@ -547,6 +541,9 @@
             }
           },
           "p_tgt": {
+            "type": "integer"
+          },
+          "max_iter": {
             "type": "integer"
           }
         }
