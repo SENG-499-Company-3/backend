@@ -11,6 +11,9 @@ afterEach(async () => await tempdb.clearDatabase());
 afterAll(async () => await tempdb.closeDatabase());
 
 describe('ScheduleController', () => {
+    describe('empty', () => {
+        expect(0).toBe(0);
+    });
     // describe('create', () => {
     //     beforeEach(() => {
     //         sinon.restore();
