@@ -19,6 +19,7 @@ describe('TeacherPrefController', () => {
             const teacherPrefController = new TeacherPrefController();
             const email = 'test@gmail.com';
             const response = await teacherPrefController.update(
+                "abcd",
                 email, 
                 ["CSC 110", "CSC 111"],
                 "08:30",
@@ -38,6 +39,7 @@ describe('TeacherPrefController', () => {
             const teacherPrefController = new TeacherPrefController();
             const email = 'test@gmail.com';
             const response = await teacherPrefController.update(
+                "abcd",
                 email, 
                 ["CSC 110", "CSC 111"],
                 "08:30",
@@ -45,6 +47,7 @@ describe('TeacherPrefController', () => {
                 "true"
             );
             const response2 = await teacherPrefController.update(
+                "abcd",
                 email, 
                 ["CSC 110", "CSC 111"],
                 "08:30",
@@ -73,6 +76,7 @@ describe('TeacherPrefController', () => {
         it('should get list of teacher pref', async () => {
             const teacherPrefController = new TeacherPrefController();
             const response = await teacherPrefController.update(
+                "abcd",
                 'test@email.com', 
                 ["CSC 110", "CSC 111"],
                 "08:30",
@@ -83,6 +87,7 @@ describe('TeacherPrefController', () => {
             expect(prefList1.length).toBe(1);
             
             const response2 = await teacherPrefController.update(
+                "abcd",
                 'test2@email.com', 
                 ["CSC 110", "CSC 111"],
                 "08:30",
@@ -103,20 +108,21 @@ describe('TeacherPrefController', () => {
 
         it('should get my pref even if it hasnt been created', async () => {
             const teacherPrefController = new TeacherPrefController();
-            const myPref = await teacherPrefController.my('test@email.com');
+            const myPref = await teacherPrefController.my('test@email.com', "abcd");
             expect(myPref).toBeDefined();
         });
 
         it('should get my pref if it hasnt been created', async () => {
             const teacherPrefController = new TeacherPrefController();
             const resp = await teacherPrefController.update(
+                "abcd",
                 'test@email.com', 
                 ["CSC 110", "CSC 111"],
                 "08:30",
                 "15:00",
                 "true"
             );
-            const myPref = await teacherPrefController.my('test@email.com');
+            const myPref = await teacherPrefController.my('test@email.com', "abcd");
             expect(myPref).toBeDefined();
         });
 
