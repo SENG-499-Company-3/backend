@@ -28,7 +28,7 @@ const create = async (req, res) => {
   try {
     const response = await userController.create(email, password, name, role);
 
-    res.status(200).send(response);
+    res.status(200).send("Created user. ");
   } catch (err) {
     res.status(401).send({ message: err });
   }

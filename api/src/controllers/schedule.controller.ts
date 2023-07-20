@@ -22,6 +22,7 @@ export class ScheduleController {
     try {
       await create_schedule(); //creates mock schedule
     } catch (err) {
+      console.log("Error creating schedule");
       throw new Error('Error creating schedule.');
     }
   }
