@@ -55,7 +55,7 @@ export class ScheduleController {
     {
 
       //get days, begin, and end
-      const times = time_mapping[asg[1]%15].split(" ");
+      const times = time_mapping[asg[1]%16].split(" ");
       const days = times[0];
       let begin = times[1];
       begin = begin.replace(':', '');
