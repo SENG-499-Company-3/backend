@@ -37,6 +37,7 @@ export const algo1_testData = [
     preferences: [[0]],
     loads: [[0]],
     availabilities: [[0]],
-    p_tgt: 0
+    p_tgt: 0,
+    max_iter: 0,
   }
 ];
