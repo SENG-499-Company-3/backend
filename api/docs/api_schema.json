@@ -475,6 +475,24 @@
         "required": ["valid"],
         "type": "object"
       },
+      "assignment": {
+        "required": ["course", "prof", "timeslot", "room"],
+        "type": "object",
+        "properties": {
+          "course": {
+            "$ref": "#/components/schemas/inputdata_courses"
+          },
+          "prof": {
+            "$ref": "#/components/schemas/inputdata_professors"
+          },
+          "timeslot": {
+            "$ref": "#/components/schemas/inputdata_timeslots"
+          },
+          "room": {
+            "$ref": "#/components/schemas/inputdata_rooms"
+          }
+        }
+      },
       "schedule": {
         "required": ["assignments", "complete", "valid", "reward", "iterations", "c_hat", "quality"],
         "type": "object",
@@ -482,10 +500,7 @@
           "assignments": {
             "type": "array",
             "items": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
+              "$ref": "#/components/schemas/assignment"
             }
           },
           "valid": {
