@@ -763,22 +763,14 @@
           "course": {
             "type": "string"
           },
-          "term": {
+          "Term": {
+            "type" : "array",
+            "items" : {
+              "type" : "integer"
+            }
+          },
+          "Year": {
             "type" : "integer"
-          },
-          "prereq": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "coreq": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
           },
           "pastEnrol": {
             "type": "array",
@@ -808,12 +800,6 @@
           },
           "size": {
             "type": "integer"
-          },
-          "constraints": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "term": {
             "type": "integer"
