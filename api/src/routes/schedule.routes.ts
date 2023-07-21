@@ -1,4 +1,8 @@
 import express from 'express';
+import { validate as validateEndpoint } from 'express-jsonschema';
+import { validate } from 'jsonschema';
+import inputData from '../schemagen/schemas/inputdata.json';
+import schedule from '../schemagen/schemas/schedule.json';
 import { ScheduleController } from '../controllers/schedule.controller';
 import { isAdmin, getEmail } from '../helpers/auth';
 
@@ -25,13 +29,15 @@ const create = async (req, res) => {
   }
   try {
     await scheduleController.create();
-    res.status(200).send('Created schedule.');
+    // TODO clearly not following spec
+    res.status(200).send(validate(schedule, 'Created schedule.'));
   } catch (err) {
     res.status(401).send({ message: err });
   }
 };
-router.get('/create', create);
+router.get('/create', validateEndpoint({body: inputData}), create);
 
+// TODO Pretty sure this is depreciated
 /**
  * Admin list entire schedule
  * Get the entire schedule that has been created from the database
@@ -59,6 +65,7 @@ const list = async (req, res) => {
 };
 router.get('/list', list);
 
+// TODO Pretty sure this is depreciated
 /** teacher: get my schedule
  *  * @param {*} req
  * @param {*} res
@@ -81,6 +88,7 @@ const my = async (req, res) => {
 };
 router.get('/my', my);
 
+// TODO add to api_schema.jso
 /**
  * Admin: triggers build schedule
  *
@@ -97,6 +105,7 @@ const generate_trigger = async (req, res) => {
 };
 router.get('/generate_trigger', generate_trigger);
 
+// TODO add to api_schema.jso
 /**
  * Admin: triggers validate schedule
  *
@@ -104,14 +113,14 @@ router.get('/generate_trigger', generate_trigger);
  * @param {*} res
  */
 const validate_trigger = async (req, res) => {
-    const id = req.param.id;
-    try {
-      const response = await scheduleController.validate(id);
-      res.status(200).send(response);
-    } catch (err) {
-      res.status(401).send({ message: err });
-    }
-  };
-  router.get('/validate_trigger', validate_trigger);
+  const id = req.param.id;
+  try {
+    const response = await scheduleController.validate(id);
+    res.status(200).send(response);
+  } catch (err) {
+    res.status(401).send({ message: err });
+  }
+};
+router.get('/validate_trigger', validate_trigger);
 
 module.exports = router;
