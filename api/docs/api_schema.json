@@ -514,16 +514,28 @@
         "type": "object",
         "properties": {
           "rooms": {
-            "$ref": "#/components/schemas/inputdata_rooms"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inputdata_rooms"
+            }
           },
           "timeslots": {
-            "$ref": "#/components/schemas/inputdata_timeslots"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inputdata_timeslots"
+            }
           },
           "courses": {
-            "$ref": "#/components/schemas/inputdata_courses"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inputdata_courses"
+            }
           },
           "professors": {
-            "$ref": "#/components/schemas/inputdata_professors"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inputdata_professors"
+            }
           },
           "dimensions": {
             "$ref": "#/components/schemas/inputdata_dimensions"
