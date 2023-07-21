@@ -22,6 +22,9 @@ export class ScheduleController {
    */
   async create(): Promise<void> {
     try {
+      
+
+
       // await create_schedule(); //creates mock schedule\
       const algo1_output = await this.trigger();
       const assignments = algo1_output.assignments;
@@ -50,18 +53,34 @@ export class ScheduleController {
     let schedules: ISchedule[] = [];
     for(var asg of assignments)
     {
+      //get days, begin, and end
+      const times = time_mapping[asg[1]%15].split(" ");
+      const days = times[0];
+      let begin = times[1];
+      begin = begin.replace(':', '');
+      let begin_num = parseInt(begin);
+      let end = times[2];
+      end = end.replace(':', '');
+      let end_num = parseInt(end);
+
+      //get subj and num
+      const subj_full = course_mapping[asg[0]%62].split(" ");
+      const subj = subj_full[0];
+      const num = subj_full[1];
+      const num_n = parseInt(num);
+
       let s: ISchedule = {
         Term: 1,
-        Subj: course_mapping[asg[0]],
-        Num: 110,
+        Subj: subj,
+        Num: num_n,
         Section: "A01",
         Title: "Programming practices",
         SchedType: "LEC",
-        Instructor: teacher_mapping[asg[2]],
+        Instructor: teacher_mapping[asg[2]%13],
         Bldg: "ECS",
         Room: "116",
-        Begin: 1100,
-        End: 1200,
+        Begin: begin_num,
+        End: end_num,
         Days: "MTh",
         StartDate: "Sep 7, 2023",
         EndDate: "Dec 16, 2023",
