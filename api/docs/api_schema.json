@@ -757,7 +757,7 @@
         }
       },
       "class_size_prediction_inner": {
-        "required": ["coreq", "course", "term","pastEnrol", "prereq"],
+        "required": ["course", "Term","Year","pastEnrollment"],
         "type": "object",
         "properties": {
           "course": {
@@ -772,7 +772,7 @@
           "Year": {
             "type" : "integer"
           },
-          "pastEnrol": {
+          "pastEnrollment": {
             "type": "array",
             "items": {
               "required": ["size", "term", "year"],
