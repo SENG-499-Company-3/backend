@@ -53,6 +53,7 @@ export class ScheduleController {
     let schedules: ISchedule[] = [];
     for(var asg of assignments)
     {
+
       //get days, begin, and end
       const times = time_mapping[asg[1]%15].split(" ");
       const days = times[0];
@@ -64,7 +65,7 @@ export class ScheduleController {
       let end_num = parseInt(end);
 
       //get subj and num
-      const subj_full = course_mapping[asg[0]%62].split(" ");
+      const subj_full = course_mapping[asg[0]%100].split(" ");
       const subj = subj_full[0];
       const num = subj_full[1];
       const num_n = parseInt(num);
@@ -76,12 +77,12 @@ export class ScheduleController {
         Section: "A01",
         Title: "Programming practices",
         SchedType: "LEC",
-        Instructor: teacher_mapping[asg[2]%13],
+        Instructor: teacher_mapping[asg[2]%120],
         Bldg: "ECS",
-        Room: "116",
+        Room: "xxx",
         Begin: begin_num,
         End: end_num,
-        Days: "MTh",
+        Days: days,
         StartDate: "Sep 7, 2023",
         EndDate: "Dec 16, 2023",
         Cap: 50
