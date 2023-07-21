@@ -4,7 +4,10 @@ import { validate } from 'jsonschema';
 import inputData from '../schemagen/schemas/inputdata.json';
 import schedule from '../schemagen/schemas/schedule.json';
 import { ScheduleController } from '../controllers/schedule.controller';
-import { isAdmin, getEmail } from '../helpers/auth';
+import { isAdmin, getName } from '../helpers/auth';
+import { ISchedule } from '../interfaces/Schedule';
+const Schedule = require('../models/schedule.model');
+
 
 const router = express.Router();
 const scheduleController: ScheduleController = new ScheduleController();
@@ -65,28 +68,6 @@ const list = async (req, res) => {
 };
 router.get('/list', list);
 
-// TODO Pretty sure this is depreciated
-/** teacher: get my schedule
- *  * @param {*} req
- * @param {*} res
- * @return {*} ISchedule[]
- */
-const my = async (req, res) => {
-  if (!req.headers.authorization) {
-    res.status(401).send({ message: 'This endpoint requires authorization header.' });
-    return;
-  }
-  const authToken = req.headers.authorization;
-
-  try {
-    const email = await getEmail(authToken);
-    const response = await scheduleController.my(email);
-    res.status(200).send(response);
-  } catch (err) {
-    res.status(401).send({ message: err });
-  }
-};
-router.get('/my', my);
 
 // TODO add to api_schema.jso
 /**
@@ -113,14 +94,77 @@ router.get('/generate_trigger', generate_trigger);
  * @param {*} res
  */
 const validate_trigger = async (req, res) => {
-  const id = req.param.id;
-  try {
-    const response = await scheduleController.validate(id);
-    res.status(200).send(response);
-  } catch (err) {
-    res.status(401).send({ message: err });
-  }
+    const id = req.param.id;
+    try {
+      const response = await scheduleController.validate(id);
+      res.status(200).send(response);
+    } catch (err) {
+      res.status(401).send({ message: err });
+    }
 };
 router.get('/validate_trigger', validate_trigger);
+
+
+/** teacher: get my schedule
+ *  * @param {*} req
+ * @param {*} res
+ * @return {*} ISchedule[]
+*/
+const my = async (req, res) => {
+    if(!req.headers.authorization)
+    {
+        res.status(401).send({ message: "This endpoint requires authorization header."});
+        return;
+    }
+    const authToken = req.headers.authorization;
+
+    try
+    {
+        const userName = await getName(authToken);
+        const response = await scheduleController.my(userName);
+        res.status(200).send(response);
+    } catch (err)
+    {
+        res.status(401).send({message: err});
+    }
+}
+router.get('/my', my);
+
+
+/**
+ * Admin: update the entire schedule
+ * @param {*} req
+ * @param {*} res
+ * @return {*} 
+*/
+const update = async (req, res) => {
+    if(!req.headers.authorization) 
+    {
+        res.status(401).send({ message: "This endpoint requires authorization header."});
+        return;
+    }
+    const authToken = req.headers.authorization;
+    const isAdm = await isAdmin(authToken);
+    if(!isAdm)
+    {
+        res.status(401).send({message: "Need admin access."});
+        return;
+    }
+    try
+    {
+        let schedules = {} as ISchedule[];
+        const numSchedules = req.body.length;
+        for(let i = 0; i < numSchedules; i++)
+        {
+            schedules[i] = <ISchedule>req.body[i];
+        }
+        await scheduleController.update(schedules, numSchedules);
+        res.status(200).send({message: "Updated schedule."});
+    } catch (err)
+    {
+        res.status(401).send({message: "Error creating schedule: " + err});
+    }
+}
+router.get('/update', update);
 
 module.exports = router;

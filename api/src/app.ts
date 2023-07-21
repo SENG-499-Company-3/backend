@@ -1,14 +1,16 @@
 import cors from 'cors';
 import morgan from 'morgan';
 import express from 'express';
-import { courseData2023 } from './models/data/courseData';
-import { create_professors } from './helpers/createMockData';
+import { create_professors, create_schedule, create_teacher_pref } from './helpers/createMockData';
 
 const user = require('./routes/user.routes');
 const auth = require('./routes/auth.routes');
 const schedule = require('./routes/schedule.routes');
 const teacherPref = require('./routes/teacherpref.routes');
 const predictSchedule = require('./routes/predictSchedule.routes');
+const course = require('./routes/course.routes');
+const classroom = require('./routes/classroom.routes');
+
 
 const app = express();
 
@@ -40,22 +42,18 @@ db.mongoose
 
 create_professors();
 
-// // Create data for previous enrolment
-// const Schedule = require('./models/classSizePrediction.model');
-// Schedule.findOne({ course: courseData2023[0].course }).then((course) => {
-//   if (!course) {
-//     courseData2023.forEach((data) => {
-//       Schedule.create(data);
-//     });
-//     console.log('Courses created!');
-//   }
-// });
+create_schedule();
+
+create_teacher_pref();
 
 app.use('/user', user);
 app.use('/auth', auth);
 app.use('/schedule', schedule);
 app.use('/teacherpref', teacherPref);
 app.use('/schedule', predictSchedule);
+app.use('/course', course);
+app.use('/classrooms', classroom)
+
 
 // Global error handling
 // eslint-disable-next-line no-unused-vars

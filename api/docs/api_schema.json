@@ -476,7 +476,7 @@
         "type": "object"
       },
       "schedule": {
-        "required": ["assignments", "complete", "valid"],
+        "required": ["assignments", "complete", "valid", "reward", "iterations", "c_hat", "quality"],
         "type": "object",
         "properties": {
           "assignments": {
@@ -495,6 +495,18 @@
           "complete": {
             "type": "boolean",
             "nullable": true
+          },
+          "reward": {
+            "type": "float"
+          },
+          "iterations": {
+            "type": "integer"
+          },
+          "c_hat": {
+            "type": "float"
+          },
+          "quality": {
+            "type": "float"
           }
         }
       },
@@ -502,22 +514,31 @@
         "type": "object",
         "properties": {
           "rooms": {
-            "$ref": "#/components/schemas/inputdata_rooms"
-          },
-          "timeslots": {
-            "$ref": "#/components/schemas/inputdata_timeslots"
-          },
-          "courses": {
-            "$ref": "#/components/schemas/inputdata_courses"
-          },
-          "professors": {
-            "$ref": "#/components/schemas/inputdata_professors"
-          },
-          "dimensions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/inputdata_dimensions"
+              "$ref": "#/components/schemas/inputdata_rooms"
             }
+          },
+          "timeslots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inputdata_timeslots"
+            }
+          },
+          "courses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inputdata_courses"
+            }
+          },
+          "professors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inputdata_professors"
+            }
+          },
+          "dimensions": {
+            "$ref": "#/components/schemas/inputdata_dimensions"
           },
           "preferences": {
             "type": "array",
@@ -531,10 +552,7 @@
           "loads": {
             "type": "array",
             "items": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
+              "type": "integer"
             }
           },
           "availabilities": {
@@ -547,6 +565,9 @@
             }
           },
           "p_tgt": {
+            "type": "integer"
+          },
+          "max_iter": {
             "type": "integer"
           }
         }

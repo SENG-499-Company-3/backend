@@ -1,0 +1,33 @@
+{
+    "type": "object",
+    "required": ["Subj", "Num", "Section", "Title", "SchedType", "Type", "Cap"],
+    "properties": {
+      "Subj": {
+        "type": "string",
+        "example": "CSC"
+      },
+      "Num": {
+        "type": "number"
+      },
+      "Section": {
+        "type": "string"
+      },
+      "Title": {
+        "type": "string"
+      }
+      ,
+      "SchedType": {
+        "type": "string"
+      },
+      "Type": {
+        "type": "string",
+        "example": "CORE"
+      },
+      "Cap": {
+        "type": "number"
+      }
+      
+    },
+    "$schema": "http://json-schema.org/schema#"
+  }
+  
