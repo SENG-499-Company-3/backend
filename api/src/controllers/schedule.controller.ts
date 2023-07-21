@@ -46,9 +46,9 @@ export class ScheduleController {
   //converts assignments[][] to list of schedules
   async asg_to_schedule(assignments: number[][]): Promise<ISchedule[]>
   {
-    const course_mapping = algo1_mapping.courses;
-    const time_mapping = algo1_mapping.timeslots;
-    const teacher_mapping = algo1_mapping.teacher;
+    const course_mapping = algo1_mapping.courses.items;
+    const time_mapping = algo1_mapping.timeslots.items;
+    const teacher_mapping = algo1_mapping.teacher.items;
 
     let schedules: ISchedule[] = [];
     for(var asg of assignments)

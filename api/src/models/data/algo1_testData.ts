@@ -1,6 +1,6 @@
 export const algo1_mapping = 
   {
-    courses: [
+    courses: { items: [
       "ECE 111", "ECE 112", "ECE 113", 
       "ECE 114", "ECE 115", "ECE 116", 
       "ECE 117", "ECE 118", "ECE 119", 
@@ -34,8 +34,8 @@ export const algo1_mapping =
       "SCI 111", "SCI 112", "SCI 113", 
       "SCI 114", "SCI 115", "SCI 116", 
       "SCI 117", "SCI 118", "SCI 119",
-  ],
-  timeslots: [
+  ]},
+  timeslots: {items: [
     'MR 08:30 09:50', //A
     'MR 10:00 11:20', //B
     'MR 11:30 12:50', //C
@@ -51,8 +51,8 @@ export const algo1_mapping =
     'TWF 13:30 14:20', //M
     'TF 14:30 16:30', //N
     'TR 16:30 17:50', //O
-  ],
-  teacher: [
+  ]},
+  teacher: {items: [
     "Michael Zastre", "John Doe", "Albus Dumbledore", "Nik Fury", 
     "Bill Gates", "Steve Jobs", "Malcom Merlin", "Barry Allen",
     "Michael Adams", "Harry Potter", "James Potter", "Marry Jane", 
@@ -83,7 +83,7 @@ export const algo1_mapping =
     "Peter Parker5", "Abby Gale5", "Eddie Brock5", "Mark Laidlaw5", 
     "Joe West5", "Joe Laidlaw5", "Chris Prat5", "Peter Roso5", 
     "James Holmes5", "Anna Holmes5", "Albus Peterson5", "John Peterson5",
-  ]
+  ]}
 
     
   };
