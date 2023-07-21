@@ -2,7 +2,11 @@
   "required": [
     "assignments",
     "complete",
-    "valid"
+    "valid",
+    "reward",
+    "iterations",
+    "c_hat",
+    "quality"
   ],
   "type": "object",
   "properties": {
@@ -22,6 +26,18 @@
     "complete": {
       "type": "boolean",
       "nullable": true
+    },
+    "reward": {
+      "type": "float"
+    },
+    "iterations": {
+      "type": "integer"
+    },
+    "c_hat": {
+      "type": "float"
+    },
+    "quality": {
+      "type": "float"
     }
   },
   "$schema": "http://json-schema.org/schema#"

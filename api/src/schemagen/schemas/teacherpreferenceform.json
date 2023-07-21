@@ -1,34 +1,92 @@
 {
+  "required": [
+    "courses",
+    "peng",
+    "userId"
+  ],
   "type": "object",
-  "required": ["_id","peng", "courses", "email", "start", "end"],
   "properties": {
-    "_id": {
-      "type": "string"
-    },
     "peng": {
       "type": "boolean",
       "description": "Professional Engineer certified"
     },
+    "userId": {
+      "allOf": [
+        {
+          "required": [
+            "email",
+            "password"
+          ],
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "format": "email",
+              "example": "user@email.com"
+            },
+            "password": {
+              "type": "string",
+              "description": "password hashed in db",
+              "format": "password",
+              "example": "password"
+            }
+          },
+          "$schema": "http://json-schema.org/schema#"
+        },
+        {
+          "required": [
+            "name",
+            "userrole"
+          ],
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "User name"
+            },
+            "userrole": {
+              "type": "string",
+              "description": "User roles",
+              "enum": [
+                "ADMIN",
+                "TEACHER"
+              ],
+              "$schema": "http://json-schema.org/schema#"
+            }
+          }
+        }
+      ],
+      "$schema": "http://json-schema.org/schema#",
+      "type": "object"
+    },
     "courses": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "description": "Course name",
-        "example": "Introduction to Python"
-      }
-    },
-    "email": {
-      "type": "string",
-      "format": "email",
-      "example": "user@email.com"
-    },
-    "start": {
-      "type": "string",
-      "description": "Start date of the course"
-    },
-    "end": {
-      "type": "string",
-      "description": "End date of the course"
+      "required": [
+        "code",
+        "subject",
+        "term"
+      ],
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "description": "Course subject, e.g. SENG, CSC"
+        },
+        "code": {
+          "type": "string",
+          "description": "Course code, e.g. 499,310"
+        },
+        "term": {
+          "type": "string",
+          "description": "Term course is offered in",
+          "enum": [
+            "FALL",
+            "SPRING",
+            "SUMMER"
+          ],
+          "$schema": "http://json-schema.org/schema#"
+        }
+      },
+      "$schema": "http://json-schema.org/schema#"
     }
   },
   "$schema": "http://json-schema.org/schema#"
