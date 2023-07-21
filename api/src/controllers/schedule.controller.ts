@@ -1,7 +1,7 @@
 import { ISchedule } from '../interfaces/Schedule';
-import { create_schedule } from '../helpers/createMockData';
 import axios from 'axios';
 import { algo1_testData } from '../models/data/algo1_testData';
+import { create_schedule } from '../helpers/createMockData';
 
 const Schedule = require('../models/schedule.model');
 const generatedSchedule = require('../models/generatedSchedule.model');
@@ -20,8 +20,9 @@ export class ScheduleController {
    */
   async create(): Promise<void> {
     try {
-      await create_schedule(10); //creates mock schedule
+      await create_schedule(); //creates mock schedule
     } catch (err) {
+      console.log("Error creating schedule");
       throw new Error('Error creating schedule.');
     }
   }
@@ -89,6 +90,7 @@ export class ScheduleController {
       .save()
       .then((res) => id = res._id)
       .catch((err) => console.log('err', err));
+
 
     return id;
   }

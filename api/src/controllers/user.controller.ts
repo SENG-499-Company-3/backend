@@ -2,7 +2,7 @@ import { hashPassword } from '../helpers/auth';
 import { IUser, UserRoles } from '../interfaces/User';
 
 const User = require('../models/user.model');
-const TeacherPref = require('../models/teacherpref.model');
+const teacherPrefSchema = require('../models/teacherpref.model');
 
 /**
  * User Controller
@@ -52,19 +52,15 @@ export class UserController {
     try {
       const users: IUser[] = await User.find().catch((err) => err);
 
-      const usersWithPref = users.map(user => {
+      const teacherPrefs = await teacherPrefSchema.find().catch((err) => err);
+
+      const usersWithPref = users.map((user) => {
         console.log(user);
-        TeacherPref.findOne({ email: user.email }).then((pref) => {
-          if (pref) {
-            return {
-              id: user._id,
-              email: user.email,
-              password: user.password,
-              name: user.name,
-              role: user.role,
-              token: user.token,
-              preferencesSubmitted: true
-            }
+        let pref = false;
+
+        teacherPrefs.forEach((teacherPref) => {
+          if (teacherPref.email === user.email) {
+            pref = true;
           }
         });
 
@@ -75,8 +71,8 @@ export class UserController {
           name: user.name,
           role: user.role,
           token: user.token,
-          preferencesSubmitted: false
-        }
+          preferencesSubmitted: pref
+        } as IUser;
       });
 
       return usersWithPref;
@@ -86,16 +82,15 @@ export class UserController {
     }
   }
 
-
   /**
    * Get user data based on their email
-   * @param {string} email 
+   * @param {string} email
    * @returns {Promise<IUser>}
    */
   async getUser(email: string): Promise<IUser> {
     let user: IUser = {} as IUser;
     user = await User.findOne({ email: email }).catch((err) => err);
-    if (!user) throw new Error("No user associated with given email.");
+    if (!user) throw new Error('No user associated with given email.');
     return user;
   }
 
