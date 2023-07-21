@@ -1,6 +1,8 @@
 import { ISchedule } from '../interfaces/Schedule';
+import { IGeneratedSchedule } from '../interfaces/GeneratedSchedule';
+
 import axios from 'axios';
-import { algo1_testData } from '../models/data/algo1_testData';
+import { algo1_mapping } from '../models/data/algo1_testData';
 import { create_schedule } from '../helpers/createMockData';
 
 const Schedule = require('../models/schedule.model');
@@ -20,54 +22,93 @@ export class ScheduleController {
    */
   async create(): Promise<void> {
     try {
-      await create_schedule(); //creates mock schedule
+      
+
+
+      // await create_schedule(); //creates mock schedule\
+      const algo1_output = await this.trigger();
+      const assignments = algo1_output.assignments;
+
+      //convert schedule into proper form
+      const schedules = await this.asg_to_schedule(assignments);
+      
+      //replace current schedule with the new one schedule in database
+      console.log("Schedule length is " + schedules.length);
+      await this.update(schedules, schedules.length);
+
+
     } catch (err) {
-      console.log("Error creating schedule");
+      console.log("Error creating schedule", err);
       throw new Error('Error creating schedule.');
     }
   }
 
-  /**
-   * Retrieves the entire schedule that was previously created
-   * @return {*}  {Promise<ISchedule[]>}
-   * @memberof ScheduleController
-   */
-  async list(): Promise<ISchedule[]> {
-    try {
-      const schedules: ISchedule[] = await Schedule.find().catch((err) => err);
-      return schedules;
-    } catch (err) {
-      throw new Error('Error while retrieving the entire schedule');
+  //converts assignments[][] to list of schedules
+  async asg_to_schedule(assignments: number[][]): Promise<ISchedule[]>
+  {
+    const course_mapping = algo1_mapping.courses;
+    const time_mapping = algo1_mapping.timeslots;
+    const teacher_mapping = algo1_mapping.teacher;
+
+    let schedules: ISchedule[] = [];
+    for(var asg of assignments)
+    {
+
+      //get days, begin, and end
+      const times = time_mapping[asg[1]%15].split(" ");
+      const days = times[0];
+      let begin = times[1];
+      begin = begin.replace(':', '');
+      let begin_num = parseInt(begin);
+      let end = times[2];
+      end = end.replace(':', '');
+      let end_num = parseInt(end);
+
+      //get subj and num
+      const subj_full = course_mapping[asg[0]%100].split(" ");
+      const subj = subj_full[0];
+      const num = subj_full[1];
+      const num_n = parseInt(num);
+
+      let s: ISchedule = {
+        Term: 1,
+        Subj: subj,
+        Num: num_n,
+        Section: "A01",
+        Title: "Programming practices",
+        SchedType: "LEC",
+        Instructor: teacher_mapping[asg[2]%120],
+        Bldg: "ECS",
+        Room: "xxx",
+        Begin: begin_num,
+        End: end_num,
+        Days: days,
+        StartDate: "Sep 7, 2023",
+        EndDate: "Dec 16, 2023",
+        Cap: 50
+      }
+      console.log("S is: ");
+      console.log(s);
+      schedules.push(s);
+
     }
+
+    return schedules;
+
+
   }
 
-    /**
-     * Retrieves the schedule of the teacher to whom the authToken belongs to
-     * @param {string} name
-     * @return {*}  {Promise<ISchedule[]>}
-     * @memberof ScheduleController
-     */
-    async my(name: string): Promise<ISchedule[]>
-    {
-        try 
-        {
-            const schedules: ISchedule[] = await Schedule.find({Instructor: name}).catch((err) => err);
-            return schedules;
-        } catch (err)
-        {
-            throw new Error('Error while retrieving your schedule');
-        }
-    }
+  
   
 
   /**
    * trigger the algorithm to create a schedule
    *
-   * @return {*}  {Promise<String>}
+   * @return {*}  {Promise<IGeneratedSchedule>}
    * @memberof ScheduleController
    */
-  async trigger(): Promise<String> {
-    const test = algo1_testData[0];
+  async trigger(): Promise<IGeneratedSchedule> {
+    const test = algo1_mapping[0];
 
     const algorithm1IP = process.env.ALGORITHM_1_IP || 'localhost';
     const algorithm1Port = process.env.ALGORITHM_1_PORT || '5000';
@@ -92,7 +133,7 @@ export class ScheduleController {
       .catch((err) => console.log('err', err));
 
 
-    return id;
+    return genSchedule;
   }
 
   /**
@@ -129,11 +170,46 @@ export class ScheduleController {
             for(let i = 0; i < numSchedules ; i++)
             {
                 const s = new Schedule(schedules[i]);
-                await s.save(s).catch((err) => err);
+                await s.save(s).catch((err) => {
+                  console.log("Error saving schedule", err);
+                  return;
+               });
             }
         } catch (err)
         {
             throw new Error('Error while retrieving the entire schedule: '+err);
+        }
+    }
+
+    /**
+   * Retrieves the entire schedule that was previously created
+   * @return {*}  {Promise<ISchedule[]>}
+   * @memberof ScheduleController
+   */
+  async list(): Promise<ISchedule[]> {
+    try {
+      const schedules: ISchedule[] = await Schedule.find().catch((err) => err);
+      return schedules;
+    } catch (err) {
+      throw new Error('Error while retrieving the entire schedule');
+    }
+  }
+
+    /**
+     * Retrieves the schedule of the teacher to whom the authToken belongs to
+     * @param {string} name
+     * @return {*}  {Promise<ISchedule[]>}
+     * @memberof ScheduleController
+     */
+    async my(name: string): Promise<ISchedule[]>
+    {
+        try 
+        {
+            const schedules: ISchedule[] = await Schedule.find({Instructor: name}).catch((err) => err);
+            return schedules;
+        } catch (err)
+        {
+            throw new Error('Error while retrieving your schedule');
         }
     }
 
