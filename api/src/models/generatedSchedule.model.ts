@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 export const generatedScheduleSchema = new Schema(
   {
+    //assignments: list of list that has index of [courses, time slot, teacher]
     assignments: [{ type: Array, required: true, default: [],  }],
     valid: { type: Boolean, required: true },
     complete: { type: Boolean, required: true },
