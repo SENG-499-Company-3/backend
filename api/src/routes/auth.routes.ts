@@ -3,6 +3,7 @@ import { validate as validateEndpoint } from 'express-jsonschema';
 import { validate } from 'jsonschema';
 import bodyParser from 'body-parser';
 import userlogin from '../schemagen/schemas/userlogin.json';
+import type { Userlogin } from '../schemagen/types/userlogin';
 import predicted_class_size from '../schemagen/schemas/predicted_class_size.json';
 import user from '../schemagen/schemas/user.json';
 import jwt from '../schemagen/schemas/jwt.json';
@@ -26,7 +27,7 @@ const login = async (req, res) => {
     res.status(400).send({ message: 'Content can not be empty!' });
   }
 
-  const { email, password } = req.body;
+  const { email, password } : Userlogin = req.body;
 
   try {
     const response = await authController.login(email, password);

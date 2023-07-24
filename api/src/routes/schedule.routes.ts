@@ -110,7 +110,7 @@ router.get('/validate_trigger', validate_trigger);
  * @param {*} res
  * @return {*} ISchedule[]
 */
-const my = async (req, res) => {
+const my = async (req, res)  => {
     if(!req.headers.authorization)
     {
         res.status(401).send({ message: "This endpoint requires authorization header."});

@@ -3,7 +3,8 @@ import { CourseController } from '../controllers/course.controller';
 import { isAdmin, getName } from '../helpers/auth';
 import { validate } from 'express-jsonschema';
 
-import courseValidate from '../schemagen/schemas/course.json';
+import courseValidate from '../schemagen/schemas/courseid.json';
+import type { Courseid as CourseValidate } from '../schemagen/types/courseid';
 
 const router = express.Router();
 const courseController: CourseController = new CourseController();
@@ -48,15 +49,15 @@ router.get('/list', list);
  * @param {*} res 
  * @returns {*}
  */
-const remove = async (req, res) => {
-    if(!req.headers.authorization)
+const remove = async ({headers, course}: {headers: any, course: CourseValidate}, res: any) => {
+    if(!headers.authorization)
     {
         res.status(401).send({ message: "This endpoint requires authorization header."});
         return;
     }
-    const authToken = req.headers.authorization;
+    const authToken = headers.authorization;
     const isAdm = await isAdmin(authToken);
-    if(!isAdm) 
+    if(!isAdm)
     {
         res.status(401).send({message: "Need admin access."});
         return;
@@ -65,13 +66,13 @@ const remove = async (req, res) => {
     try
     {
         const course_remove = new Course({
-            Subj: req.body.Subj,
-            Num: req.body.Num,
-            Section: req.body.Section,
-            Title: req.body.Title,
-            SchedType: req.body.SchedType,
-            Type: req.body.Type,
-            Cap: req.body.Cap 
+            Subj: course.Subj,
+            Num: course.Num,
+            Section: course.Section,
+            Title: course.Title,
+            SchedType: course.SchedType,
+            Type: course.Type,
+            Cap: course.Cap
           });
         await courseController.remove(course_remove);
         res.status(200).send({message: "Removed course"});
@@ -90,13 +91,13 @@ router.get('/remove',validate({body: courseValidate}), remove);
  * @returns {*}
  */
 
-const update = async (req, res) => {
-    if(!req.headers.authorization)
+const update = async ({headers, course }: {headers: any, course: CourseValidate }, res: any): Promise<void> => {
+    if(!headers.authorization)
     {
         res.status(401).send({ message: "This endpoint requires authorization header."});
         return;
     }
-    const authToken = req.headers.authorization;
+    const authToken = headers.authorization;
     const isAdm = await isAdmin(authToken);
     if(!isAdm) 
     {
@@ -107,13 +108,13 @@ const update = async (req, res) => {
     try
     {
         const course_update = new Course({
-            Subj: req.body.Subj,
-            Num: req.body.Num,
-            Section: req.body.Section,
-            Title: req.body.Title,
-            SchedType: req.body.SchedType,
-            Type: req.body.Type,
-            Cap: req.body.Cap 
+            Subj: course.Subj,
+            Num: course.Num,
+            Section: course.Section,
+            Title: course.Title,
+            SchedType: course.SchedType,
+            Type: course.Type,
+            Cap: course.Cap
           });
         await courseController.update(course_update);
         res.status(200).send({message: "Updated course."});
@@ -123,6 +124,4 @@ const update = async (req, res) => {
     }
 }
 router.get('/update', validate({body: courseValidate}), update);
-
-
 module.exports = router;
