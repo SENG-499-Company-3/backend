@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "day": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "length": {
+      "type": "integer"
+    },
+    "startTime": {
+      "type": "integer"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

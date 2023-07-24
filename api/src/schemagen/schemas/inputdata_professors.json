@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "courses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "timePreferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "coursePreferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dayPreferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "equipmentPreferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

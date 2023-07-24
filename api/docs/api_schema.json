@@ -281,7 +281,7 @@
       "post": {
         "tags": ["algorithm2"],
         "summary": "predict class Sizes",
-        "description": "Endpoint for predicting class sizes\n",
+        "description": "Algorithm 2 Endpoint for predicting class sizes\n",
         "operationId": "schedulePredictClassSize",
         "requestBody": {
           "content": {

@@ -4,6 +4,7 @@
     "required": [
       "coreq",
       "course",
+      "term",
       "pastEnrol",
       "prereq"
     ],
@@ -11,6 +12,9 @@
     "properties": {
       "course": {
         "type": "string"
+      },
+      "term": {
+        "type": "integer"
       },
       "prereq": {
         "type": "array",

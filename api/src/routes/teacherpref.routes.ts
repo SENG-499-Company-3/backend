@@ -5,6 +5,7 @@ import { validate } from 'express-jsonschema';
 import bodyParser from 'body-parser';
 import jwt from '../schemagen/schemas/jwt.json';
 import teacherPref from '../schemagen/schemas/teacherpreferenceform.json';
+import type { Teacherpreferenceform } from '../schemagen/types/teacherpreferenceform';
 
 const router = express.Router();
 const teacherPrefController: TeacherPrefController = new TeacherPrefController();
@@ -16,23 +17,23 @@ router.use(bodyParser.json());
  * @param {*} res
  * @return {*}
  */
-const update = async (req, res) => {
-  if (!req.headers.authorization) {
+const update = async ({ headers, body }: { headers: any, body: Teacherpreferenceform }, res: any) => {
+  if (!headers.authorization) {
     res.status(400).send({ message: 'This endpoint requires authorization header.' });
     return;
   }
-  if (!req.body._id || !req.body.email || !req.body.courses || !req.body.start || !req.body.end ) {
+  if (!body._id || !body.email || !body.courses || !body.start || !body.end ) {
     res.status(400).send({ message: 'Need to provide all information to update teacher preference.' });
     return;
   }
 
-  const authToken = req.headers.authorization;
-  const uid = req.body._id;
-  const email = req.body.email;
-  const courses = req.body.courses;
-  const start = req.body.start;
-  const end = req.body.end;
-  const peng = req.body.peng;
+  const authToken = headers.authorization;
+  const uid = body._id;
+  const email = body.email;
+  const courses = body.courses;
+  const start = body.start;
+  const end = body.end;
+  const peng = body.peng;
 
   try {
     //check user is authorized
@@ -120,7 +121,7 @@ const byId = async (req, res) => {
   {
     const teacherPref = await teacherPrefController.byId(req.query.id);
     res.status(200).send(teacherPref);
-  } catch(err) 
+  } catch(err)
   {
     res.status(400).send({message: '' + err});
   }

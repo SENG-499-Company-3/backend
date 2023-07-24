@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "courses": {
+      "type": "integer"
+    },
+    "times": {
+      "type": "integer"
+    },
+    "teachers": {
+      "type": "integer"
+    },
+    "rooms": {
+      "type": "integer"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

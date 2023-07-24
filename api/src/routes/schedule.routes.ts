@@ -1,4 +1,8 @@
 import express from 'express';
+import { validate as validateEndpoint } from 'express-jsonschema';
+import { validate } from 'jsonschema';
+import inputData from '../schemagen/schemas/inputdata.json';
+import schedule from '../schemagen/schemas/schedule.json';
 import { ScheduleController } from '../controllers/schedule.controller';
 import { isAdmin, getName } from '../helpers/auth';
 import { ISchedule } from '../interfaces/Schedule';
@@ -28,13 +32,15 @@ const create = async (req, res) => {
   }
   try {
     await scheduleController.create();
-    res.status(200).send('Created schedule.');
+    // TODO clearly not following spec
+    res.status(200).send(validate(schedule, 'Created schedule.'));
   } catch (err) {
     res.status(401).send({ message: err });
   }
 };
-router.get('/create', create);
+router.get('/create', validateEndpoint({body: inputData}), create);
 
+// TODO Pretty sure this is depreciated
 /**
  * Admin list entire schedule
  * Get the entire schedule that has been created from the database
@@ -63,6 +69,7 @@ const list = async (req, res) => {
 router.get('/list', list);
 
 
+// TODO add to api_schema.jso
 /**
  * Admin: triggers build schedule
  *
@@ -79,6 +86,7 @@ const generate_trigger = async (req, res) => {
 };
 router.get('/generate_trigger', generate_trigger);
 
+// TODO add to api_schema.jso
 /**
  * Admin: triggers validate schedule
  *
@@ -95,8 +103,6 @@ const validate_trigger = async (req, res) => {
     }
 };
 router.get('/validate_trigger', validate_trigger);
- 
-
 
 
 /** teacher: get my schedule
@@ -104,7 +110,7 @@ router.get('/validate_trigger', validate_trigger);
  * @param {*} res
  * @return {*} ISchedule[]
 */
-const my = async (req, res) => {
+const my = async (req, res)  => {
     if(!req.headers.authorization)
     {
         res.status(401).send({ message: "This endpoint requires authorization header."});
@@ -160,8 +166,5 @@ const update = async (req, res) => {
     }
 }
 router.get('/update', update);
-
-
-
 
 module.exports = router;

@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "properties": {
+    "coursename": {
+      "type": "string"
+    },
+    "noScheduleOverlap": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "lecturesNumber": {
+      "type": "integer"
+    },
+    "labsNumber": {
+      "type": "integer"
+    },
+    "tutorialsNumber": {
+      "type": "integer"
+    },
+    "capacity": {
+      "type": "integer"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}
