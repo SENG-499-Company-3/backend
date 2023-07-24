@@ -722,7 +722,7 @@
           "coursePreferences": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "integer"
             }
           },
           "dayPreferences": {
@@ -736,6 +736,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "load": {
+            "type": "integer"
           }
         }
       },
