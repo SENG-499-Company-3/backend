@@ -21,6 +21,7 @@ const login = async (req, res) => {
   //Validate request
   if (!req.body.email || !req.body.password) {
     res.status(400).send({ message: 'Content can not be empty!' });
+    return;
   }
 
   const { email, password } = req.body;
@@ -43,6 +44,7 @@ router.post('/login', validate({ body: userlogin }), login);
 const self = async (req, res) => {
   if (!req.headers.authorization) {
     res.status(400).send({ message: 'Self endpoint requires authorization header.' });
+    return;
   }
 
   const token = req.headers.authorization;
