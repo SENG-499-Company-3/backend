@@ -494,7 +494,7 @@
         }
       },
       "schedule": {
-        "required": ["assignments", "complete", "valid", "reward", "iterations", "c_hat", "quality"],
+        "required": ["assignments", "complete", "valid", "reward", "iterations", "c_hat", "quality", "inputData"],
         "type": "object",
         "properties": {
           "assignments": {
@@ -522,6 +522,9 @@
           },
           "quality": {
             "type": "float"
+          },
+          "inputData": {
+            "$ref":"#/components/schemas/inputdata"
           }
         }
       },
