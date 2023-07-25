@@ -28,7 +28,7 @@ const login = async (req, res) => {
     return;
   }
 
-  const { email, password } : Userlogin = req.body;
+  const { email, password }: Userlogin = req.body;
 
   try {
     const response = await authController.login(email, password);

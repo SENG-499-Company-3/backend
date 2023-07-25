@@ -31,9 +31,10 @@ export interface Inputdata {
     name?: string;
     courses?: string[];
     timePreferences?: string[];
-    coursePreferences?: string[];
+    coursePreferences?: number[];
     dayPreferences?: string[];
     equipmentPreferences?: string[];
+    load?: number;
     [k: string]: unknown;
   }[];
   dimensions?: {

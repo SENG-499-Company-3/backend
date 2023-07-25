@@ -837,20 +837,20 @@
         }
       },
       "class_size_prediction_inner": {
-        "required": ["course", "Term","Year","pastEnrollment"],
+        "required": ["course", "Term", "Year", "pastEnrollment"],
         "type": "object",
         "properties": {
           "course": {
             "type": "string"
           },
           "Term": {
-            "type" : "array",
-            "items" : {
-              "type" : "integer"
+            "type": "array",
+            "items": {
+              "type": "integer"
             }
           },
           "Year": {
-            "type" : "integer"
+            "type": "integer"
           },
           "pastEnrollment": {
             "type": "array",
