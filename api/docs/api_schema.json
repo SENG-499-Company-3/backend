@@ -799,7 +799,7 @@
           "coursePreferences": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "integer"
             }
           },
           "dayPreferences": {
@@ -813,6 +813,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "load": {
+            "type": "integer"
           }
         }
       },
@@ -834,30 +837,22 @@
         }
       },
       "class_size_prediction_inner": {
-        "required": ["coreq", "course", "term", "pastEnrol", "prereq"],
+        "required": ["course", "Term","Year","pastEnrollment"],
         "type": "object",
         "properties": {
           "course": {
             "type": "string"
           },
-          "term": {
-            "type": "integer"
-          },
-          "prereq": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "type": "string"
+          "Term": {
+            "type" : "array",
+            "items" : {
+              "type" : "integer"
             }
           },
-          "coreq": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
+          "Year": {
+            "type" : "integer"
           },
-          "pastEnrol": {
+          "pastEnrollment": {
             "type": "array",
             "items": {
               "required": ["size", "term", "year"],
@@ -885,12 +880,6 @@
           },
           "size": {
             "type": "integer"
-          },
-          "constraints": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "term": {
             "type": "integer"
