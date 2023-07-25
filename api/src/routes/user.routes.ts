@@ -28,7 +28,7 @@ const create = async (req, res) => {
   try {
     const response = await userController.create(email, password, name, role);
 
-    res.status(200).send("Created user. ");
+    res.status(200).send('Created user. ');
   } catch (err) {
     res.status(401).send({ message: err });
   }
@@ -49,7 +49,6 @@ const list = async (req, res) => {
       user.password = undefined;
       user.token = undefined;
       return true;
-
     });
 
     res.status(200).send(users);
@@ -59,39 +58,32 @@ const list = async (req, res) => {
 };
 router.get('/list', list);
 
-
 //get user by id
 const byId = async (req, res) => {
-  if(!req.headers.authorization) 
-  {
-      res.status(401).send({ message: "This endpoint requires authorization header."});
-      return;
+  if (!req.headers.authorization) {
+    res.status(401).send({ message: 'This endpoint requires authorization header.' });
+    return;
   }
   const authToken = req.headers.authorization;
   const isAdm = await isAdmin(authToken);
-  if(!isAdm) 
-  {
-      res.status(401).send({message: "Need admin access."});
-      return;
-  }
-  
-  if(!req.query.id)
-  {
-    res.status(400).send({message: "Need to provide user id in url"});
+  if (!isAdm) {
+    res.status(401).send({ message: 'Need admin access.' });
     return;
   }
-  try{
+
+  if (!req.query.id) {
+    res.status(400).send({ message: 'Need to provide user id in url' });
+    return;
+  }
+  try {
     let user = await userController.byId(req.query.id);
     user.password = undefined;
     res.status(200).send(user);
-  } catch(err) {
-    res.status(401).send({messge: err});
+  } catch (err) {
+    res.status(401).send({ messge: err });
   }
-}
+};
 
 router.get('', byId);
-
-
-
 
 module.exports = router;

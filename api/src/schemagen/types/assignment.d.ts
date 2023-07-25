@@ -5,20 +5,8 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export interface Inputdata {
-  rooms?: {
-    location?: string;
-    capacity?: number;
-    equipment?: string[];
-    [k: string]: unknown;
-  }[];
-  timeslots?: {
-    day?: string[];
-    length?: number;
-    startTime?: number;
-    [k: string]: unknown;
-  }[];
-  courses?: {
+export interface Assignment {
+  course: {
     coursename?: string;
     noScheduleOverlap?: string[];
     lecturesNumber?: number;
@@ -26,8 +14,8 @@ export interface Inputdata {
     tutorialsNumber?: number;
     capacity?: number;
     [k: string]: unknown;
-  }[];
-  professors?: {
+  };
+  prof: {
     name?: string;
     courses?: string[];
     timePreferences?: string[];
@@ -36,18 +24,18 @@ export interface Inputdata {
     equipmentPreferences?: string[];
     load?: number;
     [k: string]: unknown;
-  }[];
-  dimensions?: {
-    courses?: number;
-    times?: number;
-    teachers?: number;
-    rooms?: number;
+  };
+  timeslot: {
+    day?: string[];
+    length?: number;
+    startTime?: number;
     [k: string]: unknown;
   };
-  preferences?: number[][];
-  loads?: number[];
-  availabilities?: number[][];
-  p_tgt?: number;
-  max_iter?: number;
+  room: {
+    location?: string;
+    capacity?: number;
+    equipment?: string[];
+    [k: string]: unknown;
+  };
   [k: string]: unknown;
 }

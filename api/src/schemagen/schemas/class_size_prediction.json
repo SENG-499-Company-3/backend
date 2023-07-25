@@ -1,43 +1,25 @@
 {
   "type": "array",
   "items": {
-    "required": [
-      "coreq",
-      "course",
-      "term",
-      "pastEnrol",
-      "prereq"
-    ],
+    "required": ["course", "Term", "Year", "pastEnrollment"],
     "type": "object",
     "properties": {
       "course": {
         "type": "string"
       },
-      "term": {
+      "Term": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
+      },
+      "Year": {
         "type": "integer"
       },
-      "prereq": {
-        "type": "array",
-        "nullable": true,
-        "items": {
-          "type": "string"
-        }
-      },
-      "coreq": {
-        "type": "array",
-        "nullable": true,
-        "items": {
-          "type": "string"
-        }
-      },
-      "pastEnrol": {
+      "pastEnrollment": {
         "type": "array",
         "items": {
-          "required": [
-            "size",
-            "term",
-            "year"
-          ],
+          "required": ["size", "term", "year"],
           "type": "object",
           "properties": {
             "year": {

@@ -1,10 +1,7 @@
 {
   "allOf": [
     {
-      "required": [
-        "email",
-        "password"
-      ],
+      "required": ["email", "password"],
       "type": "object",
       "properties": {
         "email": {
@@ -22,10 +19,7 @@
       "$schema": "http://json-schema.org/schema#"
     },
     {
-      "required": [
-        "name",
-        "userrole"
-      ],
+      "required": ["name", "userrole"],
       "type": "object",
       "properties": {
         "name": {
@@ -35,10 +29,7 @@
         "userrole": {
           "type": "string",
           "description": "User roles",
-          "enum": [
-            "ADMIN",
-            "TEACHER"
-          ],
+          "enum": ["ADMIN", "TEACHER"],
           "$schema": "http://json-schema.org/schema#"
         }
       }

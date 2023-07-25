@@ -7,10 +7,9 @@
 
 export interface ClassSizePredictionInner {
   course: string;
-  term: number;
-  prereq: string[];
-  coreq: string[];
-  pastEnrol: {
+  Term: number[];
+  Year: number;
+  pastEnrollment: {
     year: number;
     term: number;
     size: number;

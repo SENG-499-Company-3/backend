@@ -160,45 +160,6 @@
         }
       }
     },
-    "/teacher/preference": {
-      "post": {
-        "tags": ["frontend"],
-        "summary": "form endpoint for teacher preference availability",
-        "description": "form endpoint for teacher preference availability\n",
-        "operationId": "teacherPref",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/coursepreference"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "User is authenicated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/success"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "user jwt re-auth failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/schedule/create": {
       "post": {
         "tags": ["algorithm1"],
@@ -281,7 +242,7 @@
       "post": {
         "tags": ["algorithm2"],
         "summary": "predict class Sizes",
-        "description": "Algorithm 2 Endpoint for predicting class sizes\n",
+        "description": "Endpoint exposed by algo2 for predicting class sizes\n",
         "operationId": "schedulePredictClassSize",
         "requestBody": {
           "content": {
@@ -305,6 +266,103 @@
           },
           "400": {
             "description": "unable to predict class size",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/preferences/{teacher_id}": {
+      "post": {
+        "tags": ["frontend"],
+        "summary": "get prefs for the given teacher",
+        "description": "Endpoint used by frontend for getting teachers",
+        "operationId": "getTeacherPreference",
+        "responses": {
+          "200": {
+            "description": "Class size is predicted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/preference"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unable to predict class size",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/preferences": {
+      "put": {
+        "tags": ["frontend"],
+        "summary": "Update or create a teacher preference",
+        "description": "Used by frontend to share a update or create a teacher preference",
+        "operationId": "updatePreference",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/preference"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "updated preference was successfully updated and the stored preference was this",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/preference"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "user create failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["frontend"],
+        "summary": "Update or create a teacher preference",
+        "description": "Used by frontend to get the current professors preference",
+        "operationId": "getPreference",
+        "responses": {
+          "200": {
+            "description": "Get this professors preference",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/preference"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User create failed",
             "content": {
               "application/json": {
                 "schema": {
@@ -344,6 +402,38 @@
             "format": "password",
             "example": "password"
           }
+        }
+      },
+      "preference": {
+        "required": ["professorId", "coursePreferences", "additionalDetailes", "availability", "load"],
+        "type": "object",
+        "properties": {
+          "professorId": {
+            "type": "string",
+            "example": "Rich Little"
+          },
+          "coursePreferences": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "courseId": {
+                  "type": "number"
+                },
+                "ability": {
+                  "type": "string",
+                  "enum": ["ABLE", "WITH_DIFFICULTY"]
+                },
+                "willingness": {
+                  "type": "string",
+                  "enum": ["WILLING", "UNWILLING", "VERY_WILLING"]
+                }
+              }
+            }
+          },
+          "additionalDetailes": {},
+          "availability": {},
+          "load": {}
         }
       },
       "user": {
@@ -402,19 +492,6 @@
           },
           "term": {
             "$ref": "#/components/schemas/term"
-          }
-        }
-      },
-      "coursepreference": {
-        "required": ["courseid", "preference"],
-        "type": "object",
-        "properties": {
-          "courseid": {
-            "$ref": "#/components/schemas/courseid"
-          },
-          "preference": {
-            "type": "number",
-            "description": "Preference Value"
           }
         }
       },
@@ -512,16 +589,16 @@
             "nullable": true
           },
           "reward": {
-            "type": "float"
+            "type": "number"
           },
           "iterations": {
             "type": "integer"
           },
           "c_hat": {
-            "type": "float"
+            "type": "number"
           },
           "quality": {
-            "type": "float"
+            "type": "number"
           }
         }
       },
@@ -760,20 +837,20 @@
         }
       },
       "class_size_prediction_inner": {
-        "required": ["course", "Term","Year","pastEnrollment"],
+        "required": ["course", "Term", "Year", "pastEnrollment"],
         "type": "object",
         "properties": {
           "course": {
             "type": "string"
           },
           "Term": {
-            "type" : "array",
-            "items" : {
-              "type" : "integer"
+            "type": "array",
+            "items": {
+              "type": "integer"
             }
           },
           "Year": {
-            "type" : "integer"
+            "type": "integer"
           },
           "pastEnrollment": {
             "type": "array",

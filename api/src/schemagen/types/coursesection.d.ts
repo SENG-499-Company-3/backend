@@ -18,7 +18,7 @@ export interface Coursesection {
     /**
      * Term course is offered in
      */
-    term: "FALL" | "SPRING" | "SUMMER";
+    term: 'FALL' | 'SPRING' | 'SUMMER';
     [k: string]: unknown;
   };
   /**
@@ -44,7 +44,7 @@ export interface Coursesection {
     /**
      * User roles
      */
-    userrole: "ADMIN" | "TEACHER";
+    userrole: 'ADMIN' | 'TEACHER';
     [k: string]: unknown;
   })[];
   /**
@@ -56,7 +56,7 @@ export interface Coursesection {
    */
   endDate?: string;
   meetingtimes: {
-    days: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY")[];
+    days: ('MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY')[];
     startTime: string;
     endTime: string;
     [k: string]: unknown;

@@ -8,7 +8,6 @@
 export interface PredictedClassSizeInner {
   course?: string;
   size?: number;
-  constraints?: string[];
   term?: number;
   [k: string]: unknown;
 }

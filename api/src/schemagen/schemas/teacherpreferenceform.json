@@ -1,9 +1,5 @@
 {
-  "required": [
-    "courses",
-    "peng",
-    "userId"
-  ],
+  "required": ["courses", "peng", "userId"],
   "type": "object",
   "properties": {
     "peng": {
@@ -13,10 +9,7 @@
     "userId": {
       "allOf": [
         {
-          "required": [
-            "email",
-            "password"
-          ],
+          "required": ["email", "password"],
           "type": "object",
           "properties": {
             "email": {
@@ -34,10 +27,7 @@
           "$schema": "http://json-schema.org/schema#"
         },
         {
-          "required": [
-            "name",
-            "userrole"
-          ],
+          "required": ["name", "userrole"],
           "type": "object",
           "properties": {
             "name": {
@@ -47,10 +37,7 @@
             "userrole": {
               "type": "string",
               "description": "User roles",
-              "enum": [
-                "ADMIN",
-                "TEACHER"
-              ],
+              "enum": ["ADMIN", "TEACHER"],
               "$schema": "http://json-schema.org/schema#"
             }
           }
@@ -60,11 +47,7 @@
       "type": "object"
     },
     "courses": {
-      "required": [
-        "code",
-        "subject",
-        "term"
-      ],
+      "required": ["code", "subject", "term"],
       "type": "object",
       "properties": {
         "subject": {
@@ -78,11 +61,7 @@
         "term": {
           "type": "string",
           "description": "Term course is offered in",
-          "enum": [
-            "FALL",
-            "SPRING",
-            "SUMMER"
-          ],
+          "enum": ["FALL", "SPRING", "SUMMER"],
           "$schema": "http://json-schema.org/schema#"
         }
       },

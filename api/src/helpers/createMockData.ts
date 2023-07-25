@@ -45,7 +45,7 @@ export async function create_professors() {
 }
 
 export async function create_teacher_pref() {
-    // Create new user preferences if one doesn't already exist
+  // Create new user preferences if one doesn't already exist
   teacherPrefData.forEach(async (data, index) => {
     teacherPrefSchema.findOne({ email: data.email }).then(async (pref: any) => {
       if (!pref) {

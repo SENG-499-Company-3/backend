@@ -17,6 +17,6 @@ export type User = {
   /**
    * User roles
    */
-  userrole: "ADMIN" | "TEACHER";
+  userrole: 'ADMIN' | 'TEACHER';
   [k: string]: unknown;
 };

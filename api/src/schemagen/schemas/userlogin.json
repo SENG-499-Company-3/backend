@@ -1,8 +1,5 @@
 {
-  "required": [
-    "email",
-    "password"
-  ],
+  "required": ["email", "password"],
   "type": "object",
   "properties": {
     "email": {

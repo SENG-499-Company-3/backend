@@ -1,8 +1,5 @@
 {
-  "required": [
-    "message",
-    "success"
-  ],
+  "required": ["message", "success"],
   "type": "object",
   "properties": {
     "success": {

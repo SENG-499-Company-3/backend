@@ -22,7 +22,7 @@ export async function hashPassword(password: string) {
       });
     });
   });
-  
+
   return hashedPassword;
 }
 
@@ -47,14 +47,13 @@ export async function comparePassword(password: string, hash: string) {
 
 /**
  * Gets email of the user associated with this authtoken, throws error if cannot
- * @param {string} authToken 
+ * @param {string} authToken
  * @returns {Promise<String>}
  */
-export async function getEmail(authToken: string)
-{
+export async function getEmail(authToken: string) {
   let decoded_email = '';
   decoded_email = jwt_decode(authToken).email;
-  if(!decoded_email) throw new Error("Invalid authentication token.");
+  if (!decoded_email) throw new Error('Invalid authentication token.');
   return decoded_email;
 }
 // export async function getUser(authToken: string)
@@ -69,50 +68,46 @@ export async function getEmail(authToken: string)
 //   return user;
 // }
 
-
 /**
  * Returns true if the user associated with the authToken is admin, false otherwise
- * @param {string} authToken 
+ * @param {string} authToken
  * @returns {boolean}
  */
-export async function isAdmin(authToken: string)
-{
+export async function isAdmin(authToken: string) {
   let decoded_email = '';
   decoded_email = jwt_decode(authToken).email;
-  if(!decoded_email) throw new Error("Invalid authentication token.");
+  if (!decoded_email) throw new Error('Invalid authentication token.');
 
   let user: IUser = {} as IUser;
   user = await User.findOne({ email: decoded_email }).catch((err) => err);
 
-  if(!user) return false;
+  if (!user) return false;
 
-  return user.role=="ADMIN";
+  return user.role == 'ADMIN';
 }
 
 /**
  * Returns the name of the user associated with this authToken. Throws exception if authtoken is invalid or user not found.
- * @param {string} authToken 
+ * @param {string} authToken
  * @returns {string}
  */
-export async function getName(authToken: string)
-{
+export async function getName(authToken: string) {
   const decoded_email = await getEmail(authToken);
   let user: IUser = {} as IUser;
   user = await User.findOne({ email: decoded_email }).catch((err) => err);
 
-  if(!user) throw new Error("User not found.");
+  if (!user) throw new Error('User not found.');
 
-  return user.name; 
+  return user.name;
 }
 
 //get user id from authtoken. throws exception if not found
-export async function getUid(authToken: string)
-{
+export async function getUid(authToken: string) {
   const decoded_email = await getEmail(authToken);
   let user: IUser = {} as IUser;
   user = await User.findOne({ email: decoded_email }).catch((err) => err);
 
-  if(!user) throw new Error("User not found.");
+  if (!user) throw new Error('User not found.');
 
-  return user._id; 
+  return user._id;
 }
