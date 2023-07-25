@@ -6,18 +6,44 @@
  */
 
 export interface Schedule {
-  assignments: number[][];
+  assignments: {
+    course: {
+      coursename?: string;
+      noScheduleOverlap?: string[];
+      lecturesNumber?: number;
+      labsNumber?: number;
+      tutorialsNumber?: number;
+      capacity?: number;
+      [k: string]: unknown;
+    };
+    prof: {
+      name?: string;
+      courses?: string[];
+      timePreferences?: string[];
+      coursePreferences?: string[];
+      dayPreferences?: string[];
+      equipmentPreferences?: string[];
+      [k: string]: unknown;
+    };
+    timeslot: {
+      day?: string[];
+      length?: number;
+      startTime?: number;
+      [k: string]: unknown;
+    };
+    room: {
+      location?: string;
+      capacity?: number;
+      equipment?: string[];
+      [k: string]: unknown;
+    };
+    [k: string]: unknown;
+  }[];
   valid: boolean;
   complete: boolean;
-  reward: {
-    [k: string]: unknown;
-  };
+  reward: number;
   iterations: number;
-  c_hat: {
-    [k: string]: unknown;
-  };
-  quality: {
-    [k: string]: unknown;
-  };
+  c_hat: number;
+  quality: number;
   [k: string]: unknown;
 }

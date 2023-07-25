@@ -1,0 +1,46 @@
+{
+  "required": [
+    "professorId",
+    "coursePreferences",
+    "additionalDetailes",
+    "availability",
+    "load"
+  ],
+  "type": "object",
+  "properties": {
+    "professorId": {
+      "type": "string",
+      "example": "Rich Little"
+    },
+    "coursePreferences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "courseId": {
+            "type": "number"
+          },
+          "ability": {
+            "type": "string",
+            "enum": [
+              "ABLE",
+              "WITH_DIFFICULTY"
+            ]
+          },
+          "willingness": {
+            "type": "string",
+            "enum": [
+              "WILLING",
+              "UNWILLING",
+              "VERY_WILLING"
+            ]
+          }
+        }
+      }
+    },
+    "additionalDetailes": {},
+    "availability": {},
+    "load": {}
+  },
+  "$schema": "http://json-schema.org/schema#"
+}
