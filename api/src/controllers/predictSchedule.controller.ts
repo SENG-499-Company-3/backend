@@ -27,7 +27,7 @@ export class PredictScheduleController {
 
   async class_size_prediction(): Promise<String> {
     // const previousEnrolment = await Schedule.find().catch((err) => err);
-    const previousEnrolment = courseData2023[0];
+    const previousEnrolment = courseData2023;
 
     const algorithm2IP = process.env.ALGORITHM_2_IP || 'localhost';
     const algorithm2Port = process.env.ALGORITHM_2_PORT || '5000';
