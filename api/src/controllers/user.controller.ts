@@ -95,16 +95,10 @@ export class UserController {
   }
 
   //get user by id
-  async byId(uid: string): Promise<IUser>
-  {
+  async byId(uid: string): Promise<IUser> {
     let user: IUser = {} as IUser;
-    user = await User.findOne({_id: uid}).catch((err) => err);
-    if(!user) throw new Error("No user associated with given email.");
+    user = await User.findOne({ _id: uid }).catch((err) => err);
+    if (!user) throw new Error('No user associated with given email.');
     return user;
   }
-
-  
-  
 }
-
-

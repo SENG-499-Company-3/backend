@@ -22,7 +22,7 @@ export interface Teacherpreferenceform {
     /**
      * User roles
      */
-    userrole: "ADMIN" | "TEACHER";
+    userrole: 'ADMIN' | 'TEACHER';
     [k: string]: unknown;
   };
   courses: {
@@ -37,7 +37,7 @@ export interface Teacherpreferenceform {
     /**
      * Term course is offered in
      */
-    term: "FALL" | "SPRING" | "SUMMER";
+    term: 'FALL' | 'SPRING' | 'SUMMER';
     [k: string]: unknown;
   };
   [k: string]: unknown;

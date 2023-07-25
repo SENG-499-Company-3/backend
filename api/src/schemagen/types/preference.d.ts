@@ -9,8 +9,8 @@ export interface Preference {
   professorId: string;
   coursePreferences: {
     courseId?: number;
-    ability?: "ABLE" | "WITH_DIFFICULTY";
-    willingness?: "WILLING" | "UNWILLING" | "VERY_WILLING";
+    ability?: 'ABLE' | 'WITH_DIFFICULTY';
+    willingness?: 'WILLING' | 'UNWILLING' | 'VERY_WILLING';
     [k: string]: unknown;
   }[];
   additionalDetailes: unknown;

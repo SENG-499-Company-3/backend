@@ -1,9 +1,5 @@
 {
-  "required": [
-    "days",
-    "endTime",
-    "startTime"
-  ],
+  "required": ["days", "endTime", "startTime"],
   "type": "object",
   "properties": {
     "days": {
@@ -11,13 +7,7 @@
       "items": {
         "type": "string",
         "description": "Days course is offered on",
-        "enum": [
-          "MONDAY",
-          "TUESDAY",
-          "WEDNESDAY",
-          "THURSDAY",
-          "FRIDAY"
-        ],
+        "enum": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"],
         "$schema": "http://json-schema.org/schema#"
       }
     },

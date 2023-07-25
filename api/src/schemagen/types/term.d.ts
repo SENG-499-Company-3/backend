@@ -8,4 +8,4 @@
 /**
  * Term course is offered in
  */
-export type Term = "FALL" | "SPRING" | "SUMMER";
+export type Term = 'FALL' | 'SPRING' | 'SUMMER';

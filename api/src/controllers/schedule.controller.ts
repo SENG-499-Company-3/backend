@@ -22,40 +22,32 @@ export class ScheduleController {
    */
   async create(): Promise<void> {
     try {
-      
-
-
       // await create_schedule(); //creates mock schedule\
       const algo1_output = await this.trigger();
       const assignments = algo1_output.assignments;
 
       //convert schedule into proper form
       const schedules = await this.asg_to_schedule(assignments);
-      
+
       //replace current schedule with the new one schedule in database
-      console.log("Schedule length is " + schedules.length);
+      console.log('Schedule length is ' + schedules.length);
       await this.update(schedules, schedules.length);
-
-
     } catch (err) {
-      console.log("Error creating schedule", err);
+      console.log('Error creating schedule', err);
       throw new Error('Error creating schedule.');
     }
   }
 
   //converts assignments[][] to list of schedules
-  async asg_to_schedule(assignments: number[][]): Promise<ISchedule[]>
-  {
+  async asg_to_schedule(assignments: number[][]): Promise<ISchedule[]> {
     const course_mapping = algo1_mapping.courses;
     const time_mapping = algo1_mapping.timeslots;
     const teacher_mapping = algo1_mapping.teacher;
 
     let schedules: ISchedule[] = [];
-    for(var asg of assignments)
-    {
-
+    for (var asg of assignments) {
       //get days, begin, and end
-      const times = time_mapping[asg[1]%16].split(" ");
+      const times = time_mapping[asg[1] % 16].split(' ');
       const days = times[0];
       let begin = times[1];
       begin = begin.replace(':', '');
@@ -65,7 +57,7 @@ export class ScheduleController {
       let end_num = parseInt(end);
 
       //get subj and num
-      const subj_full = course_mapping[asg[0]%100].split(" ");
+      const subj_full = course_mapping[asg[0] % 100].split(' ');
       const subj = subj_full[0];
       const num = subj_full[1];
       const num_n = parseInt(num);
@@ -74,32 +66,26 @@ export class ScheduleController {
         Term: 1,
         Subj: subj,
         Num: num_n,
-        Section: "A01",
-        Title: "Programming practices",
-        SchedType: "LEC",
-        Instructor: teacher_mapping[asg[2]%120],
-        Bldg: "ECS",
-        Room: "xxx",
+        Section: 'A01',
+        Title: 'Programming practices',
+        SchedType: 'LEC',
+        Instructor: teacher_mapping[asg[2] % 120],
+        Bldg: 'ECS',
+        Room: 'xxx',
         Begin: begin_num,
         End: end_num,
         Days: days,
-        StartDate: "Sep 7, 2023",
-        EndDate: "Dec 16, 2023",
+        StartDate: 'Sep 7, 2023',
+        EndDate: 'Dec 16, 2023',
         Cap: 50
-      }
-      console.log("S is: ");
+      };
+      console.log('S is: ');
       console.log(s);
       schedules.push(s);
-
     }
 
     return schedules;
-
-
   }
-
-  
-  
 
   /**
    * trigger the algorithm to create a schedule
@@ -129,9 +115,8 @@ export class ScheduleController {
 
     await genSchedule
       .save()
-      .then((res) => id = res._id)
+      .then((res) => (id = res._id))
       .catch((err) => console.log('err', err));
-
 
     return genSchedule;
   }
@@ -151,37 +136,31 @@ export class ScheduleController {
 
     return response.data.valid;
   }
-    
 
-    /**
-     * Replaces the entire schedule by the one provided
-     * @param {ISchedule[]} schedules
-     * @param {string} numSchedules
-     * @return {*} 
-     * @memberof ScheduleController
-     */
-    async update(schedules: ISchedule[], numSchedules: number): Promise<void>
-    {
-
-        try 
-        {
-            //delete current schedule and insert the new one
-            await Schedule.deleteMany();
-            for(let i = 0; i < numSchedules ; i++)
-            {
-                const s = new Schedule(schedules[i]);
-                await s.save(s).catch((err) => {
-                  console.log("Error saving schedule", err);
-                  return;
-               });
-            }
-        } catch (err)
-        {
-            throw new Error('Error while retrieving the entire schedule: '+err);
-        }
+  /**
+   * Replaces the entire schedule by the one provided
+   * @param {ISchedule[]} schedules
+   * @param {string} numSchedules
+   * @return {*}
+   * @memberof ScheduleController
+   */
+  async update(schedules: ISchedule[], numSchedules: number): Promise<void> {
+    try {
+      //delete current schedule and insert the new one
+      await Schedule.deleteMany();
+      for (let i = 0; i < numSchedules; i++) {
+        const s = new Schedule(schedules[i]);
+        await s.save(s).catch((err) => {
+          console.log('Error saving schedule', err);
+          return;
+        });
+      }
+    } catch (err) {
+      throw new Error('Error while retrieving the entire schedule: ' + err);
     }
+  }
 
-    /**
+  /**
    * Retrieves the entire schedule that was previously created
    * @return {*}  {Promise<ISchedule[]>}
    * @memberof ScheduleController
@@ -195,22 +174,18 @@ export class ScheduleController {
     }
   }
 
-    /**
-     * Retrieves the schedule of the teacher to whom the authToken belongs to
-     * @param {string} name
-     * @return {*}  {Promise<ISchedule[]>}
-     * @memberof ScheduleController
-     */
-    async my(name: string): Promise<ISchedule[]>
-    {
-        try 
-        {
-            const schedules: ISchedule[] = await Schedule.find({Instructor: name}).catch((err) => err);
-            return schedules;
-        } catch (err)
-        {
-            throw new Error('Error while retrieving your schedule');
-        }
+  /**
+   * Retrieves the schedule of the teacher to whom the authToken belongs to
+   * @param {string} name
+   * @return {*}  {Promise<ISchedule[]>}
+   * @memberof ScheduleController
+   */
+  async my(name: string): Promise<ISchedule[]> {
+    try {
+      const schedules: ISchedule[] = await Schedule.find({ Instructor: name }).catch((err) => err);
+      return schedules;
+    } catch (err) {
+      throw new Error('Error while retrieving your schedule');
     }
-
+  }
 }

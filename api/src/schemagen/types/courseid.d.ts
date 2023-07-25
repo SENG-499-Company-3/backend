@@ -17,6 +17,6 @@ export interface Courseid {
   /**
    * Term course is offered in
    */
-  term: "FALL" | "SPRING" | "SUMMER";
+  term: 'FALL' | 'SPRING' | 'SUMMER';
   [k: string]: unknown;
 }

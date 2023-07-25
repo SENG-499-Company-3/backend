@@ -1,24 +1,11 @@
 {
-  "required": [
-    "assignments",
-    "complete",
-    "valid",
-    "reward",
-    "iterations",
-    "c_hat",
-    "quality"
-  ],
+  "required": ["assignments", "complete", "valid", "reward", "iterations", "c_hat", "quality"],
   "type": "object",
   "properties": {
     "assignments": {
       "type": "array",
       "items": {
-        "required": [
-          "course",
-          "prof",
-          "timeslot",
-          "room"
-        ],
+        "required": ["course", "prof", "timeslot", "room"],
         "type": "object",
         "properties": {
           "course": {

@@ -1,11 +1,5 @@
 {
-  "required": [
-    "professorId",
-    "coursePreferences",
-    "additionalDetailes",
-    "availability",
-    "load"
-  ],
+  "required": ["professorId", "coursePreferences", "additionalDetailes", "availability", "load"],
   "type": "object",
   "properties": {
     "professorId": {
@@ -22,18 +16,11 @@
           },
           "ability": {
             "type": "string",
-            "enum": [
-              "ABLE",
-              "WITH_DIFFICULTY"
-            ]
+            "enum": ["ABLE", "WITH_DIFFICULTY"]
           },
           "willingness": {
             "type": "string",
-            "enum": [
-              "WILLING",
-              "UNWILLING",
-              "VERY_WILLING"
-            ]
+            "enum": ["WILLING", "UNWILLING", "VERY_WILLING"]
           }
         }
       }

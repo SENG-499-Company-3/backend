@@ -1,11 +1,5 @@
 {
-  "required": [
-    "coreq",
-    "course",
-    "term",
-    "pastEnrol",
-    "prereq"
-  ],
+  "required": ["coreq", "course", "term", "pastEnrol", "prereq"],
   "type": "object",
   "properties": {
     "course": {
@@ -31,11 +25,7 @@
     "pastEnrol": {
       "type": "array",
       "items": {
-        "required": [
-          "size",
-          "term",
-          "year"
-        ],
+        "required": ["size", "term", "year"],
         "type": "object",
         "properties": {
           "year": {

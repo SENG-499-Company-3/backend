@@ -27,7 +27,7 @@ const login = async (req, res) => {
     res.status(400).send({ message: 'Content can not be empty!' });
   }
 
-  const { email, password } : Userlogin = req.body;
+  const { email, password }: Userlogin = req.body;
 
   try {
     const response = await authController.login(email, password);

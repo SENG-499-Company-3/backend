@@ -53,9 +53,8 @@ app.use('/schedule', schedule);
 // for backend
 app.use('/schedule', predictSchedule);
 app.use('/course', course);
-app.use('/classrooms', classroom)
-app.use('/preferences', preferences)
-
+app.use('/classrooms', classroom);
+app.use('/preferences', preferences);
 
 // Global error handling
 // eslint-disable-next-line no-unused-vars

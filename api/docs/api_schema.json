@@ -285,7 +285,7 @@
         "operationId": "getTeacherPreference",
         "responses": {
           "200": {
-            "description":f "Class size is predicted",
+            "description": "Class size is predicted",
             "content": {
               "application/json": {
                 "schema": {

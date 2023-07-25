@@ -1,10 +1,5 @@
 {
-  "required": [
-    "course",
-    "prof",
-    "timeslot",
-    "room"
-  ],
+  "required": ["course", "prof", "timeslot", "room"],
   "type": "object",
   "properties": {
     "course": {

@@ -6,7 +6,7 @@
  */
 
 export interface Meetingtime {
-  days: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY")[];
+  days: ('MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY')[];
   startTime: string;
   endTime: string;
   [k: string]: unknown;
