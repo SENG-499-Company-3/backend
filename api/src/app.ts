@@ -6,11 +6,11 @@ import { create_professors, create_schedule, create_teacher_pref } from './helpe
 const user = require('./routes/user.routes');
 const auth = require('./routes/auth.routes');
 const schedule = require('./routes/schedule.routes');
-const teacherPref = require('./routes/teacherpref.routes');
+// const teacherPref = require('./routes/teacherpref.routes');
 const predictSchedule = require('./routes/predictSchedule.routes');
 const course = require('./routes/course.routes');
 const classroom = require('./routes/classroom.routes');
-
+const preferences = require('./routes/preferences.routes');
 
 const app = express();
 
@@ -49,10 +49,12 @@ create_teacher_pref();
 app.use('/user', user);
 app.use('/auth', auth);
 app.use('/schedule', schedule);
-app.use('/teacherpref', teacherPref);
+// app.use('/teacherpref', teacherPref);
+// for backend
 app.use('/schedule', predictSchedule);
 app.use('/course', course);
 app.use('/classrooms', classroom)
+app.use('/preferences', preferences)
 
 
 // Global error handling
