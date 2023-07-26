@@ -1,8 +1,6 @@
 {
   "type": "object",
-  "required": [
-    "authorization"
-  ],
+  "required": ["authorization"],
   "properties": {
     "authorization": {
       "type": "string",

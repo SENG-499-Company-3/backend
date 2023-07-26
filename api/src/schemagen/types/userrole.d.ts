@@ -8,4 +8,4 @@
 /**
  * User roles
  */
-export type Userrole = "ADMIN" | "TEACHER";
+export type Userrole = 'ADMIN' | 'TEACHER';

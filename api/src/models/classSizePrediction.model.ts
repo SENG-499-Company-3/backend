@@ -3,11 +3,13 @@ const Schema = mongoose.Schema;
 
 export const classSizePredictionSchema = new Schema(
   {
-    courses: [{
-      course: { type: String, required: true },
-      term: { type: Number, required: true },
-      size: { type: Number, required: true }
-    }]
+    courses: [
+      {
+        course: { type: String, required: true },
+        term: { type: Number, required: true },
+        size: { type: Number, required: true }
+      }
+    ]
   },
   { timestamps: true, unique: true }
 );

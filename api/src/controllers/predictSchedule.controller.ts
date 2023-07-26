@@ -44,7 +44,7 @@ export class PredictScheduleController {
 
     await newClassSizePrediction
       .save()
-      .then((res) => id = res._id)
+      .then((res) => (id = res._id))
       .catch((err) => console.log('err', err));
 
     return id;

@@ -1,21 +1,9 @@
 {
-  "required": [
-    "capacity",
-    "courseid",
-    "enddate",
-    "hoursperweek",
-    "meetingtimes",
-    "professors",
-    "startdate"
-  ],
+  "required": ["capacity", "courseid", "enddate", "hoursperweek", "meetingtimes", "professors", "startdate"],
   "type": "object",
   "properties": {
     "courseid": {
-      "required": [
-        "code",
-        "subject",
-        "term"
-      ],
+      "required": ["code", "subject", "term"],
       "type": "object",
       "properties": {
         "subject": {
@@ -29,11 +17,7 @@
         "term": {
           "type": "string",
           "description": "Term course is offered in",
-          "enum": [
-            "FALL",
-            "SPRING",
-            "SUMMER"
-          ],
+          "enum": ["FALL", "SPRING", "SUMMER"],
           "$schema": "http://json-schema.org/schema#"
         }
       },
@@ -53,10 +37,7 @@
       "items": {
         "allOf": [
           {
-            "required": [
-              "email",
-              "password"
-            ],
+            "required": ["email", "password"],
             "type": "object",
             "properties": {
               "email": {
@@ -74,10 +55,7 @@
             "$schema": "http://json-schema.org/schema#"
           },
           {
-            "required": [
-              "name",
-              "userrole"
-            ],
+            "required": ["name", "userrole"],
             "type": "object",
             "properties": {
               "name": {
@@ -87,10 +65,7 @@
               "userrole": {
                 "type": "string",
                 "description": "User roles",
-                "enum": [
-                  "ADMIN",
-                  "TEACHER"
-                ],
+                "enum": ["ADMIN", "TEACHER"],
                 "$schema": "http://json-schema.org/schema#"
               }
             }
@@ -111,11 +86,7 @@
       "format": "date"
     },
     "meetingtimes": {
-      "required": [
-        "days",
-        "endTime",
-        "startTime"
-      ],
+      "required": ["days", "endTime", "startTime"],
       "type": "object",
       "properties": {
         "days": {
@@ -123,13 +94,7 @@
           "items": {
             "type": "string",
             "description": "Days course is offered on",
-            "enum": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY"
-            ],
+            "enum": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"],
             "$schema": "http://json-schema.org/schema#"
           }
         },

@@ -5,15 +5,16 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type ClassSizePrediction = {
-  course: string;
-  Term: number[];
-  Year: number;
-  pastEnrollment: {
-    year: number;
-    term: number;
-    size: number;
+export interface Preference {
+  professorId: string;
+  coursePreferences: {
+    courseId?: number;
+    ability?: 'ABLE' | 'WITH_DIFFICULTY';
+    willingness?: 'WILLING' | 'UNWILLING' | 'VERY_WILLING';
     [k: string]: unknown;
   }[];
+  additionalDetailes: unknown;
+  availability: unknown;
+  load: unknown;
   [k: string]: unknown;
-}[];
+}

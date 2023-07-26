@@ -1,10 +1,6 @@
 {
   "type": "string",
   "description": "Term course is offered in",
-  "enum": [
-    "FALL",
-    "SPRING",
-    "SUMMER"
-  ],
+  "enum": ["FALL", "SPRING", "SUMMER"],
   "$schema": "http://json-schema.org/schema#"
 }
