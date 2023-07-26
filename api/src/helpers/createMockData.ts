@@ -3,7 +3,10 @@
 const Schedule = require('../models/schedule.model');
 const User = require('../models/user.model');
 const teacherPrefSchema = require('../models/teacherpref.model');
+const TermModel = require('../model/term.model');
+
 import { IUser } from '../interfaces/User';
+import { ITerms } from '../interfaces/Terms'
 import { courseScheduleData } from '../models/data/courseScheduleData';
 import { teacherPrefData } from '../models/data/teacherPrefData';
 import { userData } from '../models/data/userData';
@@ -60,4 +63,29 @@ export async function create_teacher_pref() {
       }
     });
   });
+}
+
+export async function populate_terms()
+{
+  const terms: ITerms[] = [{id: 1, year: 2023, month: 5},
+    {id: 2, year: 2023, month: 9},
+    {id: 3, year: 2024, month: 1},
+    {id: 4, year: 2024, month: 5},
+    {id: 5, year: 2024, month: 9},
+    {id: 6, year: 2024, month: 1}];
+  
+  terms.forEach(async (term, index) => {
+    TermModel.findOne({id: term.id}).then(async (t: ITerms) => {
+      if(!t)
+      {
+        TermModel.create(term).then(() => {
+          console.log('Term created ' + term.year + ", " + term.month);
+        }).catch(((err: any) => {
+          console.log('Error populating terms: ' + err);
+        }));
+      }
+    })
+
+  })
+  
 }
