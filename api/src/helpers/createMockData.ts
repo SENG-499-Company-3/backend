@@ -3,10 +3,10 @@
 const Schedule = require('../models/schedule.model');
 const User = require('../models/user.model');
 const teacherPrefSchema = require('../models/teacherpref.model');
-const TermModel = require('../model/term.model');
+const TermModel = require('../models/term.model');
 
 import { IUser } from '../interfaces/User';
-import { ITerms } from '../interfaces/Terms'
+import { ITerm } from '../interfaces/Term'
 import { courseScheduleData } from '../models/data/courseScheduleData';
 import { teacherPrefData } from '../models/data/teacherPrefData';
 import { userData } from '../models/data/userData';
@@ -67,7 +67,7 @@ export async function create_teacher_pref() {
 
 export async function populate_terms()
 {
-  const terms: ITerms[] = [{id: 1, year: 2023, month: 5},
+  const terms: ITerm[] = [{id: 1, year: 2023, month: 5},
     {id: 2, year: 2023, month: 9},
     {id: 3, year: 2024, month: 1},
     {id: 4, year: 2024, month: 5},
@@ -75,7 +75,7 @@ export async function populate_terms()
     {id: 6, year: 2024, month: 1}];
   
   terms.forEach(async (term, index) => {
-    TermModel.findOne({id: term.id}).then(async (t: ITerms) => {
+    TermModel.findOne({id: term.id}).then(async (t: ITerm) => {
       if(!t)
       {
         TermModel.create(term).then(() => {

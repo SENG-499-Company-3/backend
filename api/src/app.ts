@@ -1,7 +1,7 @@
 import cors from 'cors';
 import morgan from 'morgan';
 import express from 'express';
-import { create_professors, create_schedule, create_teacher_pref } from './helpers/createMockData';
+import { create_professors, create_schedule, create_teacher_pref, populate_terms } from './helpers/createMockData';
 
 const user = require('./routes/user.routes');
 const auth = require('./routes/auth.routes');
@@ -11,6 +11,7 @@ const predictSchedule = require('./routes/predictSchedule.routes');
 const course = require('./routes/course.routes');
 const classroom = require('./routes/classroom.routes');
 const preferences = require('./routes/preferences.routes');
+const termRoutes = require('./routes/term.routes');
 
 const app = express();
 
@@ -46,6 +47,8 @@ create_schedule();
 
 create_teacher_pref();
 
+populate_terms();
+
 app.use('/user', user);
 app.use('/auth', auth);
 app.use('/schedule', schedule);
@@ -55,6 +58,8 @@ app.use('/schedule', predictSchedule);
 app.use('/course', course);
 app.use('/classrooms', classroom);
 app.use('/preferences', preferences);
+app.use('/terms', termRoutes);
+
 
 // Global error handling
 // eslint-disable-next-line no-unused-vars

@@ -1,5 +1,5 @@
 import express from 'express';
-import { TermsController } from '../controllers/term.controller';
+import { TermController } from '../controllers/term.controller';
 import { isAdmin } from '../helpers/auth';
 import { validate } from 'express-jsonschema';
 import courseValidate from '../schemagen/schemas/courseid.json';
@@ -7,7 +7,7 @@ import type { Courseid as CourseValidate } from '../schemagen/types/courseid';
 
 
 const router = express.Router();
-const termsController: TermsController = new TermsController();
+const termController: TermController = new TermController();
 const TermModel = require('../models/term.model');
 
 
@@ -26,13 +26,13 @@ const list = async (req, res) => {
   }
 
   try {
-    const courses = await termsController.list();
+    const courses = await termController.list();
     res.status(200).send(courses);
   } catch (err) {
     res.status(401).send({ message: err });
   }
 }
-router.get('/list', list);
+router.get('', list);
 
 
 module.exports = router;
