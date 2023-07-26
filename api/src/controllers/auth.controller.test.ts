@@ -22,7 +22,7 @@ describe('AuthController', () => {
           email: 'test@email.com',
           password: '$2b$10$4cpWqV2h7XBkGgV.Mq6q8.Xz2/YLpk1EiMQB0QX7zUI0/YV5nkdxO',
           name: 'John Doe',
-          role: 'TEACHER',
+          userrole: 'TEACHER',
           token: ''
         })
       );
@@ -32,7 +32,7 @@ describe('AuthController', () => {
           email: 'test@email.com',
           password: '$2b$10$4cpWqV2h7XBkGgV.Mq6q8.Xz2/YLpk1EiMQB0QX7zUI0/YV5nkdxO',
           name: 'John Doe',
-          role: 'TEACHER',
+          userrole: 'TEACHER',
           token:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjg3NTU5MzA2fQ.dsERZuOJmO1cHodzrXBTQvaq_9JYTmEbVecTKNTlBcQ'
         })
@@ -66,7 +66,7 @@ describe('AuthController', () => {
           email: 'test@email.com',
           password: '$2b$10$4cpWqV2h7XBkGgV.Mq6q8.Xz2/YLpk1EiMQB0QX7zUI0/YV5nkdxO',
           name: 'John Doe',
-          role: 'TEACHER',
+          userrole: 'TEACHER',
           token: ''
         })
       );
@@ -96,7 +96,7 @@ describe('AuthController', () => {
           email: '123@gmail.com',
           password: '$2b$10$S7I99H65bLTIlrbFxpG6MuElBAe8k.tcEe9SXAJdd7bK3DXA1Q1oC',
           name: 'John Doe',
-          role: 'TEACHER',
+          userrole: 'TEACHER',
           token:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEyM0BnbWFpbC5jb20iLCJpYXQiOjE1MTYyMzkwMjJ9.I5XbzYKaGyeKykmcDu-tuWBE4E68lfuQTBJYVKwMb2c'
         })

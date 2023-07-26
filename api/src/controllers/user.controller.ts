@@ -28,7 +28,7 @@ export class UserController {
       email: email,
       password: password,
       userrole: name,
-      role: role,
+      userrole: role,
       token: ''
     });
 
