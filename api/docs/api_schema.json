@@ -571,7 +571,7 @@
         }
       },
       "schedule": {
-        "required": ["assignments", "complete", "valid", "reward", "iterations", "c_hat", "quality"],
+        "required": ["assignments", "complete", "valid", "reward", "iterations", "c_hat", "quality", "inputData"],
         "type": "object",
         "properties": {
           "assignments": {
@@ -599,6 +599,9 @@
           },
           "quality": {
             "type": "number"
+          },
+          "inputData": {
+            "$ref":"#/components/schemas/inputdata"
           }
         }
       },
@@ -749,6 +752,9 @@
           },
           "startTime": {
             "type": "integer"
+          },
+          "index": {
+            "type": "integer"
           }
         }
       },
@@ -774,6 +780,9 @@
             "type": "integer"
           },
           "capacity": {
+            "type": "integer"
+          },
+          "index": {
             "type": "integer"
           }
         }
@@ -815,6 +824,9 @@
             }
           },
           "load": {
+            "type": "integer"
+          },
+          "index": {
             "type": "integer"
           }
         }
