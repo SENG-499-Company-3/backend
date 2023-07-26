@@ -1,5 +1,5 @@
 // import { ITeacherPref } from '../interfaces/TeacherPref';
-import type { Preference as ITeacherPref } from '../schemagen/types/preference.d.ts';
+import type { Preference as ITeacherPref } from '../schemagen/types/preference';
 
 const TeacherPref = require('../models/teacherpref.model');
 
@@ -26,7 +26,7 @@ export class TeacherPrefController {
       let time = new Date();
       let time_local = time.toLocaleString('en-CA', { timeZone: 'America/Vancouver' });
       const pref = new TeacherPref(prefs);
-      const pref_curr = await TeacherPref.findOne({ email: prefs.email }).catch((err) => err);
+      const pref_curr = await TeacherPref.findOne({ professorId: prefs.professorId }).catch((err) => err);
       if (!pref_curr) {
         //insert if doesn't exist
         await pref.save(pref).catch((err) => err);
@@ -79,7 +79,7 @@ export class TeacherPrefController {
   //get teacher pref by id
   async byId(uid: string): Promise<ITeacherPref> {
     try {
-      const teacherPref: ITeacherPref = await TeacherPref.findOne({ _id: uid }).catch((err) => err);
+      const teacherPref: ITeacherPref = await TeacherPref.findOne({ professorId : uid }).catch((err) => err);
       if (!teacherPref) throw new Error('No user prefernces for specified user found');
       return teacherPref;
     } catch (err) {

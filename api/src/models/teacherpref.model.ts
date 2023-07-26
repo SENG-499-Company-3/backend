@@ -20,7 +20,7 @@ const availability = new Schema({
 
 export const teacherPrefSchema = new Schema<Preference>({
   professorId: String,
-  coursePreferences: coursePreferences,
+  coursePreferences: [coursePreferences],
   additionalDetailes: String,
   availability: [availability],
   load: Number,
