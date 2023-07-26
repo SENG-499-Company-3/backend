@@ -30,13 +30,13 @@ export class TeacherPrefController {
       if (!pref_curr) {
         //insert if doesn't exist
         await pref.save(pref).catch((err) => err);
-        return pref
+        return pref;
       } //replace if already exists
       else {
         const doc = await TeacherPref.findOne({ email: prefs.email }).catch((err) => err);
         doc.overwrite(pref);
         await doc.save();
-        return pref
+        return pref;
       }
     } catch (err) {
       console.log(err);
@@ -81,7 +81,7 @@ export class TeacherPrefController {
   //get teacher pref by id
   async byId(uid: string): Promise<ITeacherPref> {
     try {
-      const teacherPref: ITeacherPref = await TeacherPref.findOne({ professorId : uid }).catch((err) => err);
+      const teacherPref: ITeacherPref = await TeacherPref.findOne({ professorId: uid }).catch((err) => err);
       if (!teacherPref) throw new Error('No user prefernces for specified user found');
       return teacherPref;
     } catch (err) {

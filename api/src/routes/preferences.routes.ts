@@ -57,7 +57,7 @@ const update_teacher_preferences = async (
   }
 
   try {
-    const preferences: Preference = await teacherPrefController.update(body)
+    const preferences: Preference = await teacherPrefController.update(body);
     // validate(preferences, preference)
     res.status(200).send(preferences);
   } catch (err) {
@@ -75,9 +75,9 @@ const get_my_teacher_preferences = async ({ headers }: { headers: any }, res: an
 
   try {
     const userName = await getName(authToken);
-    console.log(userName)
+    console.log(userName);
     const preferences: Preference = await teacherPrefController.byId(userName);
-    console.log(userName)
+    console.log(userName);
     res.status(200).send(preferences);
   } catch (err) {
     res.status(401).send({ message: err });

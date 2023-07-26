@@ -19,22 +19,26 @@ describe('TeacherPrefController', () => {
       const teacherPrefController = new TeacherPrefController();
       const email = 'test@gmail.com';
       const response = await teacherPrefController.update({
-	professorId: 'abc',
-	coursePreferences: [{
-	  courseId: 10,
-	  ability: 'ABLE',
-	  willingness: 'WILLING',
-	}],
-	additionalDetailes: "nothing",
-	availability: [{
-	  term: {
-            termId: 1,
-            year: 2023,
-            month: 5,
-	  },
-	  isAvailable: true,
-	}],
-	load: 2,
+        professorId: 'abc',
+        coursePreferences: [
+          {
+            courseId: 10,
+            ability: 'ABLE',
+            willingness: 'WILLING'
+          }
+        ],
+        additionalDetailes: 'nothing',
+        availability: [
+          {
+            term: {
+              termId: 1,
+              year: 2023,
+              month: 5
+            },
+            isAvailable: true
+          }
+        ],
+        load: 2
       });
 
       const teacherPrefs = await TeacherPrefModel.find({ email: email });
@@ -45,44 +49,50 @@ describe('TeacherPrefController', () => {
     it('should not create another preference for the same teacher', async () => {
       const teacherPrefController = new TeacherPrefController();
       const email = 'test@gmail.com';
-      const response = await teacherPrefController.update(
-	{
-	  professorId: 'abc',
-	  coursePreferences: [{
-	    courseId: 10,
-	    ability: 'ABLE',
-	    willingness: 'WILLING',
-	  }],
-	  additionalDetailes: "nothing",
-	  availability: [{
-	    term: {
+      const response = await teacherPrefController.update({
+        professorId: 'abc',
+        coursePreferences: [
+          {
+            courseId: 10,
+            ability: 'ABLE',
+            willingness: 'WILLING'
+          }
+        ],
+        additionalDetailes: 'nothing',
+        availability: [
+          {
+            term: {
               termId: 1,
               year: 2023,
-              month: 5,
-	    },
-	    isAvailable: true,
-	  }],
-	  load: 2,
-	});
-      const response2 = await teacherPrefController.update(
-	{
-	  professorId: 'abc',
-	  coursePreferences: [{
-	    courseId: 10,
-	    ability: 'ABLE',
-	    willingness: 'WILLING',
-	  }],
-	  additionalDetailes: "nothing",
-	  availability: [{
-	    term: {
+              month: 5
+            },
+            isAvailable: true
+          }
+        ],
+        load: 2
+      });
+      const response2 = await teacherPrefController.update({
+        professorId: 'abc',
+        coursePreferences: [
+          {
+            courseId: 10,
+            ability: 'ABLE',
+            willingness: 'WILLING'
+          }
+        ],
+        additionalDetailes: 'nothing',
+        availability: [
+          {
+            term: {
               termId: 1,
               year: 2023,
-              month: 5,
-	    },
-	    isAvailable: true,
-	  }],
-	  load: 3,
-	});
+              month: 5
+            },
+            isAvailable: true
+          }
+        ],
+        load: 3
+      });
       const teacherPrefs2 = await TeacherPrefModel.find({ email: email });
       expect(response2).toBe(undefined);
       expect(teacherPrefs2.length).toBe(1);
@@ -102,47 +112,53 @@ describe('TeacherPrefController', () => {
 
     it('should get list of teacher pref', async () => {
       const teacherPrefController = new TeacherPrefController();
-      const response = await teacherPrefController.update(
-	{
-	  professorId: 'abc',
-	  coursePreferences: [{
-	    courseId: 10,
-	    ability: 'ABLE',
-	    willingness: 'WILLING',
-	  }],
-	  additionalDetailes: "nothing",
-	  availability: [{
-	    term: {
+      const response = await teacherPrefController.update({
+        professorId: 'abc',
+        coursePreferences: [
+          {
+            courseId: 10,
+            ability: 'ABLE',
+            willingness: 'WILLING'
+          }
+        ],
+        additionalDetailes: 'nothing',
+        availability: [
+          {
+            term: {
               termId: 1,
               year: 2023,
-              month: 5,
-	    },
-	    isAvailable: true,
-	  }],
-	  load: 3,
-	});
+              month: 5
+            },
+            isAvailable: true
+          }
+        ],
+        load: 3
+      });
       const prefList1 = await teacherPrefController.list();
       expect(prefList1.length).toBe(1);
 
-      const response2 = await teacherPrefController.update(
-        {
-	  professorId: 'abc',
-	  coursePreferences: [{
-	    courseId: 10,
-	    ability: 'ABLE',
-	    willingness: 'WILLING',
-	  }],
-	  additionalDetailes: "nothing",
-	  availability: [{
-	    term: {
+      const response2 = await teacherPrefController.update({
+        professorId: 'abc',
+        coursePreferences: [
+          {
+            courseId: 10,
+            ability: 'ABLE',
+            willingness: 'WILLING'
+          }
+        ],
+        additionalDetailes: 'nothing',
+        availability: [
+          {
+            term: {
               termId: 1,
               year: 2023,
-              month: 5,
-	    },
-	    isAvailable: true,
-	  }],
-	  load: 3,
-	});
+              month: 5
+            },
+            isAvailable: true
+          }
+        ],
+        load: 3
+      });
       const prefList2 = await teacherPrefController.list();
       expect(prefList2.length).toBeGreaterThan(0);
     });
@@ -161,25 +177,28 @@ describe('TeacherPrefController', () => {
 
     it('should get my pref if it hasnt been created', async () => {
       const teacherPrefController = new TeacherPrefController();
-      const resp = await teacherPrefController.update(
-        {
-	  professorId: 'abc',
-	  coursePreferences: [{
-	    courseId: 10,
-	    ability: 'ABLE',
-	    willingness: 'WILLING',
-	  }],
-	  additionalDetailes: "nothing",
-	  availability: [{
-	    term: {
+      const resp = await teacherPrefController.update({
+        professorId: 'abc',
+        coursePreferences: [
+          {
+            courseId: 10,
+            ability: 'ABLE',
+            willingness: 'WILLING'
+          }
+        ],
+        additionalDetailes: 'nothing',
+        availability: [
+          {
+            term: {
               termId: 1,
               year: 2023,
-              month: 5,
-	    },
-	    isAvailable: true,
-	  }],
-	  load: 3,
-	});
+              month: 5
+            },
+            isAvailable: true
+          }
+        ],
+        load: 3
+      });
       const myPref = await teacherPrefController.my('test@email.com', 'abcd');
       expect(myPref).toBeDefined();
     });
