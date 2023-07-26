@@ -42,7 +42,7 @@ describe('TeacherPrefController', () => {
       });
 
       const teacherPrefs = await TeacherPrefModel.find({ email: email });
-      expect(response).toBe(undefined);
+      expect(response.professorId).toBe('abc');
       expect(teacherPrefs.length).toBe(1);
     });
 
@@ -94,7 +94,7 @@ describe('TeacherPrefController', () => {
         load: 3
       });
       const teacherPrefs2 = await TeacherPrefModel.find({ email: email });
-      expect(response2).toBe(undefined);
+      expect(response2.load).toBe(3);
       expect(teacherPrefs2.length).toBe(1);
     });
   });

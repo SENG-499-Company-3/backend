@@ -3,6 +3,7 @@ import { UserController } from '../controllers/user.controller';
 import { validate } from 'express-jsonschema';
 import bodyParser from 'body-parser';
 import user from '../schemagen/schemas/user.json';
+import type { User } from '../schemagen/types/user';
 import { isAdmin } from '../helpers/auth';
 
 const router = express.Router();
@@ -16,13 +17,12 @@ router.use(bodyParser.json());
  * @param {*} res
  * @return {*}
  */
-const create = async (req, res) => {
+const create = async ({body}: {body: User}, res: any) => {
   // Validate request
-  const { email, password, name, role } = req.body;
+  const { email, password, name, userrole } = body;
 
   try {
-    const response = await userController.create(email, password, name, role);
-
+    await userController.create(email, password, name, userrole);
     res.status(200).send('Created user. ');
   } catch (err) {
     res.status(401).send({ message: err });
@@ -40,10 +40,9 @@ const list = async (req, res) => {
   try {
     let users = await userController.list();
 
-    users = users.filter(function (user) {
-      user.password = undefined;
-      user.token = undefined;
-      return true;
+    users.forEach(function (user) {
+      user.password = "";
+      user.token = "";
     });
 
     res.status(200).send(users);
@@ -71,8 +70,8 @@ const byId = async (req, res) => {
     return;
   }
   try {
-    let user = await userController.byId(req.query.id);
-    user.password = undefined;
+    let user: User = await userController.byId(req.query.id);
+    user.password = "";
     res.status(200).send(user);
   } catch (err) {
     res.status(401).send({ messge: err });
