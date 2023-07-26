@@ -18,11 +18,6 @@ router.use(bodyParser.json());
  */
 const create = async (req, res) => {
   // Validate request
-  if (!req.body.email || !req.body.password || !req.body.name || !req.body.role) {
-    res.status(400).send({ message: 'Content can not be empty!' });
-    return;
-  }
-
   const { email, password, name, role } = req.body;
 
   try {

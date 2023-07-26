@@ -20,7 +20,7 @@ export class TeacherPrefController {
    * @return {*} {Promise<void>}
    * @memberof TeacherPrefController
    */
-  async update(prefs: ITeacherPref): Promise<void> {
+  async update(prefs: ITeacherPref): Promise<ITeacherPref> {
     try {
       //try finding the teacher's current preference
       let time = new Date();
@@ -30,11 +30,13 @@ export class TeacherPrefController {
       if (!pref_curr) {
         //insert if doesn't exist
         await pref.save(pref).catch((err) => err);
+        return pref
       } //replace if already exists
       else {
         const doc = await TeacherPref.findOne({ email: prefs.email }).catch((err) => err);
         doc.overwrite(pref);
         await doc.save();
+        return pref
       }
     } catch (err) {
       console.log(err);

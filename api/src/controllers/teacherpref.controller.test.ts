@@ -2,7 +2,7 @@ import { describe, expect, beforeAll, afterAll, afterEach, it, beforeEach } from
 import { TeacherPrefController } from './teacherpref.controller';
 import * as tempdb from '../../tests/db';
 
-import TeacherPrefModel  from '../models/teacherpref.model';
+const TeacherPrefModel = require('../models/teacherpref.model');
 import sinon from 'sinon';
 
 beforeAll(async () => await tempdb.connect());

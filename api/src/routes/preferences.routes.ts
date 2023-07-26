@@ -34,7 +34,7 @@ const get_teacher_preferences = async (
 
   try {
     const preference: Preference = await teacherPrefController.byId(params.teacher_id);
-    res.status(200).send(validate(preference, preference));
+    res.status(200).send(preference);
   } catch (err) {
     res.status(401).send({ message: err });
   }
@@ -57,8 +57,9 @@ const update_teacher_preferences = async (
   }
 
   try {
-    await teacherPrefController.update(body);
-    res.status(200).send(validate({ message: 'Updated course.' }, preference));
+    const preferences: Preference = await teacherPrefController.update(body)
+    // validate(preferences, preference)
+    res.status(200).send(preferences);
   } catch (err) {
     res.status(401).send({ message: err });
   }
@@ -66,16 +67,18 @@ const update_teacher_preferences = async (
 router.put('/', validateEndpoint({ body: preference }), update_teacher_preferences);
 
 const get_my_teacher_preferences = async ({ headers }: { headers: any }, res: any): Promise<void> => {
-  if (!req.headers.authorization) {
+  if (!headers.authorization) {
     res.status(401).send({ message: 'This endpoint requires authorization header.' });
     return;
   }
-  const authToken = req.headers.authorization;
+  const authToken = headers.authorization;
 
   try {
     const userName = await getName(authToken);
+    console.log(userName)
     const preferences: Preference = await teacherPrefController.byId(userName);
-    res.status(200).send(validate(preferences, preference));
+    console.log(userName)
+    res.status(200).send(preferences);
   } catch (err) {
     res.status(401).send({ message: err });
   }

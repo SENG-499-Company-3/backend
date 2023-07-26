@@ -26,4 +26,4 @@ export const teacherPrefSchema = new Schema<Preference>({
   load: Number,
 });
 
-export default model('TeacherPref', teacherPrefSchema);
+module.exports = model('TeacherPref', teacherPrefSchema);
