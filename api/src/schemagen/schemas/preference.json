@@ -9,6 +9,7 @@
     "coursePreferences": {
       "type": "array",
       "items": {
+        "required": ["courseId", "ability", "willingness"],
         "type": "object",
         "properties": {
           "courseId": {
@@ -25,9 +26,40 @@
         }
       }
     },
-    "additionalDetailes": {},
-    "availability": {},
-    "load": {}
+    "additionalDetailes": {
+      "type": "string"
+    },
+    "availability": {
+      "type": "array",
+      "items": {
+        "required": ["term", "isAvailable"],
+        "type": "object",
+        "properties": {
+          "term": {
+            "required": ["termId", "year", "month"],
+            "properties": {
+              "termId": {
+                "type": "number"
+              },
+              "year": {
+                "type": "number"
+              },
+              "month": {
+                "type": "number"
+              }
+            },
+            "$schema": "http://json-schema.org/schema#",
+            "type": "object"
+          },
+          "isAvailable": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "load": {
+      "type": "integer"
+    }
   },
   "$schema": "http://json-schema.org/schema#"
 }

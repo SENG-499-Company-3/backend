@@ -1,4 +1,5 @@
-import { ITeacherPref } from '../interfaces/TeacherPref';
+// import { ITeacherPref } from '../interfaces/TeacherPref';
+import type { Preference as ITeacherPref } from '../schemagen/types/preference.d.ts';
 
 const TeacherPref = require('../models/teacherpref.model');
 
@@ -19,27 +20,19 @@ export class TeacherPrefController {
    * @return {*} {Promise<void>}
    * @memberof TeacherPrefController
    */
-  async update(uid: string, email: string, courses: string[], start: string, end: string, peng: string): Promise<void> {
+  async update(prefs: ITeacherPref): Promise<void> {
     try {
       //try finding the teacher's current preference
       let time = new Date();
       let time_local = time.toLocaleString('en-CA', { timeZone: 'America/Vancouver' });
-      const pref = new TeacherPref({
-        _id: uid,
-        email: email,
-        courses: courses,
-        start: start,
-        end: end,
-        peng: peng,
-        last_updated: time_local
-      });
-      const pref_curr = await TeacherPref.findOne({ email: email }).catch((err) => err);
+      const pref = new TeacherPref(prefs);
+      const pref_curr = await TeacherPref.findOne({ email: prefs.email }).catch((err) => err);
       if (!pref_curr) {
         //insert if doesn't exist
         await pref.save(pref).catch((err) => err);
       } //replace if already exists
       else {
-        const doc = await TeacherPref.findOne({ email: email }).catch((err) => err);
+        const doc = await TeacherPref.findOne({ email: prefs.email }).catch((err) => err);
         doc.overwrite(pref);
         await doc.save();
       }
@@ -74,7 +67,7 @@ export class TeacherPrefController {
       const teacherPref: ITeacherPref = await TeacherPref.findOne({ email: email }).catch((err) => err);
       if (!teacherPref) {
         //if it doesn't exist, create one
-        await this.update(uid, email, [''], '08:30', '22:00', 'false');
+        // await this.update(uid, email, [''], '08:30', '22:00', 'false');
       }
       const teacherPref2: ITeacherPref = await TeacherPref.findOne({ email: email }).catch((err) => err);
       return teacherPref2;

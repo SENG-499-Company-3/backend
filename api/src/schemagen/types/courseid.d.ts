@@ -14,9 +14,11 @@ export interface Courseid {
    * Course code, e.g. 499,310
    */
   code: string;
-  /**
-   * Term course is offered in
-   */
-  term: 'FALL' | 'SPRING' | 'SUMMER';
+  term: {
+    termId: number;
+    year: number;
+    month: number;
+    [k: string]: unknown;
+  };
   [k: string]: unknown;
 }

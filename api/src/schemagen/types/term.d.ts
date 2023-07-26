@@ -5,7 +5,9 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-/**
- * Term course is offered in
- */
-export type Term = 'FALL' | 'SPRING' | 'SUMMER';
+export interface Term {
+  termId: number;
+  year: number;
+  month: number;
+  [k: string]: unknown;
+}
