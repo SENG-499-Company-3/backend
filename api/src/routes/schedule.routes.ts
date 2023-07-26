@@ -20,16 +20,16 @@ const scheduleController: ScheduleController = new ScheduleController();
  * @return {*}
  */
 const create = async (req, res) => {
-  // if (!req.headers.authorization) {
-  //   res.status(401).send({ message: 'This endpoint requires authorization header.' });
-  //   return;
-  // }
-  // const authToken = req.headers.authorization;
-  // const isAdm = await isAdmin(authToken);
-  // if (!isAdm) {
-  //   res.status(401).send({ message: 'Need admin access.' });
-  //   return;
-  // }
+  if (!req.headers.authorization) {
+    res.status(401).send({ message: 'This endpoint requires authorization header.' });
+    return;
+  }
+  const authToken = req.headers.authorization;
+  const isAdm = await isAdmin(authToken);
+  if (!isAdm) {
+    res.status(401).send({ message: 'Need admin access.' });
+    return;
+  }
   try {
     await scheduleController.create();
     // TODO clearly not following spec
