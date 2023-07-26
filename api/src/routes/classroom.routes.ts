@@ -33,7 +33,7 @@ const update = async (req, res) => {
     res.status(401).send({ message: '' + err });
   }
 };
-router.post('/update', update);
+router.post('/', update);
 
 const list = async (req, res) => {
   if (!req.headers.authorization) {
