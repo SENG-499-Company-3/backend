@@ -17,7 +17,7 @@ describe('TeacherPrefController', () => {
 
     it('Should create user preference', async () => {
       const teacherPrefController = new TeacherPrefController();
-      const email = 'test@gmail.com';
+      const name = 'abc';
       const response = await teacherPrefController.update({
         professorId: 'abc',
         coursePreferences: [
@@ -41,14 +41,14 @@ describe('TeacherPrefController', () => {
         load: 2
       });
 
-      const teacherPrefs = await TeacherPrefModel.find({ email: email });
-      expect(response.professorId).toBe('abc');
+      const teacherPrefs = await TeacherPrefModel.find({ professorId: name });
+      expect(response.professorId).toBe(name);
       expect(teacherPrefs.length).toBe(1);
     });
 
     it('should not create another preference for the same teacher', async () => {
       const teacherPrefController = new TeacherPrefController();
-      const email = 'test@gmail.com';
+      const name = 'abc';
       const response = await teacherPrefController.update({
         professorId: 'abc',
         coursePreferences: [
@@ -93,7 +93,7 @@ describe('TeacherPrefController', () => {
         ],
         load: 3
       });
-      const teacherPrefs2 = await TeacherPrefModel.find({ email: email });
+      const teacherPrefs2 = await TeacherPrefModel.find({ professorId: name });
       expect(response2.load).toBe(3);
       expect(teacherPrefs2.length).toBe(1);
     });

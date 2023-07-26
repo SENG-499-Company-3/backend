@@ -27,7 +27,7 @@ export class UserController {
     const user = new User({
       email: email,
       password: password,
-      userrole: name,
+      name: name,
       userrole: role,
       token: ''
     });
