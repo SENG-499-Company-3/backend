@@ -5,6 +5,7 @@ const User = require('../models/user.model');
 const teacherPrefSchema = require('../models/teacherpref.model');
 const TermModel = require('../models/term.model');
 
+const jwt = require('jsonwebtoken');
 import { IUser } from '../interfaces/User';
 import { ITerm } from '../interfaces/Term'
 import { courseScheduleData } from '../models/data/courseScheduleData';
@@ -35,6 +36,7 @@ export async function create_professors() {
     User.findOne({ email: data.email }).then(async (user: IUser) => {
       if (!user) {
         data.password = await hashPassword(data.password);
+        // data.token = jwt.sign({email: data.email}, "secret");
         User.create(data)
           .then(() => {
             console.log('User ' + index + ' created!');
