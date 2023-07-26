@@ -145,6 +145,7 @@ export class ScheduleController {
    * @memberof ScheduleController
    */
   async update(schedules: ISchedule[], numSchedules: number): Promise<void> {
+
     try {
       //delete current schedule and insert the new one
       await Schedule.deleteMany();
