@@ -111,4 +111,4 @@ router.put('/', validateEndpoint({ body: preference }), update_teacher_preferenc
 //   }
 // }
 // router.get('/', get_my_teacher_preferences);
-// module.exports = router;
+module.exports = router;
