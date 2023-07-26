@@ -90,4 +90,4 @@ const teacherPrefController: TeacherPrefController = new TeacherPrefController()
 //   }
 // }
 // router.get('/', get_my_teacher_preferences);
-// module.exports = router;
+module.exports = router;
