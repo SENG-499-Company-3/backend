@@ -230,7 +230,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{backend_ip}}:{{backend_port}}/preferences/email?teacherEmail=tony@gmail.com",
+							"raw": "{{backend_ip}}:{{backend_port}}/preferences/email?teacherEmail=tony123@gmail.com",
 							"host": [
 								"{{backend_ip}}"
 							],
@@ -242,7 +242,7 @@
 							"query": [
 								{
 									"key": "teacherEmail",
-									"value": "tony@gmail.com"
+									"value": "tony123@gmail.com"
 								}
 							]
 						}
@@ -255,29 +255,69 @@
 			"name": "schedule",
 			"item": [
 				{
-					"name": "predict_class_size_trigger",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{backend_ip}}:{{backend_port}}/schedule/predict_class_size_trigger",
-							"host": [
-								"{{backend_ip}}"
-							],
-							"port": "{{backend_port}}",
-							"path": [
-								"schedule",
-								"predict_class_size_trigger"
-							]
+					"name": "algo2",
+					"item": [
+						{
+							"name": "predict_class_size_trigger",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "authorization",
+										"value": "{{authTokenVar}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{backend_ip}}:{{backend_port}}/schedule/predict_class_size_trigger",
+									"host": [
+										"{{backend_ip}}"
+									],
+									"port": "{{backend_port}}",
+									"path": [
+										"schedule",
+										"predict_class_size_trigger"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "class_size_prediction",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "authorization",
+										"value": "{{authTokenVar}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{backend_ip}}:{{backend_port}}/schedule/class_size_prediction",
+									"host": [
+										"{{backend_ip}}"
+									],
+									"port": "{{backend_port}}",
+									"path": [
+										"schedule",
+										"class_size_prediction"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
 					"name": "schedule/create",
@@ -330,7 +370,7 @@
 					"response": []
 				},
 				{
-					"name": "schedule/list",
+					"name": "list",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -478,7 +518,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"Subj\": \"CSC\",\n    \"Num\": 111,\n    \"Section\": \"A01\",\n    \"Title\": \"Fundamental Programming\",\n    \"SchedType\": \"Lec\",\n    \"Type\": \"CORE\",\n    \"Cap\": 521\n}",
+							"raw": "{\n    \"Subj\": \"CSC\",\n    \"Num\": 119,\n    \"Title\": \"Fundamental Programming\",\n    \"Year\": 2023,\n    \"Term\": \"Fall\",\n    \"Cap\": 521,\n    \"Enrolled\": 300\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -512,7 +552,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"Subj\": \"CSC\",\n    \"Num\": 111,\n    \"Section\": \"A01\",\n    \"Title\": \"Fundamental Programming\",\n    \"SchedType\": \"Lec\",\n    \"Type\": \"CORE\",\n    \"Cap\": 50\n}",
+							"raw": "{\n    \"Subj\": \"CSC\",\n    \"Num\": 119,\n    \"Title\": \"Fundamental Programming\",\n    \"Year\": 2023,\n    \"Term\": \"Fall\",\n    \"Cap\": 521,\n    \"Enrolled\": 300\n}",
 							"options": {
 								"raw": {
 									"language": "json"

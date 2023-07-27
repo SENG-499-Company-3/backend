@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { courseData2023 } from '../models/data/courseData';
-import { courseScheduleData } from '../models/data/courseScheduleData';
+import { courseData2023 } from '../models/data/algo2_courseData';
 
 // import { ISchedule, Days } from '../interfaces/Schedule';
 const classSizePrediction = require('../models/classSizePrediction.model');
@@ -45,8 +44,11 @@ export class PredictScheduleController {
       console.log(data);
 
       let courseName = data.course.split(/(\d+)/)[0];
+      console.log('courseName', courseName);
       let courseNum = data.course.split(/(\d+)/)[1];
+      console.log('courseNum', courseNum);
       let term = data.term;
+      console.log('term', term);
 
       await CourseModel
         .findOne({Subj: courseName, Num: courseNum})
@@ -76,5 +78,13 @@ export class PredictScheduleController {
       .catch((err) => console.log('err', err));
 
     return id;
+  }
+
+  async get_class_size_prediction(): Promise<String> {
+    const classSizePredictionData = await classSizePrediction
+      .find()
+      .catch((err) => err);
+
+    return classSizePredictionData;
   }
 }

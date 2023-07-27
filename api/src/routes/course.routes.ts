@@ -1,10 +1,11 @@
 import express from 'express';
 import { CourseController } from '../controllers/course.controller';
 import { isAdmin } from '../helpers/auth';
-import { validate } from 'express-jsonschema';
+import { ICourse } from '../interfaces/Course';
 
-import courseValidate from '../schemagen/schemas/course.json';
-import type { Courseid as CourseValidate } from '../schemagen/types/courseid';
+// import { validate } from 'express-jsonschema';
+// import courseValidate from '../schemagen/schemas/course.json';
+// import type { Courseid as CourseValidate } from '../schemagen/types/courseid';
 
 const router = express.Router();
 const courseController: CourseController = new CourseController();
@@ -44,7 +45,7 @@ router.get('/list', list);
  * @returns {*}
  */
 
-const create = async ({ headers, body }: { headers: any; body: CourseValidate }, res: any): Promise<void> => {
+const create = async ({ headers, body }: { headers: any; body: ICourse }, res: any): Promise<void> => {
   try {
     if (!headers.authorization) {
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
@@ -60,10 +61,11 @@ const create = async ({ headers, body }: { headers: any; body: CourseValidate },
     const course_new = new Course({
       Subj: body.Subj,
       Num: body.Num,
-      Section: body.Section,
       Title: body.Title,
-      SchedType: body.SchedType,
-      Type: body.Type
+      Year: body.Year,
+      Term: body.Term,
+      Cap: body.Cap,
+      Enrolled: body.Enrolled
     });
 
     await courseController.create(course_new);
@@ -72,7 +74,7 @@ const create = async ({ headers, body }: { headers: any; body: CourseValidate },
     res.status(401).send({ message: err + '' });
   }
 };
-router.post('/create', validate({ body: courseValidate }), create);
+router.post('/create', create); //validate({ body: ICourse }), create);
 
 /**
  * Admin: remove course

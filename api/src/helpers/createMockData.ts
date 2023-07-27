@@ -10,12 +10,12 @@ const classroom = require('../models/classroom.model');
 import { IUser } from '../interfaces/User';
 import { ITerm } from '../interfaces/Term';
 import { ICourse } from '../interfaces/Course';
-import { courseScheduleData } from '../models/data/courseScheduleData';
 import { teacherPrefData } from '../models/data/teacherPrefData';
 import { userData } from '../models/data/userData';
 import { hashPassword } from './auth';
-import { courseData2023 } from '../models/data/courseData';
 import { static_classroom_list } from '../models/data/classroomData';
+import { courseScheduleData } from '../models/data/courseScheduleData';
+import { courseData } from '../models/data/courseData';
 
 // Create data for previous enrolment
 export async function create_schedule() {
@@ -72,12 +72,24 @@ export async function create_teacher_pref() {
 
 export async function populate_terms() {
   const terms: ITerm[] = [
-    { id: 1, year: 2023, month: 5 },
-    { id: 2, year: 2023, month: 9 },
-    { id: 3, year: 2024, month: 1 },
-    { id: 4, year: 2024, month: 5 },
-    { id: 5, year: 2024, month: 9 },
-    { id: 6, year: 2024, month: 1 }
+    { id: 1, year: 2023, term: 'Fall' },
+    { id: 2, year: 2023, term: 'Summer' },
+    { id: 3, year: 2023, term: 'Spring' },
+    { id: 4, year: 2024, term: 'Fall' },
+    { id: 5, year: 2024, term: 'Summer' },
+    { id: 6, year: 2024, term: 'Spring' },
+    { id: 7, year: 2022, term: 'Fall' },
+    { id: 8, year: 2022, term: 'Summer' },
+    { id: 9, year: 2022, term: 'Spring' },
+    { id: 10, year: 2021, term: 'Fall' },
+    { id: 11, year: 2021, term: 'Summer' },
+    { id: 12, year: 2021, term: 'Spring' },
+    { id: 13, year: 2020, term: 'Fall' },
+    { id: 14, year: 2020, term: 'Summer' },
+    { id: 15, year: 2020, term: 'Spring' },
+    { id: 16, year: 2019, term: 'Fall' },
+    { id: 17, year: 2019, term: 'Summer' },
+    { id: 18, year: 2019, term: 'Spring' }
   ];
 
   terms.forEach(async (term) => {
@@ -85,7 +97,7 @@ export async function populate_terms() {
       if (!t) {
         TermModel.create(term)
           .then(() => {
-            console.log('Term created ' + term.year + ', ' + term.month);
+            console.log('Term created ' + term.year + ', ' + term.term);
           })
           .catch((err: any) => {
             console.log('Error populating terms: ' + err);
@@ -96,29 +108,28 @@ export async function populate_terms() {
 }
 
 export async function populate_courses() {
-  // Create new user preferences if one doesn't already exist
-  courseData2023.forEach(async (data, index) => {
-    let Subj = data.course.split(/(\d+)/)[0];
-    let Num = Number(data.course.split(/(\d+)/)[1]);
+  courseData.forEach(async (data, index) => {
+    let Subj = data.Course.split(' ')[0];
+    let Num = Number(data.Course.split(' ')[1]);
+
     let course: ICourse = {
       Subj: Subj,
       Num: Num,
-      Section: 'Section',
-      Title: 'Title',
-      SchedType: 'SchedType',
-      Type: 'Type',
-      Cap: 0
+      Title: data.Title,
+      Year: data.TermYr,
+      Term: data.Term,
+      Cap: data.Cap,
+      Enrolled: data.Enrolled
     };
 
-    CourseModel.findOne({ Subj: Subj, Num: Num }).then(async (c: ICourse) => {
+    CourseModel.findOne({ Subj: Subj, Num: Num, Term: data.Term, Year: data.TermYr }).then(async (c: ICourse) => {
       if (!c) {
-        // console.log(course);
         CourseModel.create(course)
           .then(() => {
             console.log('Course ' + index + ' created!');
           })
           .catch((err: any) => {
-            console.log('Error creating teacherPref!', err);
+            console.log('Error creating course!', err);
           });
       }
     });
@@ -133,11 +144,11 @@ export async function populate_classrooms() {
       .then(async (c: any) => {
         if (!c) {
           classroom.create(data);
-          console.log('Course List ' + index + ' created!');
+          console.log('Class ' + index + ' created!');
         }
       })
       .catch((err: any) => {
-        console.log('Error creating course list!', err);
+        console.log('Error creating class!', err);
       });
   });
 }
