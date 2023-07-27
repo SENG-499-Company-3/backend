@@ -53,30 +53,30 @@ export class UserController {
     try {
       const users: IUser[] = await User.find().catch((err) => err);
 
-      const teacherPrefs = await teacherPrefSchema.find().catch((err) => err);
+      // const teacherPrefs = await teacherPrefSchema.find().catch((err) => err);
 
-      const usersWithPref = users.map((user) => {
-        console.log(user);
-        let pref = false;
+      // const usersWithPref = users.map((user) => {
+      //   console.log(user);
+      //   let pref = false;
 
-        teacherPrefs.forEach((teacherPref) => {
-          if (teacherPref.email === user.email) {
-            pref = true;
-          }
-        });
+      //   teacherPrefs.forEach((teacherPref) => {
+      //     if (teacherPref.email === user.email) {
+      //       pref = true;
+      //     }
+      //   });
 
-        return {
-          id: user._id,
-          email: user.email,
-          password: user.password,
-          name: user.name,
-          userrole: user.role,
-          token: user.token,
-          preferencesSubmitted: pref
-        } as IUser;
-      });
+      //   return {
+      //     id: user._id,
+      //     email: user.email,
+      //     password: user.password,
+      //     name: user.name,
+      //     userrole: user.role,
+      //     token: user.token,
+      //     preferencesSubmitted: pref
+      //   } as IUser;
+      // });
 
-      return usersWithPref;
+      return users;
     } catch (err) {
       console.log(err);
       throw new Error('Some error occurred while retrieving users.');
