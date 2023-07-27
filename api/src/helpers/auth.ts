@@ -83,7 +83,7 @@ export async function isAdmin(authToken: string) {
 
   if (!user) return false;
 
-  return user.role == 'ADMIN';
+  return user.userrole == 'ADMIN';
 }
 
 /**
