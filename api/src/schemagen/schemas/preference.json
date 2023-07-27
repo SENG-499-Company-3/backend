@@ -1,10 +1,9 @@
 {
-  "required": ["professorId", "coursePreferences", "additionalDetailes", "availability", "load"],
+  "required": ["email", "coursePreferences", "additionalDetailes", "availability", "load"],
   "type": "object",
   "properties": {
-    "professorId": {
-      "type": "string",
-      "example": "Rich Little"
+    "email": {
+      "type": "string"
     },
     "coursePreferences": {
       "type": "array",

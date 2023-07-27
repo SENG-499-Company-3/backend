@@ -476,17 +476,13 @@
         }
       },
       "preference": {
-        "required": ["email", "professorId", "coursePreferences", "additionalDetailes", "availability", "load"],
+        "required": ["email", "coursePreferences", "additionalDetailes", "availability", "load"],
         "type": "object",
         "properties": {
           "email": {
             "type": "string",
             "format": "email",
             "example": ""
-          },
-          "professorId": {
-            "type": "string",
-            "example": "Rich Little"
           },
           "coursePreferences": {
             "type": "array",

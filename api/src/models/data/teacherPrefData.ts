@@ -2,7 +2,6 @@ import type { Preference } from '../../schemagen/types/preference';
 export const teacherPrefData: Preference[] = [
   {
     email: '124@gmail.com',
-    professorId: 'abc',
     coursePreferences: [
       {
         courseId: 10,
@@ -25,7 +24,6 @@ export const teacherPrefData: Preference[] = [
   },
   {
     email: '125@gmail.com',
-    professorId: 'bcd',
     coursePreferences: [
       {
         courseId: 11,
