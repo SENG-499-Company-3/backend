@@ -12,5 +12,6 @@ export interface InputdataCourses {
   labsNumber?: number;
   tutorialsNumber?: number;
   capacity?: number;
+  index?: number;
   [k: string]: unknown;
 }

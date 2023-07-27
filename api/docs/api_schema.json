@@ -601,7 +601,7 @@
             "type": "number"
           },
           "inputData": {
-            "$ref":"#/components/schemas/inputdata"
+            "$ref": "#/components/schemas/inputdata"
           }
         }
       },
