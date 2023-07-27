@@ -72,16 +72,16 @@ export async function create_teacher_pref() {
 
 export async function populate_terms() {
   const terms: ITerm[] = [
-    { id: 1, year: 2023, month: 5 },
-    { id: 2, year: 2023, month: 9 },
-    { id: 3, year: 2024, month: 1 },
-    { id: 4, year: 2024, month: 5 },
-    { id: 5, year: 2024, month: 9 },
-    { id: 6, year: 2024, month: 1 }
+    {year: 2023, month: 5 },
+    {year: 2023, month: 9 },
+    {year: 2024, month: 1 },
+    {year: 2024, month: 5 },
+    {year: 2024, month: 9 },
+    {year: 2024, month: 1 }
   ];
 
   terms.forEach(async (term) => {
-    TermModel.findOne({ id: term.id }).then(async (t: ITerm) => {
+    TermModel.findOne({ _id: term._id }).then(async (t: ITerm) => {
       if (!t) {
         TermModel.create(term)
           .then(() => {

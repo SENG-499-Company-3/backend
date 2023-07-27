@@ -462,10 +462,10 @@
         }
       },
       "term": {
-        "required": ["termId", "year", "month"],
+        "required": ["_id", "year", "month"],
         "properties": {
-          "termId": {
-            "type": "number"
+          "_id": {
+            "type": "string"
           },
           "year": {
             "type": "number"
