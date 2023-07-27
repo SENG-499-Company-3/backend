@@ -4,14 +4,17 @@ const Schedule = require('../models/schedule.model');
 const User = require('../models/user.model');
 const teacherPrefSchema = require('../models/teacherpref.model');
 const TermModel = require('../models/term.model');
+const CourseModel = require('../models/course.model');
 
 const jwt = require('jsonwebtoken');
 import { IUser } from '../interfaces/User';
-import { ITerm } from '../interfaces/Term'
+import { ITerm } from '../interfaces/Term';
+import { ICourse } from '../interfaces/Course';
 import { courseScheduleData } from '../models/data/courseScheduleData';
 import { teacherPrefData } from '../models/data/teacherPrefData';
 import { userData } from '../models/data/userData';
 import { hashPassword } from './auth';
+import { courseData2023 } from '../models/data/courseData';
 
 // Create data for previous enrolment
 export async function create_schedule() {
@@ -90,4 +93,31 @@ export async function populate_terms()
 
   })
   
+}
+
+export async function populate_courses() {
+  // Create new user preferences if one doesn't already exist
+  courseData2023.forEach(async (data, index) => {
+      let Subj = data.course.split(/(\d+)/)[0];
+      let Num = Number(data.course.split(/(\d+)/)[1]);
+      let course: ICourse = {
+        Subj: Subj,
+        Num: Num,
+        Section: 'Section',
+        Title: 'Title',
+        SchedType: 'SchedType',
+        Type: 'Type',
+        Cap: 0
+      }
+
+      // console.log(course);
+      CourseModel
+      .create(course)
+      .then(() => {
+        console.log('Course ' + index + ' created!');
+      })
+      .catch((err: any) => {
+        console.log('Error creating teacherPref!', err);
+      });
+  });
 }
