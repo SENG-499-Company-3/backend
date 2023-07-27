@@ -18,7 +18,7 @@ import { courseData2023 } from '../models/data/courseData';
 // Create data for previous enrolment
 export async function create_schedule() {
   courseScheduleData.forEach(async (data, index) => {
-    Schedule.findOne({ course: data.Subj, term: data.Term }).then(async (schedule: any) => {
+    Schedule.findOne({ Subj: data.Subj, Term: data.Term }).then(async (schedule: any) => {
       if (!schedule) {
         Schedule.create(data)
           .then(() => {
@@ -108,13 +108,17 @@ export async function populate_courses() {
       Cap: 0
     };
 
-    // console.log(course);
-    CourseModel.create(course)
-      .then(() => {
-        console.log('Course ' + index + ' created!');
-      })
-      .catch((err: any) => {
-        console.log('Error creating teacherPref!', err);
-      });
+    CourseModel.findOne({ Subj: Subj, Num: Num }).then(async (c: ICourse) => {
+      if (!c) {
+        // console.log(course);
+        CourseModel.create(course)
+          .then(() => {
+            console.log('Course ' + index + ' created!');
+          })
+          .catch((err: any) => {
+            console.log('Error creating teacherPref!', err);
+          });
+      }
+    });
   });
 }
