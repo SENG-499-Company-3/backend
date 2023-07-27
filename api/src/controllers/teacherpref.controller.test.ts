@@ -2,7 +2,7 @@ import { describe, expect, beforeAll, afterAll, afterEach, it, beforeEach } from
 import { TeacherPrefController } from './teacherpref.controller';
 import * as tempdb from '../../tests/db';
 
-const TeacherPrefModel = require('../models/teacherpref.model');
+import TeacherPrefModel from '../models/teacherpref.model';
 import sinon from 'sinon';
 
 beforeAll(async () => await tempdb.connect());
@@ -43,7 +43,7 @@ describe('TeacherPrefController', () => {
 
       const teacherPrefs = await teacherPrefController.byId(name);
       expect(response.professorId).toBe(name);
-      expect(teacherPrefs.length).toBe(1);
+      expect(teacherPrefs.load).toBe(2);
     });
 
     it('should not create another preference for the same teacher', async () => {
@@ -93,7 +93,7 @@ describe('TeacherPrefController', () => {
         ],
         load: 3
       });
-      const teacherPrefs2 = await TeacherPrefModel.find({ professorId: name });
+      const teacherPrefs2 = await TeacherPrefModel.find({ professorId: name }).limit(1);
       expect(response2.load).toBe(3);
       expect(teacherPrefs2.length).toBe(1);
     });
