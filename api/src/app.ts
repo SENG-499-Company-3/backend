@@ -57,7 +57,7 @@ app.use('/schedule', schedule);
 // app.use('/teacherpref', teacherPref);
 // for backend
 app.use('/schedule', predictSchedule);
-app.use('/course', course);
+app.use('/courses', course);
 app.use('/classrooms', classroom);
 app.use('/preferences', preferences);
 app.use('/terms', termRoutes);

@@ -7,5 +7,4 @@ export interface ICourse extends Document {
   Title: string;
   SchedType: string;
   Type: string;
-  Cap: Number;
 }

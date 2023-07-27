@@ -1,0 +1,75 @@
+{
+  "required": ["Subj", "Num", "Section", "Title", "SchedType", "Type"],
+  "type": "object",
+  "properties": {
+    "_id": {
+      "type": "string",
+      "description": "Id of the course"
+    },
+    "Subj": {
+      "type": "string",
+      "description": "Hours per week course is offered"
+    },
+    "Num": {
+      "type": "number",
+      "description": "Hours per week course is offered"
+    },
+    "Section": {
+      "type": "string",
+      "description": "Capacity of course"
+    },
+    "Title": {
+      "type": "string",
+      "description": "Professor teaching course",
+      "items": {
+        "allOf": [
+          {
+            "required": ["email", "password"],
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "format": "email",
+                "example": "user@email.com"
+              },
+              "password": {
+                "type": "string",
+                "description": "password hashed in db",
+                "format": "password",
+                "example": "password"
+              }
+            },
+            "$schema": "http://json-schema.org/schema#"
+          },
+          {
+            "required": ["name", "userrole"],
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "User name"
+              },
+              "userrole": {
+                "type": "string",
+                "description": "User roles",
+                "enum": ["ADMIN", "TEACHER"],
+                "$schema": "http://json-schema.org/schema#"
+              }
+            }
+          }
+        ],
+        "$schema": "http://json-schema.org/schema#",
+        "type": "object"
+      }
+    },
+    "SchedType": {
+      "type": "string",
+      "description": "Lec or Lab."
+    },
+    "Type": {
+      "type": "string",
+      "description": "Type of course CORE or ELECTIVE"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}
