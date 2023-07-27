@@ -16,6 +16,7 @@ export interface Inputdata {
     day?: string[];
     length?: number;
     startTime?: number;
+    index?: number;
     [k: string]: unknown;
   }[];
   courses?: {
@@ -25,6 +26,7 @@ export interface Inputdata {
     labsNumber?: number;
     tutorialsNumber?: number;
     capacity?: number;
+    index?: number;
     [k: string]: unknown;
   }[];
   professors?: {
@@ -35,6 +37,7 @@ export interface Inputdata {
     dayPreferences?: string[];
     equipmentPreferences?: string[];
     load?: number;
+    index?: number;
     [k: string]: unknown;
   }[];
   dimensions?: {

@@ -38,6 +38,9 @@
           },
           "startTime": {
             "type": "integer"
+          },
+          "index": {
+            "type": "integer"
           }
         },
         "$schema": "http://json-schema.org/schema#"
@@ -67,6 +70,9 @@
             "type": "integer"
           },
           "capacity": {
+            "type": "integer"
+          },
+          "index": {
             "type": "integer"
           }
         },
@@ -112,6 +118,9 @@
             }
           },
           "load": {
+            "type": "integer"
+          },
+          "index": {
             "type": "integer"
           }
         },

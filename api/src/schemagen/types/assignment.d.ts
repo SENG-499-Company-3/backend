@@ -13,6 +13,7 @@ export interface Assignment {
     labsNumber?: number;
     tutorialsNumber?: number;
     capacity?: number;
+    index?: number;
     [k: string]: unknown;
   };
   prof: {
@@ -23,12 +24,14 @@ export interface Assignment {
     dayPreferences?: string[];
     equipmentPreferences?: string[];
     load?: number;
+    index?: number;
     [k: string]: unknown;
   };
   timeslot: {
     day?: string[];
     length?: number;
     startTime?: number;
+    index?: number;
     [k: string]: unknown;
   };
   room: {
