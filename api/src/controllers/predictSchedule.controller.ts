@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { courseData2023 } from '../models/data/courseData';
+import { courseScheduleData } from '../models/data/courseScheduleData';
 
 // import { ISchedule, Days } from '../interfaces/Schedule';
 const classSizePrediction = require('../models/classSizePrediction.model');
+const CourseModel = require('../models/course.model');
+const TermModel = require('../models/term.model');
 
 // include a function to handle the logic for predicting class sizes
 // and also validate incoming payload according to the API spec
@@ -32,9 +35,34 @@ export class PredictScheduleController {
     const algorithm2IP = process.env.ALGORITHM_2_IP || 'localhost';
     const algorithm2Port = process.env.ALGORITHM_2_PORT || '5000';
 
+
     const response = await axios
       .post(`http://${algorithm2IP}:${algorithm2Port}/schedule`, previousEnrolment)
       .catch((err) => err);
+
+    for( const data of response.data) {
+
+      console.log(data);
+
+      let courseName = data.course.split(/(\d+)/)[0];
+      let courseNum = data.course.split(/(\d+)/)[1];
+      let term = data.term;
+
+      await CourseModel
+        .findOne({Subj: courseName, Num: courseNum})
+        .then((res) => {
+          data.course = res._id;
+        })
+        .catch((err) => console.log('err', err));
+
+      await TermModel
+        .findOne({ month: term})
+        .then((res) => {
+          data.term = res.id;
+        })
+        .catch((err) => console.log('err', err));
+      
+    }
 
     const newClassSizePrediction = new classSizePrediction({
       courses: response.data

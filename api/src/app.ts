@@ -1,7 +1,7 @@
 import cors from 'cors';
 import morgan from 'morgan';
 import express from 'express';
-import { create_professors, create_schedule, create_teacher_pref, populate_terms } from './helpers/createMockData';
+import { create_professors, create_schedule, create_teacher_pref, populate_terms, populate_courses } from './helpers/createMockData';
 
 const user = require('./routes/user.routes');
 const auth = require('./routes/auth.routes');
@@ -48,6 +48,8 @@ create_schedule();
 create_teacher_pref();
 
 populate_terms();
+
+populate_courses();
 
 app.use('/user', user);
 app.use('/auth', auth);
