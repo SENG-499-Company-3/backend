@@ -1,0 +1,29 @@
+{
+   "required": ["rooms"],
+   "type": "object",
+   "properties": {
+     "rooms": {
+       "type": "array",
+       "items": {
+         "type": "object",
+         "properties": {
+           "location": {
+             "type": "string"
+           },
+           "capacity": {
+             "type": "integer"
+           },
+           "equipment": {
+             "type": "array",
+             "items": {
+               "type": "string"
+             }
+           }
+         },
+         "required": ["location", "capacity", "equipment"],
+       }
+     }
+   },
+   "$schema": "http://json-schema.org/schema#"
+ }
+ 
