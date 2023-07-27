@@ -1,11 +1,8 @@
 import express from 'express';
 import { validate as validateEndpoint } from 'express-jsonschema';
-import { validate } from 'jsonschema';
 import bodyParser from 'body-parser';
 import userlogin from '../schemagen/schemas/userlogin.json';
 import type { Userlogin } from '../schemagen/types/userlogin';
-import predicted_class_size from '../schemagen/schemas/predicted_class_size.json';
-import user from '../schemagen/schemas/user.json';
 import jwt from '../schemagen/schemas/jwt.json';
 import { AuthController } from '../controllers/auth.controller';
 
@@ -56,7 +53,7 @@ const self = async (req, res) => {
   try {
     const response = await authController.self(token);
 
-    res.status(200).send(validate(response, user));
+    res.status(200).send(response);
   } catch (err) {
     res.status(401).send({ message: err });
   }

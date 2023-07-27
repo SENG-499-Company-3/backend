@@ -70,6 +70,7 @@ export class AuthController {
     }
 
     selfUser = await User.findOne({ email: decoded_email });
+    console.log('selfUser', selfUser);
 
     if (!selfUser) {
       throw new Error('There was no user with that email.');
