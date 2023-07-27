@@ -22,26 +22,12 @@ export class CourseController {
   }
 
   /**
-   * remove the given course
+   * add the given course
    * @param {ICourse} course
    * @returns {*} {Promise<ICourse[]>}
    * @memberof CourseController
    */
-  async remove(course: ICourse): Promise<void> {
-    try {
-      await Course.deleteOne({ Subj: course.Subj, Num: course.Num, Section: course.Section }).catch((err) => err);
-    } catch (err) {
-      throw new Error('Error deleting course: ' + err);
-    }
-  }
-
-  /**
-   * insert/update the given course's capacity/type
-   * @param {ICourse} course
-   * @returns {*} {Promise<ICourse[]>}
-   * @memberof CourseController
-   */
-  async update(course: ICourse): Promise<void> {
+  async create(course: ICourse): Promise<void> {
     try {
       //if the given course exists, update it, otherwise insert a new one
 
@@ -53,17 +39,19 @@ export class CourseController {
       }).catch((err) => err);
       if (!course_current) {
         //insert if the course doesn't exist
-        await course_db.save(course_db).catch((err) => err);
-      } //replace if exists
-      else {
-        const doc = await Course.findOne({ Subj: course.Subj, Num: course.Num, Section: course.Section }).catch(
-          (err) => err
-        );
-        doc.overwrite(course_db);
-        await doc.save();
+        await course_db.save(course_db).catch((err) => console.log('error saving course' + err));
+      } else {
+        //throw error if it already exists
+        throw new Error('Course already exists.');
+        // replace if exists
+        // const doc = await Course.findOne({ Subj: course.Subj, Num: course.Num, Section: course.Section }).catch(
+        //   (err) => console.log("Error adding corurse" + err)
+        // );
+        // doc.overwrite(course_db);
+        // await doc.save();
       }
     } catch (err) {
-      throw new Error('Error updating course: ' + err);
+      throw new Error(err + '');
     }
   }
 }

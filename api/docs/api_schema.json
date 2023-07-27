@@ -373,6 +373,59 @@
           }
         }
       }
+    },
+    "/courses/list": {
+      "get": {
+        "tags": ["frontend"],
+        "summary": "Get list of courses",
+        "description": "Used by frontend to the list of courses in the database.",
+        "operationId": "listCourses",
+        "responses": {
+          "200": {
+            "description": "List of course objects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/course"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courses/create": {
+      "post": {
+        "tags": ["frontend"],
+        "summary": "Add a new course.",
+        "description": "Used by frontend to add a new course.",
+        "operationId": "createCourse",
+        "responses": {
+          "200": {
+            "description": "Course was created."
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -532,6 +585,43 @@
           }
         }
       },
+      "course": {
+        "required": ["Subj", "Num", "Section", "Title", "SchedType", "Type"],
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Id of the course"
+          },
+          "Subj": {
+            "type": "string",
+            "description": "Hours per week course is offered"
+          },
+          "Num": {
+            "type": "number",
+            "description": "Hours per week course is offered"
+          },
+          "Section": {
+            "type": "string",
+            "description": "Capacity of course"
+          },
+          "Title": {
+            "type": "string",
+            "description": "Professor teaching course",
+            "items": {
+              "$ref": "#/components/schemas/user"
+            }
+          },
+          "SchedType": {
+            "type": "string",
+            "description": "Lec or Lab."
+          },
+          "Type": {
+            "type": "string",
+            "description": "Type of course CORE or ELECTIVE"
+          }
+        }
+      },
       "teacherpreferenceform": {
         "required": ["courses", "peng", "userId"],
         "type": "object",
@@ -601,7 +691,7 @@
             "type": "number"
           },
           "inputData": {
-            "$ref":"#/components/schemas/inputdata"
+            "$ref": "#/components/schemas/inputdata"
           }
         }
       },
