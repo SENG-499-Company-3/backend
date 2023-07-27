@@ -41,10 +41,7 @@ router.get('/all', get_all_preferences);
 
 const update_teacher_preferences = async ({ body }: { headers: any; body: Preference }, res: any): Promise<void> => {
   try {
-    console.log('body', body);
     const preferences: Preference = await teacherPrefController.update(body);
-    console.log('preferences', preferences);
-
     res.status(200).send(preferences);
   } catch (err) {
     res.status(401).send({ message: err });
@@ -62,7 +59,6 @@ const get_my_teacher_preferences = async ({ headers }: { headers: any }, res: an
 
     const email = await getEmail(authToken);
     const preferences: Preference = await teacherPrefController.byEmail(email);
-    console.log('preferences', preferences);
     res.status(200).send(preferences);
   } catch (err) {
     res.status(401).send({ message: err });
@@ -88,7 +84,6 @@ const get_teacher_pref_by_email = async (
 
     const email = await getEmail(authToken);
     const preferences: Preference = await teacherPrefController.byEmail(email);
-    console.log('preferences', preferences);
     res.status(200).send(preferences);
   } catch (err) {
     res.status(401).send({ message: err });

@@ -1,11 +1,10 @@
 import express from 'express';
 import { CourseController } from '../controllers/course.controller';
-import { isAdmin, getName } from '../helpers/auth';
+import { isAdmin } from '../helpers/auth';
 import { validate } from 'express-jsonschema';
 
 import courseValidate from '../schemagen/schemas/course.json';
 import type { Courseid as CourseValidate } from '../schemagen/types/courseid';
-import { ICourse } from '../interfaces/Course';
 
 const router = express.Router();
 const courseController: CourseController = new CourseController();
@@ -74,5 +73,39 @@ const create = async ({ headers, body }: { headers: any; body: CourseValidate },
   }
 };
 router.post('/create', validate({ body: courseValidate }), create);
+
+/**
+ * Admin: remove course
+ *
+ * @param {*} req
+ * @param {*} res
+ * @return {*}  {Promise<void>}
+ */
+const remove = async (req: any, res: any): Promise<void> => {
+  if (!req.headers.authorization) {
+    res.status(401).send({ message: 'This endpoint requires authorization header.' });
+    return;
+  }
+  const authToken = req.headers.authorization;
+  const isAdm = await isAdmin(authToken);
+  if (!isAdm) {
+    res.status(401).send({ message: 'Need admin access.' });
+    return;
+  }
+
+  try {
+    const course = new Course({
+      Subj: req.body.Subj,
+      Num: req.body.Num,
+      Section: req.body.Section
+    });
+
+    await courseController.remove(course);
+    res.status(200).send({ message: 'Removed course.' });
+  } catch (err) {
+    res.status(401).send({ message: err + '' });
+  }
+};
+router.post('/remove', remove);
 
 module.exports = router;

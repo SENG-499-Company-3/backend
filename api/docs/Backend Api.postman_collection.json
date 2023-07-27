@@ -436,7 +436,7 @@
 			"name": "course",
 			"item": [
 				{
-					"name": "course/list",
+					"name": "list",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -447,13 +447,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{backend_ip}}:{{backend_port}}/course/list",
+							"raw": "{{backend_ip}}:{{backend_port}}/courses/list",
 							"host": [
 								"{{backend_ip}}"
 							],
 							"port": "{{backend_port}}",
 							"path": [
-								"course",
+								"courses",
 								"list"
 							]
 						}
@@ -461,49 +461,9 @@
 					"response": []
 				},
 				{
-					"name": "course/remove",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "create",
 					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "authorization",
-								"value": "{{authTokenVar}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"Subj\": \"CSC\",\n    \"Num\": 111,\n    \"Section\": \"A01\",\n    \"Title\": \"Fundamental Programming\",\n    \"SchedType\": \"Lec\",\n    \"Type\": \"CORE\",\n    \"Cap\": 50\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{backend_ip}}:{{backend_port}}/course/remove",
-							"host": [
-								"{{backend_ip}}"
-							],
-							"port": "{{backend_port}}",
-							"path": [
-								"course",
-								"remove"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "course/update",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "authorization",
@@ -521,14 +481,48 @@
 							}
 						},
 						"url": {
-							"raw": "{{backend_ip}}:{{backend_port}}/course/update",
+							"raw": "{{backend_ip}}:{{backend_port}}/courses/create",
 							"host": [
 								"{{backend_ip}}"
 							],
 							"port": "{{backend_port}}",
 							"path": [
-								"course",
-								"update"
+								"courses",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{authTokenVar}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Subj\": \"CSC\",\n    \"Num\": 111,\n    \"Section\": \"A01\",\n    \"Title\": \"Fundamental Programming\",\n    \"SchedType\": \"Lec\",\n    \"Type\": \"CORE\",\n    \"Cap\": 50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend_ip}}:{{backend_port}}/courses/remove",
+							"host": [
+								"{{backend_ip}}"
+							],
+							"port": "{{backend_port}}",
+							"path": [
+								"courses",
+								"remove"
 							]
 						}
 					},

@@ -43,9 +43,10 @@ db.mongoose
 
 create_professors();
 
+create_teacher_pref();
+
 create_schedule();
 
-create_teacher_pref();
 
 populate_terms();
 
@@ -54,8 +55,6 @@ populate_courses();
 app.use('/user', user);
 app.use('/auth', auth);
 app.use('/schedule', schedule);
-// app.use('/teacherpref', teacherPref);
-// for backend
 app.use('/schedule', predictSchedule);
 app.use('/courses', course);
 app.use('/classrooms', classroom);
