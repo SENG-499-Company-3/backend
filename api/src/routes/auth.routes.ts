@@ -19,15 +19,15 @@ router.use(bodyParser.json());
  * @param {*} res
  */
 const login = async (req, res) => {
-  //Validate request
-  if (!req.body.email || !req.body.password) {
-    res.status(400).send({ message: 'Content can not be empty!' });
-    return;
-  }
-
-  const { email, password }: Userlogin = req.body;
-
   try {
+    //Validate request
+    if (!req.body.email || !req.body.password) {
+      res.status(400).send({ message: 'Content can not be empty!' });
+      return;
+    }
+
+    const { email, password }: Userlogin = req.body;
+
     const response = await authController.login(email, password);
     res.status(200).send(response);
   } catch (err) {
@@ -43,14 +43,14 @@ router.post('/login', validateEndpoint({ body: userlogin }), login);
  * @param {*} res
  */
 const self = async (req, res) => {
-  if (!req.headers.authorization) {
-    res.status(400).send({ message: 'Self endpoint requires authorization header.' });
-    return;
-  }
-
-  const token = req.headers.authorization;
-
   try {
+    if (!req.headers.authorization) {
+      res.status(400).send({ message: 'Self endpoint requires authorization header.' });
+      return;
+    }
+
+    const token = req.headers.authorization;
+
     const response = await authController.self(token);
 
     res.status(200).send(response);

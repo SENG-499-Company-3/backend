@@ -17,18 +17,18 @@ const Course = require('../models/course.model');
  * @returns {*}
  */
 const list = async (req, res) => {
-  if (!req.headers.authorization) {
-    res.status(401).send({ message: 'This endpoint requires authorization header.' });
-    return;
-  }
-  const authToken = req.headers.authorization;
-  const isAdm = await isAdmin(authToken);
-  if (!isAdm) {
-    res.status(401).send({ message: 'Need admin access.' });
-    return;
-  }
-
   try {
+    if (!req.headers.authorization) {
+      res.status(401).send({ message: 'This endpoint requires authorization header.' });
+      return;
+    }
+    const authToken = req.headers.authorization;
+    const isAdm = await isAdmin(authToken);
+    if (!isAdm) {
+      res.status(401).send({ message: 'Need admin access.' });
+      return;
+    }
+
     const courses = await courseController.list();
     res.status(200).send(courses);
   } catch (err) {
@@ -45,18 +45,18 @@ router.get('/list', list);
  */
 
 const create = async ({ headers, body }: { headers: any; body: CourseValidate }, res: any): Promise<void> => {
-  if (!headers.authorization) {
-    res.status(401).send({ message: 'This endpoint requires authorization header.' });
-    return;
-  }
-  const authToken = headers.authorization;
-  const isAdm = await isAdmin(authToken);
-  if (!isAdm) {
-    res.status(401).send({ message: 'Need admin access.' });
-    return;
-  }
-
   try {
+    if (!headers.authorization) {
+      res.status(401).send({ message: 'This endpoint requires authorization header.' });
+      return;
+    }
+    const authToken = headers.authorization;
+    const isAdm = await isAdmin(authToken);
+    if (!isAdm) {
+      res.status(401).send({ message: 'Need admin access.' });
+      return;
+    }
+
     const course_new = new Course({
       Subj: body.Subj,
       Num: body.Num,
@@ -82,18 +82,18 @@ router.post('/create', validate({ body: courseValidate }), create);
  * @return {*}  {Promise<void>}
  */
 const remove = async (req: any, res: any): Promise<void> => {
-  if (!req.headers.authorization) {
-    res.status(401).send({ message: 'This endpoint requires authorization header.' });
-    return;
-  }
-  const authToken = req.headers.authorization;
-  const isAdm = await isAdmin(authToken);
-  if (!isAdm) {
-    res.status(401).send({ message: 'Need admin access.' });
-    return;
-  }
-
   try {
+    if (!req.headers.authorization) {
+      res.status(401).send({ message: 'This endpoint requires authorization header.' });
+      return;
+    }
+    const authToken = req.headers.authorization;
+    const isAdm = await isAdmin(authToken);
+    if (!isAdm) {
+      res.status(401).send({ message: 'Need admin access.' });
+      return;
+    }
+
     const course = new Course({
       Subj: req.body.Subj,
       Num: req.body.Num,

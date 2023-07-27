@@ -15,10 +15,7 @@ const teacherPrefController: TeacherPrefController = new TeacherPrefController()
  * @param {*} res
  * @returns {*}
  */
-const get_all_preferences = async (
-  { headers }: { headers: any; params: { teacher_id: string } },
-  res: any
-): Promise<void> => {
+const get_all_preferences = async ({ headers }: { headers: any }, res: any): Promise<void> => {
   try {
     if (!headers.authorization) {
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
@@ -66,29 +63,26 @@ const get_my_teacher_preferences = async ({ headers }: { headers: any }, res: an
 };
 router.get('/my', get_my_teacher_preferences);
 
-const get_teacher_pref_by_email = async (
-  { headers }: { headers: any; params: { teacher_email: string } },
-  res: any
-): Promise<void> => {
+const get_teacher_pref_by_email = async (req: any, res: any): Promise<void> => {
   try {
-    if (!headers.authorization) {
+    if (!req.headers.authorization) {
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
       return;
     }
-    const authToken = headers.authorization;
+    const authToken = req.headers.authorization;
     const isAdm = await isAdmin(authToken);
     if (!isAdm) {
       res.status(401).send({ message: 'Need admin access.' });
       return;
     }
 
-    const email = await getEmail(authToken);
+    const email = req.query.teacherEmail;
     const preferences: Preference = await teacherPrefController.byEmail(email);
     res.status(200).send(preferences);
   } catch (err) {
     res.status(401).send({ message: err });
   }
 };
-router.get('/email:teacher_email', get_teacher_pref_by_email);
+router.get('/email', get_teacher_pref_by_email);
 
 module.exports = router;

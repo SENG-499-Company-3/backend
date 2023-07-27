@@ -8,17 +8,17 @@ const classroomController: ClassroomController = new ClassroomController();
 
 //adds classroom if doesn't exist, updates its capacity if it does
 const update = async (req, res) => {
-  if (!req.headers.authorization) {
-    res.status(401).send({ message: 'This endpoint requires authorization header.' });
-    return;
-  }
-  const authToken = req.headers.authorization;
-  const isAdm = await isAdmin(authToken);
-  if (!isAdm) {
-    res.status(401).send({ message: 'Need admin access.' });
-    return;
-  }
   try {
+    if (!req.headers.authorization) {
+      res.status(401).send({ message: 'This endpoint requires authorization header.' });
+      return;
+    }
+    const authToken = req.headers.authorization;
+    const isAdm = await isAdmin(authToken);
+    if (!isAdm) {
+      res.status(401).send({ message: 'Need admin access.' });
+      return;
+    }
     const classroom = new ClassroomModel({
       location: req.body.location,
       capacity: req.body.capacity,
@@ -34,17 +34,17 @@ const update = async (req, res) => {
 router.post('/update', update);
 
 const list = async (req, res) => {
-  if (!req.headers.authorization) {
-    res.status(401).send({ message: 'This endpoint requires authorization header.' });
-    return;
-  }
-  const authToken = req.headers.authorization;
-  const isAdm = await isAdmin(authToken);
-  if (!isAdm) {
-    res.status(401).send({ message: 'Need admin access.' });
-    return;
-  }
   try {
+    if (!req.headers.authorization) {
+      res.status(401).send({ message: 'This endpoint requires authorization header.' });
+      return;
+    }
+    const authToken = req.headers.authorization;
+    const isAdm = await isAdmin(authToken);
+    if (!isAdm) {
+      res.status(401).send({ message: 'Need admin access.' });
+      return;
+    }
     const resp = await classroomController.list();
     res.status(200).send(resp);
   } catch (err) {
