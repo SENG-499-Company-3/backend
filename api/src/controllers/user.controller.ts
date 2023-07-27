@@ -1,5 +1,4 @@
 import { hashPassword } from '../helpers/auth';
-import { UserRoles } from '../interfaces/User';
 import type { User as IUser } from '../schemagen/types/user';
 
 const User = require('../models/user.model');
@@ -18,11 +17,11 @@ export class UserController {
    * @param {string} email
    * @param {string} password
    * @param {string} name
-   * @param {UserRoles} role
+   * @param {string} role TEACHER or ADMIN
    * @return {*}  {Promise<void>}
    * @memberof UserController
    */
-  async create(email: string, password: string, name: string, role: UserRoles): Promise<void> {
+  async create(email: string, password: string, name: string, role: string): Promise<void> {
     // Create a User
     const user = new User({
       email: email,
@@ -53,30 +52,30 @@ export class UserController {
     try {
       const users: IUser[] = await User.find().catch((err) => err);
 
-      // const teacherPrefs = await teacherPrefSchema.find().catch((err) => err);
+      const teacherPrefs = await teacherPrefSchema.find().catch((err) => err);
 
-      // const usersWithPref = users.map((user) => {
-      //   console.log(user);
-      //   let pref = false;
+      const usersWithPref = users.map((user) => {
+        let pref = false;
 
-      //   teacherPrefs.forEach((teacherPref) => {
-      //     if (teacherPref.email === user.email) {
-      //       pref = true;
-      //     }
-      //   });
+        teacherPrefs.forEach((teacherPref) => {
+          if (teacherPref.email === user.email) {
+            pref = true;
+          }
+        });
 
-      //   return {
-      //     id: user._id,
-      //     email: user.email,
-      //     password: user.password,
-      //     name: user.name,
-      //     userrole: user.role,
-      //     token: user.token,
-      //     preferencesSubmitted: pref
-      //   } as IUser;
-      // });
+        return {
+          id: user._id,
+          email: user.email,
+          password: user.password,
+          name: user.name,
+          userrole: user.userrole,
+          token: user.token,
+          preferencesSubmitted: pref
+        } as IUser;
+      });
 
-      return users;
+      console.log('usersWithPref', usersWithPref);
+      return usersWithPref;
     } catch (err) {
       console.log(err);
       throw new Error('Some error occurred while retrieving users.');

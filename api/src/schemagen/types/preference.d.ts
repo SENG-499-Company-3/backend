@@ -6,7 +6,7 @@
  */
 
 export interface Preference {
-  professorId: string;
+  email: string;
   coursePreferences: {
     courseId: number;
     ability: 'ABLE' | 'WITH_DIFFICULTY';

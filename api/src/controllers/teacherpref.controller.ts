@@ -23,19 +23,16 @@ export class TeacherPrefController {
   async update(prefs: ITeacherPref): Promise<ITeacherPref> {
     try {
       //try finding the teacher's current preference
-      let time = new Date();
-      let time_local = time.toLocaleString('en-CA', { timeZone: 'America/Vancouver' });
       const pref = new TeacherPref(prefs);
-      const pref_curr = await TeacherPref.findOne({ professorId: prefs.professorId }).catch((err) => err);
+      const pref_curr = await TeacherPref.findOne({ email: prefs.email }).catch((err) => err);
       if (!pref_curr) {
         //insert if doesn't exist
         await pref.save(pref).catch((err) => err);
         return pref;
       } //replace if already exists
       else {
-        const doc = await TeacherPref.findOne({ email: prefs.email }).catch((err) => err);
-        doc.overwrite(pref);
-        await doc.save();
+        pref_curr.overwrite(pref);
+        await pref_curr.save();
         return pref;
       }
     } catch (err) {
@@ -64,7 +61,7 @@ export class TeacherPrefController {
    * @returns {Promise<ITeacherPref>}
    * @memberof TeacherPrefController
    */
-  async my(email: string, uid): Promise<ITeacherPref> {
+  async my(email: string): Promise<ITeacherPref> {
     try {
       const teacherPref: ITeacherPref = await TeacherPref.findOne({ email: email }).catch((err) => err);
       if (!teacherPref) {
@@ -79,9 +76,9 @@ export class TeacherPrefController {
   }
 
   //get teacher pref by id
-  async byId(uid: string): Promise<ITeacherPref> {
+  async byEmail(email: string): Promise<ITeacherPref> {
     try {
-      const teacherPref: ITeacherPref = await TeacherPref.findOne({ professorId: uid }).catch((err) => err);
+      const teacherPref: ITeacherPref = await TeacherPref.findOne({ email: email }).catch((err) => err);
       if (!teacherPref) throw new Error('No user prefernces for specified user found');
       return teacherPref;
     } catch (err) {

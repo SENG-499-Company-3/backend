@@ -17,11 +17,11 @@ router.use(bodyParser.json());
  * @param {*} res
  * @return {*}
  */
-const create = async ({body}: {body: User}, res: any) => {
-  // Validate request
-  const { email, password, name, userrole } = body;
-
+const create = async ({ body }: { body: User }, res: any) => {
   try {
+    // Validate request
+    const { email, password, name, userrole } = body;
+
     await userController.create(email, password, name, userrole);
     res.status(200).send('Created user. ');
   } catch (err) {
@@ -41,8 +41,8 @@ const list = async (req, res) => {
     let users = await userController.list();
 
     users.forEach(function (user) {
-      user.password = "";
-      user.token = "";
+      user.password = '';
+      user.token = '';
     });
 
     res.status(200).send(users);
@@ -54,24 +54,24 @@ router.get('/list', list);
 
 //get user by id
 const byId = async (req, res) => {
-  if (!req.headers.authorization) {
-    res.status(401).send({ message: 'This endpoint requires authorization header.' });
-    return;
-  }
-  const authToken = req.headers.authorization;
-  const isAdm = await isAdmin(authToken);
-  if (!isAdm) {
-    res.status(401).send({ message: 'Need admin access.' });
-    return;
-  }
-
-  if (!req.query.id) {
-    res.status(400).send({ message: 'Need to provide user id in url' });
-    return;
-  }
   try {
+    if (!req.headers.authorization) {
+      res.status(401).send({ message: 'This endpoint requires authorization header.' });
+      return;
+    }
+    const authToken = req.headers.authorization;
+    const isAdm = await isAdmin(authToken);
+    if (!isAdm) {
+      res.status(401).send({ message: 'Need admin access.' });
+      return;
+    }
+
+    if (!req.query.id) {
+      res.status(400).send({ message: 'Need to provide user id in url' });
+      return;
+    }
     let user: User = await userController.byId(req.query.id);
-    user.password = "";
+    user.password = '';
     res.status(200).send(user);
   } catch (err) {
     res.status(401).send({ messge: err });

@@ -1,7 +1,7 @@
 import cors from 'cors';
 import morgan from 'morgan';
 import express from 'express';
-import { create_professors, create_schedule, create_teacher_pref, populate_terms, populate_courses } from './helpers/createMockData';
+import { create_professors, create_schedule, create_teacher_pref, populate_terms, populate_courses, populate_classrooms } from './helpers/createMockData';
 
 const user = require('./routes/user.routes');
 const auth = require('./routes/auth.routes');
@@ -43,19 +43,19 @@ db.mongoose
 
 create_professors();
 
-create_schedule();
-
 create_teacher_pref();
+
+populate_courses();
+
+populate_classrooms();
 
 populate_terms();
 
-populate_courses();
+create_schedule();
 
 app.use('/user', user);
 app.use('/auth', auth);
 app.use('/schedule', schedule);
-// app.use('/teacherpref', teacherPref);
-// for backend
 app.use('/schedule', predictSchedule);
 app.use('/courses', course);
 app.use('/classrooms', classroom);

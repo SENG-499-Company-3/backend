@@ -1,11 +1,8 @@
 import express from 'express';
 import { validate as validateEndpoint } from 'express-jsonschema';
-import { validate } from 'jsonschema';
 import bodyParser from 'body-parser';
 import userlogin from '../schemagen/schemas/userlogin.json';
 import type { Userlogin } from '../schemagen/types/userlogin';
-import predicted_class_size from '../schemagen/schemas/predicted_class_size.json';
-import user from '../schemagen/schemas/user.json';
 import jwt from '../schemagen/schemas/jwt.json';
 import { AuthController } from '../controllers/auth.controller';
 
@@ -22,15 +19,15 @@ router.use(bodyParser.json());
  * @param {*} res
  */
 const login = async (req, res) => {
-  //Validate request
-  if (!req.body.email || !req.body.password) {
-    res.status(400).send({ message: 'Content can not be empty!' });
-    return;
-  }
-
-  const { email, password }: Userlogin = req.body;
-
   try {
+    //Validate request
+    if (!req.body.email || !req.body.password) {
+      res.status(400).send({ message: 'Content can not be empty!' });
+      return;
+    }
+
+    const { email, password }: Userlogin = req.body;
+
     const response = await authController.login(email, password);
     res.status(200).send(response);
   } catch (err) {
@@ -46,17 +43,17 @@ router.post('/login', validateEndpoint({ body: userlogin }), login);
  * @param {*} res
  */
 const self = async (req, res) => {
-  if (!req.headers.authorization) {
-    res.status(400).send({ message: 'Self endpoint requires authorization header.' });
-    return;
-  }
-
-  const token = req.headers.authorization;
-
   try {
+    if (!req.headers.authorization) {
+      res.status(400).send({ message: 'Self endpoint requires authorization header.' });
+      return;
+    }
+
+    const token = req.headers.authorization;
+
     const response = await authController.self(token);
 
-    res.status(200).send(validate(response, user));
+    res.status(200).send(response);
   } catch (err) {
     res.status(401).send({ message: err });
   }
