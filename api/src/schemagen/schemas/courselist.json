@@ -20,7 +20,7 @@
              }
            }
          },
-         "required": ["location", "capacity", "equipment"],
+         "required": ["location", "capacity", "equipment"]
        }
      }
    },
