@@ -26,14 +26,14 @@ export class TeacherPrefController {
       let time = new Date();
       let time_local = time.toLocaleString('en-CA', { timeZone: 'America/Vancouver' });
       const pref = new TeacherPref(prefs);
-      const pref_curr = await TeacherPref.findOne({ professorId: prefs.professorId }).catch((err) => err);
+      const pref_curr = await TeacherPref.findOne({ professorId: prefs.professorId })
       if (!pref_curr) {
         //insert if doesn't exist
-        await pref.save(pref).catch((err) => err);
+        await pref.save(pref)
         return pref;
       } //replace if already exists
       else {
-        const doc = await TeacherPref.findOne({ email: prefs.email }).catch((err) => err);
+        const doc = await TeacherPref.findOne({ professorId: prefs.professorId })
         doc.overwrite(pref);
         await doc.save();
         return pref;
@@ -51,7 +51,7 @@ export class TeacherPrefController {
    */
   async list(): Promise<ITeacherPref[]> {
     try {
-      const prefs: ITeacherPref[] = await TeacherPref.find().catch((err) => err);
+      const prefs: ITeacherPref[] = await TeacherPref.find()
       return prefs;
     } catch (err) {
       throw new Error('Error while retrieving the entire teacher preferences');

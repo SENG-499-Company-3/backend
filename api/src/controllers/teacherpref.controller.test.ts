@@ -19,7 +19,7 @@ describe('TeacherPrefController', () => {
       const teacherPrefController = new TeacherPrefController();
       const name = 'abc';
       const response = await teacherPrefController.update({
-        professorId: 'abc',
+        professorId: name,
         coursePreferences: [
           {
             courseId: 10,
@@ -41,7 +41,7 @@ describe('TeacherPrefController', () => {
         load: 2
       });
 
-      const teacherPrefs = await TeacherPrefModel.find({ professorId: name });
+      const teacherPrefs = await teacherPrefController.byId(name);
       expect(response.professorId).toBe(name);
       expect(teacherPrefs.length).toBe(1);
     });
