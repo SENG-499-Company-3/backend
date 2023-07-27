@@ -25,13 +25,12 @@ const availability = new Schema({
 });
 
 export const teacherPrefSchema = new Schema<Preference>({
+  email: String,
   professorId: String,
   coursePreferences: [coursePreferences],
   additionalDetailes: String,
   availability: [availability],
   load: Number
-}, {
-  _id: false, // Set _id to false to remove it for the nested schema
 });
 
 module.exports = model('TeacherPref', teacherPrefSchema);

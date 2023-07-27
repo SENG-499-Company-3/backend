@@ -444,6 +444,10 @@
         "required": ["email", "password"],
         "type": "object",
         "properties": {
+          "_id": {
+            "type": "string",
+            "example": "5e8b1b7b0b1f9a0017b5e3b1"
+          },
           "email": {
             "type": "string",
             "format": "email",
@@ -472,9 +476,14 @@
         }
       },
       "preference": {
-        "required": ["professorId", "coursePreferences", "additionalDetailes", "availability", "load"],
+        "required": ["email", "professorId", "coursePreferences", "additionalDetailes", "availability", "load"],
         "type": "object",
         "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": ""
+          },
           "professorId": {
             "type": "string",
             "example": "Rich Little"
