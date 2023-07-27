@@ -32,7 +32,7 @@ const login = async (req, res) => {
 
   try {
     const response = await authController.login(email, password);
-    res.status(200).send(validate(response, predicted_class_size));
+    res.status(200).send(response);
   } catch (err) {
     res.status(401).send({ message: err });
   }

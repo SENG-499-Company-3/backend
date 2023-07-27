@@ -1,15 +1,37 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { Schema, model } from 'mongoose';
+import type { Preference } from '../schemagen/types/preference';
 
-export const teacherPrefSchema = new Schema({
-  _id: { type: String, required: true },
-  email: { type: String, required: true },
-  // course_ids: [{ type: [String], required: true}],
-  courses: { type: [String], required: true },
-  start: { type: String, required: true },
-  end: { type: String, required: true },
-  peng: { type: Boolean, required: true },
-  last_updated: { type: String }
+const coursePreferences = new Schema({
+  courseId: Number,
+  ability: String,
+  willingness: String
+}, {
+  _id: false, // Set _id to false to remove it for the nested schema
 });
 
-module.exports = mongoose.model('TeacherPref', teacherPrefSchema);
+const term = new Schema({
+  termId: Number,
+  year: Number,
+  month: Number
+}, {
+  _id: false, // Set _id to false to remove it for the nested schema
+});
+
+const availability = new Schema({
+  term: term,
+  isAvailable: Boolean
+}, {
+  _id: false, // Set _id to false to remove it for the nested schema
+});
+
+export const teacherPrefSchema = new Schema<Preference>({
+  professorId: String,
+  coursePreferences: [coursePreferences],
+  additionalDetailes: String,
+  availability: [availability],
+  load: Number
+}, {
+  _id: false, // Set _id to false to remove it for the nested schema
+});
+
+module.exports = model('TeacherPref', teacherPrefSchema);

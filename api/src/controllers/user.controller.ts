@@ -1,5 +1,6 @@
 import { hashPassword } from '../helpers/auth';
-import { IUser, UserRoles } from '../interfaces/User';
+import { UserRoles } from '../interfaces/User';
+import type { User as IUser } from '../schemagen/types/user';
 
 const User = require('../models/user.model');
 const teacherPrefSchema = require('../models/teacherpref.model');
@@ -27,7 +28,7 @@ export class UserController {
       email: email,
       password: password,
       name: name,
-      role: role,
+      userrole: role,
       token: ''
     });
 
@@ -69,7 +70,7 @@ export class UserController {
           email: user.email,
           password: user.password,
           name: user.name,
-          role: user.role,
+          userrole: user.role,
           token: user.token,
           preferencesSubmitted: pref
         } as IUser;

@@ -1,37 +1,39 @@
-export const userData = [
+import type { User } from '../../schemagen/types/user'
+
+export const userData: User[] = [
   {
     email: '123@gmail.com',
     password: 'Test123!',
     name: 'Rich Little',
-    role: 'ADMIN',
+    userrole: 'ADMIN',
     token: ''
   },
   {
     email: '124@gmail.com',
     password: 'Test123!',
     name: 'Jeff Mayer',
-    role: 'TEACHER',
+    userrole: 'TEACHER',
     token: ''
   },
   {
     email: '125@gmail.com',
     password: 'Test123!',
     name: 'Jane Doe',
-    role: 'TEACHER',
+    userrole: 'TEACHER',
     token: ''
   },
   {
     email: '126@gmail.com',
     password: 'Test123!',
     name: 'Matt Reeves',
-    role: 'TEACHER',
+    userrole: 'TEACHER',
     token: ''
   },
   {
     email: '127@gmail.com',
     password: 'Test123!',
     name: 'Dan Brown',
-    role: 'TEACHER',
+    userrole: 'TEACHER',
     token: ''
   }
 ];
