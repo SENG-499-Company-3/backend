@@ -9,5 +9,6 @@ export interface InputdataTimeslots {
   day?: string[];
   length?: number;
   startTime?: number;
+  index?: number;
   [k: string]: unknown;
 }

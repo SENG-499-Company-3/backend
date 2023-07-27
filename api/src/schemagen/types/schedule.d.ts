@@ -46,5 +46,51 @@ export interface Schedule {
   iterations: number;
   c_hat: number;
   quality: number;
+  inputData: {
+    rooms?: {
+      location?: string;
+      capacity?: number;
+      equipment?: string[];
+      [k: string]: unknown;
+    }[];
+    timeslots?: {
+      day?: string[];
+      length?: number;
+      startTime?: number;
+      [k: string]: unknown;
+    }[];
+    courses?: {
+      coursename?: string;
+      noScheduleOverlap?: string[];
+      lecturesNumber?: number;
+      labsNumber?: number;
+      tutorialsNumber?: number;
+      capacity?: number;
+      [k: string]: unknown;
+    }[];
+    professors?: {
+      name?: string;
+      courses?: string[];
+      timePreferences?: string[];
+      coursePreferences?: number[];
+      dayPreferences?: string[];
+      equipmentPreferences?: string[];
+      load?: number;
+      [k: string]: unknown;
+    }[];
+    dimensions?: {
+      courses?: number;
+      times?: number;
+      teachers?: number;
+      rooms?: number;
+      [k: string]: unknown;
+    };
+    preferences?: number[][];
+    loads?: number[];
+    availabilities?: number[][];
+    p_tgt?: number;
+    max_iter?: number;
+    [k: string]: unknown;
+  };
   [k: string]: unknown;
 }

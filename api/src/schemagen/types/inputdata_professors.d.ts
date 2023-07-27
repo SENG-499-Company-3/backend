@@ -13,5 +13,6 @@ export interface InputdataProfessors {
   dayPreferences?: string[];
   equipmentPreferences?: string[];
   load?: number;
+  index?: number;
   [k: string]: unknown;
 }

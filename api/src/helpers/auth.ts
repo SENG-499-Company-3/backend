@@ -1,5 +1,5 @@
 // import { IUser } from '../interfaces/User';
-import type { User as IUser } from "../schemagen/types/user";
+import type { User as IUser } from '../schemagen/types/user';
 
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt');

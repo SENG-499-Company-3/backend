@@ -17,7 +17,7 @@ router.use(bodyParser.json());
  * @param {*} res
  * @return {*}
  */
-const create = async ({body}: {body: User}, res: any) => {
+const create = async ({ body }: { body: User }, res: any) => {
   // Validate request
   const { email, password, name, userrole } = body;
 
@@ -41,8 +41,8 @@ const list = async (req, res) => {
     let users = await userController.list();
 
     users.forEach(function (user) {
-      user.password = "";
-      user.token = "";
+      user.password = '';
+      user.token = '';
     });
 
     res.status(200).send(users);
@@ -71,7 +71,7 @@ const byId = async (req, res) => {
   }
   try {
     let user: User = await userController.byId(req.query.id);
-    user.password = "";
+    user.password = '';
     res.status(200).send(user);
   } catch (err) {
     res.status(401).send({ messge: err });

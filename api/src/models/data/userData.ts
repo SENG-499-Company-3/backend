@@ -1,4 +1,4 @@
-import type { User } from '../../schemagen/types/user'
+import type { User } from '../../schemagen/types/user';
 
 export const userData: User[] = [
   {

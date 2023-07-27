@@ -21,6 +21,9 @@
     },
     "capacity": {
       "type": "integer"
+    },
+    "index": {
+      "type": "integer"
     }
   },
   "$schema": "http://json-schema.org/schema#"
