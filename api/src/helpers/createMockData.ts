@@ -5,6 +5,7 @@ const User = require('../models/user.model');
 const teacherPrefSchema = require('../models/teacherpref.model');
 const TermModel = require('../models/term.model');
 const CourseModel = require('../models/course.model');
+const classroom = require('../models/classroom.model');
 
 import { IUser } from '../interfaces/User';
 import { ITerm } from '../interfaces/Term';
@@ -14,6 +15,7 @@ import { teacherPrefData } from '../models/data/teacherPrefData';
 import { userData } from '../models/data/userData';
 import { hashPassword } from './auth';
 import { courseData2023 } from '../models/data/courseData';
+import { static_classroom_list } from '../models/data/classroomData';
 
 // Create data for previous enrolment
 export async function create_schedule() {
@@ -120,5 +122,22 @@ export async function populate_courses() {
           });
       }
     });
+  });
+}
+
+export async function populate_classrooms() {
+  // Iterate through the rooms array
+  static_classroom_list.rooms.forEach(async (data, index) => {
+    classroom
+      .findOne({ location: data.location, capacity: data.capacity })
+      .then(async (c: any) => {
+        if (!c) {
+          classroom.create(data);
+          console.log('Course List ' + index + ' created!');
+        }
+      })
+      .catch((err: any) => {
+        console.log('Error creating course list!', err);
+      });
   });
 }

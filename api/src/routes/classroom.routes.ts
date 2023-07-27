@@ -1,7 +1,6 @@
 import express from 'express';
 import { ClassroomController } from '../controllers/classroom.controller';
-import { isAdmin, getName } from '../helpers/auth';
-import { IClassroom } from '../interfaces/Classroom';
+import { isAdmin } from '../helpers/auth';
 
 const ClassroomModel = require('../models/classroom.model');
 const router = express.Router();
@@ -21,10 +20,9 @@ const update = async (req, res) => {
   }
   try {
     const classroom = new ClassroomModel({
-      BuildingName: req.body.BuildingName,
-      BuildingId: req.body.BuildingId,
-      RoomNumber: req.body.RoomNumber,
-      Capacity: req.body.Capacity
+      location: req.body.location,
+      capacity: req.body.capacity,
+      equipment: req.body.equipment
     });
 
     await classroomController.update(classroom);

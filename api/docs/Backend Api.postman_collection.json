@@ -546,7 +546,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"BuildingName\": \"ELW\",\n    \"BuildingId\": 11,\n    \"RoomNumber\": 110,\n    \"Capacity\": 52\n}",
+							"raw": "{\n    \"location\": \"ELW 110\",\n    \"capacity\": 52,\n    \"equipment\": [\"projector\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
