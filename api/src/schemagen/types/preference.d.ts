@@ -8,13 +8,22 @@
 export interface Preference {
   professorId: string;
   coursePreferences: {
-    courseId?: number;
-    ability?: 'ABLE' | 'WITH_DIFFICULTY';
-    willingness?: 'WILLING' | 'UNWILLING' | 'VERY_WILLING';
+    courseId: number;
+    ability: 'ABLE' | 'WITH_DIFFICULTY';
+    willingness: 'WILLING' | 'UNWILLING' | 'VERY_WILLING';
     [k: string]: unknown;
   }[];
-  additionalDetailes: unknown;
-  availability: unknown;
-  load: unknown;
+  additionalDetailes: string;
+  availability: {
+    term: {
+      termId: number;
+      year: number;
+      month: number;
+      [k: string]: unknown;
+    };
+    isAvailable: boolean;
+    [k: string]: unknown;
+  }[];
+  load: number;
   [k: string]: unknown;
 }

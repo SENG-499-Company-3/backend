@@ -59,7 +59,7 @@ describe('UserController', () => {
         email: 'email',
         password: 'password',
         name: 'name',
-        role: 'TEACHER',
+        userrole: 'TEACHER',
         token: ''
       });
 

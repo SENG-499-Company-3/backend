@@ -11,10 +11,20 @@
       "description": "Course code, e.g. 499,310"
     },
     "term": {
-      "type": "string",
-      "description": "Term course is offered in",
-      "enum": ["FALL", "SPRING", "SUMMER"],
-      "$schema": "http://json-schema.org/schema#"
+      "required": ["termId", "year", "month"],
+      "properties": {
+        "termId": {
+          "type": "number"
+        },
+        "year": {
+          "type": "number"
+        },
+        "month": {
+          "type": "number"
+        }
+      },
+      "$schema": "http://json-schema.org/schema#",
+      "type": "object"
     }
   },
   "$schema": "http://json-schema.org/schema#"
