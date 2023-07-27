@@ -4,8 +4,6 @@ export interface IUser extends Document {
   email: string;
   password?: string;
   name: string;
-  userrole: UserRoles;
+  userrole: string;
   token?: string;
 }
-
-export type UserRoles = 'TEACHER' | 'ADMIN';
