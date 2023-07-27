@@ -601,7 +601,7 @@
             "type": "number"
           },
           "inputData": {
-            "$ref":"#/components/schemas/inputdata"
+            "$ref": "#/components/schemas/inputdata"
           }
         }
       },
@@ -895,6 +895,33 @@
           },
           "term": {
             "type": "integer"
+          }
+        }
+      },
+      "classrooms": {
+        "required": ["rooms"],
+        "type": "object",
+        "properties": {
+          "rooms": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "location": {
+                  "type": "string"
+                },
+                "capacity": {
+                  "type": "integer"
+                },
+                "equipment": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": ["location", "capacity", "equipment"]
+            }
           }
         }
       }
