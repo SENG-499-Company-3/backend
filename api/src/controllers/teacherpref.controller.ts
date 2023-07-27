@@ -1,7 +1,7 @@
 // import { ITeacherPref } from '../interfaces/TeacherPref';
 import type { Preference as ITeacherPref } from '../schemagen/types/preference';
 
-const TeacherPref = require('../models/teacherpref.model');
+import TeacherPref from '../models/teacherpref.model';
 
 /**
  * Teacher preferences controller
