@@ -55,26 +55,6 @@ export class TeacherPrefController {
     }
   }
 
-  /**
-   * get the teacher preference whose authToken is provided
-   * @param {string} email
-   * @returns {Promise<ITeacherPref>}
-   * @memberof TeacherPrefController
-   */
-  async my(email: string): Promise<ITeacherPref> {
-    try {
-      const teacherPref: ITeacherPref = await TeacherPref.findOne({ email: email }).catch((err) => err);
-      if (!teacherPref) {
-        //if it doesn't exist, create one
-        // await this.update(uid, email, [''], '08:30', '22:00', 'false');
-      }
-      const teacherPref2: ITeacherPref = await TeacherPref.findOne({ email: email }).catch((err) => err);
-      return teacherPref2;
-    } catch (err) {
-      throw new Error('Error while retrieving your preferences');
-    }
-  }
-
   //get teacher pref by id
   async byEmail(email: string): Promise<ITeacherPref> {
     try {

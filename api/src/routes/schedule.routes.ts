@@ -38,7 +38,6 @@ const create = async (req, res) => {
 };
 router.get('/create', validateEndpoint({ body: inputData }), create);
 
-// TODO Pretty sure this is depreciated
 /**
  * Admin list entire schedule
  * Get the entire schedule that has been created from the database
@@ -66,7 +65,6 @@ const list = async (req, res) => {
 };
 router.get('/list', list);
 
-// TODO add to api_schema.jso
 /**
  * Admin: triggers build schedule
  *
@@ -83,7 +81,6 @@ const generate_trigger = async (req, res) => {
 };
 router.get('/generate_trigger', generate_trigger);
 
-// TODO add to api_schema.jso
 /**
  * Admin: triggers validate schedule
  *
@@ -92,11 +89,10 @@ router.get('/generate_trigger', generate_trigger);
  */
 const validate_trigger = async (req, res) => {
   try {
-    const id = req.param.id;
+    const id = req.query.id;
     const response = await scheduleController.validate(id);
     res.status(200).send(response);
   } catch (err) {
-    console.log('err', err);
     res.status(401).send({ message: err });
   }
 };

@@ -6,7 +6,13 @@ const ClassroomModel = require('../models/classroom.model');
 const router = express.Router();
 const classroomController: ClassroomController = new ClassroomController();
 
-//adds classroom if doesn't exist, updates its capacity if it does
+/**
+ * Admin: adds classroom if doesn't exist, updates its capacity if it does
+ *
+ * @param {*} req
+ * @param {*} res
+ * @return {*}
+ */
 const update = async (req, res) => {
   try {
     if (!req.headers.authorization) {
@@ -33,6 +39,13 @@ const update = async (req, res) => {
 };
 router.post('/update', update);
 
+/**
+ *  Admin: list all classrooms
+ *
+ * @param {*} req
+ * @param {*} res
+ * @return {*}
+ */
 const list = async (req, res) => {
   try {
     if (!req.headers.authorization) {

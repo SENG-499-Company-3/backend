@@ -36,6 +36,13 @@ const get_all_preferences = async ({ headers }: { headers: any }, res: any): Pro
 };
 router.get('/all', get_all_preferences);
 
+/**
+ * Update a professors preferences
+ *
+ * @param {{ headers: any; body: Preference }} { body }
+ * @param {*} res
+ * @return {*}  {Promise<void>}
+ */
 const update_teacher_preferences = async ({ body }: { headers: any; body: Preference }, res: any): Promise<void> => {
   try {
     const preferences: Preference = await teacherPrefController.update(body);
@@ -46,6 +53,13 @@ const update_teacher_preferences = async ({ body }: { headers: any; body: Prefer
 };
 router.put('/update', validateEndpoint({ body: preference }), update_teacher_preferences);
 
+/**
+ * Get a professors preferences
+ *
+ * @param {{ headers: any }} { headers }
+ * @param {*} res
+ * @return {*}  {Promise<void>}
+ */
 const get_my_teacher_preferences = async ({ headers }: { headers: any }, res: any): Promise<void> => {
   try {
     if (!headers.authorization) {
@@ -55,9 +69,8 @@ const get_my_teacher_preferences = async ({ headers }: { headers: any }, res: an
     const authToken = headers.authorization;
 
     const email = await getEmail(authToken);
-    console.log('email', email);
     const preferences: Preference = await teacherPrefController.byEmail(email);
-    console.log('preferences', preferences);
+
     res.status(200).send(preferences);
   } catch (err) {
     res.status(401).send({ message: err });
@@ -65,6 +78,13 @@ const get_my_teacher_preferences = async ({ headers }: { headers: any }, res: an
 };
 router.get('/my', get_my_teacher_preferences);
 
+/**
+ * Get a professors preferences by email
+ *
+ * @param {*} req
+ * @param {*} res
+ * @return {*}  {Promise<void>}
+ */
 const get_teacher_pref_by_email = async (req: any, res: any): Promise<void> => {
   try {
     if (!req.headers.authorization) {
