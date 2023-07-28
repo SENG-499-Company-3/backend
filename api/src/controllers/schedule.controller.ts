@@ -2,7 +2,6 @@ import { ISchedule } from '../interfaces/Schedule';
 import { IGeneratedSchedule } from '../interfaces/GeneratedSchedule';
 
 import axios from 'axios';
-import { algo1_mapping } from '../models/data/algo1_testData';
 import { algo1Data } from '../models/data/algo1_Data';
 
 const Schedule = require('../models/schedule.model');
@@ -18,78 +17,6 @@ const teacherPrefModel = require('../models/teacherpref.model');
  * @class ScheduleController
  */
 export class ScheduleController {
-  /**
-   * Creates a schedule (currently mock data)
-   * @return {*}
-   * @memberof ScheduleController
-   */
-  async create(): Promise<void> {
-    try {
-      // await create_schedule(); //creates mock schedule\
-      const algo1_output = await this.trigger();
-      const assignments = algo1_output.assignments;
-
-      //convert schedule into proper form
-      const schedules = await this.asg_to_schedule(assignments);
-
-      //replace current schedule with the new one schedule in database
-      console.log('Schedule length is ' + schedules.length);
-      await this.update(schedules, schedules.length);
-    } catch (err) {
-      console.log('Error creating schedule', err);
-      throw new Error('Error creating schedule.');
-    }
-  }
-
-  //converts assignments[][] to list of schedules
-  async asg_to_schedule(assignments: number[][]): Promise<ISchedule[]> {
-    const course_mapping = algo1_mapping.courses;
-    const time_mapping = algo1_mapping.timeslots;
-    const teacher_mapping = algo1_mapping.teacher;
-
-    let schedules: ISchedule[] = [];
-    for (var asg of assignments) {
-      //get days, begin, and end
-      const times = time_mapping[asg[1] % 16].split(' ');
-      const days = times[0];
-      let begin = times[1];
-      begin = begin.replace(':', '');
-      let begin_num = parseInt(begin);
-      let end = times[2];
-      end = end.replace(':', '');
-      let end_num = parseInt(end);
-
-      //get subj and num
-      const subj_full = course_mapping[asg[0] % 100].split(' ');
-      const subj = subj_full[0];
-      const num = subj_full[1];
-      const num_n = parseInt(num);
-
-      let s: ISchedule = {
-        Term: 1,
-        Subj: subj,
-        Num: num_n,
-        Section: 'A01',
-        Title: 'Programming practices',
-        SchedType: 'LEC',
-        Instructor: teacher_mapping[asg[2] % 120],
-        Bldg: 'ECS',
-        Room: 'xxx',
-        Begin: begin_num,
-        End: end_num,
-        Days: days,
-        StartDate: 'Sep 7, 2023',
-        EndDate: 'Dec 16, 2023',
-        Cap: 50
-      };
-      console.log('S is: ');
-      console.log(s);
-      schedules.push(s);
-    }
-
-    return schedules;
-  }
-
   async createInputData(): Promise<any> {
     const classes = await ClassroomModel.find();
 
@@ -246,7 +173,7 @@ export class ScheduleController {
    */
   async trigger(): Promise<IGeneratedSchedule> {
     const data = await this.createInputData();
-    console.log('data', JSON.stringify(data));
+    // console.log('data', JSON.stringify(data));
 
     const algorithm1IP = process.env.ALGORITHM_1_IP || 'localhost';
     const algorithm1Port = process.env.ALGORITHM_1_PORT || '8000';
@@ -259,7 +186,6 @@ export class ScheduleController {
         'content-type': 'application/json'
       }
     });
-    console.log('response', response);
 
     const assignments: any = [];
 
@@ -289,6 +215,19 @@ export class ScheduleController {
       assignments.push(assignmentIds);
     }
 
+    const inputData = {
+      rooms: response.data.inputData.rooms,
+      timeslots: response.data.inputData.timeslots,
+      courses: response.data.inputData.courses,
+      professors: response.data.inputData.professors,
+      dimensions: response.data.inputData.dimensions,
+      preferences: response.data.inputData.preferences,
+      loads: response.data.inputData.loads,
+      required_courses: response.data.inputData.required_courses,
+      p_tgt: response.data.inputData.p_tgt,
+      max_iter: response.data.inputData.max_iter
+    };
+
     const genSchedule = new generatedSchedule({
       assignments: assignments,
       valid: response.data.valid,
@@ -296,7 +235,9 @@ export class ScheduleController {
       reward: response.data.reward,
       iterations: response.data.iterations,
       c_hat: response.data.c_hat,
-      quality: response.data.quality
+      quality: response.data.quality,
+      inputData: inputData,
+      rawAssignments: response.data.assignments
     });
 
     var id = genSchedule._id;
@@ -321,7 +262,29 @@ export class ScheduleController {
     const algorithm1IP = process.env.ALGORITHM_1_IP || 'localhost';
     const algorithm1Port = process.env.ALGORITHM_1_PORT || '5000';
 
-    const response = await axios.post(`http://${algorithm1IP}:${algorithm1Port}/schedule/validate`, { id: id });
+    let schedule: any;
+
+    await generatedSchedule.findOne({ _id: id }).then(async (res) => {
+      schedule = {
+        assignments: res.rawAssignments,
+        valid: res.valid,
+        complete: res.complete,
+        reward: res.reward,
+        iterations: res.iterations,
+        c_hat: res.c_hat,
+        quality: res.quality,
+        inputData: res.inputData
+      };
+    });
+
+    const response = await axios.post(`http://${algorithm1IP}:${algorithm1Port}/schedule/validate`, schedule, {
+      headers: {
+        // 'application/json' is the modern content-type for JSON, but some
+        // older servers may use 'text/json'.
+        // See: http://bit.ly/text-json
+        'content-type': 'application/json'
+      }
+    });
 
     return response.data.valid;
   }
@@ -362,7 +325,7 @@ export class ScheduleController {
         .populate('assignments.prof')
         .populate('assignments.room')
         .catch((err) => err);
-      console.log('schedules', schedules);
+
       return schedules;
     } catch (err) {
       throw new Error('Error while retrieving the entire schedule');
