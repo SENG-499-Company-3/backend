@@ -160,28 +160,19 @@
         }
       }
     },
-    "/schedule/create": {
+    "/schedule/generate_trigger": {
       "post": {
         "tags": ["algorithm1"],
         "summary": "algorithm 1 endpoint to generate a schedule",
         "description": "Algorithm 1 endpoint to generate a schedule\n",
         "operationId": "createSchedule",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/inputdata"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "schedule generation completed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/schedule"
+                  "$ref": "#/components/schemas/generatedSchedule"
                 }
               }
             }
@@ -204,7 +195,7 @@
         "tags": ["algorithm1"],
         "summary": "algorithm 1 endpoint to validate an existing schedule",
         "description": "Algorithm 1 endpoint to validate a schedule\n",
-        "operationId": "validateSchedule",
+        "operationId": "validateSchedule2",
         "requestBody": {
           "content": {
             "application/json": {
@@ -291,6 +282,104 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/course_size_prediction_content"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unable to predict class size",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/list": {
+      "post": {
+        "tags": ["algorithm1"],
+        "summary": "returns the schedule ",
+        "description": "Returns list of schedule objects.\n",
+        "operationId": "listSchedule",
+        "responses": {
+          "200": {
+            "description": "The schedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/scheduleFrontend"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unable to predict class size",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/my": {
+      "post": {
+        "tags": ["algorithm1"],
+        "summary": "returns the user's schedule ",
+        "description": "Return schedule objects for the logged.\n",
+        "operationId": "mySchedule",
+        "responses": {
+          "200": {
+            "description": "The schedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/scheduleFrontend"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unable to predict class size",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/validate_trigger": {
+      "post": {
+        "tags": ["algorithm1"],
+        "summary": "validates schedule",
+        "description": "Validates the schedule associcated with the given id\n",
+        "operationId": "validateSchedule",
+        "responses": {
+          "200": {
+            "description": "returns true if schedule is valid",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
                 }
               }
             }
@@ -657,6 +746,9 @@
           },
           "room": {
             "$ref": "#/components/schemas/inputdata_rooms"
+          },
+          "_id": {
+            "type": "string"
           }
         }
       },
@@ -693,6 +785,120 @@
           "inputData": {
             "$ref": "#/components/schemas/inputdata"
           }
+        }
+      },
+      "scheduleFrontend": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "assignments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "$ref": "#/components/schemas/assignmentFrontend"
+            }
+          }
+        }
+      },
+      "assignmentFrontend": {
+        "type": "object",
+        "properties": {
+          "timeslot": {
+            "type": "object",
+            "$ref": "#/components/schemas/timeslotFrontend"
+          },
+          "course": {
+            "type": "object",
+            "$ref": "#/components/schemas/predicted_course_size_course"
+          },
+          "prof": {
+            "type": "object",
+            "$ref": "#/components/schemas/profFrontend"
+          },
+          "room": {
+            "type": "object",
+            "$ref": "#/components/schemas/roomFrontend"
+          },
+          "_id": {
+            "type": "string"
+          }
+        }
+      },
+      "timeslotFrontend": {
+        "type": "object",
+        "properties": {
+          "length": {
+            "type": "integer"
+          },
+          "startTime": {
+            "type": "integer"
+          },
+          "index": {
+            "type": "integer"
+          },
+          "days": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/days"
+            }
+          }
+        }
+      },
+      "profFrontend": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "userrole": {
+            "$ref": "#/components/schemas/userrole"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "roomFrontend": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "capacity": {
+            "type": "number"
+          },
+          "equipment": {
+            "type": "array",
+            "items":{
+              "type": "string"
+            }
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        }
+      },
+      "generatedSchedule": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/assignment"
         }
       },
       "inputdata": {
