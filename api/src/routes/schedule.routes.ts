@@ -19,13 +19,16 @@ const list = async (req, res) => {
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
       return;
     }
+
     const authToken = req.headers.authorization;
     const isAdm = await isAdmin(authToken);
     if (!isAdm) {
       res.status(401).send({ message: 'Need admin access.' });
       return;
     }
+
     const response = await scheduleController.list();
+
     res.status(200).send(response);
   } catch (err) {
     res.status(401).send('Error: ' + err);
@@ -77,10 +80,12 @@ const my = async (req, res) => {
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
       return;
     }
+
     const authToken = req.headers.authorization;
 
     const userName = await getName(authToken);
     const response = await scheduleController.my(userName);
+
     res.status(200).send(response);
   } catch (err) {
     res.status(401).send({ message: err });
@@ -100,18 +105,21 @@ const update = async (req, res) => {
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
       return;
     }
+
     const authToken = req.headers.authorization;
     const isAdm = await isAdmin(authToken);
     if (!isAdm) {
       res.status(401).send({ message: 'Need admin access.' });
       return;
     }
+
     let schedules = {} as ISchedule[];
     const numSchedules = req.body.length;
     for (let i = 0; i < numSchedules; i++) {
       schedules[i] = <ISchedule>req.body[i];
     }
     await scheduleController.update(schedules, numSchedules);
+    
     res.status(200).send({ message: 'Updated schedule.' });
   } catch (err) {
     res.status(401).send({ message: 'Error creating schedule: ' + err });

@@ -18,6 +18,7 @@ const predict_class_size_trigger = async (req, res) => {
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
       return;
     }
+
     const authToken = req.headers.authorization;
     const isAdm = await isAdmin(authToken);
     if (!isAdm) {
@@ -26,6 +27,7 @@ const predict_class_size_trigger = async (req, res) => {
     }
 
     const response = await predictscheduleController.class_size_prediction(2023);
+
     res.status(200).send(response);
   } catch (err) {
     console.log('err', err);
@@ -47,6 +49,7 @@ const get_class_size_prediction = async (req, res) => {
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
       return;
     }
+
     const authToken = req.headers.authorization;
     const isAdm = await isAdmin(authToken);
     if (!isAdm) {
@@ -55,6 +58,7 @@ const get_class_size_prediction = async (req, res) => {
     }
 
     const response = await predictscheduleController.get_class_size_prediction();
+    
     res.status(200).send(response);
   } catch (err) {
     res.status(401).send({ message: err });

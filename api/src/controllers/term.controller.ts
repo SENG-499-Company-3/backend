@@ -15,8 +15,4 @@ export class TermController {
         }
     }
 
-    //Add new term
-    // async add(term: ITerm): Promise<void>{
-    //     const s = 
-    // }
 }

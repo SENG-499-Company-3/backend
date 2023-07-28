@@ -23,6 +23,7 @@ const list = async (req, res) => {
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
       return;
     }
+
     const authToken = req.headers.authorization;
     const isAdm = await isAdmin(authToken);
     if (!isAdm) {
@@ -31,6 +32,7 @@ const list = async (req, res) => {
     }
 
     const courses = await courseController.list();
+
     res.status(200).send(courses);
   } catch (err) {
     res.status(401).send({ message: err });
@@ -51,6 +53,7 @@ const create = async ({ headers, body }: { headers: any; body: ICourse }, res: a
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
       return;
     }
+
     const authToken = headers.authorization;
     const isAdm = await isAdmin(authToken);
     if (!isAdm) {
@@ -69,6 +72,7 @@ const create = async ({ headers, body }: { headers: any; body: ICourse }, res: a
     });
 
     await courseController.create(course_new);
+    
     res.status(200).send({ message: 'Added course.' });
   } catch (err) {
     res.status(401).send({ message: err + '' });
@@ -89,6 +93,7 @@ const remove = async (req: any, res: any): Promise<void> => {
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
       return;
     }
+
     const authToken = req.headers.authorization;
     const isAdm = await isAdmin(authToken);
     if (!isAdm) {
@@ -103,6 +108,7 @@ const remove = async (req: any, res: any): Promise<void> => {
     });
 
     await courseController.remove(course);
+
     res.status(200).send({ message: 'Removed course.' });
   } catch (err) {
     res.status(401).send({ message: err + '' });

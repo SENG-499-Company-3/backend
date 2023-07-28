@@ -18,6 +18,7 @@ export class ClassroomController {
         BuildingId: classroom.BuildingId,
         RoomNumber: classroom.RoomNumber
       }).catch((err) => err);
+
       if (!classroom_current) {
         //insert if the classroom doesn't exist
         await classroom_db.save(classroom_db).catch((err) => err);
@@ -28,6 +29,7 @@ export class ClassroomController {
           BuildingId: classroom.BuildingId,
           RoomNumber: classroom.RoomNumber
         }).catch((err) => err);
+        
         doc.overwrite(classroom_db);
         await doc.save();
       }

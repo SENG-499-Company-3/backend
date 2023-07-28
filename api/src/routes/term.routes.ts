@@ -27,6 +27,7 @@ const list = async (req, res) => {
     }
 
     const courses = await termController.list();
+    
     res.status(200).send(courses);
   } catch (err) {
     res.status(401).send({ message: err });

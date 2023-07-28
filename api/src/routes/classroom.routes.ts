@@ -19,12 +19,14 @@ const update = async (req, res) => {
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
       return;
     }
+
     const authToken = req.headers.authorization;
     const isAdm = await isAdmin(authToken);
     if (!isAdm) {
       res.status(401).send({ message: 'Need admin access.' });
       return;
     }
+
     const classroom = new ClassroomModel({
       location: req.body.location,
       capacity: req.body.capacity,
@@ -32,6 +34,7 @@ const update = async (req, res) => {
     });
 
     await classroomController.update(classroom);
+
     res.status(200).send('Updated/created classroom.');
   } catch (err) {
     res.status(401).send({ message: '' + err });
@@ -52,13 +55,16 @@ const list = async (req, res) => {
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
       return;
     }
+
     const authToken = req.headers.authorization;
     const isAdm = await isAdmin(authToken);
     if (!isAdm) {
       res.status(401).send({ message: 'Need admin access.' });
       return;
     }
+
     const resp = await classroomController.list();
+    
     res.status(200).send(resp);
   } catch (err) {
     res.status(401).send({ message: '' + err });

@@ -21,6 +21,7 @@ const get_all_preferences = async ({ headers }: { headers: any }, res: any): Pro
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
       return;
     }
+
     const authToken = headers.authorization;
     const isAdm = await isAdmin(authToken);
     if (!isAdm) {
@@ -29,6 +30,7 @@ const get_all_preferences = async ({ headers }: { headers: any }, res: any): Pro
     }
 
     const preference: Preference[] = await teacherPrefController.list();
+
     res.status(200).send(preference);
   } catch (err) {
     res.status(401).send({ message: err });
@@ -66,6 +68,7 @@ const get_my_teacher_preferences = async ({ headers }: { headers: any }, res: an
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
       return;
     }
+
     const authToken = headers.authorization;
 
     const email = await getEmail(authToken);
@@ -91,6 +94,7 @@ const get_teacher_pref_by_email = async (req: any, res: any): Promise<void> => {
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
       return;
     }
+
     const authToken = req.headers.authorization;
     const isAdm = await isAdmin(authToken);
     if (!isAdm) {
@@ -100,6 +104,7 @@ const get_teacher_pref_by_email = async (req: any, res: any): Promise<void> => {
 
     const email = req.query.teacherEmail;
     const preferences: Preference = await teacherPrefController.byEmail(email);
+    
     res.status(200).send(preferences);
   } catch (err) {
     res.status(401).send({ message: err });

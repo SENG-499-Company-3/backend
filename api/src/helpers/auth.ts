@@ -83,21 +83,11 @@ export async function isAdmin(authToken: string) {
  */
 export async function getName(authToken: string) {
   const decoded_email = await getEmail(authToken);
+
   let user: IUser = {} as IUser;
   user = await User.findOne({ email: decoded_email }).catch((err) => err);
 
   if (!user) throw new Error('User not found.');
 
   return user.name;
-}
-
-//get user id from authtoken. throws exception if not found
-export async function getUid(authToken: string) {
-  const decoded_email = await getEmail(authToken);
-  let user: IUser = {} as IUser;
-  user = await User.findOne({ email: decoded_email }).catch((err) => err);
-
-  if (!user) throw new Error('User not found.');
-
-  return user._id;
 }

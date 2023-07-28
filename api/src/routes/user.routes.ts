@@ -65,6 +65,7 @@ const byId = async (req, res) => {
       res.status(401).send({ message: 'This endpoint requires authorization header.' });
       return;
     }
+
     const authToken = req.headers.authorization;
     const isAdm = await isAdmin(authToken);
     if (!isAdm) {
@@ -76,8 +77,10 @@ const byId = async (req, res) => {
       res.status(400).send({ message: 'Need to provide user id in url' });
       return;
     }
+
     let user: User = await userController.byId(req.query.id);
     user.password = '';
+    
     res.status(200).send(user);
   } catch (err) {
     res.status(401).send({ messge: err });
