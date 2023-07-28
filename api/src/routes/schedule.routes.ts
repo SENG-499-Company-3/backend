@@ -64,7 +64,7 @@ const list = async (req, res) => {
     res.status(401).send('Error: ' + err);
   }
 };
-router.get('/', list);
+router.get('/list', list);
 
 // TODO add to api_schema.jso
 /**

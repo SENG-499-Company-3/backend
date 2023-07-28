@@ -74,7 +74,6 @@ export class UserController {
         } as IUser;
       });
 
-      console.log('usersWithPref', usersWithPref);
       return usersWithPref;
     } catch (err) {
       console.log(err);

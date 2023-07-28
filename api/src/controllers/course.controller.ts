@@ -34,10 +34,12 @@ export class CourseController {
       const course_current = await Course.findOne({
         Subj: course.Subj,
         Num: course.Num,
-        Section: course.Section
+        Term: course.Term,
+        Year: course.Year
       }).catch((err) => err);
       if (!course_current) {
         //insert if the course doesn't exist
+
         const course_db = new Course(course);
         await course_db.save(course_db).catch((err) => console.log('error saving course' + err));
       } else {

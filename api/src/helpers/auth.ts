@@ -57,17 +57,6 @@ export async function getEmail(authToken: string) {
   if (!decoded_email) throw new Error('Invalid authentication token.');
   return decoded_email;
 }
-// export async function getUser(authToken: string)
-// {
-//   let decoded_email = '';
-//   decoded_email = jwt_decode(authToken).email;
-//   if(!decoded_email) throw new Error("Invalid authentication token.");
-
-//   let user: IUser = {} as IUser;
-//   user = await User.findOne({email: decoded_email}).catch((err) => err);
-//   if(!user) throw new Error("Authentication token not tied to any user.");
-//   return user;
-// }
 
 /**
  * Returns true if the user associated with the authToken is admin, false otherwise

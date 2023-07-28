@@ -604,7 +604,12 @@
       },
       "isvalidschedule": {
         "required": ["valid"],
-        "type": "object"
+        "type": "object",
+        "properties": {
+          "valid": {
+            "type": "boolean"
+          }
+        }
       },
       "assignment": {
         "required": ["course", "prof", "timeslot", "room"],
@@ -778,12 +783,6 @@
           },
           "capacity": {
             "type": "integer"
-          },
-          "equipment": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           }
         }
       },
@@ -813,19 +812,10 @@
           "coursename": {
             "type": "string"
           },
-          "noScheduleOverlap": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "lecturesNumber": {
+          "courseYear": {
             "type": "integer"
           },
-          "labsNumber": {
-            "type": "integer"
-          },
-          "tutorialsNumber": {
+          "courseNumber": {
             "type": "integer"
           },
           "capacity": {
@@ -848,28 +838,10 @@
               "type": "string"
             }
           },
-          "timePreferences": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
           "coursePreferences": {
             "type": "array",
             "items": {
               "type": "integer"
-            }
-          },
-          "dayPreferences": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "equipmentPreferences": {
-            "type": "array",
-            "items": {
-              "type": "string"
             }
           },
           "load": {
