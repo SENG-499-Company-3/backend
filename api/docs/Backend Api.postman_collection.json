@@ -48,7 +48,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"tony123@gmail.com\",\r\n    \"password\": \"test\",\r\n    \"name\": \"Stank, Tony\",\r\n    \"userrole\": \"ADMIN\",\r\n    \"token\": \"\"\r\n}"
+							"raw": "{\r\n    \"email\": \"tony123AD@gmail.com\",\r\n    \"password\": \"Test123!\",\r\n    \"name\": \"Stank, Tony\",\r\n    \"userrole\": \"ADMIN\",\r\n    \"token\": \"\"\r\n}"
 						},
 						"url": {
 							"raw": "{{backend_ip}}:{{backend_port}}/user/create",
@@ -142,7 +142,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"bbird@uvic.ca\",\n    \"coursePreferences\": [\n        {\n            \"courseName\": \"SENG 401\",\n            \"courseYear\": 4,\n            \"ability\": \"ABLE\",\n            \"willingness\": \"VERY_WILLING\"\n        }\n    ],\n    \"additionalDetailes\": \"nothing\",\n    \"availability\": [\n        {\n            \"term\": {\n                \"termId\": 2,\n                \"year\": 2023,\n                \"month\": 9\n            },\n            \"isAvailable\": true\n        }\n    ],\n    \"load\": 2\n}",
+							"raw": "{\n    \"email\": \"rlittle@uvic.ca\",\n    \"coursePreferences\": [\n        {\n            \"courseName\": \"SENG 401\",\n            \"courseYear\": 4,\n            \"ability\": \"ABLE\",\n            \"willingness\": \"VERY_WILLING\"\n        }\n    ],\n    \"additionalDetailes\": \"nothing\",\n    \"availability\": [\n        {\n            \"term\": {\n                \"termId\": 2,\n                \"year\": 2023,\n                \"month\": 9\n            },\n            \"isAvailable\": true\n        }\n    ],\n    \"load\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -320,56 +320,6 @@
 					]
 				},
 				{
-					"name": "schedule/create",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "authorization",
-								"value": "{{authTokenVar}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{backend_ip}}:{{backend_port}}/schedule/create",
-							"host": [
-								"{{backend_ip}}"
-							],
-							"port": "{{backend_port}}",
-							"path": [
-								"schedule",
-								"create"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "my",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "authorization",
-								"value": "{{authTokenVar}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{backend_ip}}:{{backend_port}}/schedule/my",
-							"host": [
-								"{{backend_ip}}"
-							],
-							"port": "{{backend_port}}",
-							"path": [
-								"schedule",
-								"my"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "list",
 					"request": {
 						"method": "GET",
@@ -419,7 +369,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{backend_ip}}:{{backend_port}}/schedule/validate_trigger?id=64adbe51c357adddab4c2eb8",
+							"raw": "{{backend_ip}}:{{backend_port}}/schedule/validate_trigger?id=64c3f4f64b4007a21ce3f5ba",
 							"host": [
 								"{{backend_ip}}"
 							],
@@ -431,45 +381,8 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "64adbe51c357adddab4c2eb8"
+									"value": "64c3f4f64b4007a21ce3f5ba"
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "schedule/update",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "authorization",
-								"value": "{{authTokenVar}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n        {\n        \"Term\": 202305,\n        \"Subj\": \"SENG\",\n        \"Num\": 100,\n        \"Section\": \"A00\",\n        \"Title\": \"Fundamental Programming:I\",\n        \"SchedType\": \"LEC\",\n        \"Instructor\": \"Stank, Tony\",\n        \"Bldg\": \"ECS\",\n        \"Room\": \"10\",\n        \"Begin\": 1000,\n        \"End\": 1120,\n        \"Days\": \"MR\",\n        \"StartDate\": \"04 May 2023\",\n        \"EndDate\": \"29 Jul 2023\",\n        \"Cap\": 20\n    },\n    {\n        \"Term\": 202305,\n        \"Subj\": \"SENG\",\n        \"Num\": 101,\n        \"Section\": \"A01\",\n        \"Title\": \"Fundamental Programming:I\",\n        \"SchedType\": \"LEC\",\n        \"Instructor\": \"Stank, Tony\",\n        \"Bldg\": \"ECS\",\n        \"Room\": \"11\",\n        \"Begin\": 1001,\n        \"End\": 1121,\n        \"Days\": \"MR\",\n        \"StartDate\": \"04 May 2023\",\n        \"EndDate\": \"29 Jul 2023\",\n        \"Cap\": 21\n    }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{backend_ip}}:{{backend_port}}/schedule/update",
-							"host": [
-								"{{backend_ip}}"
-							],
-							"port": "{{backend_port}}",
-							"path": [
-								"schedule",
-								"update"
 							]
 						}
 					},
@@ -518,7 +431,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"Subj\": \"CSC\",\n    \"Num\": 119,\n    \"Title\": \"Fundamental Programming\",\n    \"Year\": 2023,\n    \"Term\": \"Fall\",\n    \"Cap\": 521,\n    \"Enrolled\": 300\n}",
+							"raw": "{\n    \"Subj\": \"CSC\",\n    \"Num\": 999,\n    \"Title\": \"Fundamental Programming AAAA\",\n    \"CourseYear\": 4,\n    \"Cap\": 521,\n    \"Enrolled\": 300\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -552,7 +465,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"Subj\": \"CSC\",\n    \"Num\": 119,\n    \"Title\": \"Fundamental Programming\",\n    \"Year\": 2023,\n    \"Term\": \"Fall\",\n    \"Cap\": 521,\n    \"Enrolled\": 300\n}",
+							"raw": "{\n    \"Subj\": \"CSC\",\n    \"Num\": 999,\n    \"Title\": \"Fundamental Programming\",\n    \"Year\": 2023,\n    \"Term\": \"Fall\",\n    \"Cap\": 521,\n    \"Enrolled\": 300\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -591,7 +504,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"location\": \"ELW 110\",\n    \"capacity\": 52,\n    \"equipment\": [\"projector\"]\n}",
+							"raw": "{\n    \"location\": \"ECS 128\",\n    \"capacity\": 52,\n    \"equipment\": [\"projector\", \"poop\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
