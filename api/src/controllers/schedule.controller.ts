@@ -17,7 +17,13 @@ const teacherPrefModel = require('../models/teacherpref.model');
  * @class ScheduleController
  */
 export class ScheduleController {
-  async createInputData(): Promise<any> {
+  /**
+   * gets clean classrooms
+   *
+   * @return {*}  {Promise<any>}
+   * @memberof ScheduleController
+   */
+  async getCleanClassrooms(): Promise<any> {
     const classes = await ClassroomModel.find();
 
     const cleanClasses = classes.map((classroom) => {
@@ -27,6 +33,16 @@ export class ScheduleController {
       };
     });
 
+    return cleanClasses;
+  }
+
+  /**
+   * gets clean courses
+   *
+   * @return {*}  {Promise<any>}
+   * @memberof ScheduleController
+   */
+  async getCleanCourses(): Promise<any> {
     const courses = await CourseModel.find();
 
     const cleanedCourses = courses.map((course) => {
@@ -39,10 +55,16 @@ export class ScheduleController {
       };
     });
 
-    const timeslots = await algo1Data.timeslots;
+    return cleanedCourses;
+  }
 
-    const teachers = await UserModel.find();
-
+  /**
+   * gets clean teacher prefs
+   *
+   * @return {*}  {Promise<any>}
+   * @memberof ScheduleController
+   */
+  async getCleanTeacherPrefs(): Promise<any> {
     const teacherPrefs = await teacherPrefModel.find();
 
     const cleanPrefs: any = [];
@@ -65,10 +87,24 @@ export class ScheduleController {
       });
     }
 
+    return cleanPrefs;
+  }
+
+  /**
+   * gets clean professors
+   *
+   * @param {any[]} teacherPrefs
+   * @param {any[]} courses
+   * @return {*}  {Promise<any>}
+   * @memberof ScheduleController
+   */
+  async getCleanProfessors(teacherPrefs: any[], courses: any[]): Promise<any> {
+    const teachers = await UserModel.find();
+
     const cleanedProfessors: any = [];
 
     for (const teacher of teachers) {
-      const pref = cleanPrefs.find((pref) => pref.email === teacher.email);
+      const pref = teacherPrefs.find((pref) => pref.email === teacher.email);
       if (
         pref &&
         pref.availability &&
@@ -79,7 +115,7 @@ export class ScheduleController {
         continue;
       }
 
-      let defaultPref = this.courseDefaultPrefLoad(cleanedCourses);
+      let defaultPref = this.courseDefaultPrefLoad(courses);
 
       if (pref && pref.prefData && pref.prefData.length > 0) {
         defaultPref = pref.prefData.map((element) => {
@@ -95,18 +131,38 @@ export class ScheduleController {
       });
     }
 
+    return cleanedProfessors;
+  }
+
+  /**
+   * Create input data for algo1
+   *
+   * @return {*}  {Promise<any>}
+   * @memberof ScheduleController
+   */
+  async createInputData(): Promise<any> {
+    const classes = await this.getCleanClassrooms();
+
+    const courses = await this.getCleanCourses();
+
+    const timeslots = await algo1Data.timeslots;
+
+    const teacherPrefs = await this.getCleanTeacherPrefs();
+
+    const professors = await this.getCleanProfessors(teacherPrefs, courses);
+
     const dimensions = {
-      courses: cleanedCourses.length,
+      courses: courses.length,
       times: timeslots.length,
-      teachers: cleanedProfessors.length,
+      teachers: professors.length,
       rooms: classes.length
     };
 
     const data = {
-      rooms: cleanClasses,
+      rooms: classes,
       timeslots: timeslots,
-      courses: cleanedCourses,
-      professors: cleanedProfessors,
+      courses: courses,
+      professors: professors,
       dimensions: dimensions,
       preferences: [],
       loads: [],
@@ -118,6 +174,13 @@ export class ScheduleController {
     return data;
   }
 
+  /**
+   * update preferences object
+   *
+   * @param {*} defaultPref
+   * @param {*} newPrefValue
+   * @memberof ScheduleController
+   */
   updatePreferences = (defaultPref: any, newPrefValue: any) => {
     const objIndex = defaultPref.findIndex((obj: any) => obj.courseName === newPrefValue.courseName);
     if (objIndex !== -1) {
@@ -126,6 +189,12 @@ export class ScheduleController {
     return defaultPref;
   };
 
+  /**
+   * course default pref load
+   *
+   * @param {any[]} cleanedCourses
+   * @memberof ScheduleController
+   */
   courseDefaultPrefLoad = (cleanedCourses: any[]) => {
     const coursePrefs: any = [];
 
@@ -141,6 +210,12 @@ export class ScheduleController {
     return coursePrefs;
   };
 
+  /**
+   * convert pref to number
+   *
+   * @param {{ courseId: number; ability: string; willingness: string }} pref
+   * @memberof ScheduleController
+   */
   prefConverter = (pref: { courseId: number; ability: string; willingness: string }) => {
     switch (pref.ability) {
       case 'ABLE':
