@@ -630,14 +630,14 @@
         }
       },
       "schedule": {
-        "required": ["assignments", "complete", "valid", "reward", "iterations", "c_hat", "quality", "inputData"],
+        "required": ["assignments", "complete", "valid", "reward", "iterations", "c_hat", "quality"],
         "type": "object",
         "properties": {
-          "assignments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/assignment"
-            }
+          "iterations": {
+            "type": "integer"
+          },
+          "quality": {
+            "type": "number"
           },
           "valid": {
             "type": "boolean",
@@ -650,14 +650,14 @@
           "reward": {
             "type": "number"
           },
-          "iterations": {
-            "type": "integer"
-          },
           "c_hat": {
             "type": "number"
           },
-          "quality": {
-            "type": "number"
+          "assignments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/assignment"
+            }
           },
           "inputData": {
             "$ref": "#/components/schemas/inputdata"
@@ -709,13 +709,10 @@
               "type": "integer"
             }
           },
-          "availabilities": {
+          "required_courses": {
             "type": "array",
             "items": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
+              "type": "integer"
             }
           },
           "p_tgt": {
@@ -831,12 +828,6 @@
         "properties": {
           "name": {
             "type": "string"
-          },
-          "courses": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "coursePreferences": {
             "type": "array",

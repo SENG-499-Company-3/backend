@@ -5,8 +5,8 @@ export const classSizePredictionSchema = new Schema(
   {
     courses: [
       {
-        course: { type: String, required: true },
-        term: { type: Number, required: true },
+        course: { type: Schema.Types.ObjectId, ref: 'Course', required: true },
+        term: { type: Schema.Types.ObjectId, ref: 'Term', required: true },
         size: { type: Number, required: true }
       }
     ]

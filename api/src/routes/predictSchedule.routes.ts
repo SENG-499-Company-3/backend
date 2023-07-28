@@ -25,9 +25,10 @@ const predict_class_size_trigger = async (req, res) => {
       return;
     }
 
-    const response = await predictscheduleController.class_size_prediction();
+    const response = await predictscheduleController.class_size_prediction(2023);
     res.status(200).send(response);
   } catch (err) {
+    console.log('err', err);
     res.status(401).send({ message: err });
   }
 };
