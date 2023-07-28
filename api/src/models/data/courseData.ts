@@ -2,8 +2,6 @@ export const courseData = [
   {
     Course: 'CSC 111',
     Title: 'FUNDMNTL PRGRMNG:ENGR APS',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 1,
     DeptDesc: 'Computer Science',
     Cap: 400,
@@ -12,8 +10,6 @@ export const courseData = [
   {
     Course: 'CSC 115',
     Title: 'FUNDAMENTAL PROGRAMING:II',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 1,
     DeptDesc: 'Computer Science',
     Cap: 150,
@@ -22,8 +18,6 @@ export const courseData = [
   {
     Course: 'CSC 115',
     Title: 'FUNDAMENTAL PROGRAMING:II',
-    Term: 'Summer',
-    TermYr: 2019,
     ClassYr: 1,
     DeptDesc: 'Computer Science',
     Cap: 115,
@@ -32,8 +26,6 @@ export const courseData = [
   {
     Course: 'CSC 225',
     Title: 'ALGORITHMS+DATA STUCT:I',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 215,
@@ -42,8 +34,6 @@ export const courseData = [
   {
     Course: 'CSC 225',
     Title: 'ALGORITHMS+DATA STUCT:I',
-    Term: 'Summer',
-    TermYr: 2019,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 145,
@@ -52,8 +42,6 @@ export const courseData = [
   {
     Course: 'CSC 226',
     Title: 'ALGORITHMS+DATA STRUCTURE II',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 140,
@@ -62,8 +50,6 @@ export const courseData = [
   {
     Course: 'CSC 226',
     Title: 'ALGORITHMS+DATA STRUCTURE II',
-    Term: 'Summer',
-    TermYr: 2019,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 120,
@@ -72,8 +58,6 @@ export const courseData = [
   {
     Course: 'CSC 230',
     Title: 'COMPUTER ARCHITECTURE',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 200,
@@ -82,8 +66,6 @@ export const courseData = [
   {
     Course: 'CSC 230',
     Title: 'COMPUTER ARCHITECTURE',
-    Term: 'Summer',
-    TermYr: 2019,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 115,
@@ -92,8 +74,6 @@ export const courseData = [
   {
     Course: 'CSC 320',
     Title: 'FOUNDATIONS:COMPUTER SCIENCE',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 174,
@@ -102,8 +82,6 @@ export const courseData = [
   {
     Course: 'CSC 320',
     Title: 'FOUNDATIONS:COMPUTER SCIENCE',
-    Term: 'Summer',
-    TermYr: 2019,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 136,
@@ -112,8 +90,6 @@ export const courseData = [
   {
     Course: 'CSC 355',
     Title: "DIGITAL LOGIC+ORGANIZAT'N",
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 140,
@@ -122,8 +98,6 @@ export const courseData = [
   {
     Course: 'CSC 360',
     Title: 'OPERATING SYSTEMS',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 148,
@@ -132,8 +106,6 @@ export const courseData = [
   {
     Course: 'CSC 361',
     Title: 'COMPUTER COMMUNCTIONS+NETWRKS',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 150,
@@ -142,8 +114,6 @@ export const courseData = [
   {
     Course: 'CSC 370',
     Title: 'DATABASE SYSTEMS',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 150,
@@ -152,8 +122,6 @@ export const courseData = [
   {
     Course: 'CSC 370',
     Title: 'DATABASE SYSTEMS',
-    Term: 'Summer',
-    TermYr: 2019,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 80,
@@ -162,8 +130,6 @@ export const courseData = [
   {
     Course: 'ECE 255',
     Title: 'INTRO TO COMPUTER ARCHITECTURE',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 2,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 120,
@@ -172,8 +138,6 @@ export const courseData = [
   {
     Course: 'ECE 260',
     Title: 'CONTINUOUS-TIME SIGNALS+SYSTMS',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 2,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 144,
@@ -182,8 +146,6 @@ export const courseData = [
   {
     Course: 'ECE 260',
     Title: 'CONTINUOUS-TIME SIGNALS+SYSTMS',
-    Term: 'Summer',
-    TermYr: 2019,
     ClassYr: 2,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 130,
@@ -192,8 +154,6 @@ export const courseData = [
   {
     Course: 'ECE 310',
     Title: 'DIGITAL SIGNAL PROCESSING I',
-    Term: 'Summer',
-    TermYr: 2019,
     ClassYr: 3,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 95,
@@ -202,8 +162,6 @@ export const courseData = [
   {
     Course: 'ECE 355',
     Title: 'MICROPROCESSOR-BASED SYSTEMS',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 3,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 154,
@@ -212,8 +170,6 @@ export const courseData = [
   {
     Course: 'ECE 360',
     Title: 'CONTROL THEORY+SYSTEMS I',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 3,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 117,
@@ -222,8 +178,6 @@ export const courseData = [
   {
     Course: 'SENG 265',
     Title: 'SOFTWARE DEVELOP METHODS',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 2,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 215,
@@ -232,8 +186,6 @@ export const courseData = [
   {
     Course: 'SENG 265',
     Title: 'SOFTWARE DEVELOP METHODS',
-    Term: 'Summer',
-    TermYr: 2019,
     ClassYr: 2,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 115,
@@ -242,8 +194,6 @@ export const courseData = [
   {
     Course: 'SENG 275',
     Title: 'SOFTWARE TESTING',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 2,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 693,
@@ -252,8 +202,6 @@ export const courseData = [
   {
     Course: 'SENG 275',
     Title: 'SOFTWARE TESTING',
-    Term: 'Summer',
-    TermYr: 2019,
     ClassYr: 2,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 60,
@@ -262,8 +210,6 @@ export const courseData = [
   {
     Course: 'SENG 310',
     Title: "HUMAN COMPUTER INTERACT'N",
-    Term: 'Summer',
-    TermYr: 2019,
     ClassYr: 3,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 140,
@@ -272,8 +218,6 @@ export const courseData = [
   {
     Course: 'SENG 321',
     Title: 'REQUIREMENTS ENGINEERING',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 3,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 50,
@@ -282,8 +226,6 @@ export const courseData = [
   {
     Course: 'SENG 350',
     Title: 'SOFTWARE ARCHITECTURE & DESIGN',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 3,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 93,
@@ -292,8 +234,6 @@ export const courseData = [
   {
     Course: 'SENG 360',
     Title: 'SECURITY ENGINEERING',
-    Term: 'Fall',
-    TermYr: 2019,
     ClassYr: 3,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 115,
@@ -302,8 +242,6 @@ export const courseData = [
   {
     Course: 'SENG 426',
     Title: 'SOFTWARE QUALITY ENGR',
-    Term: 'Summer',
-    TermYr: 2019,
     ClassYr: 4,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 66,
@@ -312,8 +250,6 @@ export const courseData = [
   {
     Course: 'SENG 440',
     Title: 'EMBEDDED SYSTEMS',
-    Term: 'Summer',
-    TermYr: 2019,
     ClassYr: 4,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 95,
@@ -322,8 +258,6 @@ export const courseData = [
   {
     Course: 'SENG 499',
     Title: 'DESIGN PROJECT II',
-    Term: 'Summer',
-    TermYr: 2019,
     ClassYr: 4,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 45,
@@ -332,8 +266,6 @@ export const courseData = [
   {
     Course: 'CSC 111',
     Title: 'FUNDMNTL PRGRMNG:ENGR APS',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 1,
     DeptDesc: 'Computer Science',
     Cap: 115,
@@ -342,8 +274,6 @@ export const courseData = [
   {
     Course: 'CSC 115',
     Title: 'FUNDAMENTAL PROGRAMING:II',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 1,
     DeptDesc: 'Computer Science',
     Cap: 380,
@@ -352,8 +282,6 @@ export const courseData = [
   {
     Course: 'CSC 225',
     Title: 'ALGORITHMS+DATA STUCT:I',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 175,
@@ -362,8 +290,6 @@ export const courseData = [
   {
     Course: 'CSC 226',
     Title: 'ALGORITHMS+DATA STRUCTURE II',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 200,
@@ -372,8 +298,6 @@ export const courseData = [
   {
     Course: 'CSC 230',
     Title: 'COMPUTER ARCHITECTURE',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 175,
@@ -382,8 +306,6 @@ export const courseData = [
   {
     Course: 'CSC 320',
     Title: 'FOUNDATIONS:COMPUTER SCIENCE',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 117,
@@ -392,8 +314,6 @@ export const courseData = [
   {
     Course: 'CSC 360',
     Title: 'OPERATING SYSTEMS',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 173,
@@ -402,8 +322,6 @@ export const courseData = [
   {
     Course: 'CSC 361',
     Title: 'COMPUTER COMMUNCTIONS+NETWRKS',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 175,
@@ -412,8 +330,6 @@ export const courseData = [
   {
     Course: 'CSC 370',
     Title: 'DATABASE SYSTEMS',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 150,
@@ -422,8 +338,6 @@ export const courseData = [
   {
     Course: 'CSC 460',
     Title: 'DESIGN: REAL-TIME SYSTEMS',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 4,
     DeptDesc: 'Computer Science',
     Cap: 35,
@@ -432,8 +346,6 @@ export const courseData = [
   {
     Course: 'ECE 310',
     Title: 'DIGITAL SIGNAL PROCESSING I',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 3,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 195,
@@ -442,8 +354,6 @@ export const courseData = [
   {
     Course: 'ECE 360',
     Title: 'CONTROL THEORY+SYSTEMS I',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 3,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 80,
@@ -452,8 +362,6 @@ export const courseData = [
   {
     Course: 'ECE 455',
     Title: 'REAL TIME COMP SYS DESGN',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 4,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 70,
@@ -462,8 +370,6 @@ export const courseData = [
   {
     Course: 'ECE 458',
     Title: 'COMMUNICATION NETWORKS',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 4,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 94,
@@ -472,8 +378,6 @@ export const courseData = [
   {
     Course: 'SENG 265',
     Title: 'SOFTWARE DEVELOP METHODS',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 2,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 147,
@@ -482,8 +386,6 @@ export const courseData = [
   {
     Course: 'SENG 310',
     Title: "HUMAN COMPUTER INTERACT'N",
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 3,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 150,
@@ -492,8 +394,6 @@ export const courseData = [
   {
     Course: 'SENG 321',
     Title: 'REQUIREMENTS ENGINEERING',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 3,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 72,
@@ -502,8 +402,6 @@ export const courseData = [
   {
     Course: 'SENG 371',
     Title: 'SOFTWARE EVOLUTION',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 3,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 75,
@@ -512,8 +410,6 @@ export const courseData = [
   {
     Course: 'SENG 401',
     Title: 'SOCIAL+PROFESSIONL ISSUES',
-    Term: 'Spring',
-    TermYr: 2020,
     ClassYr: 4,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 70,
@@ -522,8 +418,6 @@ export const courseData = [
   {
     Course: 'CSC 111',
     Title: 'FUNDMNTL PRGRMNG:ENGR APS',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 1,
     DeptDesc: 'Computer Science',
     Cap: 475,
@@ -532,8 +426,6 @@ export const courseData = [
   {
     Course: 'CSC 115',
     Title: 'FUNDAMENTAL PROGRAMING:II',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 1,
     DeptDesc: 'Computer Science',
     Cap: 176,
@@ -542,8 +434,6 @@ export const courseData = [
   {
     Course: 'CSC 115',
     Title: 'FUNDAMENTAL PROGRAMING:II',
-    Term: 'Summer',
-    TermYr: 2022,
     ClassYr: 1,
     DeptDesc: 'Computer Science',
     Cap: 78,
@@ -552,8 +442,6 @@ export const courseData = [
   {
     Course: 'CSC 225',
     Title: 'ALGORITHMS+DATA STUCT:I',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 216,
@@ -562,8 +450,6 @@ export const courseData = [
   {
     Course: 'CSC 225',
     Title: 'ALGORITHMS+DATA STUCT:I',
-    Term: 'Summer',
-    TermYr: 2022,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 75,
@@ -572,8 +458,6 @@ export const courseData = [
   {
     Course: 'CSC 226',
     Title: 'ALGORITHMS+DATA STRUCTURE II',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 153,
@@ -582,8 +466,6 @@ export const courseData = [
   {
     Course: 'CSC 226',
     Title: 'ALGORITHMS+DATA STRUCTURE II',
-    Term: 'Summer',
-    TermYr: 2022,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 100,
@@ -592,8 +474,6 @@ export const courseData = [
   {
     Course: 'CSC 230',
     Title: 'COMPUTER ARCHITECTURE',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 160,
@@ -602,8 +482,6 @@ export const courseData = [
   {
     Course: 'CSC 230',
     Title: 'COMPUTER ARCHITECTURE',
-    Term: 'Summer',
-    TermYr: 2022,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 65,
@@ -612,8 +490,6 @@ export const courseData = [
   {
     Course: 'CSC 320',
     Title: 'FOUNDATIONS:COMPUTER SCIENCE',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 95,
@@ -622,8 +498,6 @@ export const courseData = [
   {
     Course: 'CSC 320',
     Title: 'FOUNDATIONS:COMPUTER SCIENCE',
-    Term: 'Summer',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 141,
@@ -632,8 +506,6 @@ export const courseData = [
   {
     Course: 'CSC 355',
     Title: "DIGITAL LOGIC+ORGANIZAT'N",
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 137,
@@ -642,8 +514,6 @@ export const courseData = [
   {
     Course: 'CSC 360',
     Title: 'OPERATING SYSTEMS',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 175,
@@ -652,8 +522,6 @@ export const courseData = [
   {
     Course: 'CSC 360',
     Title: 'OPERATING SYSTEMS',
-    Term: 'Summer',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 95,
@@ -662,8 +530,6 @@ export const courseData = [
   {
     Course: 'CSC 361',
     Title: 'COMPUTER COMMUNCTIONS+NETWRKS',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 120,
@@ -672,8 +538,6 @@ export const courseData = [
   {
     Course: 'CSC 370',
     Title: 'DATABASE SYSTEMS',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 180,
@@ -682,8 +546,6 @@ export const courseData = [
   {
     Course: 'CSC 370',
     Title: 'DATABASE SYSTEMS',
-    Term: 'Summer',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 113,
@@ -692,8 +554,6 @@ export const courseData = [
   {
     Course: 'ECE 255',
     Title: 'INTRO TO COMPUTER ARCHITECTURE',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 2,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 145,
@@ -702,8 +562,6 @@ export const courseData = [
   {
     Course: 'ECE 260',
     Title: 'CONTINUOUS-TIME SIGNALS+SYSTMS',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 2,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 148,
@@ -712,8 +570,6 @@ export const courseData = [
   {
     Course: 'ECE 260',
     Title: 'CONTINUOUS-TIME SIGNALS+SYSTMS',
-    Term: 'Summer',
-    TermYr: 2022,
     ClassYr: 2,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 115,
@@ -722,8 +578,6 @@ export const courseData = [
   {
     Course: 'ECE 310',
     Title: 'DIGITAL SIGNAL PROCESSING I',
-    Term: 'Summer',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 80,
@@ -732,8 +586,6 @@ export const courseData = [
   {
     Course: 'ECE 355',
     Title: 'MICROPROCESSOR-BASED SYSTEMS',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 180,
@@ -742,8 +594,6 @@ export const courseData = [
   {
     Course: 'ECE 360',
     Title: 'CONTROL THEORY+SYSTEMS I',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 140,
@@ -752,8 +602,6 @@ export const courseData = [
   {
     Course: 'SENG 265',
     Title: 'SOFTWARE DEVELOP METHODS',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 2,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 215,
@@ -762,8 +610,6 @@ export const courseData = [
   {
     Course: 'SENG 265',
     Title: 'SOFTWARE DEVELOP METHODS',
-    Term: 'Summer',
-    TermYr: 2022,
     ClassYr: 2,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 82,
@@ -772,8 +618,6 @@ export const courseData = [
   {
     Course: 'SENG 275',
     Title: 'SOFTWARE TESTING',
-    Term: 'Summer',
-    TermYr: 2022,
     ClassYr: 2,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 55,
@@ -782,8 +626,6 @@ export const courseData = [
   {
     Course: 'SENG 310',
     Title: "HUMAN COMPUTER INTERACT'N",
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 78,
@@ -792,8 +634,6 @@ export const courseData = [
   {
     Course: 'SENG 310',
     Title: "HUMAN COMPUTER INTERACT'N",
-    Term: 'Summer',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 125,
@@ -802,8 +642,6 @@ export const courseData = [
   {
     Course: 'SENG 321',
     Title: 'REQUIREMENTS ENGINEERING',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 72,
@@ -812,8 +650,6 @@ export const courseData = [
   {
     Course: 'SENG 350',
     Title: 'SOFTWARE ARCHITECTURE & DESIGN',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 85,
@@ -822,8 +658,6 @@ export const courseData = [
   {
     Course: 'SENG 360',
     Title: 'SECURITY ENGINEERING',
-    Term: 'Fall',
-    TermYr: 2022,
     ClassYr: 3,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 100,
@@ -832,8 +666,6 @@ export const courseData = [
   {
     Course: 'SENG 426',
     Title: 'SOFTWARE QUALITY ENGR',
-    Term: 'Summer',
-    TermYr: 2022,
     ClassYr: 4,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 91,
@@ -842,8 +674,6 @@ export const courseData = [
   {
     Course: 'SENG 440',
     Title: 'EMBEDDED SYSTEMS',
-    Term: 'Summer',
-    TermYr: 2022,
     ClassYr: 4,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 110,
@@ -852,8 +682,6 @@ export const courseData = [
   {
     Course: 'SENG 499',
     Title: 'DESIGN PROJECT II',
-    Term: 'Summer',
-    TermYr: 2022,
     ClassYr: 4,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 84,
@@ -862,8 +690,6 @@ export const courseData = [
   {
     Course: 'CSC 111',
     Title: 'FUNDMNTL PRGRMNG:ENGR APS',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 1,
     DeptDesc: 'Computer Science',
     Cap: 138,
@@ -872,8 +698,6 @@ export const courseData = [
   {
     Course: 'CSC 115',
     Title: 'FUNDAMENTAL PROGRAMING:II',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 1,
     DeptDesc: 'Computer Science',
     Cap: 364,
@@ -882,8 +706,6 @@ export const courseData = [
   {
     Course: 'CSC 225',
     Title: 'ALGORITHMS+DATA STUCT:I',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 160,
@@ -892,8 +714,6 @@ export const courseData = [
   {
     Course: 'CSC 226',
     Title: 'ALGORITHMS+DATA STRUCTURE II',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 180,
@@ -902,8 +722,6 @@ export const courseData = [
   {
     Course: 'CSC 230',
     Title: 'COMPUTER ARCHITECTURE',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 2,
     DeptDesc: 'Computer Science',
     Cap: 145,
@@ -912,8 +730,6 @@ export const courseData = [
   {
     Course: 'CSC 320',
     Title: 'FOUNDATIONS:COMPUTER SCIENCE',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 210,
@@ -922,8 +738,6 @@ export const courseData = [
   {
     Course: 'CSC 360',
     Title: 'OPERATING SYSTEMS',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 150,
@@ -932,8 +746,6 @@ export const courseData = [
   {
     Course: 'CSC 361',
     Title: 'COMPUTER COMMUNCTIONS+NETWRKS',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 150,
@@ -942,8 +754,6 @@ export const courseData = [
   {
     Course: 'CSC 370',
     Title: 'DATABASE SYSTEMS',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 3,
     DeptDesc: 'Computer Science',
     Cap: 150,
@@ -952,8 +762,6 @@ export const courseData = [
   {
     Course: 'ECE 310',
     Title: 'DIGITAL SIGNAL PROCESSING I',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 3,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 180,
@@ -962,8 +770,6 @@ export const courseData = [
   {
     Course: 'ECE 360',
     Title: 'CONTROL THEORY+SYSTEMS I',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 3,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 80,
@@ -972,8 +778,6 @@ export const courseData = [
   {
     Course: 'ECE 455',
     Title: 'REAL TIME COMP SYS DESGN',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 4,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 96,
@@ -982,8 +786,6 @@ export const courseData = [
   {
     Course: 'ECE 458',
     Title: 'COMMUNICATION NETWORKS',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 4,
     DeptDesc: 'Electrical & Computer Engg',
     Cap: 115,
@@ -992,8 +794,6 @@ export const courseData = [
   {
     Course: 'SENG 265',
     Title: 'SOFTWARE DEVELOP METHODS',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 2,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 185,
@@ -1002,8 +802,6 @@ export const courseData = [
   {
     Course: 'SENG 275',
     Title: 'SOFTWARE TESTING',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 2,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 70,
@@ -1012,8 +810,6 @@ export const courseData = [
   {
     Course: 'SENG 310',
     Title: "HUMAN COMPUTER INTERACT'N",
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 3,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 105,
@@ -1022,8 +818,6 @@ export const courseData = [
   {
     Course: 'SENG 321',
     Title: 'REQUIREMENTS ENGINEERING',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 3,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 60,
@@ -1032,8 +826,6 @@ export const courseData = [
   {
     Course: 'SENG 371',
     Title: 'SOFTWARE EVOLUTION',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 3,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 82,
@@ -1042,8 +834,6 @@ export const courseData = [
   {
     Course: 'SENG 401',
     Title: 'SOCIAL+PROFESSIONL ISSUES',
-    Term: 'Spring',
-    TermYr: 2023,
     ClassYr: 4,
     DeptDesc: 'Engineering & Computer Science',
     Cap: 63,

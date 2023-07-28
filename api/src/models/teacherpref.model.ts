@@ -1,10 +1,12 @@
 import { Schema, model } from 'mongoose';
 import type { Preference } from '../schemagen/types/preference';
 
-const coursePreferences = new Schema({
-  courseId: Number,
-  ability: String,
-  willingness: String
+const coursePreferences = new Schema(
+  {
+    courseName: String,
+    courseYear: Number,
+    ability: String,
+    willingness: String
 }, {
   _id: false, // Set _id to false to remove it for the nested schema
 });

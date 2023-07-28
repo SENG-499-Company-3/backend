@@ -1,5 +1,5 @@
 {
-  "required": ["email", "coursePreferences", "additionalDetailes", "availability", "load"],
+  "required": ["email", "coursePreferences", "additionalDetailes", "load"],
   "type": "object",
   "properties": {
     "email": {
@@ -8,10 +8,13 @@
     "coursePreferences": {
       "type": "array",
       "items": {
-        "required": ["courseId", "ability", "willingness"],
+        "required": ["courseName", "courseYear", "ability", "willingness"],
         "type": "object",
         "properties": {
-          "courseId": {
+          "courseName": {
+            "type": "string"
+          },
+          "courseYear": {
             "type": "number"
           },
           "ability": {

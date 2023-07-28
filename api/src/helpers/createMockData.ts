@@ -116,13 +116,12 @@ export async function populate_courses() {
       Subj: Subj,
       Num: Num,
       Title: data.Title,
-      Year: data.TermYr,
-      Term: data.Term,
+      CourseYear: data.ClassYr,
       Cap: data.Cap,
       Enrolled: data.Enrolled
     };
 
-    CourseModel.findOne({ Subj: Subj, Num: Num, Term: data.Term, Year: data.TermYr }).then(async (c: ICourse) => {
+    CourseModel.findOne({ Subj: Subj, Num: Num, CourseYear: data.ClassYr }).then(async (c: ICourse) => {
       if (!c) {
         CourseModel.create(course)
           .then(() => {

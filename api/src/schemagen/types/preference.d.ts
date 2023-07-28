@@ -8,7 +8,8 @@
 export interface Preference {
   email: string;
   coursePreferences: {
-    courseId: number;
+    courseName: String;
+    courseYear: Number;
     ability: 'ABLE' | 'WITH_DIFFICULTY';
     willingness: 'WILLING' | 'UNWILLING' | 'VERY_WILLING';
     [k: string]: unknown;
