@@ -77,7 +77,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"tony123@gmail.com\",\r\n    \"password\": \"test\"\r\n}"
+							"raw": "{\r\n    \"email\": \"rlittle@uvic.ca\",\r\n    \"password\": \"Test123!\"\r\n}"
 						},
 						"url": {
 							"raw": "{{backend_ip}}:{{backend_port}}/auth/login",
@@ -142,7 +142,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"tony123@gmail.com\",\n    \"coursePreferences\": [\n      {\n        \"courseId\": 10,\n        \"ability\": \"ABLE\",\n        \"willingness\": \"WILLING\"\n      }\n    ],\n    \"additionalDetailes\": \"nothing\",\n    \"availability\": [\n      {\n        \"term\": {\n          \"termId\": 1,\n          \"year\": 2023,\n          \"month\": 5\n        },\n        \"isAvailable\": true\n      }\n    ],\n    \"load\": 2\n}",
+							"raw": "{\n    \"email\": \"bbird@uvic.ca\",\n    \"coursePreferences\": [\n        {\n            \"courseName\": \"SENG 401\",\n            \"courseYear\": 4,\n            \"ability\": \"ABLE\",\n            \"willingness\": \"VERY_WILLING\"\n        }\n    ],\n    \"additionalDetailes\": \"nothing\",\n    \"availability\": [\n        {\n            \"term\": {\n                \"termId\": 2,\n                \"year\": 2023,\n                \"month\": 9\n            },\n            \"isAvailable\": true\n        }\n    ],\n    \"load\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -230,7 +230,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{backend_ip}}:{{backend_port}}/preferences/email?teacherEmail=tony123@gmail.com",
+							"raw": "{{backend_ip}}:{{backend_port}}/preferences/email?teacherEmail=bbird@uvic.ca",
 							"host": [
 								"{{backend_ip}}"
 							],
@@ -242,7 +242,7 @@
 							"query": [
 								{
 									"key": "teacherEmail",
-									"value": "tony123@gmail.com"
+									"value": "bbird@uvic.ca"
 								}
 							]
 						}
@@ -345,7 +345,7 @@
 					"response": []
 				},
 				{
-					"name": "schedule/my",
+					"name": "my",
 					"request": {
 						"method": "GET",
 						"header": [

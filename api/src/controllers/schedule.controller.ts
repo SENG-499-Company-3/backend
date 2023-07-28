@@ -155,8 +155,8 @@ export class ScheduleController {
       let defaultPref = this.courseDefaultPrefLoad(cleanedCourses);
 
       if (pref && pref.prefData && pref.prefData.length > 0) {
-        defaultPref = pref.prefData.map( (element) => {
-          return  this.updatePreferences(defaultPref, element);
+        defaultPref = pref.prefData.map((element) => {
+          return this.updatePreferences(defaultPref, element);
         });
         defaultPref = defaultPref[0];
       }
@@ -261,8 +261,36 @@ export class ScheduleController {
     });
     console.log('response', response);
 
+    const assignments: any = [];
+
+    for (const assignment of response.data.assignments) {
+      let assignmentIds = {
+        course: null,
+        prof: null,
+        room: null,
+        timeslot: assignment.timeslot
+      };
+
+      let subj = assignment.course.coursename.split(' ')[0];
+      let num = assignment.course.coursename.split(' ')[1];
+
+      await CourseModel.findOne({ Subj: subj, Num: num }).then((res) => {
+        assignmentIds.course = res._id;
+      });
+
+      await UserModel.findOne({ name: assignment.prof.name }).then((res) => {
+        assignmentIds.prof = res._id;
+      });
+
+      await ClassroomModel.findOne({ location: assignment.room.location }).then((res) => {
+        assignmentIds.room = res._id;
+      });
+
+      assignments.push(assignmentIds);
+    }
+
     const genSchedule = new generatedSchedule({
-      assignments: response.data.assignments,
+      assignments: assignments,
       valid: response.data.valid,
       complete: response.data.complete,
       reward: response.data.reward,
