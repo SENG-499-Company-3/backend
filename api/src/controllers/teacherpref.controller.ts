@@ -55,7 +55,13 @@ export class TeacherPrefController {
     }
   }
 
-  //get teacher pref by id
+  /**
+   * Get teacher preference by id
+   *
+   * @param {string} email
+   * @return {*}  {Promise<ITeacherPref>}
+   * @memberof TeacherPrefController
+   */
   async byEmail(email: string): Promise<ITeacherPref> {
     try {
       const teacherPref: ITeacherPref = await TeacherPref.findOne({ email: email }).catch((err) => err);
