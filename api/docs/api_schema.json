@@ -56,7 +56,7 @@
         },
         "responses": {
           "200": {
-            "description": "search results matching criteria",
+            "description": "Created user.",
             "content": {
               "application/json": {
                 "schema": {
@@ -95,7 +95,7 @@
         },
         "responses": {
           "200": {
-            "description": "search results matching criteria",
+            "description": "JWT token for the logged in user.",
             "content": {
               "application/json": {
                 "schema": {
@@ -138,17 +138,47 @@
         ],
         "responses": {
           "200": {
-            "description": "User is authenicated",
+            "description": "User information and auth token.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/user"
+                  "$ref": "#/components/schemas/userSelf"
                 }
               }
             }
           },
           "400": {
             "description": "user jwt re-auth failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/list": {
+      "get": {
+        "tags": ["frontend"],
+        "summary": "Get list of all users",
+        "description": "Self endpoint for to get the list of all users",
+        "operationId": "listUser",
+        "responses": {
+          "200": {
+            "description": "List of users.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/userSelf"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Need admin access.",
             "content": {
               "application/json": {
                 "schema": {
@@ -277,37 +307,7 @@
         }
       }
     },
-    "/preferences/{teacher_id}": {
-      "post": {
-        "tags": ["frontend"],
-        "summary": "get prefs for the given teacher",
-        "description": "Endpoint used by frontend for getting teachers",
-        "operationId": "getTeacherPreference",
-        "responses": {
-          "200": {
-            "description": "Class size is predicted",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/preference"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unable to predict class size",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/preferences": {
+    "/preferences/update": {
       "put": {
         "tags": ["frontend"],
         "summary": "Update or create a teacher preference",
@@ -334,7 +334,7 @@
             }
           },
           "400": {
-            "description": "user create failed",
+            "description": "updating/creating preferences failed",
             "content": {
               "application/json": {
                 "schema": {
@@ -344,12 +344,14 @@
             }
           }
         }
-      },
+      }
+    },
+    "/preferences/all": {
       "get": {
         "tags": ["frontend"],
-        "summary": "Update or create a teacher preference",
+        "summary": "Get all professors' preferences",
         "description": "Used by frontend to get the current professors preference",
-        "operationId": "getPreference",
+        "operationId": "getPreferences",
         "responses": {
           "200": {
             "description": "Get this professors preference",
@@ -363,6 +365,66 @@
           },
           "400": {
             "description": "User create failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/preferences/my": {
+      "get": {
+        "tags": ["frontend"],
+        "summary": "Get the current professor's preferences",
+        "description": "Used by frontend to get the preferences of the logged in professor",
+        "operationId": "getMyPreferences",
+        "responses": {
+          "200": {
+            "description": "Get this professors preference",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/preference"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Failed to get this user's preferences",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/preferences/email:teacherEmail": {
+      "get": {
+        "tags": ["frontend"],
+        "summary": "Get the preferences of the professor with the given email",
+        "description": "Used by frontend to get the preferences of the professor with given email",
+        "operationId": "getMyPreferences",
+        "responses": {
+          "200": {
+            "description": "Professor's preferences",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/preference"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Failed to get given user's preferences",
             "content": {
               "application/json": {
                 "schema": {
@@ -410,6 +472,15 @@
         "summary": "Add a new course.",
         "description": "Used by frontend to add a new course.",
         "operationId": "createCourse",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/course"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Course was created."
@@ -426,7 +497,102 @@
           }
         }
       }
+    },
+    "/courses/remove": {
+      "post": {
+        "tags": ["frontend"],
+        "summary": "Remove a course.",
+        "description": "Used by frontend to remove a course.",
+        "operationId": "removeCourse",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/course"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Course was removed."
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/classroom/update": {
+      "post": {
+        "tags": ["frontend"],
+        "summary": "Add/update a classroom.",
+        "description": "Used by frontend to Add a classroom or if the classroom exists, it is updated instead.",
+        "operationId": "updateClassroom",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/classroom"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated/created classroom."
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/classroom/list": {
+      "post": {
+        "tags": ["frontend"],
+        "summary": "Get list of all classrooms.",
+        "description": "Used by frontend to get a list of all classrooms.",
+        "operationId": "updateClassroom",
+        "responses": {
+          "200": {
+            "description": "List of classrooms.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/classroom"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
+
   },
   "components": {
     "schemas": {
@@ -547,6 +713,28 @@
           }
         ]
       },
+      "userSelf": {
+        "required": ["_id", "email", "name", "userrole", "token"],
+        "type": "object",
+        "properties": {
+          "days": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/days"
+            }
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time",
+            "example": "08:00"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "time",
+            "example": "09:00"
+          }
+        }
+      },
       "meetingtime": {
         "required": ["days", "endTime", "startTime"],
         "type": "object",
@@ -583,6 +771,62 @@
           },
           "term": {
             "$ref": "#/components/schemas/term"
+          }
+        }
+      },
+      "course": {
+        "required": ["Subj", "Num", "Section", "Title", "SchedType", "Type"],
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Course id"
+          },
+          "Subj": {
+            "type": "string",
+            "description": "Course subject, e.g. SENG, CSC"
+          },
+          "Num": {
+            "type": "number",
+            "description": "Course code, e.g. 499,310"
+          },
+          "Section": {
+            "type": "string",
+            "description": "Course section, e.g. A01"
+          },
+          "Title": {
+            "type": "string",
+            "description": "Course title, e.g. Data Structures and Algorithms 1"
+          },
+          "SchedType": {
+            "type": "string",
+            "description": "e.g. Lec or Lab"
+          },
+          "Type": {
+            "type": "string",
+            "description": "CORE or ELECTIVE"
+          },
+          "Cap": {
+            "type": "number",
+            "description": "Max number of students that can be in this course."
+          }
+        }
+      },
+      "classroom": {
+        "required": ["location", "capacity", "equipment"],
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string",
+            "description": "Classroom location, e.g. ECS 116."
+          },
+          "capacity": {
+            "type": "number",
+            "description": "Classroom capacity; max number of students that fit in it."
+          },
+          "equipment": {
+            "type": "array",
+            "description": "Array of strings of the equipment the class has, e.g. [projector]."
           }
         }
       },
