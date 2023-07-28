@@ -5,7 +5,13 @@ import { isAdmin } from '../helpers/auth';
 const router = express.Router();
 const termController: TermController = new TermController();
 
-//Get list of terms
+/**
+ * Get list of terms
+ *
+ * @param {*} req
+ * @param {*} res
+ * @return {*} 
+ */
 const list = async (req, res) => {
   try {
     if (!req.headers.authorization) {

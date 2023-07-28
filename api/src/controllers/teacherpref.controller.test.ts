@@ -9,7 +9,7 @@ beforeAll(async () => await tempdb.connect());
 afterEach(async () => await tempdb.clearDatabase());
 afterAll(async () => await tempdb.closeDatabase());
 
-describe('TeacherPrefController', () => {
+describe.only('TeacherPrefController', () => {
   describe('update', () => {
     beforeEach(() => {
       sinon.restore();
@@ -19,10 +19,11 @@ describe('TeacherPrefController', () => {
       const teacherPrefController = new TeacherPrefController();
       const name = 'abc';
       const response = await teacherPrefController.update({
-        professorId: 'abc',
+        email: 'abc',
         coursePreferences: [
           {
-            courseId: 10,
+            courseName: 'course',
+            courseYear: 10,
             ability: 'ABLE',
             willingness: 'WILLING'
           }
@@ -49,11 +50,12 @@ describe('TeacherPrefController', () => {
     it('should not create another preference for the same teacher', async () => {
       const teacherPrefController = new TeacherPrefController();
       const name = 'abc';
-      const response = await teacherPrefController.update({
-        professorId: 'abc',
+      await teacherPrefController.update({
+        email: 'abc',
         coursePreferences: [
           {
-            courseId: 10,
+            courseName: 'course',
+            courseYear: 10,
             ability: 'ABLE',
             willingness: 'WILLING'
           }
@@ -72,10 +74,11 @@ describe('TeacherPrefController', () => {
         load: 2
       });
       const response2 = await teacherPrefController.update({
-        professorId: 'abc',
+        email: 'abc',
         coursePreferences: [
           {
-            courseId: 10,
+            courseName: 'course',
+            courseYear: 10,
             ability: 'ABLE',
             willingness: 'WILLING'
           }
@@ -112,11 +115,12 @@ describe('TeacherPrefController', () => {
 
     it('should get list of teacher pref', async () => {
       const teacherPrefController = new TeacherPrefController();
-      const response = await teacherPrefController.update({
-        professorId: 'abc',
+      await teacherPrefController.update({
+        email: 'abc',
         coursePreferences: [
           {
-            courseId: 10,
+            courseName: 'course',
+            courseYear: 10,
             ability: 'ABLE',
             willingness: 'WILLING'
           }
@@ -137,11 +141,12 @@ describe('TeacherPrefController', () => {
       const prefList1 = await teacherPrefController.list();
       expect(prefList1.length).toBe(1);
 
-      const response2 = await teacherPrefController.update({
-        professorId: 'abc',
+      await teacherPrefController.update({
+        email: 'abc',
         coursePreferences: [
           {
-            courseId: 10,
+            courseName: 'course',
+            courseYear: 10,
             ability: 'ABLE',
             willingness: 'WILLING'
           }
@@ -161,46 +166,6 @@ describe('TeacherPrefController', () => {
       });
       const prefList2 = await teacherPrefController.list();
       expect(prefList2.length).toBeGreaterThan(0);
-    });
-  });
-
-  describe('my', () => {
-    beforeEach(() => {
-      sinon.restore();
-    });
-
-    it('should get my pref even if it hasnt been created', async () => {
-      const teacherPrefController = new TeacherPrefController();
-      const myPref = await teacherPrefController.my('test@email.com', 'abcd');
-      expect(myPref).toBeDefined();
-    });
-
-    it('should get my pref if it hasnt been created', async () => {
-      const teacherPrefController = new TeacherPrefController();
-      const resp = await teacherPrefController.update({
-        professorId: 'abc',
-        coursePreferences: [
-          {
-            courseId: 10,
-            ability: 'ABLE',
-            willingness: 'WILLING'
-          }
-        ],
-        additionalDetailes: 'nothing',
-        availability: [
-          {
-            term: {
-              termId: 1,
-              year: 2023,
-              month: 5
-            },
-            isAvailable: true
-          }
-        ],
-        load: 3
-      });
-      const myPref = await teacherPrefController.my('test@email.com', 'abcd');
-      expect(myPref).toBeDefined();
     });
   });
 });

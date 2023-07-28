@@ -22,7 +22,9 @@ export const generatedScheduleSchema = new Schema(
     reward: { type: Number, required: true },
     iterations: { type: Number, required: true },
     c_hat: { type: Number, required: true },
-    quality: { type: Number, required: true }
+    quality: { type: Number, required: true },
+    inputData: { type: Object, required: true },
+    rawAssignments: { type: Object, required: true }
   },
   { timestamps: true, unique: true }
 );

@@ -52,7 +52,13 @@ const list = async (req, res) => {
 };
 router.get('/list', list);
 
-//get user by id
+/**
+ * Get a User by ID
+ *
+ * @param {*} req
+ * @param {*} res
+ * @return {*}
+ */
 const byId = async (req, res) => {
   try {
     if (!req.headers.authorization) {

@@ -34,6 +34,13 @@ const predict_class_size_trigger = async (req, res) => {
 };
 router.get('/predict_class_size_trigger', predict_class_size_trigger);
 
+/**
+ * Get Predicted Class Size
+ *
+ * @param {*} req
+ * @param {*} res
+ * @return {*}
+ */
 const get_class_size_prediction = async (req, res) => {
   try {
     if (!req.headers.authorization) {

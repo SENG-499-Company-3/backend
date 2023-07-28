@@ -3,7 +3,13 @@ import { IClassroom } from '../interfaces/Classroom';
 const ClassroomModel = require('../models/classroom.model');
 
 export class ClassroomController {
-  //update classroom or add it if doesn't exist
+  /**
+   * Admin: adds classroom if doesn't exist, updates its capacity if it does
+   *
+   * @param {IClassroom} classroom
+   * @return {*}  {Promise<void>}
+   * @memberof ClassroomController
+   */
   async update(classroom: IClassroom): Promise<void> {
     try {
       const classroom_db = new ClassroomModel(classroom);
@@ -30,6 +36,12 @@ export class ClassroomController {
     }
   }
 
+  /**
+   *  list of all classrooms
+   *
+   * @return {*}  {Promise<IClassroom[]>}
+   * @memberof ClassroomController
+   */
   async list(): Promise<IClassroom[]> {
     try {
       const classrooms: IClassroom[] = await ClassroomModel.find().catch((err) => err);
