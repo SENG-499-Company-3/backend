@@ -48,7 +48,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"tony123AD@gmail.com\",\r\n    \"password\": \"Test123!\",\r\n    \"name\": \"Stank, Tony\",\r\n    \"userrole\": \"ADMIN\",\r\n    \"token\": \"\"\r\n}"
+							"raw": "{\r\n    \"email\": \"tony@gmail.com\",\r\n    \"password\": \"Test123!\",\r\n    \"name\": \"Stank, Tony\",\r\n    \"userrole\": \"ADMIN\",\r\n    \"token\": \"\"\r\n}"
 						},
 						"url": {
 							"raw": "{{backend_ip}}:{{backend_port}}/user/create",
@@ -230,7 +230,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{backend_ip}}:{{backend_port}}/preferences/email?teacherEmail=bbird@uvic.ca",
+							"raw": "{{backend_ip}}:{{backend_port}}/preferences/email?teacherEmail=rlittle@uvic.ca",
 							"host": [
 								"{{backend_ip}}"
 							],
@@ -242,7 +242,7 @@
 							"query": [
 								{
 									"key": "teacherEmail",
-									"value": "bbird@uvic.ca"
+									"value": "rlittle@uvic.ca"
 								}
 							]
 						}
@@ -347,8 +347,17 @@
 				{
 					"name": "schedule_trigger",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"selectedCourses\": [\r\n        {\r\n            \"_id\": \"64c3dea0e3ec8772ccdf5d66\",\r\n            \"Subj\": \"CSC\",\r\n            \"Num\": 111,\r\n            \"Title\": \"FUNDMNTL PRGRMNG:ENGR APS\",\r\n            \"CourseYear\": 1,\r\n            \"Cap\": 400,\r\n            \"Enrolled\": 346,\r\n            \"__v\": 0\r\n        }\r\n    ],\r\n    \"term\": {\r\n        \"year\": 1,\r\n        \"term\": \"fall\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{backend_ip}}:{{backend_port}}/schedule/generate_trigger",
 							"host": [
@@ -369,7 +378,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{backend_ip}}:{{backend_port}}/schedule/validate_trigger?id=64c3f4f64b4007a21ce3f5ba",
+							"raw": "{{backend_ip}}:{{backend_port}}/schedule/validate_trigger?id=64c4186b89e77799e98043f2",
 							"host": [
 								"{{backend_ip}}"
 							],
@@ -381,7 +390,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "64c3f4f64b4007a21ce3f5ba"
+									"value": "64c4186b89e77799e98043f2"
 								}
 							]
 						}
