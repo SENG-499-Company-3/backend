@@ -1,7 +1,6 @@
-import { describe, expect, beforeAll, afterAll, afterEach, it, beforeEach } from '@jest/globals';
+import { describe, expect, beforeAll, afterAll, afterEach, it, beforeEach, jest } from '@jest/globals';
 import { AuthController } from './auth.controller';
 import * as tempdb from '../../tests/db';
-import { IUser } from '../interfaces/User';
 
 const UserModel = require('../models/user.model');
 const sinon = require('sinon');

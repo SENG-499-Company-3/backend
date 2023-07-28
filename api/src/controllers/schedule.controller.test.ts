@@ -1,9 +1,6 @@
 import { describe, expect, beforeAll, afterAll, afterEach, it, beforeEach } from '@jest/globals';
-import { ScheduleController } from './schedule.controller';
 import * as tempdb from '../../tests/db';
-import { UserController } from './user.controller';
 
-const ScheduleModel = require('../models/schedule.model');
 const sinon = require('sinon');
 
 beforeAll(async () => await tempdb.connect());

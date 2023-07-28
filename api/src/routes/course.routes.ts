@@ -62,8 +62,7 @@ const create = async ({ headers, body }: { headers: any; body: ICourse }, res: a
       Subj: body.Subj,
       Num: body.Num,
       Title: body.Title,
-      Year: body.Year,
-      Term: body.Term,
+      CourseYear: body.CourseYear,
       Cap: body.Cap,
       Enrolled: body.Enrolled
     });

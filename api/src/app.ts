@@ -12,7 +12,6 @@ import {
 const user = require('./routes/user.routes');
 const auth = require('./routes/auth.routes');
 const schedule = require('./routes/schedule.routes');
-// const teacherPref = require('./routes/teacherpref.routes');
 const predictSchedule = require('./routes/predictSchedule.routes');
 const course = require('./routes/course.routes');
 const classroom = require('./routes/classroom.routes');
@@ -56,8 +55,6 @@ populate_courses();
 populate_classrooms();
 
 populate_terms();
-
-// create_schedule();
 
 app.use('/user', user);
 app.use('/auth', auth);
