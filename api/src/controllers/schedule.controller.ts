@@ -46,14 +46,13 @@ export class ScheduleController {
     const courses = await CourseModel.find();
 
     const cleanedCourses = courses.map((course) => {
-
-        return {
-          coursename: course.Subj + ' ' + course.Num,
-          courseYear: course.CourseYear,
-          courseNumber: course.Num,
-          capacity: course.Cap,
-          index: null
-        };
+      return {
+        coursename: course.Subj + ' ' + course.Num,
+        courseYear: course.CourseYear,
+        courseNumber: course.Num,
+        capacity: course.Cap,
+        index: null
+      };
     });
 
     return cleanedCourses;
@@ -144,13 +143,10 @@ export class ScheduleController {
   async createInputData(selectedCourses: ICourse[], term: ITerm): Promise<any> {
     console.log('term', term);
     const classes = await this.getCleanClassrooms();
-    console.log('classes', classes);
 
     const courses = await this.getCleanCourses(selectedCourses);
-    console.log('courses', courses);
 
     const timeslots = await algo1Data.timeslots;
-    
 
     const teacherPrefs = await this.getCleanTeacherPrefs();
 
@@ -252,10 +248,7 @@ export class ScheduleController {
    * @memberof ScheduleController
    */
   async trigger(selectedCourses: ICourse[], term: ITerm): Promise<IGeneratedSchedule> {
-    console.log('selectedCourses', selectedCourses);
-    console.log('term', term);
     const data = await this.createInputData(selectedCourses, term);
-    // console.log('data', JSON.stringify(data));
 
     const algorithm1IP = process.env.ALGORITHM_1_IP || 'localhost';
     const algorithm1Port = process.env.ALGORITHM_1_PORT || '8000';
@@ -283,15 +276,17 @@ export class ScheduleController {
       let num = assignment.course.coursename.split(' ')[1];
 
       await CourseModel.findOne({ Subj: subj, Num: num }).then((res) => {
-        assignmentIds.course = res._id;
+        assignmentIds.course = res._id || '';
       });
 
       await UserModel.findOne({ name: assignment.prof.name }).then((res) => {
-        assignmentIds.prof = res._id;
+        assignmentIds.prof = res._id || '';
       });
 
       await ClassroomModel.findOne({ location: assignment.room.location }).then((res) => {
-        assignmentIds.room = res._id;
+        assignmentIds.room = res && res._id || '64c41f369c106c1657c82e92';
+      }).catch((err) => {
+        console.log('err', err);
       });
 
       assignments.push(assignmentIds);
