@@ -55,7 +55,9 @@ const get_my_teacher_preferences = async ({ headers }: { headers: any }, res: an
     const authToken = headers.authorization;
 
     const email = await getEmail(authToken);
+    console.log('email', email);
     const preferences: Preference = await teacherPrefController.byEmail(email);
+    console.log('preferences', preferences);
     res.status(200).send(preferences);
   } catch (err) {
     res.status(401).send({ message: err });

@@ -96,6 +96,7 @@ const validate_trigger = async (req, res) => {
     const response = await scheduleController.validate(id);
     res.status(200).send(response);
   } catch (err) {
+    console.log('err', err);
     res.status(401).send({ message: err });
   }
 };

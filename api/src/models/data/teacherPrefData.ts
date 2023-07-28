@@ -1,10 +1,11 @@
 import type { Preference } from '../../schemagen/types/preference';
 export const teacherPrefData: Preference[] = [
   {
-    email: '124@gmail.com',
+    email: 'raltawy@uvic.ca',
     coursePreferences: [
       {
-        courseId: 10,
+        courseName: 'CSC 115',
+        courseYear: 1,
         ability: 'ABLE',
         willingness: 'WILLING'
       }
@@ -17,16 +18,17 @@ export const teacherPrefData: Preference[] = [
           year: 2023,
           month: 5
         },
-        isAvailable: true
+        isAvailable: false
       }
     ],
     load: 2
   },
   {
-    email: '125@gmail.com',
+    email: 'imenbour@uvic.ca',
     coursePreferences: [
       {
-        courseId: 11,
+        courseName: 'CSC 230',
+        courseYear: 2,
         ability: 'ABLE',
         willingness: 'WILLING'
       }
@@ -40,6 +42,29 @@ export const teacherPrefData: Preference[] = [
           month: 9
         },
         isAvailable: true
+      }
+    ],
+    load: 2
+  },
+  {
+    email: 'datkinso@uvic.ca',
+    coursePreferences: [
+      {
+        courseName: 'CSC 230',
+        courseYear: 1,
+        ability: 'ABLE',
+        willingness: 'WILLING'
+      }
+    ],
+    additionalDetailes: 'something',
+    availability: [
+      {
+        term: {
+          termId: 2,
+          year: 2023,
+          month: 9
+        },
+        isAvailable: false
       }
     ],
     load: 2

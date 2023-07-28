@@ -34,8 +34,6 @@ export class CourseController {
       const course_current = await Course.findOne({
         Subj: course.Subj,
         Num: course.Num,
-        Term: course.Term,
-        Year: course.Year
       }).catch((err) => err);
       if (!course_current) {
         //insert if the course doesn't exist

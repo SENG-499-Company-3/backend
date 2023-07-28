@@ -72,28 +72,28 @@ export async function create_teacher_pref() {
 
 export async function populate_terms() {
   const terms: ITerm[] = [
-    { id: 1, year: 2023, term: 'Fall' },
-    { id: 2, year: 2023, term: 'Summer' },
-    { id: 3, year: 2023, term: 'Spring' },
-    { id: 4, year: 2024, term: 'Fall' },
-    { id: 5, year: 2024, term: 'Summer' },
-    { id: 6, year: 2024, term: 'Spring' },
-    { id: 7, year: 2022, term: 'Fall' },
-    { id: 8, year: 2022, term: 'Summer' },
-    { id: 9, year: 2022, term: 'Spring' },
-    { id: 10, year: 2021, term: 'Fall' },
-    { id: 11, year: 2021, term: 'Summer' },
-    { id: 12, year: 2021, term: 'Spring' },
-    { id: 13, year: 2020, term: 'Fall' },
-    { id: 14, year: 2020, term: 'Summer' },
-    { id: 15, year: 2020, term: 'Spring' },
-    { id: 16, year: 2019, term: 'Fall' },
-    { id: 17, year: 2019, term: 'Summer' },
-    { id: 18, year: 2019, term: 'Spring' }
+    { year: 2023, term: 'Fall' },
+    { year: 2023, term: 'Summer' },
+    { year: 2023, term: 'Spring' },
+    { year: 2024, term: 'Fall' },
+    { year: 2024, term: 'Summer' },
+    { year: 2024, term: 'Spring' },
+    { year: 2022, term: 'Fall' },
+    { year: 2022, term: 'Summer' },
+    { year: 2022, term: 'Spring' },
+    { year: 2021, term: 'Fall' },
+    { year: 2021, term: 'Summer' },
+    { year: 2021, term: 'Spring' },
+    { year: 2020, term: 'Fall' },
+    { year: 2020, term: 'Summer' },
+    { year: 2020, term: 'Spring' },
+    { year: 2019, term: 'Fall' },
+    { year: 2019, term: 'Summer' },
+    { year: 2019, term: 'Spring' }
   ];
 
   terms.forEach(async (term) => {
-    TermModel.findOne({ id: term.id }).then(async (t: ITerm) => {
+    TermModel.findOne({ year: term.year, term: term.term }).then(async (t: ITerm) => {
       if (!t) {
         TermModel.create(term)
           .then(() => {
@@ -116,13 +116,12 @@ export async function populate_courses() {
       Subj: Subj,
       Num: Num,
       Title: data.Title,
-      Year: data.TermYr,
-      Term: data.Term,
+      CourseYear: data.ClassYr,
       Cap: data.Cap,
       Enrolled: data.Enrolled
     };
 
-    CourseModel.findOne({ Subj: Subj, Num: Num, Term: data.Term, Year: data.TermYr }).then(async (c: ICourse) => {
+    CourseModel.findOne({ Subj: Subj, Num: Num, CourseYear: data.ClassYr }).then(async (c: ICourse) => {
       if (!c) {
         CourseModel.create(course)
           .then(() => {

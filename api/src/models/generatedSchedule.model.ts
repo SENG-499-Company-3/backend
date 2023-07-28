@@ -3,8 +3,20 @@ const Schema = mongoose.Schema;
 
 export const generatedScheduleSchema = new Schema(
   {
-    //assignments: list of list that has index of [courses, time slot, teacher]
-    assignments: [{ type: Array, required: true, default: [] }],
+    //assignments: list of list that has index of [course, prof, timeslot, room]
+    assignments: [
+      {
+        course: { type: Schema.Types.ObjectId, ref: 'Course', required: true },
+        prof: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+        timeslot: {
+          days: { type: Array, required: true },
+          length: { type: Number, required: true },
+          startTime: { type: Number, required: true },
+          index: { type: Number }
+        },
+        room: { type: Schema.Types.ObjectId, ref: 'Classroom', required: true }
+      }
+    ],
     valid: { type: Boolean, required: true },
     complete: { type: Boolean, required: true },
     reward: { type: Number, required: true },
