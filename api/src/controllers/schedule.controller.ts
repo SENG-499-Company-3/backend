@@ -354,9 +354,15 @@ export class ScheduleController {
    * @return {*}  {Promise<ISchedule[]>}
    * @memberof ScheduleController
    */
-  async list(): Promise<ISchedule[]> {
+  async list(): Promise<any[]> {
     try {
-      const schedules: ISchedule[] = await Schedule.find().catch((err) => err);
+      const schedules = await generatedSchedule
+        .find()
+        .populate('assignments.course')
+        .populate('assignments.prof')
+        .populate('assignments.room')
+        .catch((err) => err);
+      console.log('schedules', schedules);
       return schedules;
     } catch (err) {
       throw new Error('Error while retrieving the entire schedule');
