@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { IGeneratedSchedule } from '../interfaces/GeneratedSchedule';
 import { algo1Data } from '../models/data/algo1_Data';
+import { ICourse } from '../interfaces/Course';
+import { ITerm } from '../interfaces/Term';
 
 const generatedSchedule = require('../models/generatedSchedule.model');
 const ClassroomModel = require('../models/classroom.model');
@@ -39,17 +41,19 @@ export class ScheduleController {
    * @return {*}  {Promise<any>}
    * @memberof ScheduleController
    */
-  async getCleanCourses(): Promise<any> {
+  async getCleanCourses(selectedCourses: ICourse[]): Promise<any> {
+    console.log('selectedCourses', selectedCourses);
     const courses = await CourseModel.find();
 
     const cleanedCourses = courses.map((course) => {
-      return {
-        coursename: course.Subj + ' ' + course.Num,
-        courseYear: course.CourseYear,
-        courseNumber: course.Num,
-        capacity: course.Cap,
-        index: null
-      };
+
+        return {
+          coursename: course.Subj + ' ' + course.Num,
+          courseYear: course.CourseYear,
+          courseNumber: course.Num,
+          capacity: course.Cap,
+          index: null
+        };
     });
 
     return cleanedCourses;
@@ -137,12 +141,16 @@ export class ScheduleController {
    * @return {*}  {Promise<any>}
    * @memberof ScheduleController
    */
-  async createInputData(): Promise<any> {
+  async createInputData(selectedCourses: ICourse[], term: ITerm): Promise<any> {
+    console.log('term', term);
     const classes = await this.getCleanClassrooms();
+    console.log('classes', classes);
 
-    const courses = await this.getCleanCourses();
+    const courses = await this.getCleanCourses(selectedCourses);
+    console.log('courses', courses);
 
     const timeslots = await algo1Data.timeslots;
+    
 
     const teacherPrefs = await this.getCleanTeacherPrefs();
 
@@ -243,8 +251,10 @@ export class ScheduleController {
    * @return {*}  {Promise<IGeneratedSchedule>}
    * @memberof ScheduleController
    */
-  async trigger(): Promise<IGeneratedSchedule> {
-    const data = await this.createInputData();
+  async trigger(selectedCourses: ICourse[], term: ITerm): Promise<IGeneratedSchedule> {
+    console.log('selectedCourses', selectedCourses);
+    console.log('term', term);
+    const data = await this.createInputData(selectedCourses, term);
     // console.log('data', JSON.stringify(data));
 
     const algorithm1IP = process.env.ALGORITHM_1_IP || 'localhost';
