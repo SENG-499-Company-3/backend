@@ -160,28 +160,19 @@
         }
       }
     },
-    "/schedule/create": {
+    "/schedule/generate_trigger": {
       "post": {
         "tags": ["algorithm1"],
         "summary": "algorithm 1 endpoint to generate a schedule",
         "description": "Algorithm 1 endpoint to generate a schedule\n",
         "operationId": "createSchedule",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/inputdata"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "schedule generation completed",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/schedule"
+                  "$ref": "#/components/schemas/generatedSchedule"
                 }
               }
             }
@@ -204,7 +195,7 @@
         "tags": ["algorithm1"],
         "summary": "algorithm 1 endpoint to validate an existing schedule",
         "description": "Algorithm 1 endpoint to validate a schedule\n",
-        "operationId": "validateSchedule",
+        "operationId": "validateSchedule2",
         "requestBody": {
           "content": {
             "application/json": {
@@ -238,12 +229,12 @@
         }
       }
     },
-    "/schedule/predict_class_sizes": {
+    "/schedule/predict_class_size_trigger": {
       "post": {
         "tags": ["algorithm2"],
         "summary": "predict class Sizes",
-        "description": "Endpoint exposed by algo2 for predicting class sizes\n",
-        "operationId": "schedulePredictClassSize",
+        "description": "Endpoint exposed by algo2 for predicting class sizes and term a course is offered.\n",
+        "operationId": "schedulePredictClassSizeTrigger",
         "requestBody": {
           "content": {
             "application/json": {
@@ -255,11 +246,12 @@
         },
         "responses": {
           "200": {
-            "description": "Class size is predicted",
+            "description": "Id of the classSizePrediction data generated.",
             "content": {
-              "application/json": {
+              "text/plain": 
+              {
                 "schema": {
-                  "$ref": "#/components/schemas/predicted_class_size"
+                  "type": "string"
                 }
               }
             }
@@ -277,7 +269,135 @@
         }
       }
     },
-    "/preferences/{teacher_id}": {
+    "/schedule/class_size_prediction": {
+      "post": {
+        "tags": ["algorithm2"],
+        "summary": "returns predicted class Sizes",
+        "description": "Returns the class sizes that were generated using class_size_trigger\n",
+        "operationId": "schedulePredictClassSizeGet",
+        "responses": {
+          "200": {
+            "description": "List of courses and their predicted sizes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/course_size_prediction_content"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unable to predict class size",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/list": {
+      "post": {
+        "tags": ["algorithm1"],
+        "summary": "returns the schedule ",
+        "description": "Returns list of schedule objects.\n",
+        "operationId": "listSchedule",
+        "responses": {
+          "200": {
+            "description": "The schedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/scheduleFrontend"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unable to predict class size",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/my": {
+      "post": {
+        "tags": ["algorithm1"],
+        "summary": "returns the user's schedule ",
+        "description": "Return schedule objects for the logged.\n",
+        "operationId": "mySchedule",
+        "responses": {
+          "200": {
+            "description": "The schedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/scheduleFrontend"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unable to predict class size",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/validate_trigger": {
+      "post": {
+        "tags": ["algorithm1"],
+        "summary": "validates schedule",
+        "description": "Validates the schedule associcated with the given id\n",
+        "operationId": "validateSchedule",
+        "responses": {
+          "200": {
+            "description": "returns true if schedule is valid",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unable to predict class size",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/preferences/:teacher_id": {
       "post": {
         "tags": ["frontend"],
         "summary": "get prefs for the given teacher",
@@ -626,6 +746,9 @@
           },
           "room": {
             "$ref": "#/components/schemas/inputdata_rooms"
+          },
+          "_id": {
+            "type": "string"
           }
         }
       },
@@ -662,6 +785,120 @@
           "inputData": {
             "$ref": "#/components/schemas/inputdata"
           }
+        }
+      },
+      "scheduleFrontend": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "assignments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "$ref": "#/components/schemas/assignmentFrontend"
+            }
+          }
+        }
+      },
+      "assignmentFrontend": {
+        "type": "object",
+        "properties": {
+          "timeslot": {
+            "type": "object",
+            "$ref": "#/components/schemas/timeslotFrontend"
+          },
+          "course": {
+            "type": "object",
+            "$ref": "#/components/schemas/predicted_course_size_course"
+          },
+          "prof": {
+            "type": "object",
+            "$ref": "#/components/schemas/profFrontend"
+          },
+          "room": {
+            "type": "object",
+            "$ref": "#/components/schemas/roomFrontend"
+          },
+          "_id": {
+            "type": "string"
+          }
+        }
+      },
+      "timeslotFrontend": {
+        "type": "object",
+        "properties": {
+          "length": {
+            "type": "integer"
+          },
+          "startTime": {
+            "type": "integer"
+          },
+          "index": {
+            "type": "integer"
+          },
+          "days": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/days"
+            }
+          }
+        }
+      },
+      "profFrontend": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "userrole": {
+            "$ref": "#/components/schemas/userrole"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "roomFrontend": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "capacity": {
+            "type": "number"
+          },
+          "equipment": {
+            "type": "array",
+            "items":{
+              "type": "string"
+            }
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        }
+      },
+      "generatedSchedule": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/assignment"
         }
       },
       "inputdata": {
@@ -729,10 +966,117 @@
           "$ref": "#/components/schemas/class_size_prediction_inner"
         }
       },
+      "course_size_prediction_content": {
+        "type": "object",
+        "properties": {
+          "courses": {
+            "type": "object",
+            "$ref": "#/components/schemas/course_size_prediction_content_inner"
+
+          }
+        }
+      },
+      "course_size_prediction_content_inner": {
+        "type": "object",
+        "properties": {
+          "course": {
+            "$ref": "#/components/schemas/predicted_course_size_course"
+          },
+          "term": {
+            "$ref": "#/components/schemas/predicted_course_size_term"
+          }
+        }
+      },
       "predicted_class_size": {
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/predicted_class_size_inner"
+        }
+      },
+      "predicted_course_size": {
+        "type": "object",
+        "properties": {
+          "course": {
+            "type": "object",
+            "properties": {
+              "schema":{
+              "$ref": "#/components/schemas/predicted_course_size_course"
+              }
+            }
+          },
+          "term": {
+            "type": "object",
+            "properties": {
+              "schema": {
+              "$ref": "#/components/schemas/predicted_course_size_term"
+              }
+            }
+          }
+        }
+      },
+      "predicted_course_size_course": {
+        "type": "object",
+        "properties": {
+          "course": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "Subj": {
+                "type": "string"
+              },
+              "Num": {
+                "type": "number"
+              },
+              "Title": {
+                "type": "string"
+              },
+              "CourseYear": {
+                "type": "number"
+              },
+              "Cap": {
+                "type": "number"
+              },
+              "Enrolled": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "predicted_course_size_term": {
+        "type": "object",
+        "properties": {
+          "course": {
+            "type": "object"
+            },
+          "_id": {
+            "type": "string"
+          },
+          "year": {
+            "type": "number"
+          },
+          "term": {
+            "type": "string"
+          }
+        }
+      },
+      "course": {
+        "type": "object",
+        "properties": {
+          "course": {
+            "type": "object"
+            },
+          "_id": {
+            "type": "string"
+          },
+          "year": {
+            "type": "number"
+          },
+          "term": {
+            "type": "string"
+          }
         }
       },
       "userrole": {
@@ -879,7 +1223,7 @@
           "pastEnrollment": {
             "type": "array",
             "items": {
-              "required": ["size", "term", "year"],
+              "required": ["year", "term", "size"],
               "type": "object",
               "properties": {
                 "year": {
