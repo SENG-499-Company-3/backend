@@ -1,42 +1,10 @@
 import express from 'express';
-import { validate as validateEndpoint } from 'express-jsonschema';
-import { validate } from 'jsonschema';
-import inputData from '../schemagen/schemas/inputdata.json';
-import schedule from '../schemagen/schemas/schedule.json';
 import { ScheduleController } from '../controllers/schedule.controller';
 import { isAdmin, getName } from '../helpers/auth';
 import { ISchedule } from '../interfaces/Schedule';
 
 const router = express.Router();
 const scheduleController: ScheduleController = new ScheduleController();
-
-/**
- * Admin: triggers build schedule
- * Make schedule by running the algorithms (currently just creates a mock schedule)
- * @param {*} req
- * @param {*} res
- * @return {*}
- */
-const create = async (req, res) => {
-  try {
-    if (!req.headers.authorization) {
-      res.status(401).send({ message: 'This endpoint requires authorization header.' });
-      return;
-    }
-    const authToken = req.headers.authorization;
-    const isAdm = await isAdmin(authToken);
-    if (!isAdm) {
-      res.status(401).send({ message: 'Need admin access.' });
-      return;
-    }
-    await scheduleController.create();
-    // TODO clearly not following spec
-    res.status(200).send(validate(schedule, 'Created schedule.'));
-  } catch (err) {
-    res.status(401).send({ message: err });
-  }
-};
-router.get('/create', validateEndpoint({ body: inputData }), create);
 
 /**
  * Admin list entire schedule
