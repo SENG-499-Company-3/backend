@@ -40,13 +40,15 @@ router.get('/list', list);
  */
 const generate_trigger = async (req, res) => {
   try {
-    const response = await scheduleController.trigger();
+    const { selectedCourses, term } = req.body;
+
+    const response = await scheduleController.trigger(selectedCourses, term);
     res.status(200).send(response);
   } catch (err) {
     res.status(401).send({ message: err });
   }
 };
-router.get('/generate_trigger', generate_trigger);
+router.post('/generate_trigger', generate_trigger);
 
 /**
  * Admin: triggers validate schedule
